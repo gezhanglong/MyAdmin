@@ -1,0 +1,91 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{4D11BD71-374B-418F-9571-DC525440896B}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>MyProject.Task</RootNamespace>
+    <AssemblyName>MyProject.Task</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Deepleo.Weixin.SDK, Version=2.0.1.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\weixinSDK\weixinSDK-master\Deepleo.Web\bin\Deepleo.Weixin.SDK.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json">
+      <HintPath>..\..\..\oldProject\MyProject\MyProject\bin\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.Mvc, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="AdminMenuTask.cs" />
+    <Compile Include="AdminPowerTask.cs" />
+    <Compile Include="AdminRoleMenuTask.cs" />
+    <Compile Include="AdminRolePowerTask.cs" />
+    <Compile Include="AdminUserRoleTask.cs" />
+    <Compile Include="AdminUserTask.cs" />
+    <Compile Include="SysExceptionTask.cs" />
+    <Compile Include="SysLogTask.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="WeiXinMediaMessageTask.cs" />
+    <Compile Include="WeiXinMenuTask.cs" />
+    <Compile Include="WeiXinRedPackSdk.cs" />
+    <Compile Include="WeiXinSdkTask.cs" />
+    <Compile Include="WeiXinReplyMessageTask.cs" />
+    <Compile Include="WeiXinReceiveMessageTask.cs" />
+    <Compile Include="WeiXinUserTask.cs" />
+    <Compile Include="XiaoWeiXinSdkTask.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\MyProject.Core\MyProject.Core.csproj">
+      <Project>{ccbb87d3-06a8-4675-b511-39ff4d21d527}</Project>
+      <Name>MyProject.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\MyProject.Data\MyProject.Data.csproj">
+      <Project>{e3e4e9bb-73f2-430f-8b5b-98354c5fc468}</Project>
+      <Name>MyProject.Data</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\MyProject.Services\MyProject.Services.csproj">
+      <Project>{61ba4f81-97a1-4a51-b88e-a3a9629f09aa}</Project>
+      <Name>MyProject.Services</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

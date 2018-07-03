@@ -1,0 +1,114 @@
+﻿@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewBag.Title = "用户管理";
+    var permList = ViewBag.perm as List<MyProject.Core.Dtos.PermDto>;
+    if (permList == null)
+    {
+        permList = new List<MyProject.Core.Dtos.PermDto>();
+    }
+}
+@using MyProject.Services.MvcPager;
+@using MyProject.Controllers.Core;
+@model PagedList<MyProject.Controllers.AdminUsers.ViewModels.AdminUserModel>
+@section Script
+    {
+    <script type="text/javascript">
+        $(function () {
+            $(".box").colorbox({
+                iframe: true,
+                width: 550,
+                height: 550,
+                onClosed: function () {
+                    window.location.reload();
+                }
+            });
+        });
+
+        function IsLock(str, id) {
+            if (str == '解锁')
+                url = '/AdminUsers/UnLock?id='+id;
+            else url = '/AdminUsers/Lock?id=' + id;
+            if (confirm('是否确定' + str + '?')) {
+                $.post(url, function () {
+                    alert(str + "成功");
+                    window.location.reload();
+                });
+            }
+        }
+        </script>
+ }
+
+<div class="right_box_card">
+    <ul>
+        <li class="right_box_card1"><a href="#">用户管理</a></li>
+    </ul>
+</div>
+<div style="line-height: 40px;">
+    <p class="avatar_btn"> 
+        @Html.ToolButton("btnSave", "新增用户", permList, "Save", @Url.Action("Save", "AdminUsers"), "")
+    </p>
+</div>
+<div>
+    @using (Html.BeginForm("List", "AdminUsers", FormMethod.Get))
+    {
+        <table class="right_box_tab" style="margin-top: 10px;" width="100%" border="0" cellspacing="0" cellpadding="0">
+            <tr>
+                <td>
+                    用户名称：@Html.TextBox("account", null, new { @class = "text-input" })
+                </td>
+                <td>
+                    用户角色：@Html.DropDownList("userRole", ViewBag.RoleList as List<SelectListItem>)
+                </td>
+                <td>
+                    <input type="submit" value="查找" class="submit" style="float: left; width: 80px;" />
+                </td>
+            </tr>
+            
+        </table>
+    }
+</div>
+<table class="right_box_tab" style="margin-top: 10px;" width="100%" border="0" cellspacing="0" cellpadding="0">
+    <tr height="30" class="tab_title">
+        <td>
+            ID
+        </td>
+        <td>
+            用户名称
+        </td>
+        <td>
+            角色名称
+        </td>
+        <td>
+            是否锁定
+        </td>
+        <td>
+            
+        </td>
+    </tr>
+    @foreach (var item in Model)
+    {
+        <tr height="35" class="tab_td1">
+            <td>
+                @item.AdminUserId
+            </td>
+            <td>
+                @item.UserName
+            </td>
+            <td>
+                @item.RoleName
+            </td>
+            <td>
+                @(item.IsLock ? "是":"否")
+            </td>
+            <td>
+                 @Html.ToolButton("btnSave", "修改", permList, "Save", "/AdminUsers/Save?id="+item.AdminUserId, "","box")
+                 @Html.ToolButton("btnDelete", "删除", permList, "Delete","", "DeletePost('/AdminUsers/Delete?id="+item.AdminUserId+"')")
+                 @Html.ToolButton("btnIsLock", item.IsLock ? "解锁":"锁定", permList, "Lock", "", "IsLock("+(item.IsLock ? "'解锁'":"'锁定'")+","+item.AdminUserId+")")
+ 
+            </td>
+        </tr>
+    }
+</table>
+<div style="padding:10px;">
+    @Html.Pager(Model)
+</div>

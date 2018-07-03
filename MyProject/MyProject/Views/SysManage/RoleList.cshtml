@@ -1,0 +1,51 @@
+﻿@{
+    ViewBag.Title = "角色列表";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var permList = ViewBag.perm as List<MyProject.Core.Dtos.PermDto>;
+    if (permList == null)
+    {
+        permList = new List<MyProject.Core.Dtos.PermDto>();
+    }
+}
+@using MyProject.Controllers.Core;
+@model List<MyProject.Controllers.SysManage.ViewModels.UserRoleModel>
+<div class="right_box_card">
+    <ul>
+        <li class="right_box_card1"><a href="#">角色列表</a></li>
+    </ul>
+</div>
+<div style="line-height: 40px;">
+    <p class="avatar_btn">
+        @*<a href="@Url.Action("SaveRole", "SysManage")" class="box" id="lnkAdd">新增角色</a>*@
+         @Html.ToolButton("btnSaveRole", "新增角色", permList, "SaveRole", @Url.Action("SaveRole", "SysManage"), "")
+    </p>
+</div>
+<table class="right_box_tab" style="margin-top: 10px;" width="100%" border="0" cellspacing="0"
+    cellpadding="0">
+    <tr height="30" class="tab_title">
+        <td>
+            角色ID
+        </td>
+        <td>
+            角色名称
+        </td>
+        <td>
+        </td>
+    </tr>
+    @foreach (var item in Model)
+    {
+        <tr height="35" class="tab_td1" style="line-height: 26px;" onmouseover="this.className = 'tab_td2' "
+            onmouseout=" this.className = 'tab_td1'">
+            <td>
+                @item.RoleId
+            </td>
+            <td>
+                @item.RoleName
+            </td>
+            <td>
+               @* @Html.ActionLink("修改", "SaveRole", "SysManage", new { item.RoleId }, null)*@
+                @Html.ToolButton("btnSaveRole2", "修改", permList, "SaveRole", "/SysManage/SaveRole?roleId="+item.RoleId, "")
+            </td>
+        </tr>
+    }
+</table>

@@ -1,0 +1,27 @@
+﻿label.error
+{
+    margin-left: 10px;
+    padding-left: 25px;
+    height: 24px;
+    line-height: 24px;
+    color: red;
+    font-size: 12px;
+    background: url("images/error.gif") no-repeat scroll 0 -4px transparent;
+}
+
+label.valid
+{
+    margin-left: 10px;
+    padding-left: 25px;
+    height: 24px;
+    line-height: 24px;
+    color: red;
+    font-size: 12px;
+    background: url("images/valid.gif") no-repeat scroll 0 -4px transparent;
+}
+
+input.error
+{
+    border: 1px solid #ff0000;
+    background-color: #ffeeee;
+}

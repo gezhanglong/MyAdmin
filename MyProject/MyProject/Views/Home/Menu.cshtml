@@ -1,0 +1,17 @@
+﻿@{
+    Layout = null;
+}
+@model List<MyProject.Controllers.SysManage.ViewModels.MenuModel>
+<ul id="treeMenu" style="margin-top: 3px;">
+    @foreach (var item in Model.Where(c => c.ParentId == 0))
+    {
+        <li isexpand="false"><span>@item.MenuName</span>
+            <ul>
+                @foreach (var child in Model.Where(c => c.ParentId == item.MenuId))
+                {
+                    <li><span><a hre="@child.LinkUrl" target="home" id="@child.MenuId">@child.MenuName</a> </span></li>
+                }
+            </ul>
+        </li>
+    }
+</ul>

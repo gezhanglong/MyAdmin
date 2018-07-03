@@ -1,0 +1,109 @@
+/* ---Reset&Common 一般情况不允许修改此文�?
+------------------------------------------------------------------------------------------ */
+html, body, div, span, applet, object, iframe, p, blockquote, pre, a, abbr, acronym, address, big, cite, code, del, dfn, em, font, img, ins, kbd, q, s, samp, small, strike, strong, sub, sup, tt, var, b, u, i, center, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td { margin:0; padding:0;}
+a {color:#36c;text-decoration:none;}
+a:hover {color:#f90;text-decoration:underline;}
+ul,ol,li{ list-style:none;}
+em { font-style:normal;}
+img{ border:0; vertical-align:middle;}
+textarea,input,select{ font-size:12px; vertical-align:middle;}
+
+/*--- 表单元素重置 ---button, input.button { position:relative;top:0.25em;}*/
+textarea {overflow:auto;}
+input.text, textarea {background-color:#fff;border:1px solid #bbb; vertical-align:middle;}
+input.text:focus {border-color:#666; vertical-align:middle}
+input.text, textarea, select {margin:0.1em 0; vertical-align:middle}
+form.inline div, form.inline p {vertical-align:middle;}
+form.inline label {position:relative;top:-0.25em;}
+form.inline input.checkbox, form.inline input.radio, form.inline input.button, form.inline button {margin:0.5em 0;}
+
+
+/*--- 常用链接或文字颜�?---*/
+.cOrangef60, a.cOrangef60:link,a.cOrangef60:visited,a.cOrangef60:active {color:#f60;text-decoration:none;}
+a.cOrangef60:hover { color:#f60; text-decoration:underline;}
+
+.cRedc00, a.cRedc00:link,a.cRedc00:visited,a.cRedc00:active {color:#c00;text-decoration:none;}
+a.cRedc00:hover { color:#f60; text-decoration:underline;}
+
+.cBlue39c, a.cBlue39c:link,a.cBlue39c:visited,a.cBlue39c:active {color:#39c;text-decoration:none;}
+a.cBlue39c:hover { color:#39c; text-decoration:underline;}
+
+.cBlue058, a.cBlue058:link,a.cBlue058:visited,a.cBlue058:active {color:#058;text-decoration:none;}
+a.cBlue058:hover { color:#f00; text-decoration:underline;}
+
+.cBlue06c, a.cBlue06c:link,a.cBlue06c:visited,a.cBlue06c:active {color:#06c;text-decoration:none;}
+a.cBlue06c:hover { color:#f00; text-decoration:underline;}
+
+.cBlue325e7f, a.cBlue325e7f:link,a.cBlue325e7f:visited,a.cBlue325e7f:active {color:#325e7f;text-decoration:none;}
+a.cBlue325e7f:hover { color:#f00; text-decoration:underline;}
+
+.cBlack000, a.cBlack000:link,a.cBlack000:visited,a.cBlack000:active {color:#000;text-decoration:none;}
+a.cBlack000:hover { color:#f30; text-decoration:underline;}
+
+.cWhitefff, a.cWhitefff:link,a.cWhitefff:visited,a.cWhitefff:active {color:#fff;text-decoration:none;}
+a.cWhitefff:hover { color:#fff; text-decoration:underline;}
+
+.cGray333, a.cGray333:link,a.cGray333:visited,a.cGray333:active {color:#333;text-decoration:none;}
+a.cGray333:hover { color:#f30; text-decoration:underline;}
+
+.cGray666, a.cGray666:link,a.cGray666:visited,a.cGray666:active {color:#666;text-decoration:none;}
+a.cGray666:hover { color:#f60; text-decoration:underline;}
+
+.cGray999, a.cGray999:link,a.cGray999:visited,a.cGray999:active {color:#999;text-decoration:none;}
+a.cGray999:hover { color:#f60; text-decoration:underline;}
+
+/*--- 框架控制 ---*/
+.area { width:992px; clear:both; margin:0 auto;}
+.side_fL { float:left; margin-right:5px;}
+.side_fR { float:right;}
+
+/*--- 宽度控制 ---*/
+.w190 { width:190px;}
+.w240 { width:240px;}
+.w546 { width:546px;}
+
+.w200 { width:200px;}
+.w784 { width:784px;}
+
+.w168 { width:168px;}
+.w816 { width:816px;}
+.w610 { width:610px;}
+.w198 { width:198px;}
+
+
+/*--- 常用控制 ---*/
+.tC{ text-align:center;}
+.tL{ text-align:left;}
+.tR{ text-align:right;}
+.tB { font-weight:bold;}
+.tH { font-family:\9ED1\4F53;}
+.f12px{font-size:12px;}
+.f14px{font-size:14px;}
+.f16px{font-size:16px;}
+.f18px{font-size:18px;}
+.f24px {font-size:24px;}
+.f28px { font-size:28px;}
+.f38px { font-size:38px;}
+
+.fL{float:left;}
+.fR{float:right;}
+.clear { clear:both; display:block;}
+.clearfix { clear:both; height:1px; font-size:1px; line-height:1px; overflow:hidden;}
+.show{ display:block;}
+.hide{display:none;}
+
+ul dd.last,
+ul li.last { border-bottom:none;}
+
+.blank_12 { height:12px; overflow:hidden; clear:both;}
+.blank_8 { height:8px; overflow:hidden; clear:both;}
+
+.border_gray { border-bottom:1px solid #ccc; height:16px; overflow:hidden; margin-bottom:10px; clear:both;}
+.border_blue {border-bottom:3px solid #83f9aa; height:16px; overflow:hidden; margin-bottom:8px; clear:both;}
+.border_pink {border-bottom:3px solid #ff99d3; height:16px; overflow:hidden; margin-bottom:8px; clear:both;}
+.border_red {border-bottom:3px solid #ff9999; height:16px; overflow:hidden; margin-bottom:8px; clear:both;}
+
+.txtInput {border:1px solid #ccc;}
+.txtInput_sel { border:1px solid #F90;}
+
+

@@ -1,0 +1,93 @@
+﻿@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewBag.Title = ""; 
+}
+@using MyProject.Services.MvcPager; 
+@using MyProject.Services.Extensions;
+@model PagedList<MyProject.Core.Entities.SysLog>
+ 
+<body style="background-color:#F9F9F9;margin-top:0px;"> 
+<div class="widget-box" style="margin-top:0;">
+          <div class="widget-title"> 
+            <h5>后台日志</h5>
+          </div>
+          <div class="widget-content nopadding">
+              <div class="">
+                  <div id="DataTables_Table_0_length" class="dataTables_length" style ="width: 100%;">
+                     @using (Html.BeginForm("IndexLog", "SysLog", FormMethod.Get))
+                        {
+                            <table>
+                                <tr>
+                                    <td >类型：</td>
+                                    <td style="padding-right: 15px;">
+                                         @Html.DropDownList("logType", ViewData["LogTypeList"] as List<SelectListItem>, new { @style="width: 130px;height: 23px;"})
+                                    </td> 
+                                    <td >模块：</td>
+                                      <td style="padding-right: 15px;">
+                                         @Html.DropDownList("logModule", ViewData["LogModuleList"] as List<SelectListItem>, new { @style="width: 130px;height: 23px;"})
+                                    </td>  
+                                    <td>日期：</td>
+                                    <td style="padding-right: 15px;"> 
+                                        @Html.TextBox("sdate",null, new { @class="Wdate", @onfocus="WdatePicker()" , @style="width: 130px;height: 23px;"}) 
+                                             -   
+                                        @Html.TextBox("edate",null, new { @class="Wdate", @onfocus="WdatePicker()" , @style="width: 130px;height: 23px;"})
+                                    </td>
+                                    <td>
+                                        <input type="submit" value="查找" class="btn btn-mini" style="padding: 4px 8px;font-weight:bold;" /> 
+                                        
+                                    </td>
+                                </tr>
+            
+                            </table>
+                        }
+                  </div>
+
+              </div>
+
+            <table class="table table-bordered table-striped"> 
+                <thead>
+                <tr>
+                  <th>ID</th>
+                  <th>操作人</th> 
+                    <th>信息</th>
+                  <th>结果</th> 
+                  <th>类型</th> 
+                    <th>模块</th>
+                  <th>添加时间</th>  
+                </tr>
+              </thead>
+              <tbody> 
+                  @foreach (var item in Model)
+                    {
+                        <tr >
+                            <td>
+                                @item.Id
+                            </td>
+                            <td>
+                                @item.Operator
+                            </td> 
+                            <td style="text-align:center;">
+                               @item.Message
+                            </td>
+                             <td>
+                                @item.Result
+                            </td>
+                            <td >
+                                @(((MyProject.Core.Enum.LogTypeEnum)item.Type).ToDescriptionName())
+                            </td> 
+                             <td > 
+                                 @(((MyProject.Core.Enum.LogModuleEnum)item.Module).ToDescriptionName())
+                            </td> 
+                            <td style="text-align:center;">
+                               @item.CreateTime
+                            </td> 
+                        </tr>
+                   }
+              </tbody>
+            </table>  
+          </div> 
+        </div>
+       <div style="">
+            @Html.Pager(Model)
+       </div>  
+</body>   

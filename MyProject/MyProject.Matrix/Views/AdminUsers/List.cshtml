@@ -1,0 +1,134 @@
+﻿@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewBag.Title = "用户管理";
+    var permList = ViewBag.perm as List<MyProject.Core.Dtos.PermDto>;
+    if (permList == null)
+    {
+        permList = new List<MyProject.Core.Dtos.PermDto>();
+    }
+}
+@using MyProject.Services.MvcPager;
+@using MyProject.Matrix.Controllers.Core;
+@model PagedList<MyProject.Matrix.Controllers.AdminUsers.ViewModels.AdminUserModel>  
+
+<body style="background-color:#F9F9F9;margin-top:0px;"> 
+<div class="widget-box" style="margin-top:0;">
+          <div class="widget-title"> 
+            <h5>用户列表</h5>
+          </div>
+          <div class="widget-content nopadding">
+              <div class="">
+                  <div id="DataTables_Table_0_length" class="dataTables_length">
+                     @using (Html.BeginForm("List", "AdminUsers", FormMethod.Get))
+                        {
+                            <table>
+                                <tr>
+                                    <td style="padding-right: 15px;">
+                                        用户名称：@Html.TextBox("account", null, new { @class = "span11" })
+                                    </td>
+                                    <td style="padding-right: 15px;">
+                                        用户角色：@Html.DropDownList("userRole", ViewBag.RoleList as List<SelectListItem>, new { @style="width: 130px;height: 23px;"})
+                                    </td>
+                                    <td>
+                                        <input type="submit" value="查找" class="btn btn-mini" style="padding: 4px 8px;font-weight:bold;" />
+                                         @Html.ToolButton("btnAdd", "新增用户", permList, "Save", @Url.Action("Save", "AdminUsers"), "")
+                                    </td>
+                                </tr>
+            
+                            </table>
+                        }
+                  </div>
+
+              </div>
+
+            <table class="table table-bordered table-striped"> 
+                <thead>
+                <tr>
+                  <th>ID</th>
+                  <th>用户名称</th>
+                  <th>角色名称</th>
+                  <th>是否锁定</th> 
+                    <th>操作</th>
+                </tr>
+              </thead>
+              <tbody> 
+                  @foreach (var item in Model)
+                    {
+                        <tr >
+                            <td style="text-align:center;">
+                                @item.AdminUserId
+                            </td>
+                            <td style="text-align:center;">
+                                @item.UserName
+                            </td>
+                            <td style="text-align:center;">
+                                @item.RoleName
+                            </td>
+                            <td style="text-align:center;">
+                                @(item.IsLock ? "是":"否")
+                            </td>
+                            <td style="text-align:center;">
+                                 @Html.ToolButton("btnSave", "修改", permList, "Save", "/AdminUsers/Save?id="+item.AdminUserId, "")
+                                 @Html.ToolButton("btnDelete", "删除", permList, "Delete","", "DeletePost('/AdminUsers/Delete?id="+item.AdminUserId+"')")
+                                 @Html.ToolButton("btnIsLock", item.IsLock ? "解锁":"锁定", permList, "Lock", "", "IsLock("+(item.IsLock ? "'解锁'":"'锁定'")+","+item.AdminUserId+")")
+
+                            </td>
+                        </tr>
+                   }
+              </tbody>
+            </table>  
+          </div> 
+        </div>
+       <div style="">
+            @Html.Pager(Model)
+       </div> 
+</body>  
+@section Script
+    {
+    <script type="text/javascript">
+        $(function () {
+            $("#btnSave,#btnAdd").colorbox({//弹窗
+                iframe: true,
+                opacity: 0.8,//遮罩0为透明
+                width: "500px",
+                height: "380px",
+                onClosed: function () {
+                    window.location.reload();
+                },
+                onOpen: function () {
+                    //alert('onOpen: colorbox 即将打开');
+                },
+                onLoad: function () {
+                    //alert('onLoad: colorbox已经开始加载目标内容');
+                },
+                onComplete: function () {
+                    //alert('onComplete: colorbox已显示加载内容');
+                    $("#colorbox").css({ "width": "500px", "height": "380px", "top": "30px" })//修改弹框/遮罩的宽高
+                },
+                onCleanup: function () {
+                    // alert('onCleanup: colorbox已经开始关闭过程');
+                }
+            });
+
+        });
+        function IsLock(str, id) {
+            if (str == '解锁')
+                url = '/AdminUsers/UnLock?id=' + id;
+            else url = '/AdminUsers/Lock?id=' + id;
+            if (confirm('是否确定' + str + '?')) {
+                $.post(url, function () {
+                    alert(str + "成功");
+                    window.location.reload();
+                });
+            }
+        }
+        function DeletePost(url, data) {
+            if (confirm('是否确定删除?')) {
+                $.post(url, data, function () {
+                    alert('删除成功');
+                    window.location.reload();
+                });
+            }
+        }
+    </script>
+}

@@ -1,0 +1,88 @@
+﻿@{
+    ViewBag.Title = "PowerList";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+
+    var powerList = (List<PowerModel>)ViewData["PowerList"];
+}
+@using MyProject.Controllers.SysManage.ViewModels
+@model SavePowerModel  
+@section Script
+{
+    <script type="text/javascript">
+        $(function () {
+            $("#form1").validationEngine();
+        })
+    </script>
+}
+
+<div class="right_box_card">
+    <ul>
+        <li class="right_box_card1"><a href="#">菜单权限</a></li>
+    </ul>
+</div>
+
+<table  class="right_box_tab" style="margin-top: 10px;" width="100%"
+    border="0" cellspacing="0" cellpadding="0">
+    <tr height="30" class="tab_title">
+        <td>
+            权限名称
+        </td>
+        <td>
+            Action
+        </td>
+        <td>
+            Controller
+        </td>
+        <td>
+            权限编号
+        </td>
+        <td>
+        </td>
+    </tr>
+    @foreach (var item in powerList)
+    {
+        <tr height="35" class="tab_td1" style="line-height: 26px;" onmouseover="this.className = 'tab_td2' "
+            onmouseout=" this.className = 'tab_td1'">
+            <td>
+                @item.PowerName
+            </td>
+            <td>
+                @item.Action
+            </td>
+            <td>
+                @item.Controller
+            </td>
+            <td>
+                @item.PowerCode
+            </td>
+            <td>
+                <a href="javascript:void(0);" onclick="DeletePost('@Url.Action("DeletePower", "SysManage")',{powerId:@item.PowerId})">
+                    删除</a>
+            </td>
+        </tr>
+    }
+</table>
+
+@using (Html.BeginForm("SavePower", "SysManage", FormMethod.Post, new { @class = "formular", id = "form1" }))
+{
+    @Html.HiddenFor(c => c.MenuId)
+    <fieldset>
+        <label>
+            <span>@Html.LabelFor(c => c.PowerName)</span>
+            @Html.TextBoxFor(c => c.PowerName, new { @class = "validate[required] text-input" })
+        </label>
+        <label>
+            <span>@Html.LabelFor(c => c.Action)</span>
+            @Html.TextBoxFor(c => c.Action, new { @class = "validate[required] text-input" })
+        </label>
+        <label>
+            <span>@Html.LabelFor(c => c.Controller)</span>
+            @Html.TextBoxFor(c => c.Controller, new { @class = "validate[required] text-input" })
+        </label>
+        <label>
+            <span>@Html.LabelFor(c => c.PowerCode)</span>
+            @Html.TextBoxFor(c => c.PowerCode, new { @class = "text-input" })
+        </label>
+        <input type="submit" value="保存" class="submit" />
+    </fieldset> 
+}

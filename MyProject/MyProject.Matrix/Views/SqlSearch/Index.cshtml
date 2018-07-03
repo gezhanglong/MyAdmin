@@ -1,0 +1,65 @@
+﻿@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewBag.Title = "sql查询";
+}
+@model System.Data.DataTable 
+<body style="background-color:#F9F9F9;margin-top:0px;"> 
+    <div class="widget-box" style="margin-top: 0;">
+        <div class="widget-title">
+            <h5>sql查询</h5>
+        </div>
+        <div class="widget-content nopadding">
+            <div class="">
+                <div id="DataTables_Table_0_length" class="dataTables_length">
+                    @using (Html.BeginForm("Index", "SqlSearch", FormMethod.Post))
+                    {
+                        <table>
+                            <tr>
+                                <td style="padding-right: 15px;">
+                                    @Html.TextArea("sql", ViewData["Sql"].ToString(), new {@class="span11", @style = "width:600px; height:120px;" })
+                                </td>
+                                <td>
+                                    <input type="submit" value="查找" class="btn btn-mini" style="padding: 4px 8px; font-weight: bold;" />
+                                </td>
+
+                            </tr>
+
+                        </table>
+                        }
+                </div>
+
+            </div>
+             @if (Model != null && Model.Rows.Count != 0)
+                    {
+            <table class="table table-bordered table-striped">
+                <tbody>
+                   
+                        <tr>
+                            @for (int i = 0; i < Model.Columns.Count; i++)
+                            {
+                                <td style="text-align: center;font-weight:bolder;">
+                                    @Model.Columns[i].ColumnName
+                                </td>
+                             }
+
+                        </tr>
+                   
+                        @for (int i = 0; i < Model.Rows.Count; i++)
+                        {
+                        <tr>
+                            @for (int j = 0; j < Model.Columns.Count; j++)
+                            {
+                                <td style="text-align:center;">
+                                        @Model.Rows[i][j]
+                                </td>
+                            }
+                        </tr>
+                      
+                        }
+                </tbody>
+            </table>
+                              }
+        </div>
+    </div> 
+</body>
+

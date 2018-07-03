@@ -1,0 +1,33 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    <title>@ViewBag.Title</title>
+   @* @Styles.Render("~/Content/Matrix_Admin/css") 
+     @Scripts.Render("~/Content/Matrix_Admin/js")*@ 
+    <link href="~/Content/Matrix_Admin/css/bootstrap.min.css" rel="stylesheet" />  
+    <link href="~/Content/Matrix_Admin/css/colorpicker.css" rel="stylesheet" />
+    <link href="~/Content/Matrix_Admin/css/uniform.css" rel="stylesheet" />
+    <link href="~/Content/Matrix_Admin/css/select2.css" rel="stylesheet" />
+    <link href="~/Content/Matrix_Admin/css/matrix-style.css" rel="stylesheet" />
+    <link href="~/Content/Matrix_Admin/css/matrix-media.css" rel="stylesheet" />   
+    <link href="~/Content/colorbox/colorbox.css" rel="stylesheet" />
+     
+    <script src="/Content/Matrix_Admin/js/jquery.min.js" ></script>
+    <script src="~/Content/colorbox/jquery.colorbox.js"></script>
+    <script src="/Content/Matrix_Admin/js/bootstrap.min.js"></script>
+    <script src="~/Content/My97DatePicker/WdatePicker.js"></script> 
+    @if (IsSectionDefined("Style"))
+    {
+        @RenderSection("Style");
+    }
+    @if(IsSectionDefined("Script"))
+    {
+        @RenderSection("Script");
+    }
+</head>
+
+    @RenderBody() 
+
+</html>

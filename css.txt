@@ -1,0 +1,6 @@
+1、浮动：float:left
+2、圆弧：border-radius: 6px;
+3、table再多也不会把td撑大
+    #ext{table-layout:fixed;} 
+    #ext td {white-space:nowrap;overflow:hidden;word-break:keep-all;text-overflow:ellipsis }
+3、给div加滚动条 ：overflow: scroll; 

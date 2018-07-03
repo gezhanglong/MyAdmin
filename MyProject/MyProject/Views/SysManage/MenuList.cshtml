@@ -1,0 +1,130 @@
+﻿@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var permList = ViewBag.perm as List<MyProject.Core.Dtos.PermDto>;
+    if (permList == null)
+    {
+        permList = new List<MyProject.Core.Dtos.PermDto>();
+    }
+}
+@using MyProject.Controllers.Core;
+@model List<MyProject.Controllers.SysManage.ViewModels.MenuModel>
+@section Script
+    {
+    <script type="text/javascript">
+        $(function () {
+            $('#treeTable').treeTable();
+            $(".box").colorbox({
+                iframe: true,
+                width: 700,
+                height: 500,
+                onClosed: function () {
+                    window.location.reload();
+                }
+            });
+
+            $(".powerBox").colorbox({
+                iframe: true,
+                width: 700,
+                height: 500
+            });
+        })
+    </script>
+}
+
+<div class="right_box_card">
+    <ul>
+        <li class="right_box_card1"><a href="#">菜单管理</a></li>
+    </ul>
+</div>
+<div style="line-height: 40px;">
+    <p class="avatar_btn"> 
+         @Html.ToolButton("btnSave1", "新增菜单", permList, "SaveMenu", @Url.Action("SaveMenu", "SysManage"), "")
+    </p>
+</div>
+<table id="treeTable" class="right_box_tab" style="margin-top: 10px;" width="100%"
+    border="0" cellspacing="0" cellpadding="0">
+    <tr height="30" class="tab_title">
+        <td>
+            ID
+        </td>
+        <td>
+            菜单名称
+        </td>
+        <td>
+            菜单链接
+        </td>
+        <td>
+            父ID
+        </td>
+        <td>
+            排序编码
+        </td>
+        <td>
+            创建时间
+        </td>
+        <td>
+        </td>
+    </tr>
+    @foreach (var item in Model.Where(c => c.ParentId == 0))
+    {
+        <tr height="35" class="tab_td1" id="node-@item.MenuId">
+            <td>
+                @item.MenuId
+            </td>
+            <td class="red">
+                @item.MenuName
+            </td>
+            <td>
+                @item.LinkUrl
+            </td>
+            <td>
+                @item.ParentId
+            </td>
+            <td>
+                @item.SortOrder
+            </td>
+            <td>
+                @item.CreateDate
+            </td>
+            <td>
+               @* @Html.ActionLink("修改", "SaveMenu", "SysManage", new { item.MenuId }, new { @class = "box" })
+                <a href="#" onclick="DeletePost('/SysManage/DeleteMenu', { menuId: @item.MenuId})">删除</a>*@
+                 @Html.ToolButton("btnSave2", "修改", permList, "SaveMenu", "/SysManage/SaveMenu?menuid="+item.MenuId, "")
+                 @Html.ToolButton("btnDelete2", "删除", permList, "DeleteMenu","", "DeletePost('/SysManage/DeleteMenu?menuId="+item.MenuId+"')")
+            </td>
+        </tr>
+        foreach (var child in Model.Where(c => c.ParentId == item.MenuId))
+        {
+            <tr height="35" class="child-of-node-@item.MenuId tab_td1">
+                <td>
+                    @child.MenuId
+                </td>
+                <td>
+                    @child.MenuName
+                </td>
+                <td>
+                    @child.LinkUrl
+                </td>
+                <td>
+                    @child.ParentId
+                </td>
+                <td>
+                    @child.SortOrder
+                </td>
+                <td>
+                    @child.CreateDate
+                </td>
+                <td>
+                  @*  @Html.ActionLink("修改", "SaveMenu", "SysManage", new {child.MenuId}, new {@class = "box"})
+                    <a href="#" onclick="DeletePost('/SysManage/DeleteMenu', { menuId: @child.MenuId})">
+                        删除</a>
+                    @Html.ActionLink("权限列表", "SavePower", "SysManage", new {child.MenuId}, new {@class = "powerBox"})*@
+
+                    @Html.ToolButton("btnSave3", "修改", permList, "SaveMenu", "/SysManage/SaveMenu?menuid="+child.MenuId, "")
+                 @Html.ToolButton("btnDelete3", "删除", permList, "DeleteMenu","", "DeletePost('/SysManage/DeleteMenu?menuId="+child.MenuId+"')")
+                     @Html.ToolButton("btnPower", "权限列表", permList, "SavePower", "/SysManage/SavePower?menuid="+child.MenuId, "")
+                </td>
+            </tr>
+        }
+    }
+</table>

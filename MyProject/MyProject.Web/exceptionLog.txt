@@ -1,0 +1,138 @@
+没有为该对象定义无参数的构造函数。|   在 System.RuntimeTypeHandle.CreateInstance(RuntimeType type, Boolean publicOnly, Boolean noCheck, Boolean& canBeCached, RuntimeMethodHandleInternal& ctor, Boolean& bNeedSecurityCheck)
+   在 System.RuntimeType.CreateInstanceSlow(Boolean publicOnly, Boolean skipCheckThis, Boolean fillCache, StackCrawlMark& stackMark)
+   在 System.Activator.CreateInstance(Type type, Boolean nonPublic)
+   在 System.Activator.CreateInstance(Type type)
+   在 Codeplex.Data.DynamicJson.DeserializeObject(Type targetType) 位置 f:\zl\weixinSDK\weixinSDK-master\Deepleo.Weixin.SDK\Helpers\DynamicJson.cs:行号 263
+   在 Codeplex.Data.DynamicJson.TryConvert(ConvertBinder binder, Object& result) 位置 f:\zl\weixinSDK\weixinSDK-master\Deepleo.Weixin.SDK\Helpers\DynamicJson.cs:行号 327
+   在 CallSite.Target(Closure , CallSite , Object )
+   在 System.Dynamic.UpdateDelegates.UpdateAndExecute1[T0,TRet](CallSite site, T0 arg0)
+   在 MyProject.Task.WeiXinSdkTask.JsApiToken() 位置 f:\zl\Project\MyProject2\Pro2\MyProject\MyProject.Task\WeiXinSdkTask.cs:行号 459|Can't find a connection string with the name 'MyP'|2018/5/16 14:19:56
+没有为该对象定义无参数的构造函数。|   在 System.RuntimeTypeHandle.CreateInstance(RuntimeType type, Boolean publicOnly, Boolean noCheck, Boolean& canBeCached, RuntimeMethodHandleInternal& ctor, Boolean& bNeedSecurityCheck)
+   在 System.RuntimeType.CreateInstanceSlow(Boolean publicOnly, Boolean skipCheckThis, Boolean fillCache, StackCrawlMark& stackMark)
+   在 System.Activator.CreateInstance(Type type, Boolean nonPublic)
+   在 System.Activator.CreateInstance(Type type)
+   在 Codeplex.Data.DynamicJson.DeserializeObject(Type targetType) 位置 f:\zl\weixinSDK\weixinSDK-master\Deepleo.Weixin.SDK\Helpers\DynamicJson.cs:行号 263
+   在 Codeplex.Data.DynamicJson.TryConvert(ConvertBinder binder, Object& result) 位置 f:\zl\weixinSDK\weixinSDK-master\Deepleo.Weixin.SDK\Helpers\DynamicJson.cs:行号 327
+   在 CallSite.Target(Closure , CallSite , Object )
+   在 MyProject.Task.WeiXinSdkTask.JsApiToken() 位置 f:\zl\Project\MyProject2\Pro2\MyProject\MyProject.Task\WeiXinSdkTask.cs:行号 459|Can't find a connection string with the name 'MyP'|2018/5/16 14:20:20
+没有为该对象定义无参数的构造函数。|   在 System.RuntimeTypeHandle.CreateInstance(RuntimeType type, Boolean publicOnly, Boolean noCheck, Boolean& canBeCached, RuntimeMethodHandleInternal& ctor, Boolean& bNeedSecurityCheck)
+   在 System.RuntimeType.CreateInstanceSlow(Boolean publicOnly, Boolean skipCheckThis, Boolean fillCache, StackCrawlMark& stackMark)
+   在 System.Activator.CreateInstance(Type type, Boolean nonPublic)
+   在 System.Activator.CreateInstance(Type type)
+   在 Codeplex.Data.DynamicJson.DeserializeObject(Type targetType) 位置 f:\zl\weixinSDK\weixinSDK-master\Deepleo.Weixin.SDK\Helpers\DynamicJson.cs:行号 263
+   在 Codeplex.Data.DynamicJson.TryConvert(ConvertBinder binder, Object& result) 位置 f:\zl\weixinSDK\weixinSDK-master\Deepleo.Weixin.SDK\Helpers\DynamicJson.cs:行号 327
+   在 CallSite.Target(Closure , CallSite , Object )
+   在 MyProject.Task.WeiXinSdkTask.JsApiToken() 位置 f:\zl\Project\MyProject2\Pro2\MyProject\MyProject.Task\WeiXinSdkTask.cs:行号 459|Can't find a connection string with the name 'MyP'|2018/5/16 14:22:37
+没有为该对象定义无参数的构造函数。|   在 System.RuntimeTypeHandle.CreateInstance(RuntimeType type, Boolean publicOnly, Boolean noCheck, Boolean& canBeCached, RuntimeMethodHandleInternal& ctor, Boolean& bNeedSecurityCheck)
+   在 System.RuntimeType.CreateInstanceSlow(Boolean publicOnly, Boolean skipCheckThis, Boolean fillCache, StackCrawlMark& stackMark)
+   在 System.Activator.CreateInstance(Type type, Boolean nonPublic)
+   在 System.Activator.CreateInstance(Type type)
+   在 Codeplex.Data.DynamicJson.DeserializeObject(Type targetType) 位置 f:\zl\weixinSDK\weixinSDK-master\Deepleo.Weixin.SDK\Helpers\DynamicJson.cs:行号 263
+   在 Codeplex.Data.DynamicJson.TryConvert(ConvertBinder binder, Object& result) 位置 f:\zl\weixinSDK\weixinSDK-master\Deepleo.Weixin.SDK\Helpers\DynamicJson.cs:行号 327
+   在 CallSite.Target(Closure , CallSite , Object )
+   在 MyProject.Task.WeiXinSdkTask.JsApiToken() 位置 f:\zl\Project\MyProject2\Pro2\MyProject\MyProject.Task\WeiXinSdkTask.cs:行号 459|Can't find a connection string with the name 'MyP'|2018/5/16 14:22:40
+没有为该对象定义无参数的构造函数。|   在 System.RuntimeTypeHandle.CreateInstance(RuntimeType type, Boolean publicOnly, Boolean noCheck, Boolean& canBeCached, RuntimeMethodHandleInternal& ctor, Boolean& bNeedSecurityCheck)
+   在 System.RuntimeType.CreateInstanceSlow(Boolean publicOnly, Boolean skipCheckThis, Boolean fillCache, StackCrawlMark& stackMark)
+   在 System.Activator.CreateInstance(Type type, Boolean nonPublic)
+   在 System.Activator.CreateInstance(Type type)
+   在 Codeplex.Data.DynamicJson.DeserializeObject(Type targetType) 位置 f:\zl\weixinSDK\weixinSDK-master\Deepleo.Weixin.SDK\Helpers\DynamicJson.cs:行号 263
+   在 Codeplex.Data.DynamicJson.TryConvert(ConvertBinder binder, Object& result) 位置 f:\zl\weixinSDK\weixinSDK-master\Deepleo.Weixin.SDK\Helpers\DynamicJson.cs:行号 327
+   在 CallSite.Target(Closure , CallSite , Object )
+   在 MyProject.Task.WeiXinSdkTask.JsApiToken() 位置 f:\zl\Project\MyProject2\Pro2\MyProject\MyProject.Task\WeiXinSdkTask.cs:行号 459|Can't find a connection string with the name 'MyP'|2018/5/16 14:25:23
+没有为该对象定义无参数的构造函数。|   在 System.RuntimeTypeHandle.CreateInstance(RuntimeType type, Boolean publicOnly, Boolean noCheck, Boolean& canBeCached, RuntimeMethodHandleInternal& ctor, Boolean& bNeedSecurityCheck)
+   在 System.RuntimeType.CreateInstanceSlow(Boolean publicOnly, Boolean skipCheckThis, Boolean fillCache, StackCrawlMark& stackMark)
+   在 System.Activator.CreateInstance(Type type, Boolean nonPublic)
+   在 System.Activator.CreateInstance(Type type)
+   在 Codeplex.Data.DynamicJson.DeserializeObject(Type targetType) 位置 f:\zl\weixinSDK\weixinSDK-master\Deepleo.Weixin.SDK\Helpers\DynamicJson.cs:行号 263
+   在 Codeplex.Data.DynamicJson.TryConvert(ConvertBinder binder, Object& result) 位置 f:\zl\weixinSDK\weixinSDK-master\Deepleo.Weixin.SDK\Helpers\DynamicJson.cs:行号 327
+   在 CallSite.Target(Closure , CallSite , Object )
+   在 MyProject.Task.WeiXinSdkTask.JsApiToken() 位置 f:\zl\Project\MyProject2\Pro2\MyProject\MyProject.Task\WeiXinSdkTask.cs:行号 459|Can't find a connection string with the name 'MyP'|2018/5/16 14:27:27
+没有为该对象定义无参数的构造函数。|   在 System.RuntimeTypeHandle.CreateInstance(RuntimeType type, Boolean publicOnly, Boolean noCheck, Boolean& canBeCached, RuntimeMethodHandleInternal& ctor, Boolean& bNeedSecurityCheck)
+   在 System.RuntimeType.CreateInstanceSlow(Boolean publicOnly, Boolean skipCheckThis, Boolean fillCache, StackCrawlMark& stackMark)
+   在 System.Activator.CreateInstance(Type type, Boolean nonPublic)
+   在 System.Activator.CreateInstance(Type type)
+   在 Codeplex.Data.DynamicJson.DeserializeObject(Type targetType) 位置 f:\zl\weixinSDK\weixinSDK-master\Deepleo.Weixin.SDK\Helpers\DynamicJson.cs:行号 263
+   在 Codeplex.Data.DynamicJson.TryConvert(ConvertBinder binder, Object& result) 位置 f:\zl\weixinSDK\weixinSDK-master\Deepleo.Weixin.SDK\Helpers\DynamicJson.cs:行号 327
+   在 CallSite.Target(Closure , CallSite , Object )
+   在 MyProject.Task.WeiXinSdkTask.JsApiToken() 位置 f:\zl\Project\MyProject2\Pro2\MyProject\MyProject.Task\WeiXinSdkTask.cs:行号 459|Can't find a connection string with the name 'MyP'|2018/5/16 14:29:14
+没有为该对象定义无参数的构造函数。|   在 System.RuntimeTypeHandle.CreateInstance(RuntimeType type, Boolean publicOnly, Boolean noCheck, Boolean& canBeCached, RuntimeMethodHandleInternal& ctor, Boolean& bNeedSecurityCheck)
+   在 System.RuntimeType.CreateInstanceSlow(Boolean publicOnly, Boolean skipCheckThis, Boolean fillCache, StackCrawlMark& stackMark)
+   在 System.Activator.CreateInstance(Type type, Boolean nonPublic)
+   在 System.Activator.CreateInstance(Type type)
+   在 Codeplex.Data.DynamicJson.DeserializeObject(Type targetType) 位置 f:\zl\weixinSDK\weixinSDK-master\Deepleo.Weixin.SDK\Helpers\DynamicJson.cs:行号 263
+   在 Codeplex.Data.DynamicJson.TryConvert(ConvertBinder binder, Object& result) 位置 f:\zl\weixinSDK\weixinSDK-master\Deepleo.Weixin.SDK\Helpers\DynamicJson.cs:行号 327
+   在 CallSite.Target(Closure , CallSite , Object )
+   在 MyProject.Task.WeiXinSdkTask.JsApiToken() 位置 f:\zl\Project\MyProject2\Pro2\MyProject\MyProject.Task\WeiXinSdkTask.cs:行号 459|Can't find a connection string with the name 'MyP'|2018/5/16 14:29:16
+没有为该对象定义无参数的构造函数。|   在 System.RuntimeTypeHandle.CreateInstance(RuntimeType type, Boolean publicOnly, Boolean noCheck, Boolean& canBeCached, RuntimeMethodHandleInternal& ctor, Boolean& bNeedSecurityCheck)
+   在 System.RuntimeType.CreateInstanceSlow(Boolean publicOnly, Boolean skipCheckThis, Boolean fillCache, StackCrawlMark& stackMark)
+   在 System.Activator.CreateInstance(Type type, Boolean nonPublic)
+   在 System.Activator.CreateInstance(Type type)
+   在 Codeplex.Data.DynamicJson.DeserializeObject(Type targetType) 位置 f:\zl\weixinSDK\weixinSDK-master\Deepleo.Weixin.SDK\Helpers\DynamicJson.cs:行号 263
+   在 Codeplex.Data.DynamicJson.TryConvert(ConvertBinder binder, Object& result) 位置 f:\zl\weixinSDK\weixinSDK-master\Deepleo.Weixin.SDK\Helpers\DynamicJson.cs:行号 327
+   在 CallSite.Target(Closure , CallSite , Object )
+   在 MyProject.Task.WeiXinSdkTask.JsApiToken() 位置 f:\zl\Project\MyProject2\Pro2\MyProject\MyProject.Task\WeiXinSdkTask.cs:行号 459|Can't find a connection string with the name 'MyP'|2018/5/16 14:31:18
+没有为该对象定义无参数的构造函数。|   在 System.RuntimeTypeHandle.CreateInstance(RuntimeType type, Boolean publicOnly, Boolean noCheck, Boolean& canBeCached, RuntimeMethodHandleInternal& ctor, Boolean& bNeedSecurityCheck)
+   在 System.RuntimeType.CreateInstanceSlow(Boolean publicOnly, Boolean skipCheckThis, Boolean fillCache, StackCrawlMark& stackMark)
+   在 System.Activator.CreateInstance(Type type, Boolean nonPublic)
+   在 System.Activator.CreateInstance(Type type)
+   在 Codeplex.Data.DynamicJson.DeserializeObject(Type targetType) 位置 f:\zl\weixinSDK\weixinSDK-master\Deepleo.Weixin.SDK\Helpers\DynamicJson.cs:行号 263
+   在 Codeplex.Data.DynamicJson.TryConvert(ConvertBinder binder, Object& result) 位置 f:\zl\weixinSDK\weixinSDK-master\Deepleo.Weixin.SDK\Helpers\DynamicJson.cs:行号 327
+   在 CallSite.Target(Closure , CallSite , Object )
+   在 MyProject.Task.WeiXinSdkTask.JsApiToken() 位置 f:\zl\Project\MyProject2\Pro2\MyProject\MyProject.Task\WeiXinSdkTask.cs:行号 459|Can't find a connection string with the name 'MyP'|2018/5/16 14:32:08
+没有为该对象定义无参数的构造函数。|   在 System.RuntimeTypeHandle.CreateInstance(RuntimeType type, Boolean publicOnly, Boolean noCheck, Boolean& canBeCached, RuntimeMethodHandleInternal& ctor, Boolean& bNeedSecurityCheck)
+   在 System.RuntimeType.CreateInstanceSlow(Boolean publicOnly, Boolean skipCheckThis, Boolean fillCache, StackCrawlMark& stackMark)
+   在 System.Activator.CreateInstance(Type type, Boolean nonPublic)
+   在 System.Activator.CreateInstance(Type type)
+   在 Codeplex.Data.DynamicJson.DeserializeObject(Type targetType) 位置 f:\zl\weixinSDK\weixinSDK-master\Deepleo.Weixin.SDK\Helpers\DynamicJson.cs:行号 263
+   在 Codeplex.Data.DynamicJson.TryConvert(ConvertBinder binder, Object& result) 位置 f:\zl\weixinSDK\weixinSDK-master\Deepleo.Weixin.SDK\Helpers\DynamicJson.cs:行号 327
+   在 CallSite.Target(Closure , CallSite , Object )
+   在 MyProject.Task.WeiXinSdkTask.JsApiToken() 位置 f:\zl\Project\MyProject2\Pro2\MyProject\MyProject.Task\WeiXinSdkTask.cs:行号 459|Can't find a connection string with the name 'MyP'|2018/5/16 14:32:29
+没有为该对象定义无参数的构造函数。|   在 System.RuntimeTypeHandle.CreateInstance(RuntimeType type, Boolean publicOnly, Boolean noCheck, Boolean& canBeCached, RuntimeMethodHandleInternal& ctor, Boolean& bNeedSecurityCheck)
+   在 System.RuntimeType.CreateInstanceSlow(Boolean publicOnly, Boolean skipCheckThis, Boolean fillCache, StackCrawlMark& stackMark)
+   在 System.Activator.CreateInstance(Type type, Boolean nonPublic)
+   在 System.Activator.CreateInstance(Type type)
+   在 Codeplex.Data.DynamicJson.DeserializeObject(Type targetType) 位置 f:\zl\weixinSDK\weixinSDK-master\Deepleo.Weixin.SDK\Helpers\DynamicJson.cs:行号 263
+   在 Codeplex.Data.DynamicJson.TryConvert(ConvertBinder binder, Object& result) 位置 f:\zl\weixinSDK\weixinSDK-master\Deepleo.Weixin.SDK\Helpers\DynamicJson.cs:行号 327
+   在 CallSite.Target(Closure , CallSite , Object )
+   在 MyProject.Task.WeiXinSdkTask.JsApiToken() 位置 f:\zl\Project\MyProject2\Pro2\MyProject\MyProject.Task\WeiXinSdkTask.cs:行号 459|Can't find a connection string with the name 'MyP'|2018/5/16 14:32:56
+没有为该对象定义无参数的构造函数。|   在 System.RuntimeTypeHandle.CreateInstance(RuntimeType type, Boolean publicOnly, Boolean noCheck, Boolean& canBeCached, RuntimeMethodHandleInternal& ctor, Boolean& bNeedSecurityCheck)
+   在 System.RuntimeType.CreateInstanceSlow(Boolean publicOnly, Boolean skipCheckThis, Boolean fillCache, StackCrawlMark& stackMark)
+   在 System.Activator.CreateInstance(Type type, Boolean nonPublic)
+   在 System.Activator.CreateInstance(Type type)
+   在 Codeplex.Data.DynamicJson.DeserializeObject(Type targetType) 位置 f:\zl\weixinSDK\weixinSDK-master\Deepleo.Weixin.SDK\Helpers\DynamicJson.cs:行号 263
+   在 Codeplex.Data.DynamicJson.TryConvert(ConvertBinder binder, Object& result) 位置 f:\zl\weixinSDK\weixinSDK-master\Deepleo.Weixin.SDK\Helpers\DynamicJson.cs:行号 327
+   在 CallSite.Target(Closure , CallSite , Object )
+   在 System.Dynamic.UpdateDelegates.UpdateAndExecute1[T0,TRet](CallSite site, T0 arg0)
+   在 MyProject.Task.WeiXinSdkTask.JsApiToken() 位置 f:\zl\Project\MyProject2\Pro2\MyProject\MyProject.Task\WeiXinSdkTask.cs:行号 459|Can't find a connection string with the name 'MyP'|2018/5/16 14:45:28
+没有为该对象定义无参数的构造函数。|   在 System.RuntimeTypeHandle.CreateInstance(RuntimeType type, Boolean publicOnly, Boolean noCheck, Boolean& canBeCached, RuntimeMethodHandleInternal& ctor, Boolean& bNeedSecurityCheck)
+   在 System.RuntimeType.CreateInstanceSlow(Boolean publicOnly, Boolean skipCheckThis, Boolean fillCache, StackCrawlMark& stackMark)
+   在 System.Activator.CreateInstance(Type type, Boolean nonPublic)
+   在 System.Activator.CreateInstance(Type type)
+   在 Codeplex.Data.DynamicJson.DeserializeObject(Type targetType) 位置 f:\zl\weixinSDK\weixinSDK-master\Deepleo.Weixin.SDK\Helpers\DynamicJson.cs:行号 263
+   在 Codeplex.Data.DynamicJson.TryConvert(ConvertBinder binder, Object& result) 位置 f:\zl\weixinSDK\weixinSDK-master\Deepleo.Weixin.SDK\Helpers\DynamicJson.cs:行号 327
+   在 CallSite.Target(Closure , CallSite , Object )
+   在 MyProject.Task.WeiXinSdkTask.JsApiToken() 位置 f:\zl\Project\MyProject2\Pro2\MyProject\MyProject.Task\WeiXinSdkTask.cs:行号 459|Can't find a connection string with the name 'MyP'|2018/5/16 14:47:11
+没有为该对象定义无参数的构造函数。|   在 System.RuntimeTypeHandle.CreateInstance(RuntimeType type, Boolean publicOnly, Boolean noCheck, Boolean& canBeCached, RuntimeMethodHandleInternal& ctor, Boolean& bNeedSecurityCheck)
+   在 System.RuntimeType.CreateInstanceSlow(Boolean publicOnly, Boolean skipCheckThis, Boolean fillCache, StackCrawlMark& stackMark)
+   在 System.RuntimeType.CreateInstanceDefaultCtor(Boolean publicOnly, Boolean skipCheckThis, Boolean fillCache, StackCrawlMark& stackMark)
+   在 System.Activator.CreateInstance(Type type, Boolean nonPublic)
+   在 System.Activator.CreateInstance(Type type)
+   在 Codeplex.Data.DynamicJson.DeserializeObject(Type targetType) 位置 f:\zl\weixinSDK\weixinSDK-master\Deepleo.Weixin.SDK\Helpers\DynamicJson.cs:行号 263
+   在 Codeplex.Data.DynamicJson.Deserialize(Type type) 位置 f:\zl\weixinSDK\weixinSDK-master\Deepleo.Weixin.SDK\Helpers\DynamicJson.cs:行号 248
+   在 Codeplex.Data.DynamicJson.TryConvert(ConvertBinder binder, Object& result) 位置 f:\zl\weixinSDK\weixinSDK-master\Deepleo.Weixin.SDK\Helpers\DynamicJson.cs:行号 336
+   在 CallSite.Target(Closure , CallSite , Object )
+   在 System.Dynamic.UpdateDelegates.UpdateAndExecute1[T0,TRet](CallSite site, T0 arg0)
+   在 MyProject.Task.WeiXinSdkTask.JsApiToken() 位置 f:\zl\Project\MyProject2\Pro2\MyProject\MyProject.Task\WeiXinSdkTask.cs:行号 459|Can't find a connection string with the name 'MyP'|2018/5/16 14:48:18
+没有为该对象定义无参数的构造函数。|   在 System.RuntimeTypeHandle.CreateInstance(RuntimeType type, Boolean publicOnly, Boolean noCheck, Boolean& canBeCached, RuntimeMethodHandleInternal& ctor, Boolean& bNeedSecurityCheck)
+   在 System.RuntimeType.CreateInstanceSlow(Boolean publicOnly, Boolean skipCheckThis, Boolean fillCache, StackCrawlMark& stackMark)
+   在 System.RuntimeType.CreateInstanceDefaultCtor(Boolean publicOnly, Boolean skipCheckThis, Boolean fillCache, StackCrawlMark& stackMark)
+   在 System.Activator.CreateInstance(Type type, Boolean nonPublic)
+   在 System.Activator.CreateInstance(Type type)
+   在 Codeplex.Data.DynamicJson.DeserializeObject(Type targetType) 位置 f:\zl\weixinSDK\weixinSDK-master\Deepleo.Weixin.SDK\Helpers\DynamicJson.cs:行号 263
+   在 Codeplex.Data.DynamicJson.Deserialize(Type type) 位置 f:\zl\weixinSDK\weixinSDK-master\Deepleo.Weixin.SDK\Helpers\DynamicJson.cs:行号 248
+   在 Codeplex.Data.DynamicJson.TryConvert(ConvertBinder binder, Object& result) 位置 f:\zl\weixinSDK\weixinSDK-master\Deepleo.Weixin.SDK\Helpers\DynamicJson.cs:行号 336
+   在 CallSite.Target(Closure , CallSite , Object )
+   在 MyProject.Task.WeiXinSdkTask.JsApiToken() 位置 f:\zl\Project\MyProject2\Pro2\MyProject\MyProject.Task\WeiXinSdkTask.cs:行号 459|Can't find a connection string with the name 'MyP'|2018/5/16 14:49:21
+“Codeplex.Data.DynamicJson”未包含“access_token”的定义|   在 CallSite.Target(Closure , CallSite , Object )
+   在 System.Dynamic.UpdateDelegates.UpdateAndExecute1[T0,TRet](CallSite site, T0 arg0)
+   在 MyProject.Task.WeiXinSdkTask.JsApiToken() 位置 f:\zl\Project\MyProject2\Pro2\MyProject\MyProject.Task\WeiXinSdkTask.cs:行号 459|Can't find a connection string with the name 'MyP'|2018/5/16 14:51:35

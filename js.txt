@@ -1,0 +1,5 @@
+1、$("#UserName").css("display","none"); //隐藏节点
+2、包含
+if($(this).html().indexof("国")!=-1){
+$(this).prepend("aa")
+}

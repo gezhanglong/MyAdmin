@@ -1,0 +1,451 @@
+﻿@{
+    Layout = null;
+}
+@model MyProject.Areas.WeiXin.Models.WeiXinReplyMessageModel
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Save</title> 
+     <link href="~/Scripts/jquery-ligerUI-1.1.9/ligerUI/skins/Aqua/css/ligerui-form.css" rel="stylesheet" type="text/css">
+    <script src="~/Scripts/jquery-ligerUI-1.1.9/jquery/jquery-1.9.0.min.js" type="text/javascript"></script>
+    <script src="~/Scripts/jquery-ligerUI-1.1.9/ligerUI/js/core/base.js" type="text/javascript"></script>
+    <script src="~/Scripts/jquery-ligerUI-1.1.9/ligerUI/js/plugins/ligerForm.js" type="text/javascript"></script>
+    <script src="~/Scripts/jquery-ligerUI-1.1.9/ligerUI/js/plugins/ligerDateEditor.js" type="text/javascript"></script>
+    <script src="~/Scripts/jquery-ligerUI-1.1.9/ligerUI/js/plugins/ligerComboBox.js" type="text/javascript"></script>
+    <script src="~/Scripts/jquery-ligerUI-1.1.9/ligerUI/js/plugins/ligerCheckBox.js" type="text/javascript"></script>
+    <script src="~/Scripts/jquery-ligerUI-1.1.9/ligerUI/js/plugins/ligerButton.js" type="text/javascript"></script>
+    <script src="~/Scripts/jquery-ligerUI-1.1.9/ligerUI/js/plugins/ligerDialog.js" type="text/javascript"></script>
+    <script src="~/Scripts/jquery-ligerUI-1.1.9/ligerUI/js/plugins/ligerRadio.js" type="text/javascript"></script>
+    <script src="~/Scripts/jquery-ligerUI-1.1.9/ligerUI/js/plugins/ligerSpinner.js" type="text/javascript"></script>
+    <script src="~/Scripts/jquery-ligerUI-1.1.9/ligerUI/js/plugins/ligerTextBox.js" type="text/javascript"></script>
+ 
+ 
+    <style type="text/css">
+           body{ font-size:12px;}
+        .l-table-edit {}
+        .l-table-edit-td{ padding:4px;}
+        .l-button-submit,.l-button-reset{width:80px; float:left; margin-left:10px; padding-bottom:2px;}
+        .l-verify-tip{ left:230px; top:120px;} 
+    </style> 
+</head>
+<body>
+   
+    @using (Html.BeginForm("Save", "WeiXinReplyMessage", FormMethod.Post, new { @class = "formular", id = "form1" }))
+{
+        @Html.HiddenFor(c => c.Id)
+        <table cellpadding="0" cellspacing="0" class="l-table-edit">
+            <tbody>
+                <tr>
+                <td align="right" class="l-table-edit-td">@Html.LabelFor(c=>c.MatchKey):</td>
+                <td align="left" class="l-table-edit-td"> 
+                    @Html.TextBoxFor(c => c.MatchKey, new { })
+                </td>
+                
+            </tr>
+                <tr>
+                <td align="right" class="l-table-edit-td">@Html.LabelFor(c => c.MsgType):</td>
+                <td align="left" class="l-table-edit-td">
+                    @Html.DropDownListFor(c=>c.MsgType,ViewData["MsgTypeList"] as List<SelectListItem>,new{@style="width:100px;"})
+                </td>
+            </tr> 
+                <tr style="display:none;" id="trContent">
+                <td align="right" class="l-table-edit-td" valign="top">@Html.LabelFor(c=>c.Content):</td>
+                <td align="left" class="l-table-edit-td">
+                    @Html.TextAreaFor(c=>c.Content,new{@style="width:400px;height:100px;"})
+                   </td>
+            </tr>   
+                <tr style="display:none;" id="trMediaId">
+                <td align="right" class="l-table-edit-td">@Html.LabelFor(c => c.MediaId):</td>
+                <td align="left" class="l-table-edit-td">
+                    @Html.DropDownListFor(c=>c.MediaId,ViewData["MediaIdList"] as List<SelectListItem>,new{@style="width:100px;"})
+                </td>
+            </tr> 
+                <tr style="display:none;" id="trArticleCount">
+                <td align="right" class="l-table-edit-td">@Html.LabelFor(c=>c.ArticleCount):</td>
+                <td align="left" class="l-table-edit-td"> 
+                    @Html.TextBoxFor(c => c.ArticleCount, new { })
+                </td>
+                
+            </tr>
+                <tr style="display:none;" id="trArticles">
+                <td align="right" class="l-table-edit-td">@Html.LabelFor(c=>c.Articles):</td>
+                <td align="left" class="l-table-edit-td"> 
+                    @Html.TextBoxFor(c => c.Articles, new { })
+                </td>
+                
+            </tr>
+                <tr style="display:none;" id="trTitle">
+                <td align="right" class="l-table-edit-td">@Html.LabelFor(c=>c.Title):</td>
+                <td align="left" class="l-table-edit-td"> 
+                    @Html.TextBoxFor(c => c.Title, new { })
+                </td> 
+            </tr>
+                <tr style="display:none;" id="trDescription">
+                <td align="right" class="l-table-edit-td">@Html.LabelFor(c=>c.Description):</td>
+                <td align="left" class="l-table-edit-td">  
+                     @Html.TextAreaFor(c=>c.Description,new{@style="width:400px;height:40px;"})
+                </td>  
+            </tr>
+                <tr style="display:none;" id="trMusicURL">
+                <td align="right" class="l-table-edit-td">@Html.LabelFor(c=>c.MusicURL):</td>
+                <td align="left" class="l-table-edit-td"> 
+                    @Html.TextBoxFor(c => c.MusicURL, new { @style="width:400px;"})
+                </td>
+                
+            </tr>
+                <tr style="display:none;" id="trHQMusicUrl">
+                <td align="right" class="l-table-edit-td">@Html.LabelFor(c=>c.HQMusicUrl):</td>
+                <td align="left" class="l-table-edit-td"> 
+                    @Html.TextBoxFor(c => c.HQMusicUrl, new { @style="width:400px;" })
+                </td>
+                
+            </tr>
+                <tr style="display:none;" id="trThumbMediaId">
+                <td align="right" class="l-table-edit-td">@Html.LabelFor(c => c.ThumbMediaId):</td>
+                <td align="left" class="l-table-edit-td">
+                    @Html.DropDownListFor(c=>c.ThumbMediaId,ViewData["ThumbMediaIdList"] as List<SelectListItem>,new{@style="width:100px;"})
+                </td>
+            </tr>
+                <tr style="display:none;"  class="article">
+                <td align="right" class="l-table-edit-td">@Html.LabelFor(c=>c.PicUrl):</td>
+                <td align="left" class="l-table-edit-td">  
+                    @Html.DropDownListFor(c=>c.PicUrl,ViewData["picurlList"] as List<SelectListItem>,new{@style="width:100px;"})
+                </td>
+                
+            </tr>
+                <tr style="display:none;"  class="article">
+                <td align="right" class="l-table-edit-td">@Html.LabelFor(c=>c.Url):</td>
+                <td align="left" class="l-table-edit-td">  
+                     @Html.TextAreaFor(c=>c.Url,new{@style="width:400px;height:40px;"})
+                </td>
+                
+            </tr> 
+                <tr style="display:none;" class="article">
+                <td align="right" class="l-table-edit-td">@Html.LabelFor(c=>c.Title1):</td>
+                <td align="left" class="l-table-edit-td">  
+                     @Html.TextBoxFor(c => c.Title1, new { })
+                </td>
+                </tr>
+                <tr style="display:none;" class="article">
+                <td align="right" class="l-table-edit-td">@Html.LabelFor(c=>c.Description1):</td>
+                <td align="left" class="l-table-edit-td">  
+                     @Html.TextAreaFor(c=>c.Description1,new{@style="width:400px;height:40px;"})
+                </td>  
+            </tr>
+                <tr style="display:none;"  class="article">
+                <td align="right" class="l-table-edit-td">@Html.LabelFor(c=>c.PicUrl1):</td>
+                <td align="left" class="l-table-edit-td">  
+                      @Html.DropDownListFor(c=>c.PicUrl1,ViewData["picurlList"] as List<SelectListItem>,new{@style="width:100px;"})
+                </td>
+                
+            </tr>
+                <tr style="display:none;" class="article">
+                <td align="right" class="l-table-edit-td">@Html.LabelFor(c=>c.Url1):</td>
+                <td align="left" class="l-table-edit-td">  
+                     @Html.TextAreaFor(c=>c.Url1,new{@style="width:400px;height:40px;"})
+                </td>
+                
+            </tr> 
+                <tr style="display:none;" class="article">
+                <td align="right" class="l-table-edit-td">@Html.LabelFor(c=>c.Title2):</td>
+                <td align="left" class="l-table-edit-td">  
+                     @Html.TextBoxFor(c => c.Title2, new { })
+                </td>
+                </tr>
+                <tr style="display:none;" class="article">
+                <td align="right" class="l-table-edit-td">@Html.LabelFor(c=>c.Description2):</td>
+                <td align="left" class="l-table-edit-td">  
+                     @Html.TextAreaFor(c=>c.Description2,new{@style="width:400px;height:40px;"})
+                </td>  
+            </tr>
+                <tr style="display:none;"  class="article">
+                <td align="right" class="l-table-edit-td">@Html.LabelFor(c=>c.PicUrl2):</td>
+                <td align="left" class="l-table-edit-td">  
+                      @Html.DropDownListFor(c=>c.PicUrl2,ViewData["picurlList"] as List<SelectListItem>,new{@style="width:100px;"})
+                </td>
+                
+            </tr>
+                <tr style="display:none;" class="article">
+                <td align="right" class="l-table-edit-td">@Html.LabelFor(c=>c.Url2):</td>
+                <td align="left" class="l-table-edit-td">  
+                     @Html.TextAreaFor(c=>c.Url2,new{@style="width:400px;height:40px;"})
+                </td>
+                
+            </tr> 
+                <tr style="display:none;" class="article">
+                <td align="right" class="l-table-edit-td">@Html.LabelFor(c=>c.Title3):</td>
+                <td align="left" class="l-table-edit-td">  
+                     @Html.TextBoxFor(c => c.Title3, new { })
+                </td>
+                </tr>
+                <tr style="display:none;" class="article">
+                <td align="right" class="l-table-edit-td">@Html.LabelFor(c=>c.Description3):</td>
+                <td align="left" class="l-table-edit-td">  
+                     @Html.TextAreaFor(c=>c.Description3,new{@style="width:400px;height:40px;"})
+                </td>  
+            </tr>
+                <tr style="display:none;"  class="article">
+                <td align="right" class="l-table-edit-td">@Html.LabelFor(c=>c.PicUrl3):</td>
+                <td align="left" class="l-table-edit-td">  
+                      @Html.DropDownListFor(c=>c.PicUrl3,ViewData["picurlList"] as List<SelectListItem>,new{@style="width:100px;"})
+                </td>
+                
+            </tr>
+                <tr style="display:none;" class="article">
+                <td align="right" class="l-table-edit-td">@Html.LabelFor(c=>c.Url3):</td>
+                <td align="left" class="l-table-edit-td">  
+                     @Html.TextAreaFor(c=>c.Url3,new{@style="width:400px;height:40px;"})
+                </td>
+                
+            </tr>  
+                <tr style="display:none;" class="article">
+                <td align="right" class="l-table-edit-td">@Html.LabelFor(c=>c.Title4):</td>
+                <td align="left" class="l-table-edit-td">  
+                     @Html.TextBoxFor(c => c.Title4, new { })
+                </td>
+                </tr>
+                <tr style="display:none;" class="article">
+                <td align="right" class="l-table-edit-td">@Html.LabelFor(c=>c.Description4):</td>
+                <td align="left" class="l-table-edit-td">  
+                     @Html.TextAreaFor(c=>c.Description4,new{@style="width:400px;height:40px;"})
+                </td>  
+            </tr>
+                <tr style="display:none;"  class="article">
+                <td align="right" class="l-table-edit-td">@Html.LabelFor(c=>c.PicUrl4):</td>
+                <td align="left" class="l-table-edit-td">  
+                      @Html.DropDownListFor(c=>c.PicUrl4,ViewData["picurlList"] as List<SelectListItem>,new{@style="width:100px;"})
+                </td>
+                
+            </tr>
+                <tr style="display:none;" class="article">
+                <td align="right" class="l-table-edit-td">@Html.LabelFor(c=>c.Url4):</td>
+                <td align="left" class="l-table-edit-td">  
+                     @Html.TextAreaFor(c=>c.Url4,new{@style="width:400px;height:40px;"})
+                </td>
+                
+            </tr> 
+                <tr style="display:none;" class="article">
+                <td align="right" class="l-table-edit-td">@Html.LabelFor(c=>c.Title5):</td>
+                <td align="left" class="l-table-edit-td">  
+                     @Html.TextBoxFor(c => c.Title5, new { })
+                </td>
+                </tr>
+                <tr style="display:none;" class="article">
+                <td align="right" class="l-table-edit-td">@Html.LabelFor(c=>c.Description5):</td>
+                <td align="left" class="l-table-edit-td">  
+                     @Html.TextAreaFor(c=>c.Description5,new{@style="width:400px;height:40px;"})
+                </td>  
+            </tr>
+                <tr style="display:none;"  class="article">
+                <td align="right" class="l-table-edit-td">@Html.LabelFor(c=>c.PicUrl5):</td>
+                <td align="left" class="l-table-edit-td">  
+                      @Html.DropDownListFor(c=>c.PicUrl5,ViewData["picurlList"] as List<SelectListItem>,new{@style="width:100px;"})
+                </td>
+                
+            </tr>
+                <tr style="display:none;" class="article">
+                <td align="right" class="l-table-edit-td">@Html.LabelFor(c=>c.Url5):</td>
+                <td align="left" class="l-table-edit-td">  
+                     @Html.TextAreaFor(c=>c.Url5,new{@style="width:400px;height:40px;"})
+                </td>
+                
+            </tr> 
+                <tr style="display:none;" class="article">
+                <td align="right" class="l-table-edit-td">@Html.LabelFor(c=>c.Title6):</td>
+                <td align="left" class="l-table-edit-td">  
+                     @Html.TextBoxFor(c => c.Title6, new { })
+                </td>
+                </tr>
+                <tr style="display:none;" class="article">
+                <td align="right" class="l-table-edit-td">@Html.LabelFor(c=>c.Description6):</td>
+                <td align="left" class="l-table-edit-td">  
+                     @Html.TextAreaFor(c=>c.Description6,new{@style="width:400px;height:40px;"})
+                </td>  
+            </tr>
+                <tr style="display:none;"  class="article">
+                <td align="right" class="l-table-edit-td">@Html.LabelFor(c=>c.PicUrl6):</td>
+                <td align="left" class="l-table-edit-td">  
+                      @Html.DropDownListFor(c=>c.PicUrl6,ViewData["picurlList"] as List<SelectListItem>,new{@style="width:100px;"})
+                </td>
+                
+            </tr>
+                <tr style="display:none;" class="article">
+                <td align="right" class="l-table-edit-td">@Html.LabelFor(c=>c.Url6):</td>
+                <td align="left" class="l-table-edit-td">  
+                     @Html.TextAreaFor(c=>c.Url6,new{@style="width:400px;height:40px;"})
+                </td>
+                
+            </tr> 
+                <tr style="display:none;" class="article">
+                <td align="right" class="l-table-edit-td">@Html.LabelFor(c=>c.Title7):</td>
+                <td align="left" class="l-table-edit-td">  
+                     @Html.TextBoxFor(c => c.Title7, new { })
+                </td>
+                </tr>
+                <tr style="display:none;" class="article">
+                <td align="right" class="l-table-edit-td">@Html.LabelFor(c=>c.Description7):</td>
+                <td align="left" class="l-table-edit-td">  
+                     @Html.TextAreaFor(c=>c.Description7,new{@style="width:400px;height:40px;"})
+                </td>  
+            </tr>
+                <tr style="display:none;"  class="article">
+                <td align="right" class="l-table-edit-td">@Html.LabelFor(c=>c.PicUrl7):</td>
+                <td align="left" class="l-table-edit-td">  
+                      @Html.DropDownListFor(c=>c.PicUrl7,ViewData["picurlList"] as List<SelectListItem>,new{@style="width:100px;"})
+                </td>
+                
+            </tr>
+                <tr style="display:none;" class="article">
+                <td align="right" class="l-table-edit-td">@Html.LabelFor(c=>c.Url7):</td>
+                <td align="left" class="l-table-edit-td">  
+                     @Html.TextAreaFor(c=>c.Url7,new{@style="width:400px;height:40px;"})
+                </td>
+                
+            </tr> 
+        </tbody></table>
+        <div>
+            @Html.ValidationSummary()
+            <input type="submit" value="保存" class="submit" style="margin:20px;"/> 
+        </div> 
+}
+</body>
+</html>
+
+<script type="text/javascript">  
+    $(function () { 
+        var msgType ="@(Model.MsgType)";//初始化
+        switch (msgType) {
+            case "1":
+                $("#trContent").css("display", "table-row");
+                $("#trMediaId").css("display", "none");
+                $("#trTitle").css("display", "none");
+                $("#trDescription").css("display", "none");
+                $("#trMusicURL").css("display", "none");
+                $("#trHQMusicUrl").css("display", "none");
+                $("#trThumbMediaId").css("display", "none");
+                $("#trArticleCount").css("display", "none");
+                $("#trArticles").css("display", "none"); 
+                $(".article").css("display", "none");
+                break;
+            case "2":
+            case "3":
+                $("#trContent").css("display", "none");
+                $("#trMediaId").css("display", "table-row");
+                $("#trTitle").css("display", "none");
+                $("#trDescription").css("display", "none");
+                $("#trMusicURL").css("display", "none");
+                $("#trHQMusicUrl").css("display", "none");
+                $("#trThumbMediaId").css("display", "none");
+                $("#trArticleCount").css("display", "none");
+                $("#trArticles").css("display", "none"); 
+                $(".article").css("display", "none");
+                break;
+            case "4":
+                $("#trContent").css("display", "none");
+                $("#trMediaId").css("display", "table-row");
+                $("#trTitle").css("display", "table-row");
+                $("#trDescription").css("display", "table-row");
+                $("#trMusicURL").css("display", "none");
+                $("#trHQMusicUrl").css("display", "none");
+                $("#trThumbMediaId").css("display", "none");
+                $("#trArticleCount").css("display", "none");
+                $("#trArticles").css("display", "none"); 
+                $(".article").css("display", "none");
+                break;
+            case "5":
+                $("#trContent").css("display", "none");
+                $("#trMediaId").css("display", "none");
+                $("#trTitle").css("display", "table-row");
+                $("#trDescription").css("display", "table-row");
+                $("#trMusicURL").css("display", "table-row");
+                $("#trHQMusicUrl").css("display", "table-row");
+                $("#trThumbMediaId").css("display", "table-row");
+                $("#trArticleCount").css("display", "none");
+                $("#trArticles").css("display", "none"); 
+                $(".article").css("display", "none");
+                break;
+            case "6":
+                $("#trContent").css("display", "none");
+                $("#trMediaId").css("display", "none");
+                $("#trTitle").css("display", "table-row");
+                $("#trDescription").css("display", "table-row");
+                $("#trMusicURL").css("display", "none");
+                $("#trHQMusicUrl").css("display", "none");
+                $("#trThumbMediaId").css("display", "none");
+                $("#trArticleCount").css("display", "table-row");
+                $("#trArticles").css("display", "table-row"); 
+                $(".article").css("display", "table-row");
+                break;
+        }
+        
+        $("#MsgType").change(function () {//选择
+            msgType = $(this).val();
+            switch (msgType) {
+                case "1":
+                    $("#trContent").css("display", "table-row");
+                    $("#trMediaId").css("display", "none");
+                    $("#trTitle").css("display", "none");
+                    $("#trDescription").css("display", "none");
+                    $("#trMusicURL").css("display", "none");
+                    $("#trHQMusicUrl").css("display", "none");
+                    $("#trThumbMediaId").css("display", "none");
+                    $("#trArticleCount").css("display", "none");
+                    $("#trArticles").css("display", "none"); 
+                    $(".article").css("display", "none");
+                    break;
+                case "2":
+                case "3":
+                    $("#trContent").css("display", "none");
+                    $("#trMediaId").css("display", "table-row");
+                    $("#trTitle").css("display", "none");
+                    $("#trDescription").css("display", "none");
+                    $("#trMusicURL").css("display", "none");
+                    $("#trHQMusicUrl").css("display", "none");
+                    $("#trThumbMediaId").css("display", "none");
+                    $("#trArticleCount").css("display", "none");
+                    $("#trArticles").css("display", "none"); 
+                    $(".article").css("display", "none");
+                    break;
+                case "4":
+                    $("#trContent").css("display", "none");
+                    $("#trMediaId").css("display", "table-row");
+                    $("#trTitle").css("display", "table-row");
+                    $("#trDescription").css("display", "table-row");
+                    $("#trMusicURL").css("display", "none");
+                    $("#trHQMusicUrl").css("display", "none");
+                    $("#trThumbMediaId").css("display", "none");
+                    $("#trArticleCount").css("display", "none");
+                    $("#trArticles").css("display", "none"); 
+                    $(".article").css("display", "none");
+                    break;
+                case "5":
+                    $("#trContent").css("display", "none");
+                    $("#trMediaId").css("display", "none");
+                    $("#trTitle").css("display", "table-row");
+                    $("#trDescription").css("display", "table-row");
+                    $("#trMusicURL").css("display", "table-row");
+                    $("#trHQMusicUrl").css("display", "table-row");
+                    $("#trThumbMediaId").css("display", "table-row");
+                    $("#trArticleCount").css("display", "none");
+                    $("#trArticles").css("display", "none"); 
+                    $(".article").css("display", "none");
+                    break;
+                case "6":
+                    $("#trContent").css("display", "none");
+                    $("#trMediaId").css("display", "none");
+                    $("#trTitle").css("display", "table-row");
+                    $("#trDescription").css("display", "table-row");
+                    $("#trMusicURL").css("display", "none");
+                    $("#trHQMusicUrl").css("display", "none");
+                    $("#trThumbMediaId").css("display", "none");
+                    $("#trArticleCount").css("display", "table-row");
+                    $("#trArticles").css("display", "table-row"); 
+                    $(".article").css("display", "table-row");
+                    break;
+            }
+        });
+    });
+</script>

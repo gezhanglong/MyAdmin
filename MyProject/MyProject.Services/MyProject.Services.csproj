@@ -1,0 +1,100 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{61BA4F81-97A1-4A51-B88E-A3A9629F09AA}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>MyProject.Services</RootNamespace>
+    <AssemblyName>MyProject.Services</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="EmitMapper, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>bin\Debug\EmitMapper.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Drawing.Design" />
+    <Reference Include="System.Runtime.Caching" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.Mvc, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
+    <Reference Include="System.Web.Routing" />
+    <Reference Include="System.Web.WebPages, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Extensions\ControllerContextExtensions.cs" />
+    <Compile Include="Extensions\DateTimeExtensions.cs" />
+    <Compile Include="Extensions\EnumExtensions.cs" />
+    <Compile Include="Extensions\HtmlPagerExtension.cs" />
+    <Compile Include="Extensions\HttpPostedFileBaseExtensions.cs" />
+    <Compile Include="Extensions\HttpRequestExtensions.cs" />
+    <Compile Include="Extensions\KeyValueTriplet.cs" />
+    <Compile Include="Extensions\ListExtensoins.cs" />
+    <Compile Include="Extensions\RouteValueDictionaryExtensions.cs" />
+    <Compile Include="Extensions\SelectListExtensions.cs" />
+    <Compile Include="Extensions\StringExtensions.cs" />
+    <Compile Include="Mappers\EntityMapper.cs" />
+    <Compile Include="MvcPager\PagedList.cs" />
+    <Compile Include="MvcPager\PageLinqExtensions.cs" />
+    <Compile Include="MvcPager\PagerBuilder.cs" />
+    <Compile Include="MvcPager\PagerHelper.cs" />
+    <Compile Include="MvcPager\PagerItem.cs" />
+    <Compile Include="MvcPager\PagerOptions.cs" />
+    <Compile Include="ORM\BaseDao.cs" />
+    <Compile Include="ORM\DbFactory.cs" />
+    <Compile Include="ORM\PetaPoco.cs" />
+    <Compile Include="ORM\PetaPocoRepository.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Utility\CacheHelper.cs" />
+    <Compile Include="Utility\CryptHelper.cs" />
+    <Compile Include="Utility\CryptTools.cs" />
+    <Compile Include="Utility\EncodeUtility.cs" />
+    <Compile Include="Utility\FileHelper.cs" />
+    <Compile Include="Utility\FileItem.cs" />
+    <Compile Include="Utility\ImageUtility.cs" />
+    <Compile Include="Utility\ImgHelper.cs" />
+    <Compile Include="Utility\QueryHelper.cs" />
+    <Compile Include="Utility\ResultHelper.cs" />
+    <Compile Include="Utility\Utils.cs" />
+    <Compile Include="Utility\ValidateCode.cs" />
+    <Compile Include="Utility\WebUtils.cs" />
+    <Compile Include="Utility\XmlHelper.cs" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

@@ -1,0 +1,37 @@
+﻿
+
+
+<!DOCTYPE html>
+<html>
+<head>
+    <link href="/Content/main.css" rel="stylesheet" type="text/css" />
+    <link href="/Content/header.css" rel="stylesheet" type="text/css" />
+    <link href="/Content/reset.css" rel="stylesheet" type="text/css" />
+    <link href="/Content/index.css" rel="stylesheet" type="text/css" />
+    <link href="/Content/public.css" rel="stylesheet" type="text/css" />  
+    <link href="/Scripts/colorbox/colorbox.css" rel="stylesheet" type="text/css" />
+    <link href="/Scripts/jquery-validation-engine/css/template.css" rel="stylesheet" type="text/css" />
+    <link href="/Scripts/jquery-validation-engine/css/validationEngine.jquery.css" rel="stylesheet" type="text/css" /> 
+    <link href="/Scripts/jquery-treeTable/stylesheets/jquery.treeTable.css" rel="stylesheet" type="text/css" />
+    <script src="/Scripts/jquery-1.7.1.min.js" type="text/javascript"></script>
+    <script src="/Scripts/colorbox/jquery.colorbox-min.js" type="text/javascript"></script>
+    <script src="/Scripts/AdminCommon.js?r=4534" type="text/javascript"></script> 
+    <script src="/Scripts/jquery-validation-engine/js/jquery.validationEngine.js" type="text/javascript"></script>
+    <script src="/Scripts/jquery-validation-engine/js/languages/jquery.validationEngine-zh_CN.js" type="text/javascript"></script>     
+    <script src="/Scripts/jquery-treeTable/javascripts/jquery.treeTable.js" type="text/javascript"></script>  
+    <title>@ViewBag.Title</title>
+    @if (IsSectionDefined("Style"))
+    {
+        @RenderSection("Style");
+    }
+    @if(IsSectionDefined("Script"))
+    {
+        @RenderSection("Script");
+    }
+</head>
+<body>
+    <div class="wrap">
+        @RenderBody()
+    </div>
+</body>
+</html>

@@ -1,0 +1,43 @@
+﻿@{
+    ViewBag.Title = "保存菜单";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@model MyProject.Controllers.SysManage.ViewModels.SaveMenuModel
+@section Script
+ {
+    <script type="text/javascript">
+        $(function () {
+            $("#form1").validationEngine();
+        })
+    </script>
+}
+
+
+<div class="right_box_card">
+    <ul>
+        <li class="right_box_card1"><a href="#">保存菜单</a></li>
+    </ul>
+</div>
+@using (Html.BeginForm("SaveMenu", "SysManage", FormMethod.Post, new { @class = "formular", id = "form1" }))
+{
+    @Html.HiddenFor(c => c.MenuId)
+    <fieldset>
+        <label>
+            <span>@Html.LabelFor(c => c.ParentId)</span>
+            @Html.DropDownListFor(c => c.ParentId, ViewData["ParentList"] as List<SelectListItem>, new { @class = "validate[required] text-input" })
+        </label>
+        <label>
+            <span>@Html.LabelFor(c => c.MenuName)</span>
+            @Html.TextBoxFor(c => c.MenuName, new { @class = "validate[required] text-input" })
+        </label>
+        <label>
+            <span>@Html.LabelFor(c => c.LinkUrl)</span>
+            @Html.TextBoxFor(c => c.LinkUrl, new { @class = "text-input" })
+        </label>
+        <label>
+            <span>@Html.LabelFor(c => c.SortOrder)</span>
+            @Html.TextBoxFor(c => c.SortOrder, new { @class = "validate[required,custom[integer],min[1]] text-input" })
+        </label>
+        <input type="submit" value="保存" class="submit" />
+    </fieldset> 
+}

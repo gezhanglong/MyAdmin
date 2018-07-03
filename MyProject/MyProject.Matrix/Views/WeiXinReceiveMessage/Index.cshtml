@@ -1,0 +1,156 @@
+﻿@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewBag.Title = ""; 
+}
+@using MyProject.Services.MvcPager; 
+@using MyProject.Services.Extensions;
+@model PagedList<MyProject.Core.Entities.WeiXinReceiveMessage> 
+
+<body style="background-color:#F9F9F9;margin-top:0px;"> 
+<div class="widget-box" style="margin-top:0;">
+          <div class="widget-title"> 
+            <h5>微信接收信息记录</h5>
+          </div>
+          <div class="widget-content nopadding" style="overflow-y: auto;">
+              <div class="">
+                  <div id="DataTables_Table_0_length" class="dataTables_length" style ="width: 100%;">
+                     @using (Html.BeginForm("Index", "WeiXinReceiveMessage", FormMethod.Get))
+                        {
+                            <table>
+                                <tr> 
+                                   <td >查询条件：</td>
+                                    <td style="padding-right: 2px;">
+                                         @Html.DropDownList("fields", ViewData["fieldsList"] as List<SelectListItem>, new { @style="width: 130px;height: 23px;"})
+                                    </td>  
+                                      <td style="padding-right: 15px;">
+                                          @Html.TextBox("fieldValue",null, new { @style="width: 130px;height: 23px;"}) 
+                                          @Html.CheckBox("IsLike",true)<span>精确查询</span>
+                                    </td>  
+                                    <td>文本消息内容：</td>
+                                      <td style="padding-right: 15px;">
+                                          @Html.TextBox("ContentValue",null, new { @style="width: 130px;height: 23px;"}) 
+                                    </td>  
+                                    <td>日期：</td>
+                                    <td style="padding-right: 15px;"> 
+                                        @Html.TextBox("sdate",null, new { @class="Wdate", @onfocus="WdatePicker()" , @style="width: 130px;height: 23px;"}) 
+                                             -   
+                                        @Html.TextBox("edate",null, new { @class="Wdate", @onfocus="WdatePicker()" , @style="width: 130px;height: 23px;"})
+                                    </td>
+                                    <td>
+                                        <input type="submit" value="查找" class="btn btn-mini" style="padding: 4px 8px;font-weight:bold;" /> 
+                                        
+                                    </td>
+                                </tr>
+            
+                            </table>
+                        }
+                  </div>
+
+              </div>
+            <table class="table table-bordered table-striped"> 
+                <thead>
+                <tr>
+                  <th>ID</th>
+                  <th>开发者微信号</th>
+                  <th>发送方帐号</th>
+                  <th>接收消息类型</th> 
+                    <th>消息id</th>
+                    <th>文本消息内容</th>
+                    <th>消息创建时间</th>
+                    <th>图片链接</th> 
+                    <th>媒体id</th>
+                  <th>语音格式</th>
+                  <th>语音识别结果</th>
+                  <th>视频消息缩略图的媒体id</th> 
+                    <th>地理位置维度</th>
+                    <th>地理位置经度</th>
+                    <th>地图缩放大小</th>
+                    <th>地理位置信息</th> 
+                    <th>消息标题</th>
+                  <th>消息描述</th> 
+                    <th>消息链接</th>
+                    <th>事件类型</th>
+                    <th>事件KEY值</th>
+                    <th>记录时间</th>
+                </tr>
+              </thead>
+              <tbody> 
+                  @foreach (var item in Model)
+                    { 
+                        <tr >
+                            <td >
+                                @item.Id
+                            </td>
+                            <td>
+                                @item.ToUserName
+                            </td>
+                            <td>
+                                @item.FromUserName
+                            </td>
+                            <td>
+                              @item.MsgType 
+                            </td>
+                            <td>
+                               @item.MsgId
+                            </td>
+                            <td>
+                                @item.Content
+                            </td>
+                            <td>
+                              @(DateTimeExtensions.TimestampToDateTime(Convert.ToInt64(item.CreateTime)))
+                            </td> 
+                              <td>
+                              @item.PicUrl
+                            </td>
+                            <td>
+                               @item.MediaId 
+                            </td>
+                            <td>
+                                @item.Format
+                            </td>
+                            <td>
+                              @item.Recognition
+                            </td> 
+                             <td>
+                                @item.ThumbMediaId
+                            </td>
+                            <td>
+                                @item.Location_X
+                            </td>
+                            <td>
+                              @item.Location_Y
+                            </td>
+                            <td>
+                               @item.Scale 
+                            </td>
+                            <td>
+                                @item.Label
+                            </td>
+                            <td>
+                              @item.Title
+                            </td> 
+                              <td>
+                              @item.Description
+                            </td>
+                            <td>
+                               @item.Url
+                            </td>
+                            <td>
+                              @item.EventType
+                            </td> 
+                             <td>
+                              @item.EventKey
+                            </td>  
+                            <td>
+                                @(item.CreateDate)
+                            </td>
+                        </tr>
+                   }
+              </tbody>
+            </table>  
+          </div> 
+        </div>
+       <div style="">
+            @Html.Pager(Model)
+       </div> 
+</body>  

@@ -1,0 +1,95 @@
+/*--- 头部 ---*/
+.header {}
+
+/*--- 顶部工具条 ---*/
+.shortcut { background:url(images/header_2.png) repeat-x left top; height:24px; line-height:24px; width:100%; clear:both; padding-bottom:11px;}
+.wellcombar { width:588px; text-align:right; height:24px; float:left;}
+.linkbar { background:url(images/header_1.png) no-repeat left -250px; height:24px; float:left; padding-left:40px; width:360px; text-align:left;}
+.linkbar a:link,
+.linkbar a:visited,
+.linkbar a:active { font-size:12px; color:#325e7f; display:inline-block; float:left;}
+.linkbar a:hover { color:#f60;}
+.linkbar span.bettem { width:1px; height:24px; overflow:hidden; background:url(images/header_1.png) no-repeat left -300px; margin:0 12px; display:inline-block; float:left;}
+.icon_favorites { background:url(images/header_1.png) no-repeat left -745px; padding-left:16px; width:auto;}
+.icon_helpCenter { background:url(images/header_1.png) no-repeat left -795px; padding-left:16px; width:4em;}
+
+
+/*--- logo ---*/
+.logo { width:190px; height:81px;  float:left; margin-top:8px; margin-right:15px;}
+.logo a { display:block; width:100%; height:81px; text-decoration:none;}
+
+.pageTitle { font-size:26px; color:#999; font-weight:bold; float:left; display:inline-block; padding-top:43px;}
+
+/*--- 导航栏 ---*/
+.navCtn { width:780px; float:left;}
+.hotLime { height:280px; height:27px; clear:both; margin-top:8px; margin-bottom:6px}
+.nav { overflow:hidden; height:28px; line-height:28px; padding-top:20px;}
+.nav li { float:left; background:url(images/header_1.png) no-repeat -100px -200px; width:77px; height:28px; display:inline-block; font-size:14px; margin-right:4px; text-align:center;}
+.nav li.sel {background:url(images/header_1.png) no-repeat left -200px; color:#fff; font-weight:bold;}
+.nav li a { display:block; width:77px; height:28px; color:#666; text-decoration:none;}
+.nav li.sel a { color:#fff;}
+
+.searchbar { background:url(images/header_2.png) repeat-x left -50px; clear:both; height:38px;}
+.motto { background:url(images/header_1.png) no-repeat 20px top; height:38px; width:178px; float:left; margin-right:28px;}
+
+.searchCtn { background:url(images/header_1.png) no-repeat left -50px; height:30px; width:417px; padding-left:30px; float:left; margin-top:4px;}
+.seakey { height:16px; line-height:16px; margin-top:8px; border:1px solid #fff; line-height:16px; font-size:14px; width:318px; color:#333; float:left;}
+.searchCtn .btn_search { background:url(images/header_1.png) no-repeat left -100px; width:94px; height:30px; float:left; border:none;}
+
+.searchCtn_2 { background:url(images/header_1.png) no-repeat left -900px; height:39px; width:456px; padding-left:30px; float:right; margin-top:20px;}
+.searchCtn_2 .seakey { width:325px; margin-top:12px;}
+.searchCtn_2 .btn_search { background:url(images/header_1.png) no-repeat left -850px; width:95px; height:29px; float:left; border:none; margin-top:5px;}
+
+.hotwords { height:20px; line-height:20px; text-align:left; width:270px; color:#fff; float:left; margin-top:9px; padding-left:12px;font-weight:bold;}
+.hotwords a { color:#fff; margin-right:0.5em; font-weight:normal;}
+.hotwords a:hover { color:#fff; text-decoration:none;}
+
+/*--- 帮助中心 ---*/
+.helpCenter { border:1px solid #ccc; padding:1px;}
+.helpCenter_ctt { background:url(images/header_2.png) repeat-x left -300px; padding-bottom:12px;}
+.logo_footer { background:url(images/header_1.png) no-repeat 28px -550px; width:190px; height:94px; float:left;}
+.service { background:url(images/header_2.png) repeat-x left -100px; height:124px; width:750px; padding-left:30px; float:left;}
+.service dt { color:#333; font-weight:bold; padding-top:4px;}
+.service dt span { border-bottom:1px solid #f00; display:inline-block; height:20px;}
+.service dl { display:block; height:100%; float:left;}
+.service dd { height:25px; line-height:25px; width:100%; float:left;}
+.service dd a { color:#666;}
+.fore1 { width:180px;}
+.fore2 { width:180px;}
+.fore3 { width:180px;}
+.fore4 { width:180px;}
+.fore5 { width:180px;}
+
+.changtiao22{width:100%; height:3px; background:#d8d8d8; overflow:hidden; margin-bottom:3px; }
+.down_box{width:992px; height:130px; padding-top:6px; font-size:12px; margin:0 auto;}
+.down_box a:hover{text-decoration:underline;}
+.down_box a:link,.down_box a:visited{text-decoration:none;color:#3c3c3c}
+.down_ico{width:50px; height:50px;margin:22px 0 0 10px; float:left}
+.down_ico_vip{background:url(images/down_ico.png) no-repeat;}
+.down_ico_cxing{background:url(images/down_ico.png) 0 -57px no-repeat;}
+.down_ico_jif{background:url(images/down_ico.png) 0 -117px no-repeat;}
+.down_ico_help{background:url(images/down_ico.png) 0 -172px no-repeat;}
+.down_ico_payfor{background:url(images/down_ico.png) 0 -346px no-repeat;}
+
+.down_ico_ti{width:110px; height:20px;}
+.down_ico_ti1{background:url(images/down_ico.png) 0 -229px no-repeat;}
+.down_ico_ti2{background:url(images/down_ico.png) 0 -258px no-repeat;}
+.down_ico_ti3{background:url(images/down_ico.png) 0 -286px no-repeat;}
+.down_ico_ti4{background:url(images/down_ico.png) 0 -315px no-repeat;}
+.down_ico_ti5{background:url(images/down_ico.png) 0 -397px no-repeat;}
+
+.right_xubian{border-right: #d8d8d8 dashed 1px}
+.geikai{width:130px; height:12px}
+
+
+.down_ul{width:135px; height:120px; float:left}
+.down_ul ul{margin:0; padding:0; list-style:none; }
+.down_ul ul li{margin:7px 0 7px 0}
+
+/*--- 页脚 ---*/
+.footer { clear:both; text-align:center; padding-top:12px;}
+.f_links { color:#333; border-top:1px solid #ccc; height:28px; line-height:28px; padding-top:8px;}
+.f_links a { color:#333; margin:0 0.5em;}
+.copyright { height:28px; line-height:28px;}
+.ilinks { height:40px; line-height:40px; padding:8px 0 20px 0;}
+.ilinks a { margin:0 1em;}

@@ -1,0 +1,192 @@
+﻿@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+<meta content="telephone=no" name="format-detection" />
+<title>幸运大转盘</title>
+<link rel="stylesheet" href="~/Content/WeiXinShare/css/base.css" />
+</head>
+<body>
+<div class="container">
+	<div class="turntablebox">
+		<ul class="turntable" id="turntable"></ul>
+		<a href="javascript:;" class="luck" id="luck">
+			<span></span>
+			<span></span>
+		</a>
+	</div>
+	<ul class="rule">
+		<li><span>1</span><p>活动时间：即日起至5月31日。@(ViewBag.WxNickName)</p></li>
+		<li><span>2</span><p>每日首次登陆游戏后,即可获得一次幸运大转盘抽奖机会。</p></li>
+		<li><span>3</span><p>中奖之后，奖励将自动发送至微信绑定的游戏账户。</p></li>
+		<li><span>4</span><p>奖品说明：金币用于金币场和比赛；小豆用于组局和比赛。</p></li>
+		<li><span>5</span><p>本活动最终解释权归所有。</p></li>
+	</ul>
+</div>
+<div class="screenTips">
+    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAIYAAADaCAMAAABU68ovAAAAXVBMVEUAAAD29vb////x8fH////////x8fH5+fn29vby8vL////5+fn39/f6+vr////x8fH////////+/v7////09PT////x8fH39/f////////////////////x8fH///+WLTLGAAAAHXRSTlMAIpML+gb4ZhHWn1c2gvHBvq1uKJcC6k8b187lQ9yhhboAAAQYSURBVHja7d3blpowFIDhTUIAOchZDkre/zE7ycySrbUUpsRN2/1fzO18KzEqxEVgTiZNfgmmtxRc8iaR8HNe8x4BtjQePKayYCIoyBSgvNNE1AkNSHqZyLqk97EgUCCHBzZ5mkg7ScvIJuIyOyXBRFxgpqWZyGsAZLB1KjsJi8nutHU4JCRbFRH8tmirI9k8Jx2sqNs8K/m0LQkrktO2crgcgXGB4AiTEsB0hJfo9MGgX7CGcYiYwQxmMOOvZwRhBG8tCoMXjBDeXvWCEcHbi14wgCBmMIMZzGAGM5jxETNwzMAxA8cMHDNwzMAxA8cMHDNwzMAxA8cMHDNwzMAxY6E2rUQxnH2tz9cirlJFwFBJedaPnUv0M7++egPDE8iAJcIDmxwH5wwv9vUviw2kLbVO3TJU5uul/EyB0FoLp4x60PdGUd3qPurrWyjGGTc05u+1dcgI7/+tCCPARWGhH7o5Y7RCf+bH9ctXLp6v2BVDxfqz0oPXeSVaNtINo/1SXDv4dck8IIkbhtC2ol+iouEonTBCbYvVMnXOjxww6s/RFrBUpXHh/gw1rHj5d/qhYn9Gpk2FWh6xRBRX5Oj3Znh2Sq49/L6+y8pB26q9GbE2dbA2mVbx6I+7MfBglLCttm73ZQi7AD3iL4HqjFYJHSPRppqaUaJ3ATpGa+ckpGak2hRRMyqjGMkvl+xyFeSMwjAqcsZgGDdyhl0oNTnDN4yenJGZFGxNChP5/Y3efh6SM2rDOJMzboYxkDMqwyjIGcIw6F+io2FU1IxIm1JqRmgXSkvNKNCXeTpGrU0JNSO2c6LIGPgCS8AuDHz9ta0SXWDtxoDRH+MqlbC2Dt2G2JFRadtQZt2qq/orGowdGb2euxYiqWEpVWhTBnszoNAPdStuQwxqf0aocdWKW4Z+DfszIh8pxJqbuCE4YAC+4bm0evtipjpgJHeFnyyt1Ku2xa0bhjxr27p75rECNwyI9ZwvXkHq+7aTaMEV44YYy/spfgjgjNHaWW+GeUhGEX7tLlVinIFDDSgnOwhi1V6bU0b6tVS9eAERe863g4dRrtiHdc6o+nn5vtyVVgR79Cqt4uL6gfHPQyGqtP2vf7HADGbcYwaOGThm4JiBYwaOGThm4JiBYwaOGThm4JiBYwaOGThm4JiBYwaOGThm4JjhtOM+J/AgT008yDMkN/dPP9hzS8zAMQN3OEYeekp5YU7KOKXwVXqiY+QS7smcinGKABWdiBgpPJTSMHJ4KidhhPBUSMLw4CmPhKHgKUXCkHsygum71ftNSgCX6bsl8FQyfbcL5EdYsDk0R3j7aiA5wpt5AjKg/2gLJEBD/0Hf2OOf/vRrj6z/7GtP4B3nMKyjHA12kIPSjnJs3FEO0TvKkYJHOWCR+rjJH0Vn6fI5PjNbAAAAAElFTkSuQmCC" class="screenTips-icon">
+    <div class="screenTips-msg">为了更好的体验，请使用竖屏浏览</div>
+</div>
+<script src="~/Scripts/jquery-3.0.0.min.js"></script> 
+<script type="text/javascript" src="http://res.wx.qq.com/open/js/jweixin-1.2.0.js"></script>
+    <script src="~/Content/WeiXinShare/js/base.js"></script> 
+   <script type="text/javascript">
+       //document.addEventListener('WeixinJSBridgeReady', function onBridgeReady() { WeixinJSBridge.call('hideOptionMenu'); });
+       $(document).ready(function () {
+           $.get("/ApiWeb/JsApiConfig?debug=true&url=" + escape(location.href.split('#')[0]) + "&roll=" + roll(), function (res) {
+               wx.config(res);
+           }); 
+       });
+       wx.ready(function () {
+           f_onMenuShareTimeline();
+           f_onMenuShareAppMessage();
+       });
+       var title = "@(ViewBag.WxNickName)向你发起攻击！";
+       var link = "http://gxyzhanglong.eicp.net:40298/WeiXinShare/index";
+       var imgUrl = "http://gxyzhanglong.eicp.net:40298/Content/WeiXinShare/img/3.png";
+     var desc_app = "我在圣诞滑雪活动中以@(ViewBag.Score )分遥遥领先，你敢挑战我吗？赢取丰厚奖品！";
+     var desc_timeline = "@(ViewBag.WxNickName)在圣诞滑雪活动中以@(ViewBag.Score )分遥遥领先，你敢挑战Ta吗？赢取丰厚奖品！";
+       var f_onMenuShareTimeline = function () {
+           wx.onMenuShareTimeline({ title: desc_timeline, link: link, imgUrl: imgUrl, success: recordS });
+       };
+       var f_onMenuShareAppMessage = function () {
+
+           wx.onMenuShareAppMessage({ title: title, desc: desc_app, link: link, imgUrl: imgUrl, type: '', dataUrl: '', success: recordS });
+       };
+       var roll = function () { var rand = Math.random(); return (Math.round(rand * 9999)); };
+       var recordS = function () {
+           //$.post("/Xmas2016/LogXmas", { openid: '@(ViewBag.WxopenId)', actionType: 5, r: roll() }, function (data) {
+         //});
+     };
+
+
+
+    </script>
+<script type="text/javascript"> 
+
+    var config = {
+        turntable: document.getElementById("turntable"),
+        isClick: true,
+        luckArr: [//0 -> 金币  1 -> 豆  2 -> 谢谢参与
+			{ id: 1, type: 1, num: 1, txt: "1小豆", src: "/Content/WeiXinShare/img/1.png" },
+			{ id: 2, type: 0, num: 10000, txt: "1万金币", src: "/Content/WeiXinShare/img/2.png" },
+			{ id: 3, type: 1, num: 10, txt: "10小豆", src: "/Content/WeiXinShare/img/3.png" },
+			{ id: 4, type: 1, num: 2, txt: "2小豆", src: "/Content/WeiXinShare/img/4.png" },
+			{ id: 5, type: 0, num: 66000, txt: "6.6万金币", src: "/Content/WeiXinShare/img/5.png" },
+			{ id: 0, type: 2, num: 0, src: "" },
+			{ id: 6, type: 0, num: 6000, txt: "6000金币", src: "/Content/WeiXinShare/img/6.png" },
+			{ id: 7, type: 0, num: 100000, txt: "10万金币", src: "/Content/WeiXinShare/img/7.png" }
+        ],
+        unitFn: function (obj) {
+            var obj = obj, type = ["金币", "小豆"];
+            return obj.type != 2 ? (obj.num >= 10000 ? (obj.num / 10000) + "万" : obj.num) + type[obj.type] : "谢谢参与";
+        },
+        prefix: function () {
+            var styles = window.getComputedStyle(document.documentElement, '');
+            var core = (
+		        Array.prototype.slice
+		        .call(styles)
+		        .join('')
+		        .match(/-(moz|webkit|ms)-/) || (styles.OLink === '' && ['', 'o'])
+		    )[1];
+            return core;
+        },
+        luckInit: function () {
+            var arr = this.luckArr, len = arr.length, tp = "";
+            for (var i = 0; i < len; i++) {
+                if (arr[i].type != 2) {
+                    tp += '<li><div><p>' + this.unitFn(arr[i]) + '</p><span><img src="' + arr[i].src + '" /></span></div></li>'
+                } else {
+                    tp += '<li><div><p class="thanks">谢谢<br />参与</div></li>'
+                }
+            };
+            $(this.turntable).html(tp);
+
+        },
+        rotate: function (num, fn) {
+            var _this = this, angle = -45 * num + 1440;
+            var flag = true;
+            var type = this.prefix() + "TransitionEnd";
+            this.turntable.style["-" + this.prefix() + "-transition"] = "2s ease";
+            this.turntable.style["-" + this.prefix() + "-transform"] = "rotate(" + angle + "deg)";
+            this.turntable.addEventListener(type, function (e) {
+                if (e.target === e.currentTarget && flag) {
+                    flag = false;
+                    var t = num == 0 ? "" : "-";
+                    this.style["-" + _this.prefix() + "-transition"] = "none";
+                    this.style["-" + _this.prefix() + "-transform"] = "rotate(" + (num * -45) + "deg)";
+                    if (fn) { fn(num) };
+                }
+
+            }, false);
+
+        },
+        pop: function (str) {
+            var tp = '<div class="tipspop">' + str + '<span class="close">确定</span></div>';
+            return tp;
+        },
+        end: function (num) {
+            console.log(this.luckArr[num])
+            //console.log(num)
+            this.isClick = true;
+
+            layer.open({
+                content: this.pop(tp),
+                success: function (elem) {
+                    var closes = $(elem).find(".close");
+                    closes.on("click", function () {
+                        layer.closeAll();
+                    });
+                }
+            });
+        }
+    };
+
+
+    //console.log(config.prefix())
+
+    config.luckInit();
+    var isRotate = true;
+    var luck = $("#luck");
+
+    luck.on("click", function () {
+        if (!config.isClick) { return false; }
+        config.isClick = false
+
+        if (true) {
+            var num = randomNum(7, 1)[0];
+            console.log(num)
+            if (num == 5) {
+                tp = "<p class='tipsp'>" + config.unitFn(config.luckArr[num]) + "！</p>";
+            } else {
+                tp = "<p class='tipsp'>恭喜您获得" + config.unitFn(config.luckArr[num]) + "！<br /><em>（奖品已发放至您的游戏账户，请注意查收）</em></p>";
+            }
+
+        } else {
+            tp = "<p class='tipsp'>测试测试测试</p>";
+        };
+
+
+        config.rotate(num, function (num) {
+            config.isClick = true;
+            layer.open({
+                className: "my-pop",
+                content: config.pop(tp),
+                success: function (elem) {
+                    var closes = $(elem).find(".close");
+                    closes.on("click", function () {
+                        layer.closeAll();
+                    });
+                }
+            });
+        })
+    }); 
+
+</script>
+</body>
+</html>

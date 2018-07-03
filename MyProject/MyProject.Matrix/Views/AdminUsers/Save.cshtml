@@ -1,0 +1,65 @@
+﻿@{
+    ViewBag.Title = "";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@model MyProject.Matrix.Controllers.AdminUsers.ViewModels.SaveAdminUserModel
+<script type="text/javascript">
+    $(function () {
+        $("body").css({ "background-color": "#F9F9F9", "margin-top": "0px" }); 
+        if ($("#AdminUserId").val() >0) {//如果是修改，就隐藏用户和密码；
+            $("#UserName").parent().parent().css("display", "none");
+            $("#Password").parent().parent().css("display", "none");
+            $("#PasswordTwo").parent().parent().css("display", "none");
+        }
+       
+    });
+</script>
+<div class="widget-box" style="margin-top: 0; display: block;" id="div_opt_1">
+    <div class="widget-title">
+        <h5>用户信息</h5>
+    </div>
+    <div class="widget-content nopadding">
+        @using (Html.BeginForm("Save", "AdminUsers", FormMethod.Post, new { @class = "formular", id = "form1" }))
+        {
+            @Html.HiddenFor(c => c.AdminUserId)
+            <table class="table table-bordered table-striped">
+                <tbody>
+                    <tr class="even gradeC">
+                        <td style="width: 150px;">@Html.LabelFor(c => c.RoleId)</td>
+                        <td>
+                            @Html.DropDownListFor(c => c.RoleId, ViewBag.RoleList as List<SelectListItem>, new { @style = "width:50%;height: 30px;" })
+                        </td>
+                    </tr>
+                    <tr class="even gradeA">
+                        <td>@Html.LabelFor(c => c.UserName)</td>
+                        <td>
+                            @Html.TextBoxFor(c => c.UserName, new { @class = "span11", @style = "width:50%;height: 30px;" })
+                            <span style="color:red;"> @Html.ValidationMessage("UserName")</span>
+                        </td>
+                    </tr>
+                    <tr class="even gradeA">
+                        <td>@Html.LabelFor(c => c.Password)</td>
+                        <td>
+                            @Html.PasswordFor(c => c.Password, new { @class = "span11", @style = "width:50%;height: 30px;" }) 
+                            <span style="color:red;"> @Html.ValidationMessage("Password")</span>
+                        </td>
+                    </tr>
+                    <tr class="even gradeA">
+                        <td>确认密码</td>
+                        <td>
+                            @Html.PasswordFor(c=>c.PasswordTwo, new { @class = "span11", @style = "width:50%;height: 30px;" })
+                            <span style="color:red;"> @Html.ValidationMessage("PasswordTwo")</span>
+                        </td>
+                    </tr>
+                    <tr class="odd gradeA">
+                        <td></td>
+                        <td>
+                            <button type="submit" class="btn btn-success btn-mini">保存</button>
+                        </td>
+                    </tr> 
+                </tbody>
+            </table> 
+        }
+    </div>
+</div>
+

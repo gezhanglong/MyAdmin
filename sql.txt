@@ -1,0 +1,84 @@
+alter talbe dbo.AdminUser add Email nvarchar(50) --½¨×Ö¶Î
+
+--½¨±í
+USE [MyProject]
+GO
+
+/****** Object:  Table [dbo].[WeiXinUser]    Script Date: 06/28/2018 17:24:35 ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+SET ANSI_PADDING ON
+GO
+
+CREATE TABLE [dbo].[WeiXinUser](
+	[openid] [varchar](50) NOT NULL,
+	[subscribe] [int] NULL,
+	[nickname] [nvarchar](50) NULL,
+	[sex] [int] NULL,
+	[language] [varchar](50) NULL,
+	[city] [nvarchar](50) NULL,
+	[province] [nvarchar](50) NULL,
+	[country] [nvarchar](50) NULL,
+	[headimgurl] [varchar](500) NULL,
+	[subscribe_time] [int] NULL,
+	[unionid] [varchar](50) NULL,
+	[remark] [nvarchar](200) NULL,
+	[groupid] [int] NULL,
+	[tagid_list] [varchar](50) NULL,
+	[subscribe_scene] [varchar](50) NULL,
+	[qr_scene] [int] NULL,
+	[qr_scene_str] [varchar](50) NULL,
+	[createtime] [datetime] NULL,
+ CONSTRAINT [PK_WeiXinUser] PRIMARY KEY CLUSTERED 
+(
+	[openid] ASC
+)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY]
+) ON [PRIMARY]
+
+GO
+
+SET ANSI_PADDING OFF
+GO
+
+
+USE [MyProject]
+GO
+
+/****** Object:  Table [dbo].[WeiXinMenu]    Script Date: 06/28/2018 23:18:24 ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+SET ANSI_PADDING ON
+GO
+
+CREATE TABLE [dbo].[WeiXinMenu](
+	[menuid] [int] NOT NULL,
+	[type] [varchar](50) NULL,
+	[name] [nvarchar](50) NULL,
+	[key] [varchar](50) NULL,
+	[url] [varchar](200) NULL,
+	[media_id] [varchar](50) NULL,
+	[appid] [varchar](50) NULL,
+	[pagepath] [varchar](200) NULL,
+	[createtime] [datetime] NULL,
+	[creater] [nvarchar](50) NULL,
+ CONSTRAINT [PK_WeiXinMenu] PRIMARY KEY CLUSTERED 
+(
+	[menuid] ASC
+)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY]
+) ON [PRIMARY]
+
+GO
+
+SET ANSI_PADDING OFF
+GO
+
+
+

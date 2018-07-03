@@ -1,0 +1,465 @@
+﻿@{
+    Layout = null;
+    var permList = ViewBag.perm as List<MyProject.Core.Dtos.PermDto>;
+    if (permList == null)
+    {
+        permList = new List<MyProject.Core.Dtos.PermDto>();
+    }
+    var selectList = ViewData["ParentList"] as List<SelectListItem>;
+}
+@using MyProject.Matrix.Controllers.Core;
+@model List<MyProject.Matrix.Controllers.SysManage.ViewModels.MenuModel>
+
+<!DOCTYPE html>
+
+<html>
+<head> 
+    <title>菜单界面</title> 
+<link rel="stylesheet" href="/Content/Matrix_Admin/css/bootstrap.min.css" />
+<link rel="stylesheet" href="/Content/Matrix_Admin/css/bootstrap-responsive.min.css" />
+<link rel="stylesheet" href="/Content/Matrix_Admin/css/colorpicker.css" />
+<link rel="stylesheet" href="/Content/Matrix_Admin/css/datepicker.css" />
+<link rel="stylesheet" href="/Content/Matrix_Admin/css/uniform.css" />
+<link rel="stylesheet" href="/Content/Matrix_Admin/css/select2.css" />
+<link rel="stylesheet" href="/Content/Matrix_Admin/css/matrix-style.css" />
+<link rel="stylesheet" href="/Content/Matrix_Admin/css/matrix-media.css" /> 
+
+    <script src="/Content/Matrix_Admin/js/jquery.min.js"></script>  
+    <script src="/Content/Matrix_Admin/js/bootstrap-treeview.js"></script> @*树结构js*@
+<script src="/Content/Matrix_Admin/js/jquery.ui.custom.js"></script> 
+<script src="/Content/Matrix_Admin/js/bootstrap.min.js"></script> 
+<script src="/Content/Matrix_Admin/js/bootstrap-colorpicker.js"></script> 
+<script src="/Content/Matrix_Admin/js/bootstrap-datepicker.js"></script>  
+<script src="/Content/Matrix_Admin/js/masked.js"></script> 
+<script src="/Content/Matrix_Admin/js/jquery.uniform.js"></script> 
+<script src="/Content/Matrix_Admin/js/select2.min.js"></script>    
+
+    <script type="text/javascript">
+        var menuid = 0;//全局菜单ID
+        var nodeId = 0;//插件的节点ID
+        var nodes = null;//用来判断是否是末尾节点
+        var IsAdd = false;//是否是添加 
+        var powerId = 0;//全局权限ID
+        $(function () {
+            //树形菜单插件
+            $('#tree').treeview({ 
+                data: '@(Html.Raw(ViewData["treeList"]))' 
+            });
+            //点击菜单事件
+            $('#tree').on('nodeSelected', function (event, data) { 
+                menuid = data.text.split('_')[1];//通过菜单名称拿menuid
+                nodeId = data.nodeId;
+                nodes = data.nodes;
+                $.ajax({
+                    type: "POST",
+                    url: "/SysManage/GetMenuInfoByMenuId",//获得菜单信息
+                    data: { menuId: menuid },
+                    success: function (data) { 
+                        $("#td_MenuName").html(data.MenuName);
+                        $("#td_LinkUrl").html(data.LinkUrl);
+                        $("#td_SortOrder").html(data.SortOrder);
+                        $("#td_CreateDate").html(data.CreateDate); 
+
+                        $("#td_ParentId_opt").val(data.ParentId);
+                        $("#td_MenuName_opt").val(data.MenuName);
+                        $("#td_LinkUrl_opt").val(data.LinkUrl);
+                        $("#td_SortOrder_opt").val(data.SortOrder);
+                    },
+                    error: function () {
+                        alert("提交数据失败！");
+                    }
+                });
+
+                powerPostHtml(menuid);//初始化权限列表
+                $("#power_div_opt_1 tbody tr").live("click",function () {//拿到powerid,做权限删除操作
+                    powerId = $(this).attr("dataId");
+                    $(this).siblings().children().css("background-color", "");
+                    $(this).children().css("background-color","red");
+                });
+            });
+            
+            //修改后根据携带的nodeid、menuid初始化页面，修改的菜单信息和选中菜单
+            var urltype_nodeid = getUrlParam('nodeid');
+            var urltype_menuid = getUrlParam('menuid'); 
+            if (urltype_menuid != null) {
+                $('#tree').treeview('revealNode', [parseInt(urltype_nodeid), { silent: true }]);
+                $('#tree').treeview('selectNode', [parseInt(urltype_nodeid), { silent: true }]); 
+                $.ajax({
+                    type: "POST",
+                    url: "/SysManage/GetMenuInfoByMenuId",
+                    data: { menuId: urltype_menuid },
+                    success: function (data) {
+                        $("#td_MenuName").html(data.MenuName);
+                        $("#td_LinkUrl").html(data.LinkUrl);
+                        $("#td_SortOrder").html(data.SortOrder);
+                        $("#td_CreateDate").html(data.CreateDate);
+
+                    },
+                    error: function () {
+                        alert("提交数据失败！");
+                    }
+                });
+            }
+
+            //点击添加按钮添加菜单
+            $("#btn_add").click(function () {
+                IsAdd = true;
+                $("#div_opt_1").css("display", "none");
+                $("#div_opt_2").css("display", "block");
+                $("#title_opt").html("添加菜单");
+                $("#td_submit_opt").html("保存");
+
+                $("#td_ParentId_opt").val(0);
+                $("#td_MenuName_opt").val("");
+                $("#td_LinkUrl_opt").val("");
+                $("#td_SortOrder_opt").val("");
+            });
+
+            //点击修改按钮修改菜单
+            $("#btn_update").click(function () {
+                if (menuid == 0) {
+                    alert("请选择要修改的菜单！");
+                    return;
+                }
+                $("#div_opt_1").css("display", "none");
+                $("#div_opt_2").css("display", "block");
+                $("#title_opt").html("修改菜单");
+                $("#td_submit_opt").html("修改");
+                $.ajax({
+                    type: "POST",
+                    url: "/SysManage/GetMenuInfoByMenuId",
+                    data: { menuId: menuid },
+                    success: function (data) {
+                        $("#td_ParentId_opt").val(data.ParentId);
+                        $("#td_MenuName_opt").val(data.MenuName);
+                        $("#td_LinkUrl_opt").val(data.LinkUrl);
+                        $("#td_SortOrder_opt").val(data.SortOrder);
+                    },
+                    error: function () {
+                        alert("提交数据失败！");
+                    }
+                });
+
+            });
+
+            //点击删除按钮删除菜单
+            $("#btn_del").click(function () {
+                if (menuid == 0) {
+                    alert("请选择要删除的菜单！");
+                    return;
+                } 
+                if (nodes != null) {
+                    alert("该菜单不是末尾节点，不能删除！");
+                    return;
+                }
+                if (confirm("确定删除么?")) {
+                    $.ajax({
+                        type: "POST",
+                        url: "/SysManage/DeleteMenu",
+                        data: { menuId: menuid },
+                        success: function (data) {
+                            alert("删除成功！");
+                            var iframeId = $('.tab-pane.active iframe', parent.document).attr("id")//拿父页面tab的iframe节点   
+                            parent.document.getElementById(iframeId).contentWindow.location.reload(true);//添加菜单：刷新iframe 
+                        },
+                        error: function () {
+                            alert("提交数据失败！");
+                        }
+                    });
+
+                }
+                
+            });
+             
+            //提交菜单数据
+            $("#td_submit_opt").click(function () { 
+                var td_ParentId = $("#td_ParentId_opt").val();
+                var td_MenuName = $("#td_MenuName_opt").val();
+                var td_LinkUrl = $("#td_LinkUrl_opt").val();
+                var td_SortOrder = $("#td_SortOrder_opt").val();
+                if (IsAdd) {
+                    menuid = 0;
+                }
+                $.ajax({
+                    type: "POST",
+                    url: "/SysManage/SaveMenu",
+                    data: { MenuId: menuid,MenuName:td_MenuName,LinkUrl:td_LinkUrl, SortOrder:td_SortOrder,ParentId:td_ParentId,},
+                    success: function (data) {
+                        alert(data.Msg);
+                        var iframeId = $('.tab-pane.active iframe', parent.document).attr("id")//拿父页面tab的iframe节点 
+                        var iframeSrc = $('.tab-pane.active iframe', parent.document).attr("src")
+                        if (IsAdd) {
+                            parent.document.getElementById(iframeId).contentWindow.location.reload(true);//添加菜单：刷新iframe
+                        }
+                        else {
+                            parent.document.getElementById(iframeId).contentWindow.location.href = iframeSrc + "?nodeid=" + nodeId + "&menuid=" + menuid;//修改菜单：刷新iframe并带参数
+                        } 
+                    },
+                    error: function () {
+                        alert("提交数据失败！");
+                    }
+                });
+
+            });
+
+
+            //点击权限添加按钮添加权限
+            $("#power_btn_add").click(function () {
+                if (menuid == 0) {
+                    alert("请选择要添加权限的菜单！");
+                    return;
+                }
+                IsAdd = true;
+                $("#power_div_opt_1").css("display", "none");
+                $("#power_div_opt_2").css("display", "block");
+                $("#power_title_opt").html("添加菜单");
+                $("#power_td_submit_opt").html("保存");
+
+                $("#power_td_PowerName_opt").val("");
+                $("#power_td_Action_opt").val("");
+                $("#power_td_Controller_opt").val("");
+                $("#power_td_PowerCode_opt").val("");
+            });
+             
+            
+
+            //点击权限删除按钮删除权限
+            $("#power_btn_del").click(function () {
+                if (powerId == 0) {
+                    alert("请选择要删除的权限菜单！");
+                    return;
+                } 
+                if (confirm("确定删除么?")) {
+                    $.ajax({
+                        type: "POST",
+                        url: "/SysManage/DeletePower",
+                        data: { powerId: powerId },
+                        success: function (data) { 
+                            powerPostHtml(menuid);
+                            powerId = 0;
+                        },
+                        error: function () {
+                            alert("提交数据失败！");
+                        }
+                    });
+
+                }
+
+            });
+            
+
+            //提交权限数据
+            $("#power_td_submit_opt").click(function () {
+                var td_PowerName = $("#power_td_PowerName_opt").val();
+                var td_Action = $("#power_td_Action_opt").val();
+                var td_Controller = $("#power_td_Controller_opt").val();
+                var td_PowerCode = $("#power_td_PowerCode_opt").val();
+                $.ajax({
+                    type: "POST",
+                    url: "/SysManage/SavePower",
+                    data: { MenuId: menuid, PowerName: td_PowerName, Action: td_Action, Controller: td_Controller, PowerCode: td_PowerCode, },
+                    success: function (data) { 
+                        powerPostHtml(menuid);
+                        $("#power_div_opt_1").css("display", "block");
+                        $("#power_div_opt_2").css("display", "none");
+                    },
+                    error: function () {
+                        alert("提交数据失败！");
+                    }
+                });
+
+            });
+           
+        });
+
+        //获取url中的参数  
+        function getUrlParam(name) {
+            var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)"); //构造一个含有目标参数的正则表达式对象  
+            var r = window.location.search.substr(1).match(reg);  //匹配目标参数  
+            if (r != null) return unescape(r[2]); return null; //返回参数值  
+        }
+
+        //构造权限html
+        function powerPostHtml(menuid)
+        {
+            $.ajax({
+                type: "POST",
+                url: "/SysManage/GetPowerListByMenuId",//获得权限信息
+                data: { menuId: menuid },
+                success: function (data) {
+                    $("#power_div_opt_1 tbody tr").remove();
+                    var html="";
+                    for (var i = 0; i < data.length; i++) {
+                        html += "<tr dataId=" + data[i].PowerId + ">";
+                        html+=" <td >"+data[i].PowerName+"</td>";
+                        html += " <td >" + data[i].Action + "</td>";
+                        html += " <td >" + data[i].Controller + "</td>";
+                        html += " <td >" + data[i].PowerCode + "</td>";
+                        html+="</tr>"; 
+                    }
+
+                    $("#power_div_opt_1 tbody").append(html);
+                },
+                error: function () {
+                    alert("提交数据失败！");
+                }
+            });
+
+        }
+    </script>
+</head>
+<body style="background-color:#F9F9F9;margin-top:0px;"> 
+ <div id="tree" style="width: 250px;height:400px;float:left;"></div>
+ <div style="width:50%;float:left;margin-left:100px;"> 
+    <button class="btn btn-primary" id="btn_add">添加</button>
+    <button class="btn btn-info" id="btn_update">修改</button>
+    <button class="btn btn-danger" id="btn_del">删除</button> 
+     <div class="widget-box" style="margin-top:0;display:block;" id="div_opt_1">
+          <div class="widget-title"> 
+            <h5>菜单信息</h5>
+          </div>
+          <div class="widget-content nopadding">
+            <table class="table table-bordered table-striped"> 
+              <tbody> 
+                <tr class="even gradeC">
+                  <td style="width:150px;">菜单名称</td>
+                  <td id="td_MenuName"> </td> 
+                </tr>
+                <tr class="even gradeA">
+                  <td>菜单Url</td>
+                  <td id="td_LinkUrl"> </td> 
+                </tr>
+                <tr class="odd gradeA">
+                  <td>排序</td>
+                  <td id="td_SortOrder"> </td> 
+                </tr>
+                <tr class="odd gradeX">
+                  <td>创建时间</td>
+                  <td id="td_CreateDate"></td> 
+                </tr>
+                
+              </tbody>
+            </table> 
+          </div>
+        </div>
+     <div class="widget-box" style="margin-top:0;display:none;" id="div_opt_2">
+          <div class="widget-title"> 
+            <h5 id="title_opt"></h5>
+          </div>
+          <div class="widget-content nopadding">
+            <table class="table table-bordered table-striped"> 
+              <tbody> 
+                <tr class="even gradeC">
+                  <td style="width:150px;">父菜单</td>
+                  <td >
+                      <div class="controls">
+                        <select id="td_ParentId_opt">
+                            @if (selectList != null)
+                            {
+                                foreach (var item in selectList)
+                                {
+                                    <option value="@item.Value">@item.Text</option>
+                                }
+                            } 
+                        </select>
+                      </div>
+                  </td> 
+                </tr>
+                   <tr class="even gradeA">
+                  <td>菜单名称</td>
+                  <td > 
+                      <input type="text" class="span11" placeholder="菜单名称"  id="td_MenuName_opt" style="width:50%;height: 30px;"/>
+                  </td> 
+                </tr>
+                <tr class="even gradeA">
+                  <td>菜单Url</td>
+                  <td>  
+                      <input type="text" class="span11" placeholder="菜单Url"  id="td_LinkUrl_opt" style="width:80%;height: 30px;"/>
+                  </td> 
+                </tr>
+                <tr class="odd gradeA">
+                  <td>排序</td>
+                  <td>
+                      <input type="text" class="span11" placeholder="排序"  id="td_SortOrder_opt" style="width:20%;height: 30px;"/> 
+                  </td> 
+                </tr>  
+                       <tr class="odd gradeA">
+                  <td></td>
+                  <td >
+                      <button type="submit" class="btn btn-success" id="td_submit_opt">保存</button>
+                  </td> 
+                </tr>  
+              </tbody>
+            </table> 
+          </div>
+        </div>
+ </div>
+ <div style="width:50%;float:left;margin-left:100px;"> 
+    <button class="btn btn-primary" id="power_btn_add">添加</button> 
+    <button class="btn btn-danger" id="power_btn_del">删除</button> 
+     <div class="widget-box" style="margin-top:0;display:block;" id="power_div_opt_1">
+          <div class="widget-title"> 
+            <h5>权限信息</h5>
+          </div>
+          <div class="widget-content nopadding">
+            <table class="table table-bordered table-striped"> 
+                <thead>
+                <tr>
+                  <th>权限名称</th>
+                  <th>Action</th>
+                  <th>Controller</th>
+                  <th>权限编号</th> 
+                </tr>
+              </thead>
+              <tbody> 
+                
+              </tbody>
+            </table> 
+          </div>
+        </div>
+     <div class="widget-box" style="margin-top:0;display:none;" id="power_div_opt_2">
+          <div class="widget-title"> 
+            <h5 id="power_title_opt"></h5>
+          </div>
+          <div class="widget-content nopadding">
+            <table class="table table-bordered table-striped"> 
+              <tbody> 
+                <tr class="even gradeC">
+                  <td style="width:150px;">权限名称</td>
+                  <td >
+                       <input type="text" class="span11" placeholder="权限名称"  id="power_td_PowerName_opt" style="width:50%;height: 30px;"/>
+                  </td> 
+                </tr>
+                   <tr class="even gradeA">
+                  <td>Action</td>
+                  <td > 
+                      <input type="text" class="span11" placeholder="Action"  id="power_td_Action_opt" style="width:50%;height: 30px;"/>
+                  </td> 
+                </tr>
+                <tr class="even gradeA">
+                  <td>Controller</td>
+                  <td>  
+                      <input type="text" class="span11" placeholder="Controller"  id="power_td_Controller_opt" style="width:80%;height: 30px;"/>
+                  </td> 
+                </tr>
+                <tr class="odd gradeA">
+                  <td>权限编号</td>
+                  <td>
+                      <input type="text" class="span11" placeholder="权限编号"  id="power_td_PowerCode_opt" style="width:20%;height: 30px;"/> 
+                  </td> 
+                </tr>  
+                       <tr class="odd gradeA">
+                  <td></td>
+                  <td >
+                      <button type="submit" class="btn btn-success" id="power_td_submit_opt">保存</button>
+                  </td> 
+                </tr>  
+              </tbody>
+            </table> 
+          </div>
+        </div>
+ </div>
+</body>
+</html>
+
+ 

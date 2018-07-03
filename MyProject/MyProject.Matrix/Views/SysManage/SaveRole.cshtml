@@ -1,0 +1,87 @@
+﻿@{
+    ViewBag.Title = "保存角色";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+
+    var menuList = (List<RoleMenuModel>)ViewData["MenuList"];
+    var powerList = (List<RolePowerModel>)ViewData["PowerList"];
+}
+
+@using MyProject.Matrix.Controllers.SysManage.ViewModels
+@model SaveUserRoleModel  
+
+<script type="text/javascript">
+    $(function () {
+        $("body").css({ "background-color": "#F9F9F9", "margin-top": "0px" });
+    });
+</script>
+
+<div class="widget-box" style="margin-top: 0; display: block;" id="div_opt_1">
+    <div class="widget-title">
+        <h5>保存角色</h5>
+    </div>
+    <div class="widget-content nopadding">
+        @using (Html.BeginForm("SaveRole", "SysManage", FormMethod.Post, new { id = "form1", @class = "formular" }))
+        {
+  
+            @Html.HiddenFor(c => c.RoleId)  
+            <label style="margin: 10px 10px;">
+                <span>角色名称</span>
+                @Html.TextBoxFor(c => c.RoleName, new { @style = "width:200px;height: 30px;" })
+            </label>
+            <ul style="line-height: 24px; margin-top: 20px;">
+                @foreach (var item in menuList.Where(c => c.ParentId == 0))
+                    {
+           
+                    <div class="controls">
+                        <input style="display:inline-block;" type="checkbox" name="MenuId" value="@item.MenuId" @if(item.IsSelected)
+                                                                {
+                                                                    <text>checked="checked"</text>
+                                                                }/>
+                        @item.MenuName
+                        @if (powerList.Any(c => c.MenuId == item.MenuId))
+                            {
+                            <text>权限:</text>
+                            }
+                        @foreach (var power in powerList.Where(c => c.MenuId == item.MenuId))
+                            { 
+                            <input style="display:inline-block;" type="checkbox" name="PowerId" value="@power.PowerId" @if (power.IsSelected)
+                                                                    {
+                                                                    <text>checked="checked"</text>
+                                                                    }/>
+                            @power.PowerName
+                            }
+                    </div>   
+                    <ul>
+                        @foreach (var child in menuList.Where(c => c.ParentId == item.MenuId))
+                            {
+                            <div class="controls">
+                                <input style="display:inline-block;" type="checkbox" name="MenuId" value="@child.MenuId" @if (child.IsSelected)
+                                                                         {
+                                                                    <text>checked="checked"</text>
+                                                                         }/>
+                                @child.MenuName
+
+                                @if (powerList.Any(c => c.MenuId == child.MenuId))
+                                    {
+                                    <label style="margin-left: 20px; display: inline-block;" class="red">
+                                        权限</label>
+                                    }
+                                @foreach (var power in powerList.Where(c => c.MenuId == child.MenuId))
+                                    {
+                                    <input style="display:inline-block;" type="checkbox" name="PowerId" value="@power.PowerId" @if (power.IsSelected)
+                                                                                             {
+                                                                    <text>checked="checked"</text>
+                                                                                             }/>
+                                    @power.PowerName
+                                        
+                                    }
+                            </div> 
+                            }
+                    </ul>
+                    }
+                <input type="submit" value="保存" class="btn btn-success btn-mini" style="position: relative; left: 700px;" />
+            </ul>
+               
+        }
+    </div>
+</div>

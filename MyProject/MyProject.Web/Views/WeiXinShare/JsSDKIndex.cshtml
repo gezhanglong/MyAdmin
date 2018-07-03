@@ -1,0 +1,80 @@
+﻿@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>JsSDKIndex</title>
+</head>
+<body>
+    <div>
+         <span class="desc">使用微信内置地图查看位置接口</span>
+        <button class="btn btn_primary" id="openLocation">
+            openLocation</button>
+          <span class="desc">获取地理位置接口</span>
+        <button class="btn btn_primary" id="getLocation">
+            getLocation</button>
+         <span class="desc">跳转微信商品页接口</span>
+        <button class="btn btn_primary" id="openProductSpecificView">
+            openProductSpecificView</button>
+         <span class="desc">查看微信卡包中的卡券接口</span>
+        <button class="btn btn_primary" id="openCard">
+            openCard</button>
+    </div>
+
+    <script src="~/Scripts/jquery-3.0.0.min.js"></script> 
+<script type="text/javascript" src="http://res.wx.qq.com/open/js/jweixin-1.2.0.js"></script> 
+   <script type="text/javascript">
+       //document.addEventListener('WeixinJSBridgeReady', function onBridgeReady() { WeixinJSBridge.call('hideOptionMenu'); });
+       $(document).ready(function () {
+           $.get("/ApiWeb/JsApiConfig?debug=true&url=" + escape(location.href.split('#')[0]) + "&roll=" + roll(), function (res) {
+               wx.config(res);
+           });
+       });
+       var json = "";
+       wx.ready(function () {
+           wx.getLocation({
+               success: function (res) {
+                   alert(JSON.stringify(res));
+                   json = res;
+                   alert(json);
+               },
+               cancel: function (res) {
+                   alert('用户拒绝授权获取地理位置');
+               }
+           }); 
+       });
+       document.querySelector('#openLocation').onclick = function () {
+           wx.openLocation({
+               latitude: json.latitude,
+               longitude: json.longitude,
+               name: 'TIT 创意园',
+               address: '广州市海珠区新港中路 397 号',
+               scale: 14,
+               infoUrl: 'http://weixin.qq.com'
+           });
+       }; 
+       document.querySelector('#openProductSpecificView').onclick = function () {
+           wx.openProductSpecificView({
+               productId: 'pDF3iY_m2M7EQ5EKKKWd95kAxfNw'
+           });
+       };
+       // 12.3 查看卡券
+       document.querySelector('#openCard').onclick = function () {
+           alert('您没有该公众号的卡券无法打开卡券。');
+           wx.openCard({
+               cardList: [
+               ]
+           });
+       };
+       var roll = function () { var rand = Math.random(); return (Math.round(rand * 9999)); };
+      
+
+
+
+    </script>
+</body>
+</html>

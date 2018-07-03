@@ -1,0 +1,59 @@
+﻿@{
+    ViewBag.Title = "";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@model MyProject.Core.Entities.WeiXinMediaMessage
+<script type="text/javascript">
+    $(function () {
+        $("body").css({ "background-color": "#F9F9F9", "margin-top": "0px" });
+
+    });
+</script>
+<div class="widget-box" style="margin-top: 0; display: block;" id="div_opt_1">
+    <div class="widget-title">
+        <h5>编辑素材</h5>
+    </div>
+    <div class="widget-content nopadding">
+        @using (Html.BeginForm("Save", "WeiXinMediaMessage", FormMethod.Post, new { @class = "formular", id = "form1", enctype = "multipart/form-data" }))
+        {
+            @Html.HiddenFor(c => c.Id)
+            <table class="table table-bordered table-striped">
+                <tbody> 
+                    <tr class="even gradeA">
+                        <td>素材标题：</td>
+                        <td>
+                           @Html.TextBox("MediaTitle")
+                            <span style="color:red;"> @Html.ValidationMessage("MediaTitle")</span>
+                        </td>
+                    </tr>
+                     <tr class="even gradeC">
+                        <td style="width: 150px;">类型：</td>
+                        <td>
+                            @Html.DropDownList("MediaType" ,ViewData["MediaList"] as List<SelectListItem>, new { @style = "width:50%;height: 30px;" }) 
+                        </td>
+                    </tr>
+                    <tr class="even gradeC">
+                        <td style="width: 150px;">是否永久素材：</td>
+                        <td>
+                            @Html.DropDownList("IsForever" ,ViewData["MediaTypeList"] as List<SelectListItem>, new { @style = "width:50%;height: 30px;" }) 
+                        </td>
+                    </tr>
+                    <tr class="even gradeA">
+                        <td>素材文件：</td>
+                        <td>
+                            <input id="FileUpload" type="file" name="files" style="width: 250px; height: 24px; background: White"
+                            class="easyui-validatebox" />
+                        </td>
+                    </tr>
+                    <tr class="odd gradeA">
+                        <td></td>
+                        <td>
+                            <button type="submit" class="btn btn-success btn-mini">保存</button>
+                        </td>
+                    </tr> 
+                </tbody>
+            </table> 
+        }
+    </div>
+</div>
+

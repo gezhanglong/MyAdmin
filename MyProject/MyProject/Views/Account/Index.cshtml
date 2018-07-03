@@ -1,0 +1,70 @@
+﻿@{
+    Layout = null;
+}
+@model MyProject.Controllers.Account.ViewModels.LogOnModel
+<!DOCTYPE html>
+<html>
+<head>
+    <title>用户登录 - 后台管理平台</title>
+    <link href="/Scripts/jquery-validation-engine/css/template.css" rel="stylesheet" type="text/css" />
+    <link href="/Scripts/jquery-validation-engine/css/validationEngine.jquery.css" rel="stylesheet" type="text/css" />
+    <script src="/Scripts/jquery-1.7.1.min.js" type="text/javascript"></script>
+    <script src="/Scripts/jquery-validation-engine/js/jquery.validationEngine.js" type="text/javascript"></script>
+    <script src="/Scripts/jquery-validation-engine/js/languages/jquery.validationEngine-zh_CN.js" type="text/javascript"></script>
+    <script type="text/javascript">
+        $(function () {
+            $("#UserName").focus(); //聚焦输入框
+            $("#form1").validationEngine({ //用jquery-validation-engine进行前端验证
+                'custom_error_messages': {
+                    '#UserName': {
+                        'required': {
+                            'message': '* 请输入您的账号'
+                        }
+                    },
+                    '#Password': {
+                        'required': {
+                            'message': '* 请输入您的登录密码'
+                        }
+                    },
+                    '#ValidationCode': {
+                        'required': {
+                            'message': '* 请输入验证码'
+                        }
+                    }
+                }
+            });
+        }); 
+    </script>
+    <script type="text/javascript">
+        //点击刷新验证码
+        $(function () {
+            $("#imgId").click(function () {
+                $(this).attr("src", "/ValidationCode/ValidCode.ashx?s=" + Math.random()); 
+            });
+        });
+    </script>
+</head>
+<body>
+    <div style="height: 100px;">
+    </div>
+    @using (Html.BeginForm("LogOn", "Account", FormMethod.Post, new { id = "form1", @class = "formular", style = "width:300px; margin:0 auto; " }))
+    {  
+        <fieldset>
+            <label>
+                <span>@Html.LabelFor(c => c.UserName)</span>
+                @Html.TextBoxFor(c => c.UserName, new { @class = "validate[required] text-input" })
+            </label>
+            <label>
+                <span>@Html.LabelFor(c => c.Password)</span>
+                @Html.PasswordFor(c => c.Password, new { @class = "validate[required] text-input" })
+            </label>
+              <label>
+                <span>@Html.LabelFor(c => c.ValidationCode)</span>
+                @Html.TextBoxFor(c => c.ValidationCode, new { @class = "validate[required] text-input" })
+                <img src="/ValidationCode/ValidCode.ashx" id="imgId"/>
+            </label>
+            <input type="submit" value="登录" class="submit" />
+        </fieldset>
+    }
+</body>
+</html>

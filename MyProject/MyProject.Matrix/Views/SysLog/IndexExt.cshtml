@@ -1,0 +1,123 @@
+﻿@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewBag.Title = ""; 
+}
+@using MyProject.Services.MvcPager; 
+@model PagedList<MyProject.Core.Entities.SysException>
+ 
+<body style="background-color:#F9F9F9;margin-top:0px;"> 
+<div class="widget-box" style="margin-top:0;">
+          <div class="widget-title"> 
+            <h5>系统错误日志</h5>
+          </div>
+          <div class="widget-content nopadding">
+              <div class="">
+                  <div id="DataTables_Table_0_length" class="dataTables_length">
+                     @using (Html.BeginForm("IndexExt", "SysLog", FormMethod.Get))
+                        {
+                            <table>
+                                <tr>
+                                     <td>链接：</td>
+                                    <td style="padding-right: 15px;">
+                                        @Html.TextBox("helpLink", null, new { @class = "span11" })
+                                    </td> 
+                                     <td>日期：</td>
+                                    <td style="padding-right: 15px;"> 
+                                        @Html.TextBox("sdate",null, new { @class="Wdate", @onfocus="WdatePicker()" , @style="width: 130px;height: 23px;"}) 
+                                             -   
+                                        @Html.TextBox("edate",null, new { @class="Wdate", @onfocus="WdatePicker()" , @style="width: 130px;height: 23px;"})
+                                    </td>
+                                    <td>
+                                        <input type="submit" value="查找" class="btn btn-mini" style="padding: 4px 8px;font-weight:bold;" /> 
+                                        
+                                    </td>
+                                </tr>
+            
+                            </table>
+                        }
+                  </div>
+
+              </div>
+
+            <table class="table table-bordered table-striped"> 
+                <thead>
+                <tr>
+                  <th>ID</th>
+                  <th>帮助链接</th> 
+                  <th>时间</th> 
+                    <th>操作</th>
+                </tr>
+              </thead>
+              <tbody> 
+                  @foreach (var item in Model)
+                    {
+                        <tr >
+                            <td>
+                                @item.Id
+                            </td>
+                            <td style="word-break:keep-all;text-overflow:ellipsis;">
+                                @item.HelpLink
+                            </td> 
+                            <td style="text-align:center;">
+                               @item.CreateTime
+                            </td>
+                            <td style="text-align:center;">
+                                <a class="badge badge-info" data-toggle="modal"  id="@item.Id">详细信息</a> 
+                            </td>
+                        </tr>
+                   }
+              </tbody>
+            </table>  
+          </div> 
+        </div>
+       <div style="">
+            @Html.Pager(Model)
+       </div> 
+    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+					&times;
+				</button>
+				<h4 class="modal-title" id="myModalLabel">
+					详细信息
+				</h4>
+			</div>
+			<div class="modal-body" style="overflow:scroll;">
+				<table class="table table-bordered table-striped">  
+              <tbody>  
+                       
+                 
+              </tbody>
+            </table>
+			</div> 
+		</div><!-- /.modal-content -->
+	</div><!-- /.modal -->
+        </div>
+    
+</body>  
+@section Script
+    {
+    <script type="text/javascript">
+        $(function () {
+            $(".badge.badge-info").on("click", function () {
+                $(".modal-body tbody").children().remove();
+                var id = $(this).attr("id");
+                $.post("/SysLog/GetExt", { "id": id }, function (json) {
+                    var html = "<tr ><td style='text-align:center;'>帮助链接</td><td >" + json.HelpLink + "</td></tr>" +
+                    "<tr ><td style='text-align:center;'>错误信息</td><td >" + json.Message + "</td></tr> " +
+                    "<tr ><td style='text-align:center;'>来源</td><td >" + json.Source + "</td></tr>" +
+                    "<tr ><td style='text-align:center;'>堆栈</td><td style='white-space:nowrap;overflow:hidden;word-break:keep-all;text-overflow:ellipsis'>" + json.StackTrace + "</td></tr> " +
+                    "<tr ><td style='text-align:center;'>目标页</td><td >" + json.TargetSite + "</td></tr>" +
+                    "<tr ><td style='text-align:center;'>程序集</td><td>" + json.Data + "</td></tr> "
+                    $(".modal-body tbody").append(html);
+                    $('#myModal').modal('show');//显示模态框
+                });
+               
+            });
+           
+        });
+       
+    </script>
+}

@@ -1,0 +1,120 @@
+﻿@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewBag.Title = ""; 
+}
+@using MyProject.Services.MvcPager; 
+@using MyProject.Services.Extensions;
+@model PagedList<MyProject.Core.Entities.WeiXinUser> 
+
+<body style="background-color:#F9F9F9;margin-top:0px;"> 
+<div class="widget-box" style="margin-top:0;">
+          <div class="widget-title"> 
+            <h5>微信接收信息记录</h5>
+          </div>
+          <div class="widget-content nopadding" style="overflow-y: auto;">
+              <div class="">
+                  <div id="DataTables_Table_0_length" class="dataTables_length" style ="width: 100%;">
+                     @using (Html.BeginForm("Index", "WeiXinReceiveMessage", FormMethod.Get))
+                        {
+                            <table>
+                                <tr> 
+                                   <td >查询条件：</td>
+                                    <td style="padding-right: 2px;">
+                                         @Html.DropDownList("fields", ViewData["fieldsList"] as List<SelectListItem>, new { @style="width: 130px;height: 23px;"})
+                                    </td>  
+                                      <td style="padding-right: 15px;">
+                                          @Html.TextBox("fieldValue",null, new { @style="width: 130px;height: 23px;"}) 
+                                          @Html.CheckBox("IsLike",true)<span>精确查询</span>
+                                    </td>   
+                                    <td>日期：</td>
+                                    <td style="padding-right: 15px;"> 
+                                        @Html.TextBox("sdate",null, new { @class="Wdate", @onfocus="WdatePicker()" , @style="width: 130px;height: 23px;"}) 
+                                             -   
+                                        @Html.TextBox("edate",null, new { @class="Wdate", @onfocus="WdatePicker()" , @style="width: 130px;height: 23px;"})
+                                    </td>
+                                    <td>
+                                        <input type="submit" value="查找" class="btn btn-mini" style="padding: 4px 8px;font-weight:bold;" /> 
+                                        
+                                    </td>
+                                </tr>
+            
+                            </table>
+                        }
+                  </div>
+
+              </div>
+            <table class="table table-bordered table-striped"> 
+                <thead>
+                <tr>
+                  <th>openid</th>
+                  <th>关注</th>
+                  <th>昵称</th>
+                  <th>性别</th> 
+                    <th>地址</th>
+                    <th>头像</th>
+                    <th>关注时间</th>
+                    <th>unionid</th> 
+                    <th>备注</th>
+                  <th>分组ID</th>
+                  <th>关注的渠道</th>
+                  <th>场景</th> 
+                    <th>场景描述</th>
+                    <th>创建时间</th> 
+                </tr>
+              </thead>
+              <tbody> 
+                  @foreach (var item in Model)
+                    { 
+                        <tr >
+                            <td >
+                                @item.openid
+                            </td>
+                            <td>
+                                @(((MyProject.Core.Enums.WeiXinUserSubEnum)item.subscribe).ToDescriptionName()) 
+                            </td>
+                            <td>
+                                @item.nickname
+                            </td>
+                            <td> 
+                                 @(((MyProject.Core.Enums.WeiXinUserSexEnum)item.sex).ToDescriptionName()) 
+                            </td>
+                            <td>
+                               @item.country-@item.province-@item.city
+                            </td> 
+                            <td>
+                               @item.headimgurl 
+                            </td>
+                            <td> 
+                                @(DateTimeExtensions.TimestampToDateTime(Convert.ToInt64(item.subscribe_time)))
+                            </td>
+                            <td>
+                              @item.unionid
+                            </td> 
+                             <td>
+                                @item.remark
+                            </td>
+                            <td>
+                                @item.groupid
+                            </td> 
+                            <td>
+                               @item.subscribe_scene 
+                            </td>
+                            <td>
+                                @item.qr_scene
+                            </td>
+                            <td>
+                              @item.qr_scene_str
+                            </td>
+                            <td>
+                              @item.createtime
+                            </td>  
+                        </tr>
+                   }
+              </tbody>
+            </table>  
+          </div> 
+        </div>
+       <div style="">
+            @Html.Pager(Model)
+       </div> 
+</body>  
