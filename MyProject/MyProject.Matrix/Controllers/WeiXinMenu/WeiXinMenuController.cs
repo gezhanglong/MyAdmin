@@ -1,4 +1,5 @@
-﻿using MyProject.Task;
+﻿using MyProject.Core.Dtos;
+using MyProject.Task;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -59,7 +60,6 @@ namespace MyProject.Matrix.Controllers.WeiXinMenu
             return Json(_task.GetById(menuId));
         }
 
-<<<<<<< HEAD
         public ActionResult Save(string appid,string key,string media_id,int menuid,string name,string pagepath,string type,string url )
         {
             var menuinfo = _task.GetById(menuid);
@@ -128,7 +128,6 @@ namespace MyProject.Matrix.Controllers.WeiXinMenu
 
             _task.Delete(menuId);
         }
-=======
->>>>>>> origin/master
+
     }
 }

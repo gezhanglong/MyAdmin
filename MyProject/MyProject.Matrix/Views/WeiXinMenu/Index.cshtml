@@ -99,9 +99,7 @@
                 </div>
             </div>
             <div id="opt">
-<<<<<<< HEAD
-                <div style="width: 40%; float: left; margin: 20px 80px"> 
-=======
+
                 <div style="width: 40%; float: left; margin: 20px 80px">
                     <button class="btn btn-primary" id="btn_add">添加/修改</button> 
                     <button class="btn btn-danger" id="btn_del">删除</button>
@@ -144,7 +142,7 @@
                             </table>
                         </div>
                     </div>*@
->>>>>>> origin/master
+
                     <div class="widget-box" style="margin-top: 0; " id="div_opt_2">
                         <div class="widget-title">
                             <h5 id="title_opt"></h5>
@@ -219,7 +217,6 @@
                 if (html.indexOf("菜单") != -1) {
                     alert("请按菜单从左到右，从下到上的顺序操作菜单！");
                     return false;
-<<<<<<< HEAD
                 } else {
                     menuid = $(this).attr("id");
                     btnId = menuid;
@@ -229,11 +226,10 @@
                 menuid = $(this).attr("id");
                 btnId = menuid;
                 $("#title_opt").html("选择的菜单：" + $(this).html());
-=======
-                }
->>>>>>> origin/master
+
             }
             Initialize(menuid);
+        
         });
         $("#menu a").on("click", function () {//点击a标签拿menuid
             menuid = $(this).attr("id");
@@ -247,7 +243,7 @@
             }
             Initialize(menuid);
         });
-<<<<<<< HEAD
+
 
         //提交菜单数据
         $("#td_submit_opt").click(function () {
@@ -345,8 +341,6 @@
                     
             }
         });
-=======
->>>>>>> origin/master
     });
      
 
@@ -357,7 +351,6 @@
             url: "/WeiXinMenu/GetByMenuId",//获得菜单信息
             data: { menuId: menuid },
             success: function (data) {
-<<<<<<< HEAD
                 if (data != null) {
                     $("#td_name").val(data.name);
                     $("#td_type").val(data.type);
@@ -377,7 +370,7 @@
                     $("#td_pagepath").val("");
                 }
                
-=======
+
                 $("#td_name").html(data.name);
                 $("#td_type").html(data.type);
                 $("#td_key").html(data.key);
@@ -386,7 +379,6 @@
                 $("#td_appid").html(data.appid);
                 $("#td_pagepath").html(data.pagepath);
                  
->>>>>>> origin/master
             },
             error: function () {
                 alert("提交数据失败！");
