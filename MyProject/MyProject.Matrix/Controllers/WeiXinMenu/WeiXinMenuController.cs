@@ -5,12 +5,14 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using MyProject.Services.Extensions;
 
 namespace MyProject.Matrix.Controllers.WeiXinMenu
 {
     public class WeiXinMenuController : BaseController
     {
         private readonly WeiXinMenuTask _task = new WeiXinMenuTask();
+        private readonly WeiXinReplyMessageTask _replay = new WeiXinReplyMessageTask();
 
         public ActionResult Index()
         { 
@@ -49,8 +51,8 @@ namespace MyProject.Matrix.Controllers.WeiXinMenu
             var name_34 = _task.GetById(34);
             ViewBag.name_34 = name_34 == null ? "菜单3-4" : name_34.name;
             var name_35 = _task.GetById(35);
-            ViewBag.name_35 = name_35 == null ? "菜单3-5" : name_35.name; 
-
+            ViewBag.name_35 = name_35 == null ? "菜单3-5" : name_35.name;
+            ViewBag.madiaList = _replay.GetByReplayType().ToSelectList(c => c.MatchKey, c => c.MatchKey);
             return View();
         }
 
@@ -98,7 +100,7 @@ namespace MyProject.Matrix.Controllers.WeiXinMenu
            
         }
 
-        public void Delete(int menuId)
+        public ActionResult Delete(int menuId)
         {
             var list = _task.GetList();
             var list1=list.Where(c=>c.menuid>=11 && c.menuid<=15).OrderByDescending(c=>c.menuid).ToList();
@@ -124,10 +126,44 @@ namespace MyProject.Matrix.Controllers.WeiXinMenu
             if (list4.Count > 0)
             {
                 menuid4 = list4[0].menuid;
-            } 
-
+            }
+            if (menuId != menuid1 || menuId != menuid1 || menuId != menuid1 || menuId != menuid1)
+            {
+                return Json(new RequestResultDto() { Msg="不能删除",Ret=-1});
+            }
             _task.Delete(menuId);
+            return Json(new RequestResultDto() { Msg = "删除成功", Ret = 0 });
         }
 
+        public ActionResult CreateMenu()
+        {
+            var menuList = _task.GetList();
+
+        }
+
+    }
+
+    public class MenuModel
+    {
+        public List<MenuChildModel> button{get;set;} 
+    }
+    public class MenuChildModel
+    {
+        public string name { get; set; }
+        public List<object> sub_button{get;set;}
+    }
+
+    public class clickModel
+    {
+        public string type { get; set; }
+        public string name { get; set; }
+        public string key { get; set; }
+    }
+
+    public class viewModel
+    {
+        public string type { get; set; }
+        public string name { get; set; }
+        public string url { get; set; }
     }
 }

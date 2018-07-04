@@ -19,6 +19,10 @@ namespace MyProject.Core.Entities
         /// </summary>		 
         public int Id { get; set; }
         /// <summary>
+        /// 触发类型
+        /// </summary>
+        public string ReplayType { get; set; }
+        /// <summary>
         /// 回复信息类型
         /// </summary>		 
         public string MsgType { get; set; }

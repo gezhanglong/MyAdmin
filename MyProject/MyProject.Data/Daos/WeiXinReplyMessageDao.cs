@@ -24,6 +24,12 @@ namespace MyProject.Data.Daos
             return FirstOrDefault<WeiXinReplyMessage>(sql);
         }
 
+        public List<WeiXinReplyMessage> GetByReplayType()
+        {
+            var sql = Sql.Builder.Where("ReplayType is not null and replayType !='#'");
+            return Query<WeiXinReplyMessage>(sql).ToList();
+        }
+
         public void DeleteById(int id)
         {
             var sql = Sql.Builder.Where("Id = @0", id);

@@ -100,49 +100,7 @@
             </div>
             <div id="opt">
 
-                <div style="width: 40%; float: left; margin: 20px 80px">
-                    <button class="btn btn-primary" id="btn_add">添加/修改</button> 
-                    <button class="btn btn-danger" id="btn_del">删除</button>
-                    @*<div class="widget-box" style="margin-top: 0; display: block;" id="div_opt_1">
-                        <div class="widget-title">
-                            <h5>菜单信息</h5>
-                        </div>
-                        <div class="widget-content nopadding">
-                            <table class="table table-bordered table-striped">
-                                <tbody>
-                                    <tr class="even gradeC">
-                                        <td style="width: 150px;">菜单名称</td>
-                                        <td id="td_name"></td>
-                                    </tr>
-                                    <tr class="even gradeA">
-                                        <td>类型</td>
-                                        <td id="td_type"></td>
-                                    </tr>
-                                    <tr class="odd gradeA">
-                                        <td>KEY值</td>
-                                        <td id="td_key"></td>
-                                    </tr>
-                                    <tr class="odd gradeX">
-                                        <td>链接</td>
-                                        <td id="td_url"></td>
-                                    </tr>
-                                      <tr class="odd gradeX">
-                                        <td>媒体Id</td>
-                                        <td id="td_media_id"></td>
-                                    </tr>
-                                      <tr class="odd gradeX">
-                                        <td>小程序的appid</td>
-                                        <td id="td_appid"></td>
-                                    </tr>
-                                      <tr class="odd gradeX">
-                                        <td>小程序的页面路径</td>
-                                        <td id="td_pagepath"></td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>*@
-
+                <div style="width: 40%; float: left; margin: 20px 80px"> 
                     <div class="widget-box" style="margin-top: 0; " id="div_opt_2">
                         <div class="widget-title">
                             <h5 id="title_opt"></h5>
@@ -154,7 +112,7 @@
                                         <td style="width: 150px;">类型</td>
                                         <td>
                                             <div class="controls">
-                                                <select id="td_type">  
+                                                <select id="td_type" style="width: 50%; height: 30px;" >  
                                                     <option value="click">点击</option> 
                                                     <option value="view">跳转</option> 
                                                     <option value="miniprogram">小程序</option>
@@ -176,18 +134,37 @@
                                             <input type="text" class="span11" placeholder="菜单名称" id="td_name" style="width: 50%; height: 30px;" />
                                         </td>
                                     </tr>
-                                    <tr class="even gradeA">
-                                        <td>菜单Url</td>
-                                        <td>
-                                            <input type="text" class="span11" placeholder="菜单Url" id="td_key" style="width: 80%; height: 30px;" />
+                                    <tr class="even gradeA" id="key">
+                                        <td>key值</td>
+                                        <td> 
+                                            @Html.DropDownList("td_key", ViewBag.madiaList as List<SelectListItem>, new { @style = "width: 50%; height: 30px;" })
+                                       
                                         </td>
-                                    </tr>
-                                    <tr class="odd gradeA">
-                                        <td>排序</td>
+                                    </tr> 
+                                     <tr class="even gradeA" id="url">
+                                        <td>url</td>
                                         <td>
-                                            <input type="text" class="span11" placeholder="排序" id="td_SortOrder_opt" style="width: 20%; height: 30px;" />
+                                            <input type="text" class="span11" placeholder="链接" id="td_url" style="width: 80%; height: 30px;" />
                                         </td>
-                                    </tr>
+                                    </tr> 
+                                     <tr class="even gradeA" id="mediaid">
+                                        <td>媒体ID</td>
+                                        <td>
+                                            <input type="text" class="span11" placeholder="媒体ID" id="td_mediaid" style="width: 80%; height: 30px;" />
+                                        </td>
+                                    </tr> 
+                                     <tr class="even gradeA" id="appid">
+                                        <td>小程序appid</td>
+                                        <td>
+                                            <input type="text" class="span11" placeholder="小程序appid" id="td_appid" style="width: 80%; height: 30px;" />
+                                        </td>
+                                    </tr> 
+                                     <tr class="even gradeA" id="pagepath">
+                                        <td>小程序地址</td>
+                                        <td>
+                                            <input type="text" class="span11" placeholder="小程序地址" id="td_pagepath" style="width: 80%; height: 30px;" />
+                                        </td>
+                                    </tr> 
                                     <tr class="odd gradeA">
                                         <td></td>
                                         <td>
@@ -209,17 +186,15 @@
     var menuid = 0;//菜单Id
     var btnId = 0;//跟菜单ID
     $(function () {
-        $("#menu button").on("click", function () {//点击按钮拿menuid
+        $("#menu button").on("click", function () {//点击按钮拿menuid  
             menuid = $(this).attr("id");
-            $("#title_opt").html("选择的菜单："+$(this).html());
+            btnId = menuid;
             if (parseInt(menuid) > 1) {
                 var html = $("#" + (parseInt(menuid) - 1)).html(); 
-                if (html.indexOf("菜单") != -1) {
+                if (html !=null && html.indexOf("菜单") != -1) {
                     alert("请按菜单从左到右，从下到上的顺序操作菜单！");
                     return false;
-                } else {
-                    menuid = $(this).attr("id");
-                    btnId = menuid;
+                } else { 
                     $("#title_opt").html("选择的菜单：" + $(this).html());
                 }
             } else {
@@ -232,14 +207,20 @@
         
         });
         $("#menu a").on("click", function () {//点击a标签拿menuid
-            menuid = $(this).attr("id");
-            $("#title_opt").html("选择的菜单：" + $(this).html());
-            if (parseInt(menuid) > 10) {
-                var html = $("#" + (parseInt(menuid) - 1)).html();
-                if (html.indexOf("菜单") != -1) {
+            var menu = $(this).attr("id");
+            if (parseInt(menu) > 10) {
+                var html = $("#" + (parseInt(menu) - 1)).html();
+                if (html != null && html.indexOf("菜单") != -1) {
                     alert("请按菜单从左到右，从下到上的顺序操作菜单！");
                     return false;
+                } else {
+                    menuid = $(this).attr("id");
+                    $("#title_opt").html("选择的菜单：" + $(this).html());
                 }
+            } else {
+                menuid = $(this).attr("id"); 
+                $("#title_opt").html("选择的菜单：" + $(this).html());
+
             }
             Initialize(menuid);
         });
@@ -263,9 +244,8 @@
                 url: "/WeiXinMenu/Save",
                 data: { menuid: menuid, appid: td_appid, key: td_key, media_id: td_media_id, name: td_name, pagepath: td_pagepath, type: td_type, url: td_url },
                 success: function (data) {
-                    alert(data.Msg);
-                    $("#title_opt").html("选择的菜单：" + td_name);
-                    $("#" + menuid).html(td_name);
+                    alert(data.Msg); 
+                    window.location.reload();
                 },
                 error: function () {
                     alert("提交数据失败！");
@@ -285,9 +265,13 @@
                 url: "/WeiXinMenu/Delete",
                 data: { menuid: menuid },
                 success: function (data) {
-                    alert("删除成功！");
-                    $("#title_opt").html("选择的菜单" + (menuid / 10).toString().replace("0.", "").replace(".", "-"));
-                    $("#" + menuid).html(("菜单" + menuid / 10).toString().replace("0.", "").replace(".", "-"));
+                    if (data.Ret == 0) {
+                        alert(data.Msg); 
+                        window.location.reload();
+                    } else {
+                        alert(data.Msg);
+                    }
+                   
                 },
                 error: function () {
                     alert("提交数据失败！");
@@ -369,15 +353,7 @@
                     $("#td_appid").val("");
                     $("#td_pagepath").val("");
                 }
-               
-
-                $("#td_name").html(data.name);
-                $("#td_type").html(data.type);
-                $("#td_key").html(data.key);
-                $("#td_url").html(data.url);
-                $("#td_media_id").html(data.media_id);
-                $("#td_appid").html(data.appid);
-                $("#td_pagepath").html(data.pagepath);
+                
                  
             },
             error: function () {

@@ -41,6 +41,11 @@ namespace MyProject.Task
             _dao.Update(info);
         }
 
+        public List<WeiXinReplyMessage> GetByReplayType()
+        {
+            return  _dao.GetByReplayType();
+        }
+
         public void DeleteById(int menuId)
         {
             _dao.DeleteById(menuId);

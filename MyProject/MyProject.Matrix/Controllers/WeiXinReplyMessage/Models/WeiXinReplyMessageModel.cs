@@ -13,6 +13,11 @@ namespace MyProject.Matrix.Controllers.WeiXinReplyMessage.Models
         /// </summary>	 
         public int? Id { get; set; }
         /// <summary>
+        /// 触发类型
+        /// </summary> 
+        [Display(Name = "触发类型"), Required]
+        public string ReplayType { get; set; }
+        /// <summary>
         /// 回复信息类型
         /// </summary>		 
         [Display(Name = "信息类型"), Required]

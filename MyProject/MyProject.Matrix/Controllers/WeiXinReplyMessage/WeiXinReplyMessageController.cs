@@ -36,6 +36,19 @@ namespace MyProject.Matrix.Controllers.WeiXinReplyMessage
         {
             #region 初始化
             var model = new WeiXinReplyMessageModel();
+            var replyList = new List<SelectListItem>();
+            replyList.Insert(0, new SelectListItem() { Text = "关键字回复", Value = "#" });
+            replyList.Insert(1, new SelectListItem() { Text = "首次关注", Value = "subscribe" });
+            replyList.Insert(2, new SelectListItem() { Text = "点击事件", Value = "click" });
+            replyList.Insert(3, new SelectListItem() { Text = "扫码带提示", Value = "scancode_waitmsg" });
+            replyList.Insert(4, new SelectListItem() { Text = "扫码推事件", Value = "scancode_push" });
+            replyList.Insert(5, new SelectListItem() { Text = "系统拍照发图", Value = "pic_sysphoto" });
+            replyList.Insert(6, new SelectListItem() { Text = "拍照或者相册发图", Value = "pic_photo_or_album" });
+            replyList.Insert(7, new SelectListItem() { Text = "微信相册发图", Value = "pic_weixin" });
+            replyList.Insert(8, new SelectListItem() { Text = "发送位置", Value = "location_select" });
+            replyList.Insert(9, new SelectListItem() { Text = "图文消息", Value = "view_limited" });
+            replyList.Insert(10, new SelectListItem() { Text = "图片", Value = "media_id" });
+            ViewData["ReplyLists"] = replyList;
             ViewData["MsgTypeList"] = WeiXinMessageTypeEnum.image.ToSelectList();
             ViewData["ThumbMediaIdList"] = WeiXinMessageTypeEnum.image.ToSelectList();
             var madiaList = _mediaMessage.GetList().ToSelectList(c => c.MediaId, c => c.MediaType + "-" + c.MediaTitle);
@@ -153,6 +166,7 @@ namespace MyProject.Matrix.Controllers.WeiXinReplyMessage
                 {
                     var info = new MyProject.Core.Entities.WeiXinReplyMessage
                     {
+                        ReplayType = model.ReplayType,
                         Openid=model.Openid,
                         Creater = GetCurrentAdmin(),
                         CreateTime = DateTime.Now, 
@@ -177,6 +191,7 @@ namespace MyProject.Matrix.Controllers.WeiXinReplyMessage
                     var info = _message.GetById((int)model.Id);
                     if (info != null)
                     {
+                        info.ReplayType = model.ReplayType;
                         info.Openid = model.Openid;
                         info.Creater = GetCurrentAdmin();
                         info.MatchKey=model.MatchKey;
@@ -199,6 +214,19 @@ namespace MyProject.Matrix.Controllers.WeiXinReplyMessage
             }
 
             #region 初始化
+            var replyList = new List<SelectListItem>();
+            replyList.Insert(0, new SelectListItem() { Text = "关键字回复", Value = "#" });
+            replyList.Insert(1, new SelectListItem() { Text = "首次关注", Value = "subscribe" });
+            replyList.Insert(2, new SelectListItem() { Text = "点击事件", Value = "click" });
+            replyList.Insert(3, new SelectListItem() { Text = "扫码带提示", Value = "scancode_waitmsg" });
+            replyList.Insert(4, new SelectListItem() { Text = "扫码推事件", Value = "scancode_push" });
+            replyList.Insert(5, new SelectListItem() { Text = "系统拍照发图", Value = "pic_sysphoto" });
+            replyList.Insert(6, new SelectListItem() { Text = "拍照或者相册发图", Value = "pic_photo_or_album" });
+            replyList.Insert(7, new SelectListItem() { Text = "微信相册发图", Value = "pic_weixin" });
+            replyList.Insert(8, new SelectListItem() { Text = "发送位置", Value = "location_select" });
+            replyList.Insert(9, new SelectListItem() { Text = "图文消息", Value = "view_limited" });
+            replyList.Insert(10, new SelectListItem() { Text = "图片", Value = "media_id" });
+            ViewData["ReplyLists"] = replyList;
             ViewData["MsgTypeList"] = WeiXinMessageTypeEnum.image.ToSelectList();
             ViewData["ThumbMediaIdList"] = WeiXinMessageTypeEnum.image.ToSelectList();
             var madiaList = _mediaMessage.GetList().ToSelectList(c => c.MediaId, c => c.MediaType + "-" + c.MediaTitle);
