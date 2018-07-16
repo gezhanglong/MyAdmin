@@ -135,11 +135,11 @@ namespace MyProject.Matrix.Controllers.WeiXinMenu
             return Json(new RequestResultDto() { Msg = "删除成功", Ret = 0 });
         }
 
-        public ActionResult CreateMenu()
-        {
-            var menuList = _task.GetList();
+        //public ActionResult CreateMenu()
+        //{
+        //    var menuList = _task.GetList();
 
-        }
+        //}
 
     }
 

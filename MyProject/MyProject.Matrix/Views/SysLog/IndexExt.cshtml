@@ -12,7 +12,7 @@
           </div>
           <div class="widget-content nopadding">
               <div class="">
-                  <div id="DataTables_Table_0_length" class="dataTables_length">
+                  <div id="DataTables_Table_0_length" class="dataTables_length" style ="width: 100%;">
                      @using (Html.BeginForm("IndexExt", "SysLog", FormMethod.Get))
                         {
                             <table>
@@ -28,7 +28,7 @@
                                         @Html.TextBox("edate",null, new { @class="Wdate", @onfocus="WdatePicker()" , @style="width: 130px;height: 23px;"})
                                     </td>
                                     <td>
-                                        <input type="submit" value="查找" class="btn btn-mini" style="padding: 4px 8px;font-weight:bold;" /> 
+                                        <input type="submit" value="查找" class="btn btn-mini" style="padding: 4px 8px;font-weight:bold;border-radius: 4px;" /> 
                                         
                                     </td>
                                 </tr>
