@@ -170,6 +170,7 @@
                                         <td>
                                             <button type="submit" class="btn btn-success" id="td_submit_opt" style="border-radius: 5px;">保存</button> 
                                             <button class="btn btn-danger" id="btn_del" style="border-radius: 5px;">删除</button> 
+                                             <button type="submit" class="btn btn-success" id="td_submit_send" style="border-radius: 5px;">发布</button> 
                                         </td>
                                     </tr>
                                 </tbody>
@@ -253,6 +254,23 @@
             });
 
         });
+        
+        //发布
+        $("#td_submit_send").click(function () {  
+            $.ajax({
+                type: "POST",
+                url: "/WeiXinMenu/CreateMenu",
+                data: {},
+                success: function (data) {
+                    alert(data.Msg); 
+                },
+                error: function () {
+                    alert("提交数据失败！");
+                }
+            });
+
+        });
+
 
         //删除菜单数据
         $("#btn_del").click(function () {

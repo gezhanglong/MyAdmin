@@ -2,3 +2,5 @@
 添加命名空间：@using MyProject.Services.Extensions;
 后台： ViewData["LogTypeList"] = LogTypeEnum.Add.ToSelectList();
 前台：@(((MyProject.Core.Enum.LogTypeEnum)item.Type).ToDescriptionName())
+
+2. JsonConvert.SerializeObject(menuModel)

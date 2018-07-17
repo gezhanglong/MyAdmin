@@ -13,7 +13,7 @@ namespace MyProject.Data.Daos
     {
         public List<WeiXinMenu> GetList()
         {
-            var sql = Sql.Builder.Where("1=1");
+            var sql = Sql.Builder.Where("1=1").OrderBy("menuid");
             return Query<WeiXinMenu>(sql).ToList();
         }
 

@@ -6,6 +6,8 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using MyProject.Services.Extensions;
+using Deepleo.Weixin.SDK;
+using Newtonsoft.Json;
 
 namespace MyProject.Matrix.Controllers.WeiXinMenu
 {
@@ -15,9 +17,9 @@ namespace MyProject.Matrix.Controllers.WeiXinMenu
         private readonly WeiXinReplyMessageTask _replay = new WeiXinReplyMessageTask();
 
         public ActionResult Index()
-        { 
+        {
             var name_1 = _task.GetById(1);
-            ViewBag.name_1 = name_1 == null ? "菜单1" : name_1.name ;
+            ViewBag.name_1 = name_1 == null ? "菜单1" : name_1.name;
             var name_2 = _task.GetById(2);
             ViewBag.name_2 = name_2 == null ? "菜单2" : name_2.name;
             var name_3 = _task.GetById(3);
@@ -62,7 +64,7 @@ namespace MyProject.Matrix.Controllers.WeiXinMenu
             return Json(_task.GetById(menuId));
         }
 
-        public ActionResult Save(string appid,string key,string media_id,int menuid,string name,string pagepath,string type,string url )
+        public ActionResult Save(string appid, string key, string media_id, int menuid, string name, string pagepath, string type, string url)
         {
             var menuinfo = _task.GetById(menuid);
             if (menuinfo == null)
@@ -86,29 +88,29 @@ namespace MyProject.Matrix.Controllers.WeiXinMenu
             else
             {
                 menuinfo.creater = GetCurrentAdmin();
-                    menuinfo.createtime = DateTime.Now;
-                   menuinfo.appid = appid;
-                    menuinfo.key = key;
-                    menuinfo.media_id = media_id;
-                    menuinfo.name = name;
-                    menuinfo.pagepath = pagepath;
-                    menuinfo.type = type;
-                    menuinfo.url = url;
-                    _task.Update(menuinfo);
-                    return Json(new RequestResultDto() { Ret = 0, Msg = "修改成功" });
+                menuinfo.createtime = DateTime.Now;
+                menuinfo.appid = appid;
+                menuinfo.key = key;
+                menuinfo.media_id = media_id;
+                menuinfo.name = name;
+                menuinfo.pagepath = pagepath;
+                menuinfo.type = type;
+                menuinfo.url = url;
+                _task.Update(menuinfo);
+                return Json(new RequestResultDto() { Ret = 0, Msg = "修改成功" });
             }
-           
+
         }
 
         public ActionResult Delete(int menuId)
         {
             var list = _task.GetList();
-            var list1=list.Where(c=>c.menuid>=11 && c.menuid<=15).OrderByDescending(c=>c.menuid).ToList();
+            var list1 = list.Where(c => c.menuid >= 11 && c.menuid <= 15).OrderByDescending(c => c.menuid).ToList();
             var list2 = list.Where(c => c.menuid >= 21 && c.menuid <= 25).OrderByDescending(c => c.menuid).ToList();
             var list3 = list.Where(c => c.menuid >= 31 && c.menuid <= 35).OrderByDescending(c => c.menuid).ToList();
-            var list4 = list.Where(c => c.menuid ==1 || c.menuid==2 || c.menuid==3).OrderByDescending(c => c.menuid).ToList();
+            var list4 = list.Where(c => c.menuid == 1 || c.menuid == 2 || c.menuid == 3).OrderByDescending(c => c.menuid).ToList();
             var menuid1 = 1;
-            var menuid2 =2;
+            var menuid2 = 2;
             var menuid3 = 3;
             var menuid4 = 1;
             if (list1.Count > 0)
@@ -129,7 +131,7 @@ namespace MyProject.Matrix.Controllers.WeiXinMenu
             }
             if (menuId != menuid1 || menuId != menuid1 || menuId != menuid1 || menuId != menuid1)
             {
-                return Json(new RequestResultDto() { Msg="不能删除",Ret=-1});
+                return Json(new RequestResultDto() { Msg = "不能删除", Ret = -1 });
             }
             _task.Delete(menuId);
             return Json(new RequestResultDto() { Msg = "删除成功", Ret = 0 });
@@ -138,27 +140,150 @@ namespace MyProject.Matrix.Controllers.WeiXinMenu
         public ActionResult CreateMenu()
         {
             var menuList = _task.GetList();
-            var menuModel = new MenuModel();
-            foreach(var itemP in menuList.Where(c=>c.menuid<=3))
+            var menuModel = new MenuModel() { button=new List<object>()};
+            foreach (var itemP in menuList.Where(c => c.menuid <= 3))
             {
-                var childList = menuList.Where(c => c.menuid >= itemP.menuid * 10 && c.menuid < itemP.menuid * 10 + 10);
-                if(childList.Count()>0)
+                var childList = menuList.Where(c => c.menuid >= itemP.menuid * 10 && c.menuid < itemP.menuid * 10 + 10).ToList().OrderByDescending(c=>c.menuid);
+                if (childList.Count() > 0)
                 {
-                     foreach (var itemC in childList)
-                {
-
+                    var menuChildModel = new MenuChildModel() { name = itemP.name,sub_button=new List<object>() };
+                    foreach (var itemC in childList)
+                    {
+                        #region 代码
+                        switch (itemC.type)
+                        {
+                            case "click":
+                            case "location_select":
+                                var clickModel = new clickModel()
+                                {
+                                    type = itemC.type,
+                                    key = itemC.key,
+                                    name = itemC.name
+                                };
+                                menuChildModel.sub_button.Add(clickModel);
+                                break;
+                            case "view":
+                                var viewModel = new viewModel()
+                                {
+                                    type = itemC.type,
+                                    url = itemC.url,
+                                    name = itemC.name
+                                };
+                                menuChildModel.sub_button.Add(viewModel);
+                                break;
+                            case "miniprogram":
+                                var miniprogramModel = new miniprogramModel()
+                                {
+                                    type = itemC.type,
+                                    url = itemC.url,
+                                    appid = itemC.appid,
+                                    pagepath = itemC.pagepath,
+                                    name = itemC.name
+                                };
+                                menuChildModel.sub_button.Add(miniprogramModel);
+                                break;
+                            case "scancode_waitmsg":
+                            case "scancode_push":
+                            case "pic_sysphoto":
+                            case "pic_photo_or_album":
+                            case "pic_weixin":
+                                var subbuttonModel = new subbuttonModel()
+                                {
+                                    type = itemC.type,
+                                    key = itemC.key,
+                                    name = itemC.name,
+                                    sub_button = "[]"
+                                };
+                                menuChildModel.sub_button.Add(subbuttonModel);
+                                break;
+                            case "media_id":
+                            case "view_limited":
+                                var mediaidModel = new mediaidModel()
+                                {
+                                    type = itemC.type,
+                                    media_id = itemC.media_id,
+                                    name = itemC.name,
+                                };
+                                menuChildModel.sub_button.Add(mediaidModel);
+                                break;
+                        } 
+                        #endregion 
+                    }
+                    menuModel.button.Add(menuChildModel);
                 }
-                }else
+                else
                 {
-
+                    #region 代码
+                    switch (itemP.type)
+                    {
+                        case "click":
+                        case "location_select":
+                            var clickModel = new clickModel()
+                            {
+                                type = itemP.type,
+                                key = itemP.key,
+                                name = itemP.name
+                            };
+                            menuModel.button.Add(clickModel);
+                            break;
+                        case "view":
+                            var viewModel = new viewModel()
+                            {
+                                type = itemP.type,
+                                url = itemP.url,
+                                name = itemP.name
+                            };
+                            menuModel.button.Add(viewModel);
+                            break;
+                        case "miniprogram":
+                            var miniprogramModel = new miniprogramModel()
+                            {
+                                type = itemP.type,
+                                url = itemP.url,
+                                appid = itemP.appid,
+                                pagepath = itemP.pagepath,
+                                name = itemP.name
+                            };
+                            menuModel.button.Add(miniprogramModel);
+                            break;
+                        case "scancode_waitmsg":
+                        case "scancode_push":
+                        case "pic_sysphoto":
+                        case "pic_photo_or_album":
+                        case "pic_weixin":
+                            var subbuttonModel = new subbuttonModel()
+                            {
+                                type = itemP.type,
+                                key = itemP.key,
+                                name = itemP.name,
+                                sub_button = "[]"
+                            };
+                            menuModel.button.Add(subbuttonModel);
+                            break;
+                        case "media_id":
+                        case "view_limited":
+                            var mediaidModel = new mediaidModel()
+                            {
+                                type = itemP.type,
+                                media_id = itemP.media_id,
+                                name = itemP.name,
+                            };
+                            menuModel.button.Add(mediaidModel);
+                            break;
+                    } 
+                    #endregion
                 }
-               
+
             }
-            
-            var clickModel = new clickModel();
-            menuModel.button.Add(clickModel);
+            var sdk = new WeiXinSdkTask();
+            var result =  CustomMenuAPI.Create(sdk.AccountToken(), JsonConvert.SerializeObject(menuModel));
+            if (result)
+            {
+                return Json(new RequestResultDto() { Msg = "发布成功", Ret = 0 });
+            }
+            return Json(new RequestResultDto() { Msg = "发布失败", Ret = -1 });
         }
-        
+
     }
 
     public class MenuModel

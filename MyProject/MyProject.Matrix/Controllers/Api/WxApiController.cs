@@ -29,7 +29,7 @@ namespace MyProject.Matrix.Controllers.Api
             if (string.IsNullOrEmpty(token)) return Content("请先设置Token！");
             var ent = "";
             if (!BasicAPI.CheckSignature(signature, timestamp, nonce, token, out ent))
-            {
+            { 
                 return Content("参数错误！");
             }
             return Content(echostr); //返回随机字符串则表示验证通过
