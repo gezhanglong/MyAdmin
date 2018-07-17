@@ -32,10 +32,10 @@
   <ItemGroup>
     <Reference Include="Deepleo.Weixin.SDK, Version=2.0.1.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\..\weixinSDK\weixinSDK-master\Deepleo.Web\bin\Deepleo.Weixin.SDK.dll</HintPath>
+      <HintPath>..\..\..\..\..\weixinSDK\weixinSDK-master\Deepleo.Web\bin\Deepleo.Weixin.SDK.dll</HintPath>
     </Reference>
     <Reference Include="Newtonsoft.Json">
-      <HintPath>..\..\..\oldProject\MyProject\MyProject\bin\Newtonsoft.Json.dll</HintPath>
+      <HintPath>..\..\..\..\oldProject\MyProject\MyProject\bin\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />

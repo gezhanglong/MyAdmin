@@ -135,17 +135,35 @@ namespace MyProject.Matrix.Controllers.WeiXinMenu
             return Json(new RequestResultDto() { Msg = "删除成功", Ret = 0 });
         }
 
-        //public ActionResult CreateMenu()
-        //{
-        //    var menuList = _task.GetList();
+        public ActionResult CreateMenu()
+        {
+            var menuList = _task.GetList();
+            var menuModel = new MenuModel();
+            foreach(var itemP in menuList.Where(c=>c.menuid<=3))
+            {
+                var childList = menuList.Where(c => c.menuid >= itemP.menuid * 10 && c.menuid < itemP.menuid * 10 + 10);
+                if(childList.Count()>0)
+                {
+                     foreach (var itemC in childList)
+                {
 
-        //}
+                }
+                }else
+                {
 
+                }
+               
+            }
+            
+            var clickModel = new clickModel();
+            menuModel.button.Add(clickModel);
+        }
+        
     }
 
     public class MenuModel
     {
-        public List<MenuChildModel> button{get;set;} 
+        public List<object> button{get;set;} 
     }
     public class MenuChildModel
     {
@@ -160,10 +178,34 @@ namespace MyProject.Matrix.Controllers.WeiXinMenu
         public string key { get; set; }
     }
 
+    public class subbuttonModel
+    {
+        public string type { get; set; }
+        public string name { get; set; }
+        public string key { get; set; }
+        public string sub_button { get; set; }
+    }
+
+    public class mediaidModel
+    {
+        public string type { get; set; }
+        public string name { get; set; }
+        public string media_id { get; set; }
+    }
+
     public class viewModel
     {
         public string type { get; set; }
         public string name { get; set; }
         public string url { get; set; }
+    }
+
+    public class miniprogramModel
+    {
+        public string type { get; set; }
+        public string name { get; set; }
+        public string url { get; set; }
+        public string appid { get; set; }
+        public string pagepath { get; set; }
     }
 }
