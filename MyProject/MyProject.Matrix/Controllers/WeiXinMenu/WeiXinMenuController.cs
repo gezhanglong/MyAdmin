@@ -137,6 +137,7 @@ namespace MyProject.Matrix.Controllers.WeiXinMenu
             return Json(new RequestResultDto() { Msg = "删除成功", Ret = 0 });
         }
 
+        //发布
         public ActionResult CreateMenu()
         {
             var menuList = _task.GetList();
@@ -192,7 +193,7 @@ namespace MyProject.Matrix.Controllers.WeiXinMenu
                                     type = itemC.type,
                                     key = itemC.key,
                                     name = itemC.name,
-                                    sub_button = "[]"
+                                    sub_button = new List<object>(),
                                 };
                                 menuChildModel.sub_button.Add(subbuttonModel);
                                 break;
@@ -256,7 +257,7 @@ namespace MyProject.Matrix.Controllers.WeiXinMenu
                                 type = itemP.type,
                                 key = itemP.key,
                                 name = itemP.name,
-                                sub_button = "[]"
+                                sub_button = new List<object>(),
                             };
                             menuModel.button.Add(subbuttonModel);
                             break;
@@ -308,7 +309,7 @@ namespace MyProject.Matrix.Controllers.WeiXinMenu
         public string type { get; set; }
         public string name { get; set; }
         public string key { get; set; }
-        public string sub_button { get; set; }
+        public List<object> sub_button { get; set; }
     }
 
     public class mediaidModel

@@ -61,52 +61,7 @@ namespace MyProject.Task
 		            string userMessage = message.Body.Content.Value;
                     receiveMessage.Content=userMessage;//用于记录接收信息
                     var reply = _replyMessage.GetMessage( userMessage); //查找回复信息表
-                    if (reply == null)
-                    {
-                        result = ReplayPassiveMessageAPI.RepayText(openId, myUserName, "客官，小二无言以对！！");
-                    }
-                    else
-                    {
-                        switch (Convert.ToInt32(reply.MsgType))
-                        {
-                            case (int)WeiXinMessageTypeEnum.text:
-                                result = ReplayPassiveMessageAPI.RepayText(openId, myUserName, reply.Content);
-                                break;
-                            case (int)WeiXinMessageTypeEnum.image:
-                                result = ReplayPassiveMessageAPI.ReplayImage(openId, myUserName, reply.MediaId); 
-                                break;
-                            case (int)WeiXinMessageTypeEnum.video:
-                                result = ReplayPassiveMessageAPI.ReplayVedio(openId, myUserName, reply.MediaId,reply.Title,reply.Description);
-                                break;
-                            case (int)WeiXinMessageTypeEnum.voice:
-                                result = ReplayPassiveMessageAPI.ReplayVoice(openId, myUserName, reply.MediaId);
-                                break;
-                            case (int)WeiXinMessageTypeEnum.music:
-                                result = ReplayPassiveMessageAPI.ReplayMusic(openId, myUserName, reply.Title,reply.Description,reply.MusicURL,reply.HQMusicUrl,reply.ThumbMediaId);
-                                break;
-                            case (int)WeiXinMessageTypeEnum.news:
-                                var weiXinNewList =new List<WeixinNews>();
-                                var titles= reply.Title.Split(';');
-                                var descriptions= reply.Description.Split(';');
-                                var picurls= reply.PicUrl.Split(';');
-                                var urls= reply.Url.Split(';');
-                                for(int i=0;i<reply.ArticleCount;i++)
-                                {
-                                     var weiXinNew = new WeixinNews
-                                    {
-                                        title = titles[i],
-                                        description =descriptions[i],
-                                        picurl = picurls[i],
-                                        url = urls[i]
-                                    };
-                                     weiXinNewList.Add(weiXinNew);
-                                }
-                               
-                                result = ReplayPassiveMessageAPI.RepayNews(openId, myUserName,weiXinNewList);
-                                break;
-                        }
-                       
-                    }
+                    result= Repay(reply, openId, myUserName);
 	                #endregion
                     break;
                 case WeixinMessageType.Image://图片消息
@@ -181,31 +136,31 @@ namespace MyProject.Task
 
                             //TODO: 获取用户基本信息后，将用户信息存储在本地。
                             var weixinInfo = UserAdminAPI.GetInfo(AccountToken(), openId);//注意：订阅号没有此权限
-                            _userTask.AddUser(EntityMapper.Map<dynamic, WeiXinUser>(weixinInfo));//保存用户关注数据
-
-                            if (!string.IsNullOrEmpty(eventKey))
-                            {
-                                var qrscene = eventKey.Replace("qrscene_", "");//此为场景二维码的场景值
-                                result = ReplayPassiveMessageAPI.RepayNews(openId, myUserName,
-                                    new WeixinNews
-                                    {
-                                        title = "欢迎订阅，场景值：" + qrscene,
-                                        description = "欢迎订阅，场景值：" + qrscene,
-                                        picurl = string.Format("{0}/ad.jpg", domain),
-                                        url = domain
-                                    });
-                            }
-                            else
-                            {
-                                result = ReplayPassiveMessageAPI.RepayNews(openId, myUserName,
-                                 new WeixinNews
-                                 {
-                                     title = "欢迎订阅",
-                                     description = "欢迎订阅，点击此消息查看在线demo",
-                                     picurl = string.Format("{0}/ad.jpg", domain),
-                                     url = domain
-                                 });
-                            }
+                            _userTask.AddUser(JsonConvert.DeserializeObject<WeiXinUser>(weixinInfo));//保存用户关注数据
+                            result = ReplayPassiveMessageAPI.RepayText(openId, myUserName, JsonConvert.DeserializeObject<WeiXinUser>(weixinInfo));
+                            //if (!string.IsNullOrEmpty(eventKey))
+                            //{
+                            //    var qrscene = eventKey.Replace("qrscene_", "");//此为场景二维码的场景值
+                            //    result = ReplayPassiveMessageAPI.RepayNews(openId, myUserName,
+                            //        new WeixinNews
+                            //        {
+                            //            title = "欢迎订阅，场景值：" + qrscene,
+                            //            description = "欢迎订阅，场景值：" + qrscene,
+                            //            picurl = string.Format("{0}/ad.jpg", domain),
+                            //            url = domain
+                            //        });
+                            //}
+                            //else
+                            //{
+                            //    result = ReplayPassiveMessageAPI.RepayNews(openId, myUserName,
+                            //     new WeixinNews
+                            //     {
+                            //         title = "欢迎订阅",
+                            //         description = "欢迎订阅，点击此消息查看在线demo",
+                            //         picurl = string.Format("{0}/ad.jpg", domain),
+                            //         url = domain
+                            //     });
+                            //}
                             #endregion
                             break;
                         case "unsubscribe"://取消关注
@@ -300,31 +255,11 @@ namespace MyProject.Task
                             });
                             #endregion
                             break;
-                        case "click"://自定义菜单事件
+                        case "click"://自定义菜单事件 
                             #region 自定义菜单事件
-                            {
-                                switch (eventKey)
-                                {
-                                    case "myaccount"://CLICK类型事件举例
-                                        #region 我的账户
-                                        result = ReplayPassiveMessageAPI.RepayNews(openId, myUserName, new List<WeixinNews>()
-                                    {
-                                        new WeixinNews{
-                                            title="我的帐户",
-                                            url=string.Format("{0}/user?openId={1}",domain,openId),
-                                            description="点击查看帐户详情",
-                                            picurl=string.Format("{0}/Images/ad.jpg",domain)
-                                        },
-                                    });
-                                        #endregion
-                                        break;
-                                    case "www.weixinsdk.net"://VIEW类型事件举例，注意：点击菜单弹出子菜单，不会产生上报。
-                                        //TODO:后台处理逻辑
-                                        break;
-                                    default:
-                                        result = ReplayPassiveMessageAPI.RepayText(openId, myUserName, "没有响应菜单事件");
-                                        break;
-                                }
+                            { 
+                                reply = _replyMessage.GetMessageByReplayType(eventType, eventKey); //查找回复信息表 
+                                result = Repay(reply, openId, myUserName);
                             }
                             #endregion
                             break;
@@ -333,6 +268,7 @@ namespace MyProject.Task
                             result = ReplayPassiveMessageAPI.RepayText(openId, myUserName, string.Format("您将跳转至：{0}", eventKey));
                             #endregion
                             break;
+                        #region 仅支持微信iPhone5.4.1以上版本，和Android5.4以上版本的微信用户，旧版本微信用户点击后将没有回应，开发者也不能正常接收到事件推送
                         case "scancode_push"://扫码推事件的事件推送
                             {
                                 var scanType = message.Body.ScanCodeInfo.ScanType.Value;//扫描类型，一般是qrcode
@@ -415,7 +351,8 @@ namespace MyProject.Task
                                 var skuInfo = message.Body.SkuInfo.Value;//SkuInfo
 
                             }
-                            break;
+                            break; 
+                        #endregion
                     } 
 	#endregion
                     break;
@@ -512,5 +449,61 @@ namespace MyProject.Task
             return JsonConvert.DeserializeObject<OAuthUserInfoDto>(result);
         } 
         #endregion
+
+        /// <summary>
+        /// 响应消息/事件
+        /// </summary>
+        /// <param name="reply"></param>
+        public string  Repay(WeiXinReplyMessage reply,string openId,string myUserName)
+        {
+            var result = "";
+            if (reply == null)
+            {
+                result = ReplayPassiveMessageAPI.RepayText(openId, myUserName, "客官，小二无言以对！！");
+            }
+            else
+            {
+                switch (Convert.ToInt32(reply.MsgType))
+                {
+                    case (int)WeiXinMessageTypeEnum.text:
+                        result = ReplayPassiveMessageAPI.RepayText(openId, myUserName, reply.Content);
+                        break;
+                    case (int)WeiXinMessageTypeEnum.image:
+                        result = ReplayPassiveMessageAPI.ReplayImage(openId, myUserName, reply.MediaId);
+                        break;
+                    case (int)WeiXinMessageTypeEnum.video:
+                        result = ReplayPassiveMessageAPI.ReplayVedio(openId, myUserName, reply.MediaId, reply.Title, reply.Description);
+                        break;
+                    case (int)WeiXinMessageTypeEnum.voice:
+                        result = ReplayPassiveMessageAPI.ReplayVoice(openId, myUserName, reply.MediaId);
+                        break;
+                    case (int)WeiXinMessageTypeEnum.music:
+                        result = ReplayPassiveMessageAPI.ReplayMusic(openId, myUserName, reply.Title, reply.Description, reply.MusicURL, reply.HQMusicUrl, reply.ThumbMediaId);
+                        break;
+                    case (int)WeiXinMessageTypeEnum.news:
+                        var weiXinNewList = new List<WeixinNews>();
+                        var titles = reply.Title.Split(';');
+                        var descriptions = reply.Description.Split(';');
+                        var picurls = reply.PicUrl.Split(';');
+                        var urls = reply.Url.Split(';');
+                        for (int i = 0; i < reply.ArticleCount; i++)
+                        {
+                            var weiXinNew = new WeixinNews
+                            {
+                                title = titles[i],
+                                description = descriptions[i],
+                                picurl = picurls[i],
+                                url = urls[i]
+                            };
+                            weiXinNewList.Add(weiXinNew);
+                        }
+
+                        result = ReplayPassiveMessageAPI.RepayNews(openId, myUserName, weiXinNewList);
+                        break;
+                }
+
+            }
+            return result;
+        }
     }
 }

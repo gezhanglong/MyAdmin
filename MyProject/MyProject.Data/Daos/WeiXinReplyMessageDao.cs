@@ -36,9 +36,25 @@ namespace MyProject.Data.Daos
             Delete(sql);
         }
 
+        /// <summary>
+        /// 按关键字筛选
+        /// </summary>
+        /// <param name="matchKey"></param>
+        /// <returns></returns>
         public WeiXinReplyMessage GetMessage(string matchKey)
         {
             var sql = Sql.Builder.Select("*").From("WeiXinReplyMessage").Where(string.Format("MatchKey like'%{0}%'", matchKey)); 
+            return FirstOrDefault<WeiXinReplyMessage>(sql);
+        }
+
+        /// <summary>
+        /// 按触发类型和关键字筛选
+        /// </summary>
+        /// <param name="replayType"></param>
+        /// <returns></returns>
+        public WeiXinReplyMessage GetMessageByReplayType(string replayType, string matchKey)
+        {
+            var sql = Sql.Builder.Select("*").From("WeiXinReplyMessage").Where("ReplayType=@0 and MatchKey=@1", replayType,matchKey);
             return FirstOrDefault<WeiXinReplyMessage>(sql);
         }
     }

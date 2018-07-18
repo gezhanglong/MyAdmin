@@ -11,7 +11,7 @@ namespace MyProject.Core.Entities
     /// 微信菜单
     /// </summary>
     [TableName("WeiXinMenu")]
-    [PrimaryKey("menuid")]
+    [PrimaryKey("menuid",autoIncrement=false)]
     public class WeiXinMenu
     { 
         public int menuid { get; set; }

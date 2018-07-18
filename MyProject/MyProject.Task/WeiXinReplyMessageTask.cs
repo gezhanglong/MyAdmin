@@ -56,7 +56,11 @@ namespace MyProject.Task
         public WeiXinReplyMessage GetMessage( string matchKey)
         {
             return _dao.GetMessage( matchKey);
-        } 
+        }
+        public WeiXinReplyMessage GetMessageByReplayType(string replayType,string matchKey)
+        {
+            return _dao.GetMessageByReplayType(replayType,matchKey);
+        }
         #endregion
     }
 }
