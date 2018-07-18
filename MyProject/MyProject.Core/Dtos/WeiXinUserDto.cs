@@ -1,18 +1,12 @@
-﻿using MyProject.Services.ORM;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MyProject.Core.Entities
+namespace MyProject.Core.Dtos
 {
-    /// <summary>
-    /// 微信用户信息表
-    /// </summary>
-    [TableName("WeiXinUser")]
-    [PrimaryKey("openid",autoIncrement=false)]
-    public class WeiXinUser
+    public class WeiXinUserDto
     {
         /// <summary>
         /// opendd
@@ -21,7 +15,7 @@ namespace MyProject.Core.Entities
         /// <summary>
         /// subscribe
         /// </summary>		 
-        public int subscribe { get; set; }
+        public decimal subscribe { get; set; }
         /// <summary>
         /// nickname
         /// </summary>		 
@@ -29,7 +23,7 @@ namespace MyProject.Core.Entities
         /// <summary>
         /// sex
         /// </summary>		 
-        public int sex { get; set; }
+        public decimal  sex { get; set; }
         /// <summary>
         /// language
         /// </summary>		 
@@ -53,7 +47,7 @@ namespace MyProject.Core.Entities
         /// <summary>
         /// subscribe_time
         /// </summary>		 
-        public int subscribe_time { get; set; }
+        public decimal  subscribe_time { get; set; }
         /// <summary>
         /// unionid
         /// </summary>		 
@@ -65,8 +59,8 @@ namespace MyProject.Core.Entities
         /// <summary>
         /// groupid
         /// </summary>		 
-        public int groupid { get; set; }
-        
+        public decimal  groupid { get; set; }
+
         /// <summary>
         /// subscribe_scene
         /// </summary>		 
@@ -74,12 +68,10 @@ namespace MyProject.Core.Entities
         /// <summary>
         /// qr_scene
         /// </summary>		 
-        public int qr_scene { get; set; }
+        public decimal  qr_scene { get; set; }
         /// <summary>
         /// qr_scene_str
         /// </summary>		 
         public string qr_scene_str { get; set; }
-
-        public DateTime createtime { get; set; }
     }
 }

@@ -41,5 +41,11 @@ namespace MyProject.Data.Daos
             sql.OrderBy("createtime desc");
             return PagedList<WeiXinUser>(pageIndex, pageSize, sql);
         }
+
+        public WeiXinUser GetByOpenId(string openId)
+        {
+            var sql = Sql.Builder.Where("OpenId=@0", openId);
+            return FirstOrDefault<WeiXinUser>(sql); 
+        }
     }
 }

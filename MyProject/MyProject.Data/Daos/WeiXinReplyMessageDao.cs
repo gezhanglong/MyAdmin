@@ -54,8 +54,17 @@ namespace MyProject.Data.Daos
         /// <returns></returns>
         public WeiXinReplyMessage GetMessageByReplayType(string replayType, string matchKey)
         {
-            var sql = Sql.Builder.Select("*").From("WeiXinReplyMessage").Where("ReplayType=@0 and MatchKey=@1", replayType,matchKey);
-            return FirstOrDefault<WeiXinReplyMessage>(sql);
+            if (!string.IsNullOrEmpty(matchKey))
+            {
+                var sql = Sql.Builder.Select("*").From("WeiXinReplyMessage").Where("ReplayType=@0 and MatchKey=@1", replayType, matchKey);
+                return FirstOrDefault<WeiXinReplyMessage>(sql);
+            }
+            else
+            {
+                var sql = Sql.Builder.Select("*").From("WeiXinReplyMessage").Where("ReplayType=@0", replayType);
+                return FirstOrDefault<WeiXinReplyMessage>(sql);
+            }
+           
         }
     }
 }

@@ -285,6 +285,13 @@ namespace MyProject.Matrix.Controllers.WeiXinMenu
             return Json(new RequestResultDto() { Msg = "发布失败", Ret = -1 });
         }
 
+        public ActionResult test()
+        {
+            var json = "{\"subscribe\":1.0,\"openid\":\"om_jrvsMp-JheKBOBf3OHMS3dbmk\",\"nickname\":\"张龙\",\"sex\":1.0,\"language\":\"zh_CN\",\"city\":\"贵港\",\"province\":\"广西\",\"country\":\"中国\",\"headimgurl\":\"http://thirdwx.qlogo.cn/mmopen/k8TQ0fFbyQYQpHBslJBMq6ibVJ8rR07XOLwkhDuiaicg4Ygqr4SvhOwd141LdGicuzEgd2h2vvQNIXY2uab20zorksU4LYLA6Riam/132\",\"subscribe_time\":1531926051.0,\"remark\":\"\",\"groupid\":0.0,\"tagid_list\":{},\"subscribe_scene\":\"ADD_SCENE_QR_CODE\",\"qr_scene\":0.0,\"qr_scene_str\":\"\"}";
+            var user = JsonConvert.DeserializeObject<MyProject.Core.Dtos.WeiXinUserDto>(json);
+            return new EmptyResult();
+        }
+
     }
 
     public class MenuModel

@@ -17,6 +17,10 @@ namespace MyProject.Task
         {
             _dao.Add(model);
         }
+        public WeiXinUser GetByOpenId(string openId)
+        {
+            return _dao.GetByOpenId(openId);
+        }
 
         public PagedList<WeiXinUser> GetPagedList(string fields, string fieldValue, string sdate, string edate, bool IsLike, int pageIndex, int pageSize)
         {

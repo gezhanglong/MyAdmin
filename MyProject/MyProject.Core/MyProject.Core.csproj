@@ -46,6 +46,7 @@
     <Compile Include="Dtos\PermDto.cs" />
     <Compile Include="Dtos\RequestResultDto.cs" />
     <Compile Include="Dtos\SysLogDto.cs" />
+    <Compile Include="Dtos\WeiXinUserDto.cs" />
     <Compile Include="Entities\AdminMenu.cs" />
     <Compile Include="Entities\AdminPower.cs" />
     <Compile Include="Entities\AdminRoleMenu.cs" />

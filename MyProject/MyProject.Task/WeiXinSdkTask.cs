@@ -134,33 +134,17 @@ namespace MyProject.Task
                         case "subscribe"://用户未关注时，进行关注后的事件推送
                             #region 首次关注
 
-                            //TODO: 获取用户基本信息后，将用户信息存储在本地。
-                            var weixinInfo = UserAdminAPI.GetInfo(AccountToken(), openId);//注意：订阅号没有此权限
-                            _userTask.AddUser(JsonConvert.DeserializeObject<WeiXinUser>(weixinInfo));//保存用户关注数据
-                            result = ReplayPassiveMessageAPI.RepayText(openId, myUserName, JsonConvert.DeserializeObject<WeiXinUser>(weixinInfo));
-                            //if (!string.IsNullOrEmpty(eventKey))
-                            //{
-                            //    var qrscene = eventKey.Replace("qrscene_", "");//此为场景二维码的场景值
-                            //    result = ReplayPassiveMessageAPI.RepayNews(openId, myUserName,
-                            //        new WeixinNews
-                            //        {
-                            //            title = "欢迎订阅，场景值：" + qrscene,
-                            //            description = "欢迎订阅，场景值：" + qrscene,
-                            //            picurl = string.Format("{0}/ad.jpg", domain),
-                            //            url = domain
-                            //        });
-                            //}
-                            //else
-                            //{
-                            //    result = ReplayPassiveMessageAPI.RepayNews(openId, myUserName,
-                            //     new WeixinNews
-                            //     {
-                            //         title = "欢迎订阅",
-                            //         description = "欢迎订阅，点击此消息查看在线demo",
-                            //         picurl = string.Format("{0}/ad.jpg", domain),
-                            //         url = domain
-                            //     });
-                            //}
+                            //TODO: 获取用户基本信息后，将用户信息存储在本地。  
+                                var weixinInfo = UserAdminAPI.GetInfo(AccountToken(), openId);//注意：订阅号没有此权限
+                                var userinfoDto = JsonConvert.DeserializeObject<WeiXinUserDto>(JsonConvert.SerializeObject(weixinInfo));
+                                var userinfo = EntityMapper.Map<WeiXinUserDto, WeiXinUser>(userinfoDto);
+                                userinfo.createtime = DateTime.Now;
+                                if (_userTask.GetByOpenId(openId) == null)
+                                {
+                                    _userTask.AddUser(userinfo);//保存用户关注数据
+                                } 
+                                reply = _replyMessage.GetMessageByReplayType(eventType, eventKey); //查找回复信息表 
+                                result = Repay(reply, openId, myUserName); 
                             #endregion
                             break;
                         case "unsubscribe"://取消关注
