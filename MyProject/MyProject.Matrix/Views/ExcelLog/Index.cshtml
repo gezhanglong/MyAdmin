@@ -1,0 +1,39 @@
+﻿@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Excel1</title>
+</head>
+<body>
+    <div>
+        @using (Html.BeginForm("Index", "ExcelLog", FormMethod.Post, new { enctype = "multipart/form-data" }))
+        {
+            <h2>基站信息导入</h2>
+            <div>
+                <fieldset id="myfieldset">
+                    <legend>excel模版格式 </legend><font color="red">导入基站的模板格式如下，若模板格式不正确，则相应的基站不能导入!</font>
+                    <p style="color: Red; text-align: center;">@Html.ActionLink("下载模版", "GetFile")</p>
+                </fieldset>
+            </div>
+            <div style="margin-top: 20px;">
+                <fieldset id="myfieldset1">
+                    <legend>基站批量信息导入</legend>
+                    <p>
+                        选择文件：<input id="FileUpload" type="file" name="files" style="width: 250px; height: 24px; background: White"
+                            class="easyui-validatebox" />
+                    </p>
+                    <p>
+                        <input id="btnImport" type="submit" value="导入" style="width: 60px; height: 28px;" />
+                    </p>
+                    <p style="color: Red; text-align: center;">@ViewBag.error</p>
+                </fieldset>
+            </div>
+        }
+    </div>
+</body>
+</html>

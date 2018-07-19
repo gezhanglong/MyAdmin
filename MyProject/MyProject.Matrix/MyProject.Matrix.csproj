@@ -52,6 +52,7 @@
     <Reference Include="System.Data" />
     <Reference Include="System.Data.Entity" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.Transactions" />
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
@@ -131,6 +132,7 @@
     <Compile Include="Controllers\AdminUsers\ViewModels\AdminUserModel.cs" />
     <Compile Include="Controllers\AdminUsers\ViewModels\ChangePasswordModel.cs" />
     <Compile Include="Controllers\AdminUsers\ViewModels\SaveAdminUserModel.cs" />
+    <Compile Include="Controllers\ExcelLog\ExcelLogController.cs" />
     <Compile Include="Controllers\WeiXinMediaMessage\WeiXinMediaMessageController.cs" />
     <Compile Include="Controllers\WeiXinMenu\WeiXinMenuController.cs" />
     <Compile Include="Controllers\WeiXinReceiveMessage\WeiXinReceiveMessageController.cs" />
@@ -543,6 +545,7 @@
     <Content Include="Content\Matrix_Admin\fonts\glyphicons-halflings-regular.ttf" />
     <Content Include="Content\Matrix_Admin\fonts\glyphicons-halflings-regular.woff" />
     <Content Include="Content\Matrix_Admin\fonts\glyphicons-halflings-regular.woff2" />
+    <Content Include="App_Data\配置信息.xls" />
     <None Include="Scripts\jquery-1.7.1.intellisense.js" />
     <Content Include="Scripts\jquery-1.7.1.js" />
     <Content Include="Scripts\jquery-1.7.1.min.js" />
@@ -592,10 +595,9 @@
     <Content Include="Views\WeiXinReplyMessage\Save.cshtml" />
     <Content Include="Views\WeiXinUser\Index.cshtml" />
     <Content Include="Views\WeiXinMenu\Index.cshtml" />
+    <Content Include="Views\ExcelLog\Index.cshtml" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="App_Data\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <Content Include="packages.config" />
   </ItemGroup>

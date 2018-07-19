@@ -1,4 +1,6 @@
 ﻿using MyProject.Core.Dtos;
+using MyProject.Core.Entities;
+using MyProject.Data.Daos;
 using MyProject.Services.Utility;
 using System;
 using System.Collections.Generic;
@@ -18,6 +20,7 @@ namespace MyProject.Task
         private const string MchId = "1416319802"; 
         private const string PartnerKey = "edg8p9BE1uolapAlpc4o79dlvN3Feny8"; 
         private const string cert = @"C:\\m.mj.lkgame.com\\kwx\\apiclient_cert.p12";
+        private readonly LogDao _log = new LogDao();
         /// <summary>
         /// 发红包接口
         /// </summary>
@@ -64,7 +67,7 @@ namespace MyProject.Task
                            };
                 dict.Add("sign", Signature(dict, partnerKey));
                 var postDataStr = Utils.ArrayToXml(dict);
-               // WeixinSdkTask.Log(postDataStr, 168);
+                _log.Add(new Log(){Msg=postDataStr,Ret=168,CreateTime=DateTime.Now});
                 byte[] postData = Encoding.UTF8.GetBytes(postDataStr);
                 Stream reqStream = webrequest.GetRequestStream();
                 reqStream.Write(postData, 0, postData.Length);
@@ -75,15 +78,15 @@ namespace MyProject.Task
                 string resp = string.Empty;
                 using (StreamReader reader = new StreamReader(stream))
                 {
-                    resp = reader.ReadToEnd();
-                   // WeixinSdkTask.Log(resp, 168);
+                    resp = reader.ReadToEnd(); 
+                    _log.Add(new Log() { Msg = resp, Ret = 168, CreateTime = DateTime.Now });
                 }
                 srpReturn = XmlHelper.XmlToEntity<SendRedPackReturn>(resp);
             }
             catch (Exception exp)
             {
                 result = new RequestResultDto { Ret = 10009, Msg = "出错，" + exp.Message };
-                //WeixinSdkTask.Log(exp.ToString(), 168);
+                _log.Add(new Log() { Msg = exp.ToString(), Ret = 168, CreateTime = DateTime.Now }); 
             }
             return srpReturn;
         }
@@ -148,8 +151,8 @@ namespace MyProject.Task
                                {"spbill_create_ip", Utils.GetIp()},   
                            };
                 dict.Add("sign", Signature(dict, partnerKey));
-                var postDataStr = Utils.ArrayToXml(dict);
-               // LogTask.LKWebsiteLogCatchException("1企业付款：" + postDataStr);
+                var postDataStr = Utils.ArrayToXml(dict); 
+                _log.Add(new Log() { Msg = postDataStr, Ret = 168, CreateTime = DateTime.Now }); 
                 byte[] postData = Encoding.UTF8.GetBytes(postDataStr);
                 Stream reqStream = webrequest.GetRequestStream();
                 reqStream.Write(postData, 0, postData.Length);
@@ -161,14 +164,14 @@ namespace MyProject.Task
                 using (StreamReader reader = new StreamReader(stream))
                 {
                     resp = reader.ReadToEnd();
-                   // LogTask.LKWebsiteLogCatchException("2企业付款：" + resp);
+                    _log.Add(new Log() { Msg = resp, Ret = 168, CreateTime = DateTime.Now });  
                 }
                 srpReturn = XmlHelper.XmlToEntity<EnterprisePayReturn>(resp);
             }
             catch (Exception exp)
             {
                 result = new RequestResultDto { Ret = 10009, Msg = "出错，" + exp.Message };
-                //LogTask.LKWebsiteLogCatchException("3企业付款：" + exp.ToString());
+                _log.Add(new Log() { Msg = exp.ToString(), Ret = 168, CreateTime = DateTime.Now });  
             }
             return srpReturn;
         }

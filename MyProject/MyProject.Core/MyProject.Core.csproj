@@ -53,6 +53,7 @@
     <Compile Include="Entities\AdminRolePower.cs" />
     <Compile Include="Entities\AdminUser.cs" />
     <Compile Include="Entities\AdminUserRole.cs" />
+    <Compile Include="Entities\Log.cs" />
     <Compile Include="Entities\SysException.cs" />
     <Compile Include="Entities\SysLog.cs" />
     <Compile Include="Entities\WeiXinMediaMessage.cs" />
