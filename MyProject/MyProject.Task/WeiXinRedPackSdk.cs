@@ -107,6 +107,72 @@ namespace MyProject.Task
             return CryptHelper.MD5Hash(str1 + "&key=" + partnerKey).ToUpper();
         }
 
+        /// <summary>
+        /// 企业付款
+        /// </summary>
+        /// <param name="openId"></param>
+        /// <param name="totalamount">钱（单位：分）</param>
+        /// <param name="desc">描述</param>
+        /// <param name="mchId">商户ID</param>
+        /// <param name="partnerKey">商户key</param>
+        /// <param name="wxappId">公众号appid</param>
+        /// <param name="cert">证书地址</param>
+        /// <param name="result"></param>
+        /// <returns></returns>
+        public EnterprisePayReturn EnterprisePay(string openId, string totalamount, string desc, string mchId, string partnerKey, string wxappId, string cert, out RequestResultDto result)
+        {
+            EnterprisePayReturn srpReturn = null;
+            result = new RequestResultDto { Ret = 0, Msg = "ok" };
+            try
+            {
+                string url = "https://api.mch.weixin.qq.com/mmpaymkttransfers/promotion/transfers";
+
+                string orderNo = mchId + DateTime.Now.ToString("yyyyMMdd") +Utils.CreateNoncestr(10); //商户订单号
+
+                ServicePointManager.ServerCertificateValidationCallback = new RemoteCertificateValidationCallback(CheckValidationResult);
+                X509Certificate2 cer = new X509Certificate2(cert, mchId, X509KeyStorageFlags.PersistKeySet | X509KeyStorageFlags.MachineKeySet);
+                HttpWebRequest webrequest = (HttpWebRequest)HttpWebRequest.Create(url);
+                webrequest.ClientCertificates.Add(cer);
+                webrequest.Method = "post";
+
+                var dict = new Dictionary<string, string>
+                           {
+                               {"nonce_str",Utils.CreateNoncestr(16)}, 
+                               {"mchid", mchId},
+                               {"mch_appid", wxappId},
+                               {"partner_trade_no", orderNo},
+                               {"openid", openId},
+                               {"check_name", "NO_CHECK"},
+                               {"amount", totalamount},
+                               {"desc", desc}, 
+                               {"spbill_create_ip", Utils.GetIp()},   
+                           };
+                dict.Add("sign", Signature(dict, partnerKey));
+                var postDataStr = Utils.ArrayToXml(dict);
+               // LogTask.LKWebsiteLogCatchException("1企业付款：" + postDataStr);
+                byte[] postData = Encoding.UTF8.GetBytes(postDataStr);
+                Stream reqStream = webrequest.GetRequestStream();
+                reqStream.Write(postData, 0, postData.Length);
+                reqStream.Close();
+
+                HttpWebResponse webreponse = (HttpWebResponse)webrequest.GetResponse();
+                Stream stream = webreponse.GetResponseStream();
+                string resp = string.Empty;
+                using (StreamReader reader = new StreamReader(stream))
+                {
+                    resp = reader.ReadToEnd();
+                   // LogTask.LKWebsiteLogCatchException("2企业付款：" + resp);
+                }
+                srpReturn = XmlHelper.XmlToEntity<EnterprisePayReturn>(resp);
+            }
+            catch (Exception exp)
+            {
+                result = new RequestResultDto { Ret = 10009, Msg = "出错，" + exp.Message };
+                //LogTask.LKWebsiteLogCatchException("3企业付款：" + exp.ToString());
+            }
+            return srpReturn;
+        }
+
         //测试服务器上是否已经安装DigiCert根CA证书
         //public testSendRedPackReturn TestCert(string mchId, string partnerKey)
         //{
@@ -189,5 +255,22 @@ namespace MyProject.Task
         public string re_openid { get; set; }
         public string total_amount { get; set; }
         public string send_listid { get; set; }
+    }
+
+    [XmlRoot("xml")]
+    public class EnterprisePayReturn
+    {
+        public string return_code { get; set; }
+        public string return_msg { get; set; }
+        // 以下字段在return_code为 SUCCESS的时候有返回
+        public string mch_appid { get; set; }
+        public string mchid { get; set; }
+        public string result_code { get; set; }
+        public string err_code { get; set; }
+        public string err_code_des { get; set; }
+        // 以下字段在return_code 和 result_code都为 SUCCESS的时候有返回
+        public string partner_trade_no { get; set; }
+        public string payment_no { get; set; }
+        public string payment_time { get; set; }
     }
 }

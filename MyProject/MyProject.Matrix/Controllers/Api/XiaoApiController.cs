@@ -1,8 +1,10 @@
 ﻿using Deepleo.Weixin.SDK;
 using MyProject.Controllers;
+using MyProject.Core.Dtos;
 using MyProject.Core.Entities;
 using MyProject.Core.Enum;
 using MyProject.Task;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -74,10 +76,7 @@ namespace MyProject.Matrix.Controllers.Api
 
             return Content(""); //返回空串表示有响应
         }
-
-
-
-
+         
         public bool CheckSignature(string token)
         {
 
@@ -92,6 +91,37 @@ namespace MyProject.Matrix.Controllers.Api
             tmpStr = tmpStr.ToLower();//对字符串中的字母部分进行小写转换，非字母字符不作处理
             return tmpStr == signature; //开发者获得加密后的字符串可与signature对比
 
+        }
+
+        /// <summary>
+        /// 获取小程序账号信息（如果关注了公众号就会返回unionid,如果没关注过的不能用该方法拿unionid）
+        /// </summary>
+        /// <param name="code"></param>
+        /// <returns></returns>
+        public ActionResult GetInfo(string code)
+        {
+            try
+            {
+                XiaoWeiXinAppDecryptTask _appDecrypt = new XiaoWeiXinAppDecryptTask(XiaoWeiXinSdkTask.appID, XiaoWeiXinSdkTask.appsecret);
+                return Json(new RequestResultDto() { Msg = _appDecrypt.GetOpenIdAndSessionKeyString(code), Ret = 0 }, JsonRequestBehavior.AllowGet);
+            }
+            catch (Exception e)
+            {
+                SysLogTask.AddLog(new SysLogDto() { Message = e.Message, Module = LogModuleEnum.WeiXin, Operator = "zl", Result = "加密失败", Type = LogTypeEnum.WeiXinREceive });
+
+            }
+            return Json(new RequestResultDto() { Msg = "错误", Ret = -1 }, JsonRequestBehavior.AllowGet);
+        }
+
+       /// <summary>
+        /// 获取小程序账号信息（推荐使用这个，关注不关注都可以）
+       /// </summary>
+       /// <param name="loginInfo"></param>
+       /// <returns></returns>
+        public ActionResult GetInfo(WechatLoginInfo loginInfo)
+        {
+            XiaoWeiXinAppDecryptTask _appDecrypt = new XiaoWeiXinAppDecryptTask(XiaoWeiXinSdkTask.appID, XiaoWeiXinSdkTask.appsecret);
+            return Json(new RequestResultDto() { Msg =JsonConvert.SerializeObject(_appDecrypt.Decrypt(loginInfo)), Ret = 0 }, JsonRequestBehavior.AllowGet);
         }
     }
 }
