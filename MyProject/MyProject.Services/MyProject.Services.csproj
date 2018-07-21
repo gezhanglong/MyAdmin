@@ -36,6 +36,22 @@
     <Reference Include="EntityFramework">
       <HintPath>..\MyProject\bin\EntityFramework.dll</HintPath>
     </Reference>
+    <Reference Include="ICSharpCode.SharpZipLib, Version=0.85.0.0, Culture=neutral, PublicKeyToken=ad1060f781377a81, processorArchitecture=AMD64">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\bin\ICSharpCode.SharpZipLib.dll</HintPath>
+    </Reference>
+    <Reference Include="NPOI">
+      <HintPath>..\..\bin\NPOI.dll</HintPath>
+    </Reference>
+    <Reference Include="NPOI.OOXML">
+      <HintPath>..\..\bin\NPOI.OOXML.dll</HintPath>
+    </Reference>
+    <Reference Include="NPOI.OpenXml4Net">
+      <HintPath>..\..\bin\NPOI.OpenXml4Net.dll</HintPath>
+    </Reference>
+    <Reference Include="NPOI.OpenXmlFormats">
+      <HintPath>..\..\bin\NPOI.OpenXmlFormats.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
@@ -71,6 +87,7 @@
     <Compile Include="MvcPager\PagerHelper.cs" />
     <Compile Include="MvcPager\PagerItem.cs" />
     <Compile Include="MvcPager\PagerOptions.cs" />
+    <Compile Include="Npoi\NpoiSdk.cs" />
     <Compile Include="ORM\BaseDao.cs" />
     <Compile Include="ORM\DbFactory.cs" />
     <Compile Include="ORM\PetaPoco.cs" />

@@ -1,4 +1,5 @@
 ﻿using MyProject.Core.Entities;
+using MyProject.Services.Npoi;
 using MyProject.Task;
 using System;
 using System.Collections.Generic;
@@ -21,7 +22,7 @@ namespace MyProject.Matrix.Controllers.ExcelLog
             return View();
         }
 
-        
+         
         [HttpPost]
         public ActionResult Index(HttpPostedFileBase filebase)
         {
@@ -57,48 +58,31 @@ namespace MyProject.Matrix.Controllers.ExcelLog
                 savePath = Path.Combine(path, FileName);
                 file.SaveAs(savePath);
             }
-            string strConn;
-            strConn = "Provider=Microsoft.ACE.OLEDB.12.0;Data Source=" + savePath + ";" + "Extended Properties=Excel 12.0";
-            //strConn = "Provider=Microsoft.Jet.OLEDB.4.0;Data Source=" + savePath + ";" + "Extended Properties=Excel 8.0";
 
-            OleDbConnection conn = new OleDbConnection(strConn);
-            conn.Open();
-            OleDbDataAdapter myCommand = new OleDbDataAdapter("select * from [Sheet1$]", strConn);
-            DataSet myDataSet = new DataSet();
+            DataTable table =NpoiSdk.ExcelToDataTable(savePath);
 
-            conn.Close();
-            try
-            {
-                myCommand.Fill(myDataSet, "ExcelInfo");
-            }
-            catch (Exception ex)
-            {
-                ViewBag.error = ex.Message;
-                return View();
-            }
-            DataTable table = myDataSet.Tables["ExcelInfo"].DefaultView.ToTable();
 
             //引用事务机制，出错时，事物回滚
             using (TransactionScope transaction = new TransactionScope())
             {
                 for (int i = 0; i < table.Rows.Count; i++)
-                {
+                { 
                     string msg = table.Rows[i][0].ToString();
-                    int ret = int.Parse(table.Rows[i][1].ToString());
+                    var ret = table.Rows[i][1];
                     var model = new Log()
                     {
-                        Msg = msg,
-                        Ret = ret,
-                        CreateTime = DateTime.Now
+                        Ret =Convert.ToInt32(ret),
+                        Msg  = msg,
+                        CreateTime  = DateTime.Now
                     };
-                    //此处写录入数据库代码；
                     _log.AddLog(model);
+                    //此处写录入数据库代码；
                 }
                 transaction.Complete();
             }
             ViewBag.error = "导入成功";
             System.Threading.Thread.Sleep(2000);
-            return View(); // RedirectToAction("Excel1");
+            return View();
         }
 
         public FileResult GetFile()//获得模板下载地址
