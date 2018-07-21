@@ -19,6 +19,7 @@ namespace MyProject.Matrix.Controllers.Api
     public class WxApiController : Controller
     {
         private readonly WeiXinSdkTask _sdk = new WeiXinSdkTask();
+        private readonly LogTask _log = new LogTask();
 
         #region 公众号接收信息接口
         [HttpGet]
@@ -54,7 +55,7 @@ namespace MyProject.Matrix.Controllers.Api
                     var ret = wxBizMsgCrypt.DecryptMsg(msg_signature, timestamp, nonce, msg, ref decryptMsg);
                     if (ret != 0)//解密失败
                     {
-                        SysLogTask.AddLog(new SysLogDto() { Message = "message:" + ret + "request:" + msg, Module = LogModuleEnum.WeiXin, Operator = "zl", Result = "解密失败", Type = LogTypeEnum.WeiXinREceive });
+                        _log.AddLog(new Log() { Msg = "message:" + ret + "request:" + msg,Ret=0,CreateTime=DateTime.Now });
                     }
                 }
                 else
@@ -92,6 +93,28 @@ namespace MyProject.Matrix.Controllers.Api
             };
         } 
         #endregion 
+
+        /// <summary>
+        /// 支付回调接口
+        /// </summary>
+        /// <returns></returns>
+        public ActionResult PayNotify()
+        {
+            var msgBody = string.Empty;
+            var stream = System.Web.HttpContext.Current.Request.InputStream;
+            var b = new byte[stream.Length];
+            stream.Read(b, 0, (int)stream.Length);
+            msgBody = Encoding.UTF8.GetString(b);
+            if (!string.IsNullOrWhiteSpace(msgBody))
+            {
+                var _payNotify = new WeiXinPayNotifySdk();
+                var result = _payNotify.PayNotify(msgBody);
+                _log.AddLog(new Log() { Msg = "结果:" + msgBody + "result:" + result.Msg, Ret = 0, CreateTime = DateTime.Now });
+                return Content(result.Msg);
+            }
+            _log.AddLog(new Log() { Msg = "结果:null" , Ret = 0, CreateTime = DateTime.Now });
+            return Content("");
+        }
 
     }
 }
