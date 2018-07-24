@@ -9,7 +9,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Web;
 
-namespace MyProject.Services.Npoi
+namespace MyProject.Services.Utility
 {
     public class NpoiSdk
     {
@@ -130,6 +130,45 @@ namespace MyProject.Services.Npoi
             return dt;
         }
 
+        /// <summary>
+        /// 导出（数据源DataTable）
+        /// </summary>
+        /// <param name="models"></param>
+        /// <param name="FilePath"></param>
+        public static bool OutFile(DataTable models, string FilePath, ref string msg)
+        {
+            try
+            {
+                HSSFWorkbook workbook = new HSSFWorkbook();
+                var sheet = workbook.CreateSheet("sheet1");
+                var rowHead = sheet.CreateRow(0);
+                for (int i = 0; i < models.Columns.Count; i++)
+                {
+                    rowHead.CreateCell(i).SetCellValue(models.Columns[i].ColumnName);
+                }
+                for (int rowIndex = 0; rowIndex < models.Rows.Count; rowIndex++)
+                {
+                    var row = sheet.CreateRow(rowIndex + 1);
+                    for (int j = 0; j < models.Columns.Count; j++)
+                    {
+                        row.CreateCell(j).SetCellValue((models.Rows[rowIndex][j]).ToString());
+
+                    }
+
+                }
+                using (FileStream fs = new FileStream(FilePath + DateTime.Now.ToString("yyyy-MM-dd") + ".xls", FileMode.Create))
+                {
+                    workbook.Write(fs);
+                }
+                return true;
+            }
+            catch (Exception e)
+            {
+                msg = e.Message;
+                return false;
+            }
+        }
+
        
     }
 
@@ -139,9 +178,9 @@ namespace MyProject.Services.Npoi
         public BuildWorkBook(T model)
         {
             this.model =model;
-        }
+        } 
         /// <summary>
-        /// 导出
+        /// 导出（数据源类T）
         /// </summary>
         /// <param name="models"></param>
         /// <param name="FilePath"></param>
@@ -180,5 +219,7 @@ namespace MyProject.Services.Npoi
                 return false;
             } 
         }
+
+       
     }
 }

@@ -600,6 +600,7 @@
     <Content Include="Views\WeiXinUser\Index.cshtml" />
     <Content Include="Views\WeiXinMenu\Index.cshtml" />
     <Content Include="Views\ExcelLog\Index.cshtml" />
+    <Content Include="Views\ExcelLog\SaveImage.cshtml" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>

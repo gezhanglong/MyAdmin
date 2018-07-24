@@ -1,7 +1,9 @@
-﻿using System.Drawing;
+﻿using System;
+using System.Drawing;
 using System.Drawing.Drawing2D;
 using System.Drawing.Imaging;
 using System.IO;
+using System.Web;
 
 namespace MyProject.Services.Utility
 {
@@ -306,6 +308,42 @@ namespace MyProject.Services.Utility
             return returnImage;
 
         }
+
+
+        public static bool UploadImag(HttpFileCollectionBase files,ref string msg)
+        {
+            for (int i = 0; i < files.Count; i++)
+            {
+                HttpPostedFileBase file = files[i];
+                if (file.ContentLength > 0)
+                {
+                    if (file.ContentType.Contains("image/"))
+                    {
+                        using (System.Drawing.Image img = System.Drawing.Image.FromStream(file.InputStream))
+                        {
+                            string FileName = System.IO.Path.GetFileName(file.FileName);
+                            string[] SplitFileName = FileName.Split('.');
+                            string AtterFileName = DateTime.Now.ToString("yyyMMddHHmmss") + "." + SplitFileName[1];
+                            img.Save(System.Web.HttpContext.Current.Server.MapPath("/App_Data/" + AtterFileName)); 
+                        }
+                    }
+                    else
+                    {
+                        return false;
+                        msg="该文件不是图片格式！";
+                    }
+                }
+                else
+                {
+                    return false;
+                    msg = "请选择要上传的图片！"; 
+                }
+
+            }
+            return true;
+            msg = "上传成功";
+        }
+
 
 
     }

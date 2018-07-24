@@ -87,7 +87,7 @@
     <Compile Include="MvcPager\PagerHelper.cs" />
     <Compile Include="MvcPager\PagerItem.cs" />
     <Compile Include="MvcPager\PagerOptions.cs" />
-    <Compile Include="Npoi\NpoiSdk.cs" />
+    <Compile Include="Utility\NpoiSdk.cs" />
     <Compile Include="ORM\BaseDao.cs" />
     <Compile Include="ORM\DbFactory.cs" />
     <Compile Include="ORM\PetaPoco.cs" />

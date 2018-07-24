@@ -1,5 +1,5 @@
 ﻿using MyProject.Core.Entities;
-using MyProject.Services.Npoi;
+using MyProject.Services.Utility;
 using MyProject.Task;
 using System;
 using System.Collections.Generic;
@@ -90,6 +90,21 @@ namespace MyProject.Matrix.Controllers.ExcelLog
             var error = "导出成功，导出路径：" + path;
             _book.OutFile(logList, path, ref error);
             return Content(error); 
+        }
+
+
+        public ActionResult SaveImage()
+        {
+            return View();
+        }
+        [HttpPost]
+        public ActionResult SaveImage(HttpPostedFileBase filebase)
+        {
+            var files = Request.Files;
+            var msg = "";
+            ImgHelper.UploadImag(files, ref msg);
+            ViewBag.error = msg;
+            return View();
         }
 
     }
