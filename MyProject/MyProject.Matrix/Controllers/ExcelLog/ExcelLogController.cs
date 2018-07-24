@@ -23,64 +23,50 @@ namespace MyProject.Matrix.Controllers.ExcelLog
         }
 
          
+        /// <summary>
+        /// 导入
+        /// </summary>
+        /// <param name="filebase"></param>
+        /// <returns></returns>
         [HttpPost]
         public ActionResult Index(HttpPostedFileBase filebase)
         {
-            HttpPostedFileBase file = Request.Files["files"];
-            string FileName;
-            string savePath;
-            if (file == null || file.ContentLength <= 0)
+            try
             {
-                ViewBag.error = "文件不能为空";
-                return View();
-            }
-            else
-            {
-                string filename = Path.GetFileName(file.FileName);
-                int filesize = file.ContentLength;//获取上传文件的大小单位为字节byte
-                string fileEx = System.IO.Path.GetExtension(filename);//获取上传文件的扩展名
-                string NoFileName = System.IO.Path.GetFileNameWithoutExtension(filename);//获取无扩展名的文件名
-                int Maxsize = 4000 * 1024;//定义上传文件的最大空间大小为4M
-                string FileType = ".xls,.xlsx";//定义上传文件的类型字符串
-
-                FileName = NoFileName + fileEx;
-                if (!FileType.Contains(fileEx))
+                HttpPostedFileBase file = Request.Files["files"];
+                var error = "";
+                var savePath = NpoiSdk.GetSavePath(file, out error);
+                if (string.IsNullOrWhiteSpace(savePath))
                 {
-                    ViewBag.error = "文件类型不对，只能导入xls和xlsx格式的文件";
-                    return View();
+                    ViewBag.error = error; 
                 }
-                if (filesize >= Maxsize)
+                DataTable table = NpoiSdk.ExcelToDataTable(savePath);
+
+
+                //引用事务机制，出错时，事物回滚
+                using (TransactionScope transaction = new TransactionScope())
                 {
-                    ViewBag.error = "上传文件超过4M，不能上传";
-                    return View();
-                }
-                string path = AppDomain.CurrentDomain.BaseDirectory + "/App_Data/";
-                savePath = Path.Combine(path, FileName);
-                file.SaveAs(savePath);
-            }
-
-            DataTable table =NpoiSdk.ExcelToDataTable(savePath);
-
-
-            //引用事务机制，出错时，事物回滚
-            using (TransactionScope transaction = new TransactionScope())
-            {
-                for (int i = 0; i < table.Rows.Count; i++)
-                { 
-                    string msg = table.Rows[i][0].ToString();
-                    var ret = table.Rows[i][1];
-                    var model = new Log()
+                    for (int i = 0; i < table.Rows.Count; i++)
                     {
-                        Ret =Convert.ToInt32(ret),
-                        Msg  = msg,
-                        CreateTime  = DateTime.Now
-                    };
-                    _log.AddLog(model);
-                    //此处写录入数据库代码；
-                }
-                transaction.Complete();
+                        string msg = table.Rows[i][0].ToString();
+                        var ret = table.Rows[i][1];
+                        var model = new Log()
+                        {
+                            Ret = Convert.ToInt32(ret),
+                            Msg = msg,
+                            CreateTime = DateTime.Now
+                        };
+                        _log.AddLog(model);
+                        //此处写录入数据库代码；
+                    }
+                    transaction.Complete();
+                } 
+                ViewBag.error = "导入成功";
             }
-            ViewBag.error = "导入成功";
+            catch (Exception e)
+            {
+                ViewBag.error = "导入失败："+e.Message; 
+            }
             System.Threading.Thread.Sleep(2000);
             return View();
         }
@@ -90,7 +76,21 @@ namespace MyProject.Matrix.Controllers.ExcelLog
             string path = AppDomain.CurrentDomain.BaseDirectory + "/App_Data/";
             string fileName = "配置信息.xls";
             return File(path + fileName, "text/plain", fileName);
-        } 
+        }
+
+        /// <summary>
+        /// 导出
+        /// </summary>
+        /// <returns></returns>
+        public ActionResult OutFile()
+        {
+            var logList = _log.GetList();
+            string path = @"E:\";
+            var _book =new BuildWorkBook<Log>(new Log());
+            var error = "导出成功，导出路径：" + path;
+            _book.OutFile(logList, path, ref error);
+            return Content(error); 
+        }
 
     }
 }

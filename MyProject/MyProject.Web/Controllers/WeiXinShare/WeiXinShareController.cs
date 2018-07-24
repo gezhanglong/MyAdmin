@@ -2,6 +2,7 @@
 using MyProject.Core.Dtos;
 using MyProject.Core.Entities;
 using MyProject.Core.Enum;
+using MyProject.Services.Utility;
 using MyProject.Task;
 using System;
 using System.Collections.Generic;
@@ -34,5 +35,14 @@ namespace MyProject.Web.Controllers.WeiXinShare
             return View();
         }
 
+        public ActionResult Test()
+        {
+            var dict = new Dictionary<string, string>  
+            {
+                {"unionid","oxC3qvz5VNrOms3Qbhv7nmKYeMu0"},
+            };
+            var result = WebUtils.DoPost("https://api.lkgame.com/weixin/GetUserInfoByUnionid", dict);
+            return View();
+        }
     }
 }

@@ -16,5 +16,10 @@ namespace MyProject.Task
         {
             _log.Add(model);
         }
+
+        public List<Log> GetList()
+        {
+            return  _log.GetList();
+        }
     }
 }

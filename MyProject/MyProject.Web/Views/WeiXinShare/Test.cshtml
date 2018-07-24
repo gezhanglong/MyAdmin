@@ -1,0 +1,27 @@
+﻿@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Test</title>
+</head>
+<body>
+    <div>
+        
+    </div>
+</body>
+</html>
+<script src="~/Scripts/jquery-3.0.0.min.js"></script> 
+<script type="text/javascript">
+    $(function () { 
+            $.get("https://api.lkgame.com/weixin/GetUserInfoByUnionid", { unionid: 'oxC3qvz5VNrOms3Qbhv7nmKYeMu0' }, function (data) {
+                alert(data);
+              });
+        
+    });
+
+</script>
