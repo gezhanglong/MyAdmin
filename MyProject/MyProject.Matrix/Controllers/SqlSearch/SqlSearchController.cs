@@ -26,7 +26,7 @@ namespace MyProject.Controllers.SqlSearch
         {
             try
             {
-                ViewData["Sql"] = string.Empty;
+                ViewData["Sql"] = sql;
                 if (string.IsNullOrEmpty(sql))
                     return View("Index");
 
@@ -36,9 +36,10 @@ namespace MyProject.Controllers.SqlSearch
             }
             catch (Exception ex)
             {
+                ViewData["Sql"] = sql;
                 return AlertMsg(
                     ex.Message.Replace("\r", "\\r").Replace("\n", "\\n").Replace("\'", "\\'").Replace("\"", "\\\""), "/SqlSearch/Index?sql=" + Encode(sql));
-            }
+            } 
         }
 
         //导出
