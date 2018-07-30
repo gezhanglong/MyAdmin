@@ -39,9 +39,9 @@ namespace MyProject.Web.Controllers.WeiXinShare
         {
             var dict = new Dictionary<string, string>  
             {
-                {"unionid","oxC3qvz5VNrOms3Qbhv7nmKYeMu0"},
+                {"unionid","ok0Ues96SblI9MIhFC2FN1tjtXk41"},
             };
-            var result = WebUtils.DoPost("https://api.lkgame.com/weixin/GetUserInfoByUnionid", dict);
+            var result = WebUtils.DoPost("https://api.lkgame.com/wechat/GetopenidByUnionid", dict);
             return View();
         }
     }

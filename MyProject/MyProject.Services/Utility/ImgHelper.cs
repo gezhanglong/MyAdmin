@@ -309,42 +309,180 @@ namespace MyProject.Services.Utility
 
         }
 
-
-        public static bool UploadImag(HttpFileCollectionBase files,ref string msg)
+        /// <summary>
+        /// 上传图片
+        /// </summary>
+        /// <param name="files"></param>
+        /// <param name="msg"></param>
+        /// <returns></returns>
+        public static string UploadImag(HttpFileCollectionBase files, ref string msg)
         {
+            var backPath = "";
+            if (files.Count <= 0)
+            {
+                msg = "请选择要上传的图片";
+                return backPath;
+            }
             for (int i = 0; i < files.Count; i++)
             {
                 HttpPostedFileBase file = files[i];
-                if (file.ContentLength > 0)
+                if (file.ContentType.Contains("image/"))
                 {
-                    if (file.ContentType.Contains("image/"))
+                    using (System.Drawing.Image img = System.Drawing.Image.FromStream(file.InputStream))
                     {
-                        using (System.Drawing.Image img = System.Drawing.Image.FromStream(file.InputStream))
-                        {
-                            string FileName = System.IO.Path.GetFileName(file.FileName);
-                            string[] SplitFileName = FileName.Split('.');
-                            string AtterFileName = DateTime.Now.ToString("yyyMMddHHmmss") + "." + SplitFileName[1];
-                            img.Save(System.Web.HttpContext.Current.Server.MapPath("/App_Data/" + AtterFileName)); 
-                        }
-                    }
-                    else
-                    {
-                        return false;
-                        msg="该文件不是图片格式！";
+                        string FileName = System.IO.Path.GetFileName(file.FileName);
+                        string[] SplitFileName = FileName.Split('.');
+                        string AtterFileName = DateTime.Now.ToString("yyyMMddHHmmss") + "." + SplitFileName[1];
+                        backPath = "/Content/UploadImg/" + AtterFileName;
+                        img.Save(System.Web.HttpContext.Current.Server.MapPath("/Content/UploadImg/" + AtterFileName));
                     }
                 }
                 else
                 {
-                    return false;
-                    msg = "请选择要上传的图片！"; 
+
+                    msg = "该文件不是图片格式！";
+                    return backPath;
+                } 
+            }
+            msg = "上传成功";
+            return backPath;
+        }
+
+        /// <summary>
+        /// 带文字水印图片上传
+        /// </summary>
+        /// <param name="files"></param>
+        /// <param name="msg"></param>
+        /// <returns></returns>
+        public static string UploadImagFont(HttpFileCollectionBase files, ref string msg)
+        {
+            var backPath = "";
+            if (files.Count <= 0)
+            {
+                msg = "请选择要上传的图片";
+                return backPath;
+            }
+            for (int i = 0; i < files.Count; i++)
+            {
+                HttpPostedFileBase file = files[i]; 
+                    if (file.ContentType.Contains("image/"))
+                    {
+                        using (System.Drawing.Image img = System.Drawing.Image.FromStream(file.InputStream))
+                        {
+                            using (Graphics g = Graphics.FromImage(img))
+                            {
+                                g.DrawString("我的图片", new Font("宋体", 14), Brushes.Red, 0, 0);
+                            }
+                            string FileName = System.IO.Path.GetFileName(file.FileName);
+                            string[] SplitFileName = FileName.Split('.');
+                            string AtterFileName = DateTime.Now.ToString("yyyMMddHHmmss") + "." + SplitFileName[1];
+                            backPath = "/Content/UploadImg/" + AtterFileName;
+                            img.Save(System.Web.HttpContext.Current.Server.MapPath("/Content/UploadImg/" + AtterFileName));
+                        }
+                    } 
+                else
+                {
+                    msg = "请选择要上传的图片！";
+                    return backPath;
                 }
 
-            }
-            return true;
+            } 
             msg = "上传成功";
+            return backPath;
         }
 
 
+        /// <summary>
+        ///  带图片水印图片上传
+        /// </summary>
+        /// <param name="files"></param>
+        /// <param name="msg"></param>
+        /// <returns></returns>
+        public static string  UploadImagImg(HttpFileCollectionBase files, ref string msg)
+        {
+            var backPath = "";
+            if (files.Count <= 0)
+            {
+                msg = "请选择要上传的图片";
+                return backPath;
+            }
+            for (int i = 0; i < files.Count; i++)
+            {
+                HttpPostedFileBase file = files[i];
+                if (file.ContentType.Contains("image/"))
+                {
+                    string fileName = file.FileName;
+                         using (System.Drawing.Image img = System.Drawing.Image.FromStream(file.InputStream))
+                         {
+                             using (System.Drawing.Image imgWater = System.Drawing.Image.FromFile(System.Web.HttpContext.Current.Server.MapPath("/App_Data/20180730142135.png")))
+                             {
+                                 using (Graphics g = Graphics.FromImage(img))
+                                 {
+                                     g.DrawImage(imgWater, 0, 0);
+                                 }
+                                 string[] SplitFileName = fileName.Split('.');
+                                 string AtterFileName = DateTime.Now.ToString("yyyMMddHHmmss") + "." + SplitFileName[1];
+                                 backPath = "/Content/UploadImg/" + AtterFileName;
+                                 img.Save(System.Web.HttpContext.Current.Server.MapPath("/Content/UploadImg/" + AtterFileName));
+                             }
+                         }
+                }
+                else
+                {
+                    msg = "请选择要上传的图片！";
+                    return backPath;
+                }
+
+            }
+            msg = "上传成功";
+            return backPath;
+        }
+
+        /// <summary>
+        /// 缩略图上传
+        /// </summary>
+        /// <param name="files"></param>
+        /// <param name="msg"></param>
+        /// <returns></returns>
+        public static string  UploadImagBitmap(HttpFileCollectionBase files, ref string msg)
+        {
+            var backPath = "";
+            if (files.Count <= 0)
+            {
+                msg = "请选择要上传的图片";
+                return backPath;
+            }
+            for (int i = 0; i < files.Count; i++)
+            {
+                HttpPostedFileBase file = files[i];
+                if (file.ContentType.Contains("image/"))
+                {
+                    using (System.Drawing.Image img = System.Drawing.Image.FromStream(file.InputStream))
+                    {
+                        using (System.Drawing.Image imgThumb = new Bitmap(200, 100))
+                        {
+                            using (Graphics g = Graphics.FromImage(imgThumb))
+                            {
+                                g.DrawImage(img, new Rectangle(0, 0, imgThumb.Width, imgThumb.Height), new Rectangle(0, 0, img.Width, img.Height), GraphicsUnit.Pixel);
+                            }
+                            string fileName = file.FileName;
+                            string[] SplitFileName = fileName.Split('.');
+                            string AtterFileName = DateTime.Now.ToString("yyyMMddHHmmss") + "." + SplitFileName[1];
+                            backPath = "/Content/UploadImg/" + AtterFileName;
+                            img.Save(System.Web.HttpContext.Current.Server.MapPath("/Content/UploadImg/" + AtterFileName));
+                        }
+                    }
+                }
+                else
+                {
+                    msg = "请选择要上传的图片！";
+                    return backPath;
+                }
+
+            }
+            msg = "上传成功";
+            return backPath;
+        }
 
     }
 }

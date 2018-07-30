@@ -602,7 +602,9 @@
     <Content Include="Views\ExcelLog\Index.cshtml" />
     <Content Include="Views\ExcelLog\SaveImage.cshtml" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Content\UploadImg\" />
+  </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
   </ItemGroup>

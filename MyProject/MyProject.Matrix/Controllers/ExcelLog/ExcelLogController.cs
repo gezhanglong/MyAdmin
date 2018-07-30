@@ -1,4 +1,5 @@
-﻿using MyProject.Core.Entities;
+﻿using MyProject.Core.Dtos;
+using MyProject.Core.Entities;
 using MyProject.Services.Utility;
 using MyProject.Task;
 using System;
@@ -102,10 +103,12 @@ namespace MyProject.Matrix.Controllers.ExcelLog
         {
             var files = Request.Files;
             var msg = "";
-            ImgHelper.UploadImag(files, ref msg);
+            ViewBag.url1 = ImgHelper.UploadImag(files, ref msg);
+            ViewBag.url2 = ImgHelper.UploadImagFont(files, ref msg);
+            ViewBag.url3 = ImgHelper.UploadImagImg(files, ref msg);
+            ViewBag.url4 = ImgHelper.UploadImagBitmap(files, ref msg);
             ViewBag.error = msg;
             return View();
-        }
-
+        } 
     }
 }

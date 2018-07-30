@@ -7,28 +7,31 @@
 <html>
 <head>
     <meta name="viewport" content="width=device-width" />
-    <title>Excel1</title>
+    <title>uploadimg</title>   
 </head>
 <body>
     <div>
-        @using (Html.BeginForm("SaveImage", "ExcelLog", FormMethod.Post, new { enctype = "multipart/form-data" }))
+        @using (Html.BeginForm("SaveImage", "ExcelLog", FormMethod.Post, new { id="form1", enctype = "multipart/form-data" }))
         {
              
             <div style="margin-top: 20px;">
                 <fieldset id="myfieldset1">
-                    <legend>上传图片</legend>
+                    <legend>上传图片：</legend>
                     <p>
-                        选择文件：<input id="FileUpload" type="image" name="images" style="width: 250px; height: 24px; background: White"
-                            class="easyui-validatebox" />
-                        <input type="image" name="xxx"/>
+                        <input id="FileUpload" type="file" name="images" style="width: 250px; height: 24px; background: White"
+                            class="easyui-validatebox" /> 
                     </p>
                     <p>
-                        <input id="btnImport" type="submit" value="导入" style="width: 60px; height: 28px;" />
+                        <input id="btnImport" type="submit"  value="上传" style="width: 60px; height: 28px;" />
                     </p>
                     <p style="color: Red; text-align: center;">@ViewBag.error</p>
+                    <img src="@(ViewBag.url1 )" style="width:100px;height:100px;"/>
+                     <img src="@(ViewBag.url2 )" style="width:100px;height:100px;"/>
+                     <img src="@(ViewBag.url3 )" style="width:100px;height:100px;"/>
+                     <img src="@(ViewBag.url4 )" style="width:100px;height:100px;"/>
                 </fieldset>
             </div> 
         }
-    </div>
+    </div> 
 </body>
 </html>
