@@ -37,11 +37,11 @@ namespace MyProject.Web.Controllers.WeiXinShare
 
         public ActionResult Test()
         {
-            var dict = new Dictionary<string, string>  
-            {
-                {"unionid","ok0Ues96SblI9MIhFC2FN1tjtXk41"},
-            };
-            var result = WebUtils.DoPost("https://api.lkgame.com/wechat/GetopenidByUnionid", dict);
+            //var dict = new Dictionary<string, string>  
+            //{
+            //    {"unionid","ok0Ues96SblI9MIhFC2FN1tjtXk41"},
+            //};
+            //var result = WebUtils.DoGet("http://m.lkgame.com/check/wxbind");
             return View();
         }
     }
