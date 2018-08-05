@@ -4,6 +4,7 @@ using MyProject.Core.Entities;
 using MyProject.Core.Enum;
 using MyProject.Services.Utility;
 using MyProject.Task;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,7 +16,7 @@ namespace MyProject.Web.Controllers.WeiXinShare
     public class WeiXinShareController : Controller
     {
         private readonly WeiXinSdkTask _sdk = new WeiXinSdkTask();
-
+        private static readonly LogTask _log = new LogTask();
         public ActionResult Index()
         {
             var code = Request["code"];
@@ -43,6 +44,19 @@ namespace MyProject.Web.Controllers.WeiXinShare
             //};
             //var result = WebUtils.DoGet("http://m.lkgame.com/check/wxbind");
             return View();
+        }
+
+        public ActionResult Testsql(string openid)
+        {
+            var _user = new WeiXinUserTask();
+           
+            for (var i = 0; i < 1000; i++)
+            {
+                var user = _user.GetByOpenId(openid);
+                _log.AddLog(new Log() { Ret = 2018, CreateTime = DateTime.Now, Msg = JsonConvert.SerializeObject(user) });
+                
+            }
+            return Content("ok");
         }
     }
 }
