@@ -59,6 +59,7 @@
     <Compile Include="SysExceptionTask.cs" />
     <Compile Include="SysLogTask.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="WeiXinCodeTask.cs" />
     <Compile Include="WeiXinMediaMessageTask.cs" />
     <Compile Include="WeiXinMenuTask.cs" />
     <Compile Include="WeiXinPayNotifySdk.cs" />

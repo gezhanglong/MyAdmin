@@ -601,6 +601,7 @@
     <Content Include="Views\WeiXinMenu\Index.cshtml" />
     <Content Include="Views\ExcelLog\Index.cshtml" />
     <Content Include="Views\ExcelLog\SaveImage.cshtml" />
+    <Content Include="Views\XiaoApi\WxCodeIndex.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Content\UploadImg\" />

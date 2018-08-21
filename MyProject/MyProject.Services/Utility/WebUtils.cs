@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Net;
@@ -68,7 +69,7 @@ namespace MyProject.Services.Utility
             req.Method = "POST";
             req.KeepAlive = true;
             req.UserAgent = "ADCSDK";
-            req.ContentType = "application/x-www-form-urlencoded;charset=utf-8";
+            req.ContentType ="application/x-www-form-urlencoded;charset=utf-8";
 
             byte[] postData = Encoding.UTF8.GetBytes(strPostDate);
             Stream reqStream = req.GetRequestStream();
@@ -86,6 +87,8 @@ namespace MyProject.Services.Utility
                 return GetResponseAsString(rsp, encoding);
             }
         }
+
+       
 
         public static string DoPost(string url, string strPostDate, Encoding encoding, string charset)
         {
@@ -299,10 +302,10 @@ namespace MyProject.Services.Utility
 
             try
             {
+
                 // 以字符流的方式读取HTTP响应
                 stream = rsp.GetResponseStream();
                 reader = new StreamReader(stream, encoding);
-
                 // 每次读取不大于256个字符，并写入字符串
                 var buffer = new char[256];
                 int readBytes;
@@ -391,5 +394,108 @@ namespace MyProject.Services.Utility
 
             return postData.ToString();
         }
+
+
+
+        
+
+        /// <summary>
+        /// 请求并保存为图片
+        /// </summary>
+        /// <param name="url"></param>
+        /// <param name="strPostDate"></param>
+        /// <returns></returns>
+        public static bool DoPostSaveImage(string url, string strPostDate,string name)
+        {
+            HttpWebRequest req = (HttpWebRequest)WebRequest.Create(url);
+            req.Method = "POST";
+            req.KeepAlive = true;
+            req.UserAgent = "ADCSDK";
+            req.ContentType = "application/x-www-form-urlencoded;charset=utf-8";
+
+            byte[] postData = Encoding.UTF8.GetBytes(strPostDate);
+            Stream reqStream = req.GetRequestStream();
+            reqStream.Write(postData, 0, postData.Length);
+            reqStream.Close();
+
+            HttpWebResponse rsp = (HttpWebResponse)req.GetResponse();
+            if (string.IsNullOrWhiteSpace(rsp.CharacterSet))
+            {
+                #region 流生成图文文件并保存
+                try
+                {
+                    System.Drawing.Image originalImage = System.Drawing.Image.FromStream(rsp.GetResponseStream());
+                    originalImage.Save(name);
+                }
+                finally
+                {
+                    // 释放资源 
+                    if (rsp != null) rsp.Close();
+                }
+                #endregion
+                return true;
+            }
+            return false;
+        }
+
+        /// <summary>
+        /// 请求并保存为图片
+        /// </summary>
+        /// <param name="url"></param>
+        /// <param name="strPostDate"></param>
+        /// <returns></returns>
+        public static bool DoPostSaveImage(string url, string strPostDate, out byte[] by)
+        {
+            HttpWebRequest req = (HttpWebRequest)WebRequest.Create(url);
+            req.Method = "POST";
+            req.KeepAlive = true;
+            req.UserAgent = "ADCSDK";
+            req.ContentType = "application/x-www-form-urlencoded;charset=utf-8";
+
+            byte[] postData = Encoding.UTF8.GetBytes(strPostDate);
+            Stream reqStream = req.GetRequestStream();
+            reqStream.Write(postData, 0, postData.Length);
+            reqStream.Close();
+
+            HttpWebResponse rsp = (HttpWebResponse)req.GetResponse();
+            if (string.IsNullOrWhiteSpace(rsp.CharacterSet))
+            {
+               
+                MemoryStream memoryStream = new MemoryStream();
+                byte[] bytes = null;
+                try
+                {
+                    #region 请求流Stream转换为MemoryStream，因为请求流Stream不能拿到length
+                    const int bufferLength = 1024;
+                    int actual;
+                    byte[] buffer = new byte[bufferLength];
+                    while ((actual = rsp.GetResponseStream().Read(buffer, 0, bufferLength)) > 0)
+                    {
+                        memoryStream.Write(buffer, 0, actual);
+                    }
+                    memoryStream.Position = 0;
+                    #endregion
+
+                    #region memoryStream流转换为byte[] 
+                    bytes = new byte[memoryStream.Length];
+                    memoryStream.Read(bytes, 0, bytes.Length);
+                    // 设置当前流的位置为流的开始
+                    memoryStream.Seek(0, SeekOrigin.Begin);
+                    #endregion
+                }
+                finally
+                {
+                    // 释放资源 
+                    if (memoryStream != null) memoryStream.Close();
+                    if (rsp != null) rsp.Close();
+                }
+                by = bytes;
+                return true;
+            }
+            by = null;
+            return false;
+        }
+
+
     }
 }

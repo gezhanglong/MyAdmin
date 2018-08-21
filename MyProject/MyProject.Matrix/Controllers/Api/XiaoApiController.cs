@@ -123,5 +123,34 @@ namespace MyProject.Matrix.Controllers.Api
             XiaoWeiXinAppDecryptTask _appDecrypt = new XiaoWeiXinAppDecryptTask(XiaoWeiXinSdkTask.appID, XiaoWeiXinSdkTask.appsecret);
             return Json(new RequestResultDto() { Msg =JsonConvert.SerializeObject(_appDecrypt.Decrypt(loginInfo)), Ret = 0 }, JsonRequestBehavior.AllowGet);
         }
+
+
+        /// <summary>
+        /// 生成二维码
+        /// </summary>
+        /// <param name="loginInfo"></param>
+        /// <returns></returns>
+        public ActionResult GetWxCode(string unionid,int type=0)
+        {
+            if (type == 0)//保存到本地
+            {
+                return Json(new RequestResultDto() { Msg = _sdk.GetWxCodeToLocal(unionid), Ret = 0 }, JsonRequestBehavior.AllowGet);
+            }
+            else//保存到数据库
+            {
+                return Json(new RequestResultDto() { Msg = _sdk.GetWxCodeToData(unionid), Ret = 0 }, JsonRequestBehavior.AllowGet);
+            }
+            
+        }
+
+        /// <summary>
+        /// 显示二进制图片
+        /// </summary>
+        /// <param name="unionid"></param>
+        /// <returns></returns>
+        public ActionResult WxCodeIndex(string unionid)
+        {
+            return File(_sdk.WxCode(unionid), "image/jpg");//输出文件
+        }
     }
 }

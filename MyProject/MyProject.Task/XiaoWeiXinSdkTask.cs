@@ -3,13 +3,17 @@ using Deepleo.Weixin.SDK.Entities;
 using MyProject.Core.Entities;
 using MyProject.Core.Enum;
 using MyProject.Core.Enums;
+using MyProject.Data.Daos;
 using MyProject.Services.Utility;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
+using System.Net;
 using System.Text;
 using System.Threading.Tasks;
+using System.Web.Mvc;
 
 namespace MyProject.Task
 {
@@ -22,7 +26,7 @@ namespace MyProject.Task
         public static string appsecret = "e094d445c87ad7f45d82e10325ff3697";
         public static string Token = "XiaoChengXulkgame";
         public static string domain = ResultHelper.GetBaseUrl();//域名
-        private readonly WeiXinReceiveMessageTask _receiveMessage = new WeiXinReceiveMessageTask(); 
+        private readonly WeiXinReceiveMessageTask _receiveMessage = new WeiXinReceiveMessageTask();
 
         /// <summary>
         /// 说明：带TODO字眼的代码段，需要开发者自行按照自己的业务逻辑实现
@@ -30,12 +34,12 @@ namespace MyProject.Task
         /// <param name="message"></param>
         /// <returns>已经打包成xml的用于回复用户的消息包</returns>
         public string Execute(WeixinMessage message)
-        { 
-            var result = ""; 
+        {
+            var result = "";
             var openId = message.Body.FromUserName.Value;
             var myUserName = message.Body.ToUserName.Value;
             //这里需要调用TokenHelper获取Token的，省略了。 
-            
+
             #region 记录接收信息
             var receiveMessage = new WeiXinReceiveMessage()
                {
@@ -45,14 +49,14 @@ namespace MyProject.Task
                    CreateTime = message.Body.CreateTime.Value,
                    MsgType = message.Body.MsgType.Value,
                    MsgId = message.Type == WeixinMessageType.Event ? "" : message.Body.MsgId.Value //事件没有这个参数
-               };  
-            #endregion 
+               };
+            #endregion
             switch (message.Type)
             {
                 case WeixinMessageType.Text://文字消息
-                   #region 文字消息
-		            string userMessage = message.Body.Content.Value;
-                    receiveMessage.Content=userMessage;//用于记录接收信息 
+                    #region 文字消息
+                    string userMessage = message.Body.Content.Value;
+                    receiveMessage.Content = userMessage;//用于记录接收信息 
                     switch (userMessage)
                     {
                         case "1":
@@ -64,20 +68,20 @@ namespace MyProject.Task
                         default:
                             result = RepayText(openId, "客官，小二无言以对！！");
                             break;
-                    } 
-	                #endregion
+                    }
+                    #endregion
                     break;
                 case WeixinMessageType.Image://图片消息
-                   #region 图片消息
-		            string imageUrl = message.Body.PicUrl.Value;//图片地址
+                    #region 图片消息
+                    string imageUrl = message.Body.PicUrl.Value;//图片地址
                     string mediaId = message.Body.MediaId.Value;//mediaId
                     receiveMessage.PicUrl = imageUrl;
-                    receiveMessage.MediaId = mediaId;  
-	                #endregion
-                    break;  
+                    receiveMessage.MediaId = mediaId;
+                    #endregion
+                    break;
                 case WeixinMessageType.Event:
-                   #region 事件
-		            string eventType = message.Body.Event.Value.ToLower();
+                    #region 事件
+                    string eventType = message.Body.Event.Value.ToLower();
                     string eventKey = string.Empty;
                     try
                     {
@@ -164,7 +168,7 @@ namespace MyProject.Task
                                 var sentCount = message.Body.SentCount.Value;//发送成功的粉丝数
                                 var errorCount = message.Body.FilterCount.Value;//发送失败的粉丝数
                                 //TODO:开发者自己的处理逻辑,这里用log4net记录日志
-                               // LogWriter.Default.WriteInfo(string.Format("mass send job finishe,msgId:{0},msgStatus:{1},totalCount:{2},filterCount:{3},sentCount:{4},errorCount:{5}", msgId, msgStatus, totalCount, filterCount, sentCount, errorCount));
+                                // LogWriter.Default.WriteInfo(string.Format("mass send job finishe,msgId:{0},msgStatus:{1},totalCount:{2},filterCount:{3},sentCount:{4},errorCount:{5}", msgId, msgStatus, totalCount, filterCount, sentCount, errorCount));
                             }
                             #endregion
                             break;
@@ -184,7 +188,7 @@ namespace MyProject.Task
                             var lng = message.Body.Longitude.Value.ToString();
                             var pcn = message.Body.Precision.Value.ToString();
                             //TODO:在此处将经纬度记录在数据库,这里用log4net记录日志
-                           // LogWriter.Default.WriteInfo(string.Format("openid:{0} ,location,lat:{1},lng:{2},pcn:{3}", openId, lat, lng, pcn));
+                            // LogWriter.Default.WriteInfo(string.Format("openid:{0} ,location,lat:{1},lng:{2},pcn:{3}", openId, lat, lng, pcn));
                             #endregion
                             break;
                         case "voice"://语音消息
@@ -327,8 +331,8 @@ namespace MyProject.Task
 
                             }
                             break;
-                    } 
-	#endregion
+                    }
+                    #endregion
                     break;
                 default:
                     result = RepayText(openId, string.Format("未处理消息类型:{0}", message.Type));
@@ -346,7 +350,7 @@ namespace MyProject.Task
         {
             var token = "";
             try
-            { 
+            {
                 token = CacheHelper.Get("XiaoAccountToken") as string;
                 if (string.IsNullOrEmpty(token))
                 {
@@ -362,17 +366,125 @@ namespace MyProject.Task
         }
 
         //发送文本信息
-        public string RepayText(string openId,string  content)
-        { 
+        public string RepayText(string openId, string content)
+        {
             return WebUtils.DoPost("https://api.weixin.qq.com/cgi-bin/message/custom/send?access_token=" + AccountToken(), "{\"touser\":\"" + openId + "\",\"msgtype\":\"text\",\"text\":{\"content\":\"" + content + "\"}}");
-           
+
         }
 
         //发送图文信息
         public string RepayLink(string openId, string title, string description, string url, string thumb_url)
-        { 
+        {
             return WebUtils.DoPost("https://api.weixin.qq.com/cgi-bin/message/custom/send?access_token=" + AccountToken(), "{\"touser\":\"" + openId + "\",\"msgtype\":\"link\",\"link\":{\"title\":\"" + title + "\",\"description\":\"" + description + "\",\"url\":\"" + url + "\",\"thumb_url\":\"" + thumb_url + "\"}}");
 
         }
+
+
+        #region 生成二维码
+        /// <summary>
+        /// 生成二维码图片到本地
+        /// </summary>
+        /// <param name="unionid"></param>
+        /// <returns></returns>
+        public string GetWxCodeToLocal(string unionid)
+        {
+            var wxcode = new WxCodeModel()
+            {
+                scene = unionid,
+                page = "pages/index/index",
+                width = 430,
+                auto_color = false,
+                is_hyaline = false,
+                // line_color = "{\"r\":\"0\",\"g\":\"0\",\"b\":\"0\"}"
+            };
+            var name = System.Web.HttpContext.Current.Server.MapPath("/Content/UploadImg/" + unionid + ".jpg");
+            var accountToken = "12_3XH0TwhYm2_WTx07yD0kHO-jNH3dirK3Ktj97H-FHQ7RANMBtZKgjFq8-kbgCeiIwaUg-3728Q6wFcGeYxtBBkPsvTs--7E3wM8ipDGtNV2K9TufeQpOxy3TTpPawFCYPr5kxphi_hCYusv3QCPgAFABNA";
+            var istrue = WebUtils.DoPostSaveImage("https://api.weixin.qq.com/wxa/getwxacodeunlimit?access_token=" + accountToken, JsonConvert.SerializeObject(wxcode), name);
+            if (istrue)
+            {
+                return "http://localhost:62821/Content/UploadImg/" + unionid + ".jpg";
+            }
+            return "";
+
+        }
+
+        /// <summary>
+        /// 生成二维码图片到数据库（保存二进制）
+        /// </summary>
+        /// <param name="unionid"></param>
+        /// <returns></returns>
+        public string GetWxCodeToData(string unionid)
+        {
+            var imgurl = "http://localhost:62821/XiaoApi/WxCodeIndex?unionid=" + unionid;
+            var wxcode = new WxCodeModel()
+            {
+                scene = unionid,
+                page = "pages/index/index",
+                width = 430,
+                auto_color = false,
+                is_hyaline = false,
+                // line_color = "{\"r\":\"0\",\"g\":\"0\",\"b\":\"0\"}"
+            };
+            var _WeiXinCodeDao = new WeiXinCodeDao();
+            var code = _WeiXinCodeDao.GetByUnionid(unionid);//查找是否已经生成过
+            if (code == null)
+            {
+
+                byte[] postdate;
+                var accountToken = "12_3XH0TwhYm2_WTx07yD0kHO-jNH3dirK3Ktj97H-FHQ7RANMBtZKgjFq8-kbgCeiIwaUg-3728Q6wFcGeYxtBBkPsvTs--7E3wM8ipDGtNV2K9TufeQpOxy3TTpPawFCYPr5kxphi_hCYusv3QCPgAFABNA";
+                var str = WebUtils.DoPostSaveImage("https://api.weixin.qq.com/wxa/getwxacodeunlimit?access_token=" + accountToken, JsonConvert.SerializeObject(wxcode), out postdate);
+                if (str)
+                {
+
+                    var _WeiXinCode = new WeiXinCode()
+                    {
+                        CreateTime = DateTime.Now,
+                        ImageStream = postdate,
+                        UnionId = unionid,
+                        WxCodeUrl = "",
+                    };
+                    _WeiXinCodeDao.Add(_WeiXinCode);//保存二进制流到数据库
+                    code = _WeiXinCode;
+
+                }
+            }
+            if (code != null)
+            {
+                return imgurl;
+            }
+            return "";
+        }
+
+        /// <summary>
+        /// 查询数据库获得图文二进制
+        /// </summary>
+        /// <param name="unionid"></param>
+        /// <returns></returns>
+        public byte[] WxCode(string unionid)
+        {
+            var _WeiXinCodeDao = new WeiXinCodeDao();
+            var code = _WeiXinCodeDao.GetByUnionid(unionid);//查找是否已经生成过
+            if (code != null)
+            {
+                return code.ImageStream;
+            }
+            return null;
+        } 
+        #endregion
+
+
     }
+
+    /// <summary>
+    /// 二维码提交数据模型
+    /// </summary>
+    public class WxCodeModel
+    {
+        public string  scene { get; set; }
+        public string page { get; set; }
+        public int width { get; set; }
+        public bool auto_color { get; set; }
+        public object line_color { get; set; }
+        public bool is_hyaline { get; set; }
+    } 
 }

@@ -56,6 +56,7 @@
     <Compile Include="Entities\Log.cs" />
     <Compile Include="Entities\SysException.cs" />
     <Compile Include="Entities\SysLog.cs" />
+    <Compile Include="Entities\WeiXinCode.cs" />
     <Compile Include="Entities\WeiXinMediaMessage.cs" />
     <Compile Include="Entities\WeiXinMenu.cs" />
     <Compile Include="Entities\WeiXinReplyMessage.cs" />

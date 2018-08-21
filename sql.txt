@@ -105,4 +105,31 @@ CREATE TABLE [dbo].[Log](
 GO
 
 
+USE [MyProject]
+GO
+
+/****** Object:  Table [dbo].[WeiXinCode]    Script Date: 08/21/2018 16:13:29 ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE TABLE [dbo].[WeiXinCode](
+	[Id] [int] IDENTITY(1,1) NOT NULL,
+	[UnionId] [nvarchar](50) NULL,
+	[WxCodeUrl] [nvarchar](500) NULL,
+	[ImageStream] [image] NULL,
+	[CreateTime] [datetime] NULL,
+ CONSTRAINT [PK_WeiXinCode] PRIMARY KEY CLUSTERED 
+(
+	[Id] ASC
+)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY]
+) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
+
+GO
+
+
+
+
 

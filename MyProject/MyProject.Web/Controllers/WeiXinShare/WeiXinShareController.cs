@@ -7,6 +7,8 @@ using MyProject.Task;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -38,12 +40,30 @@ namespace MyProject.Web.Controllers.WeiXinShare
 
         public ActionResult Test()
         {
+            var unionid = "ok0Ues-AdEBEbo00iTzUzerErr3w";
+            //var key = "buyu20180808websitedb"; 
+            var dict = new Dictionary<string, string>  
+            {
+                {"unionid",unionid},
+                //{"sign", CryptHelper.MD5Hash(unionid + key).ToLower()},
+            };
+           // var ss = CryptHelper.MD5(unionid + key, 32).ToLower();
+            var result = WebUtils.DoPost("https://api.lkgame.com/wechat/getopenidbyunionid", dict);
+            return View();
+        }
+
+        public ActionResult Test1()
+        { 
             //var dict = new Dictionary<string, string>  
             //{
-            //    {"unionid","ok0Ues96SblI9MIhFC2FN1tjtXk41"},
+            //    {"wx_appid","wxe20f2a757ccbbce3"},
+            //    {"openid", "oxC3qv_DpUKXo_ZvfI9BsFiidxu4"},
             //};
-            //var result = WebUtils.DoGet("http://m.lkgame.com/check/wxbind");
-            return View();
+            //var result = WebUtils.DoPost("http://112.74.198.84:8110/get_one_pe_order_by_player", dict);
+            var _WeiXinCodetask = new WeiXinCodeTask();
+            var code = _WeiXinCodetask.GetByUnionid("oxC3qvz5VNrOms3Qbhv7nmKYeMu0");
+            
+            return File(code.ImageStream, "image/jpg");
         }
 
         public ActionResult Testsql(string openid)
