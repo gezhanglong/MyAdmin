@@ -32,5 +32,35 @@ namespace MyProject.Services.Extensions
             return resultDateTime;
 
         }
+
+        /// <summary>
+        /// 传入日期计算当前时间距离该日期还有多少毫秒
+        /// </summary>
+        /// <param name="time"></param>
+        /// <returns></returns>
+        public static double GetMillisecondByDateTime(DateTime time)
+        {
+            if (time <= DateTime.Now)
+            {
+                return 0;
+            }
+            var times = time - DateTime.Now;
+            return  times.TotalMilliseconds;
+        }
+
+        /// <summary>
+        /// 计算两个时间差多少毫秒
+        /// </summary>
+        /// <param name="time"></param>
+        /// <returns></returns>
+        public static double GetMillisecondByDateTime(DateTime sTime,DateTime eTime)
+        {
+            if (eTime <= sTime)
+            {
+                return 0;
+            }
+            var times = eTime - sTime;
+            return times.TotalMilliseconds;
+        }
     }
 }

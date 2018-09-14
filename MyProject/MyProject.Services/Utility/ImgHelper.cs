@@ -3,6 +3,7 @@ using System.Drawing;
 using System.Drawing.Drawing2D;
 using System.Drawing.Imaging;
 using System.IO;
+using System.Net;
 using System.Web;
 
 namespace MyProject.Services.Utility
@@ -485,7 +486,51 @@ namespace MyProject.Services.Utility
         }
 
 
-       
+        /// <summary>
+        /// 本地图片地址转二进制
+        /// </summary>
+        /// <param name="imagepath"></param>
+        /// <returns></returns>
+        public static byte[] GetPictureData(string imagepath)
+        { 
+            ////根据图片文件的路径使用文件流打开，并保存为byte[] 
+            FileStream fs = new FileStream(imagepath, FileMode.Open);//可以是其他重载方法 
+            byte[] byData = new byte[fs.Length];
+            fs.Read(byData, 0, byData.Length);
+            fs.Close();
+            return byData;
+        }
 
+        /// <summary>
+        /// 网络图片地址转二进制
+        /// </summary>
+        /// <param name="imageNetUrl">网络地址：如http://pic.lkgame.com/Upload/WebGame/Images/201809/20180907092323325.jpg</param>
+        /// <returns></returns>
+        public static byte[] getPicData(string imageNetUrl)
+        { 
+            byte[] bytes;
+            WebRequest request = WebRequest.Create(imageNetUrl);
+
+            using (WebResponse response = request.GetResponse())
+            {
+                MemoryStream memoryStream = new MemoryStream();
+                const int bufferLength = 1024;
+                int actual;
+                byte[] buffer = new byte[bufferLength];
+                while ((actual = response.GetResponseStream().Read(buffer, 0, bufferLength)) > 0)
+                {
+                    memoryStream.Write(buffer, 0, actual);
+                }
+                memoryStream.Position = 0;
+
+                bytes = new byte[memoryStream.Length];
+                memoryStream.Read(bytes, 0, bytes.Length);
+                // 设置当前流的位置为流的开始
+                memoryStream.Seek(0, SeekOrigin.Begin);
+                memoryStream.Close();
+            }
+            return bytes;
+        }
+       
     }
 }

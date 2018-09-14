@@ -379,6 +379,31 @@ namespace MyProject.Task
 
         }
 
+        //发送图片信息
+        public string RepayImage(string openId, string media_id)
+        {
+            var AccessToken = "13_bvwIxfrllfagw2Q0zxi2f6W4zyHIKzJlo7uvCuimGp9UzZEVnBaSGjFSpWdrj4p3gA6SskL4fdgc54yj0KLrEgcuZJSvhCQSgWaysM1PVtrv5CHjzai9G8-wDXxXgcTfyngANDGzOXBog1wHWINdABAIUZ";
+            openId = "oSYTi5Mw8P51KIkCo_D_QIYHzWl8";
+            media_id = "sHRVZainI-WeLcvWhEiITB0-Vik6O13PUKZzea3vVP3mAt7J9uNgr6Y0irGJbY-N";
+            return WebUtils.DoPost("https://api.weixin.qq.com/cgi-bin/message/custom/send?access_token=" + AccessToken, "{\"touser\":\"" + openId + "\",\"msgtype\":\"image\",\"image\":{\"media_id\":\"" + media_id + "\"}}");
+
+        }
+
+        //发送模板信息
+        public void RepayTemplate(string openId, string page, string name, string date, string result, string formid, string templateid)
+        {
+            var AccessToken = "13_Kwwo-LITiv-padZsdHFD1My87jSTdzndzaJ3ry3b0d3KA_3jxuph5nU83mAJ4yrE9zAZupANJyomnKgyj1encMSV6lgN1seQx3GKv_jNggoux-wLKMqeRahVjNRmt0CZ5O4l99CWUQoK6muhECGgABAOMQ";
+            openId = "oSYTi5Mw8P51KIkCo_D_QIYHzWl8";
+            page = "pages/index/index";
+            name = "老铁，好久没来抽奖，想你了";
+            date = "2018-8-28";
+            result = "从哪里来";
+            formid = "1535427217082";
+            templateid = "GAAP6ubRmWbzUJgl7einBJaPJCUb2AvCbtebTDyggJ0";
+            var str = WebUtils.DoPost("https://api.weixin.qq.com/cgi-bin/message/wxopen/template/send?access_token=" + AccessToken, "{\"touser\":\"" + openId + "\",\"template_id\":\"" + templateid + "\",\"page\":\"" + page + "\",\"form_id\":\"" + formid + "\",\"data\": {\"keyword1\":{\"value\":\"" + name + "\"},\"keyword2\":{\"value\":\"" + date + "\"},\"keyword3\":{\"value\": \"" + result + "\"}},\"emphasis_keyword\": \"keyword1.DATA\"}");
+            
+        }
+
 
         #region 生成二维码
         /// <summary>
@@ -413,12 +438,22 @@ namespace MyProject.Task
         /// </summary>
         /// <param name="unionid"></param>
         /// <returns></returns>
-        public string GetWxCodeToData(string unionid)
+        public string GetWxCodeToData(string chanelid, string indirectchanel, string giftid, string unionid, int type = 0)
         {
+            var scene = "";
+            if (type == 0)
+            {
+                scene =  unionid;
+            }
+            if (type == 1)
+            {
+                unionid = chanelid + "_" + indirectchanel + "_" + giftid;
+                scene =  chanelid + "_" + indirectchanel + "_" + giftid;
+            }
             var imgurl = "http://localhost:62821/XiaoApi/WxCodeIndex?unionid=" + unionid;
             var wxcode = new WxCodeModel()
             {
-                scene = unionid,
+                scene = scene,
                 page = "pages/index/index",
                 width = 430,
                 auto_color = false,
@@ -431,7 +466,7 @@ namespace MyProject.Task
             {
 
                 byte[] postdate;
-                var accountToken = "12_3XH0TwhYm2_WTx07yD0kHO-jNH3dirK3Ktj97H-FHQ7RANMBtZKgjFq8-kbgCeiIwaUg-3728Q6wFcGeYxtBBkPsvTs--7E3wM8ipDGtNV2K9TufeQpOxy3TTpPawFCYPr5kxphi_hCYusv3QCPgAFABNA";
+                var accountToken = "13_6vjroJaJTjv1MbU4ukGR0N9AMyoZdf4QjRqfFW__3WYLTAspwYNxlpNFx7Bx6kbfXb1zP-HSU7OAZy8RyIVTrH-h4V1OhQ0VNzJkQNcJGUFrPx6TMl9Q4HF5ruVL6046iowEACUgxusQ-oOTXTRhAJAGCA";
                 var str = WebUtils.DoPostSaveImage("https://api.weixin.qq.com/wxa/getwxacodeunlimit?access_token=" + accountToken, JsonConvert.SerializeObject(wxcode), out postdate);
                 if (str)
                 {

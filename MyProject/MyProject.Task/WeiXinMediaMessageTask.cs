@@ -1,11 +1,15 @@
 ﻿using MyProject.Core.Entities;
 using MyProject.Data.Daos;
 using MyProject.Services.MvcPager;
+using MyProject.Services.Utility;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Web;
 
 namespace MyProject.Task
 {
@@ -47,6 +51,7 @@ namespace MyProject.Task
         {
             _dao.DeleteById(menuId);
         }
-        #endregion
+        #endregion 
     }
+     
 }

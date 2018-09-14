@@ -3,6 +3,8 @@ using MyProject.Controllers;
 using MyProject.Core.Dtos;
 using MyProject.Core.Entities;
 using MyProject.Core.Enum;
+using MyProject.Matrix.Controllers.WeiXinMediaMessage;
+using MyProject.Services.Utility;
 using MyProject.Task;
 using Newtonsoft.Json;
 using System;
@@ -125,12 +127,25 @@ namespace MyProject.Matrix.Controllers.Api
         }
 
 
+         //发送模板信息
+        public void RepayTemplate()
+        {
+            _sdk.RepayTemplate("","","","","","","");
+        }
+
+         //发送图片信息
+        public void RepayImage(string openId, string media_id)
+        {
+            _sdk.RepayImage(openId, media_id);
+        }
+
+
         /// <summary>
         /// 生成二维码
         /// </summary>
         /// <param name="loginInfo"></param>
         /// <returns></returns>
-        public ActionResult GetWxCode(string unionid,int type=0)
+        public ActionResult GetWxCode(string chanelid, string indirectchanel, string giftid, string unionid, int type = 0)
         {
             if (type == 0)//保存到本地
             {
@@ -138,7 +153,7 @@ namespace MyProject.Matrix.Controllers.Api
             }
             else//保存到数据库
             {
-                return Json(new RequestResultDto() { Msg = _sdk.GetWxCodeToData(unionid), Ret = 0 }, JsonRequestBehavior.AllowGet);
+                return Json(new RequestResultDto() { Msg = _sdk.GetWxCodeToData(chanelid,indirectchanel,giftid,unionid,type), Ret = 0 }, JsonRequestBehavior.AllowGet);
             }
             
         }
@@ -152,5 +167,8 @@ namespace MyProject.Matrix.Controllers.Api
         {
             return File(_sdk.WxCode(unionid), "image/jpg");//输出文件
         }
+
+
+      
     }
 }

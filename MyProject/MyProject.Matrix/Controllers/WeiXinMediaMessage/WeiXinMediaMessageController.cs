@@ -14,6 +14,7 @@ using MyProject.Services.Utility;
 using Codeplex.Data;
 using System.Text;
 using MyProject.Matrix.Controllers.Core;
+using System.Net;
 
 namespace MyProject.Matrix.Controllers.WeiXinMediaMessage
 {
@@ -52,21 +53,22 @@ namespace MyProject.Matrix.Controllers.WeiXinMediaMessage
             }
             switch (mediaType)
             {
-                case "1":type= WeiXinMediaMessageEnum.image.ToString(); break;
+                case "1": type = WeiXinMediaMessageEnum.image.ToString(); break;
                 case "2": type = WeiXinMediaMessageEnum.voice.ToString(); break;
                 case "3": type = WeiXinMediaMessageEnum.video.ToString(); break;
                 case "4": type = WeiXinMediaMessageEnum.thumb.ToString(); break;
-            } 
+            }
             HttpPostedFileBase file = Request.Files["files"];
             string filename = Path.GetFileName(file.FileName);
             var bytes = new byte[file.InputStream.Length];
             file.InputStream.Read(bytes, 0, (int)file.InputStream.Length);
-            var fileItem = new FileItem(filename, bytes); 
+             
+            var fileItem = new FileItem(filename, bytes,"image/jpeg");
             var fileParas = new Dictionary<string, FileItem>{
             {"file",fileItem}
             };
             var textParas = new Dictionary<string, string>{
-                {"access_token",_sdk.AccountToken()},
+                {"access_token",_sdk.AccountToken()},//
                 {"type",type}
              };
             var result = JsonConvert.DeserializeObject<MediaResult>(WebUtils.DoPost(url, textParas, fileParas));
@@ -89,6 +91,10 @@ namespace MyProject.Matrix.Controllers.WeiXinMediaMessage
             return CloseParentBox("操作成功", "/WeiXinMediaMessage/index");
 
         }
+
+
+
+       
 
         [SupportFilter]
         [HttpPost]

@@ -162,7 +162,7 @@ namespace MyProject.Task
                 return null;
  
             WechatUserInfo userInfo = Decrypt(loginInfo.encryptedData, loginInfo.iv, oiask.session_key);
- 
+            userInfo.session_key = oiask.session_key == null ? "" : oiask.session_key;
             return userInfo;
         }
  
@@ -188,6 +188,50 @@ namespace MyProject.Task
             }
             return null;
         }
+
+        /// <summary>
+        /// 分享群，解密群ID
+        /// </summary>
+        /// <param name="encryptedData"></param>
+        /// <param name="iv"></param>
+        /// <returns></returns>
+        public ShareInfo DecryptShare(string encryptedData, string iv, string unionid, string sessionKey)
+        {
+
+            ShareInfo userInfo;
+            if (string.IsNullOrEmpty(sessionKey))
+            {
+                return null;
+            }
+            //创建解密器生成工具实例
+            AesCryptoServiceProvider aes = new AesCryptoServiceProvider();
+            //设置解密器参数
+            aes.Mode = CipherMode.CBC;
+            aes.BlockSize = 128;
+            aes.Padding = PaddingMode.PKCS7;
+            //格式化待处理字符串
+            byte[] byte_encryptedData = Convert.FromBase64String(encryptedData);
+            byte[] byte_iv = Convert.FromBase64String(iv);
+            byte[] byte_sessionKey = Convert.FromBase64String(sessionKey);
+
+            aes.IV = byte_iv;
+            aes.Key = byte_sessionKey;
+            //根据设置好的数据生成解密器实例
+            ICryptoTransform transform = aes.CreateDecryptor();
+
+            //解密
+            byte[] final = transform.TransformFinalBlock(byte_encryptedData, 0, byte_encryptedData.Length);
+
+            //生成结果
+            string result = Encoding.UTF8.GetString(final);
+
+            //反序列化结果，生成用户信息实例
+            userInfo = JsonConvert.DeserializeObject<ShareInfo>(result);
+
+            return userInfo;
+
+        }
+
  
         
     }
@@ -216,6 +260,7 @@ namespace MyProject.Task
         public string avatarUrl { get; set; }
         public string unionId { get; set; }
         public Watermark watermark { get; set; }
+        public string session_key { get; set; }
  
         public class Watermark
         {
@@ -233,5 +278,13 @@ namespace MyProject.Task
         public string unionid { get; set; }
         public string errcode { get; set; }
         public string errmsg { get; set; }
+    }
+
+    /// <summary>
+    /// 分享群 解密群ID
+    /// </summary>
+    public class ShareInfo
+    {
+        public string openGId { get; set; }
     }
 } 
