@@ -42,6 +42,22 @@
     <Reference Include="BenchmarkDotNet">
       <HintPath>..\packages\BenchmarkDotNet.0.9.7\lib\net40\BenchmarkDotNet.dll</HintPath>
     </Reference>
+    <Reference Include="Common.Logging, Version=3.3.1.0, Culture=neutral, PublicKeyToken=af08829b84f0328e, processorArchitecture=MSIL">
+      <HintPath>..\packages\Common.Logging.3.3.1\lib\net40\Common.Logging.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Common.Logging.Core, Version=3.3.1.0, Culture=neutral, PublicKeyToken=af08829b84f0328e, processorArchitecture=MSIL">
+      <HintPath>..\packages\Common.Logging.Core.3.3.1\lib\net40\Common.Logging.Core.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="CrystalQuartz.Core, Version=4.2.1.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\CrystalQuartz.Remote.4.2.1.0\lib\CrystalQuartz.Core.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="CrystalQuartz.Web, Version=4.2.1.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\CrystalQuartz.Remote.4.2.1.0\lib\CrystalQuartz.Web.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="Deepleo.Weixin.SDK, Version=2.0.1.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\..\..\..\weixinSDK\weixinSDK-master\Deepleo.Web\bin\Deepleo.Weixin.SDK.dll</HintPath>
@@ -50,6 +66,10 @@
     <Reference Include="Newtonsoft.Json, Version=4.5.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\..\Pro2\MyProject\MyProject\bin\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="Quartz, Version=2.6.2.0, Culture=neutral, PublicKeyToken=f6b8c98a402cc8a4, processorArchitecture=MSIL">
+      <HintPath>..\packages\Quartz.2.6.2\lib\net40\Quartz.dll</HintPath>
+      <Private>True</Private>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
@@ -137,6 +157,7 @@
     <Compile Include="Controllers\AdminUsers\ViewModels\ChangePasswordModel.cs" />
     <Compile Include="Controllers\AdminUsers\ViewModels\SaveAdminUserModel.cs" />
     <Compile Include="Controllers\ExcelLog\ExcelLogController.cs" />
+    <Compile Include="Controllers\Job\JobController.cs" />
     <Compile Include="Controllers\WeiXinMediaMessage\WeiXinMediaMessageController.cs" />
     <Compile Include="Controllers\WeiXinMenu\WeiXinMenuController.cs" />
     <Compile Include="Controllers\WeiXinReceiveMessage\WeiXinReceiveMessageController.cs" />
@@ -550,6 +571,9 @@
     <Content Include="Content\Matrix_Admin\fonts\glyphicons-halflings-regular.woff" />
     <Content Include="Content\Matrix_Admin\fonts\glyphicons-halflings-regular.woff2" />
     <Content Include="App_Data\配置信息.xls" />
+    <None Include="job_scheduling_data_2_0.xsd">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="Scripts\jquery-1.7.1.intellisense.js" />
     <Content Include="Scripts\jquery-1.7.1.js" />
     <Content Include="Scripts\jquery-1.7.1.min.js" />

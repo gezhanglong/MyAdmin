@@ -11,17 +11,19 @@
 </head>
 <body>
     <div>
-        <img src="http://localhost:62821/xiaoApi/GetWxCode"/>
+       <button id="btnid">点击</button>
     </div>
 </body>
 </html>
 <script src="~/Scripts/jquery-3.0.0.min.js"></script> 
 <script type="text/javascript">
-    $(function () { 
-        $.post("https://api.lkgame.com/wechat/GetopenidByUnionid", { unionid: 'ok0Ues96SblI9MIhFC2FN1tjtXk4' }, function (data) {
+    $(function () {
+        $("#btnid").click(function () {
+            $.post("https://apiqa.lkgame.com/superlottery/dosharew?UnionId=oxC3qvz5VNrOms3Qbhv7nmKYeMu0&roundcode=20180918011", {}, function (data) {
                 alert(data);
-              });
-        
+            }); 
+        });
+       
     });
 
 </script>

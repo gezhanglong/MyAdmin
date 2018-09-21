@@ -4,6 +4,7 @@ using MyProject.Tasks;
 using MyProject.Core.Dtos;
 using System.Collections.Generic;
 using System.Web;
+using MyProject.Task;
 
 namespace MyProject.Matrix.Controllers
 {
@@ -65,5 +66,6 @@ namespace MyProject.Matrix.Controllers
             List<PermDto> perm = (List<PermDto>)Session[filePath];
             return perm;
         }
+ 
     }
 }

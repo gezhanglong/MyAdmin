@@ -4,15 +4,16 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{4D11BD71-374B-418F-9571-DC525440896B}</ProjectGuid>
-    <OutputType>Library</OutputType>
+    <ProjectGuid>{BD7B8AE6-EB94-4913-A273-35B1EA88EFED}</ProjectGuid>
+    <OutputType>Exe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>MyProject.Task</RootNamespace>
-    <AssemblyName>MyProject.Task</AssemblyName>
+    <RootNamespace>JobApplication</RootNamespace>
+    <AssemblyName>JobApplication</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
@@ -22,6 +23,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
     <OutputPath>bin\Release\</OutputPath>
@@ -38,22 +40,12 @@
       <HintPath>..\packages\Common.Logging.Core.3.3.1\lib\net40\Common.Logging.Core.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="Deepleo.Weixin.SDK, Version=2.0.1.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\..\..\weixinSDK\weixinSDK-master\Deepleo.Web\bin\Deepleo.Weixin.SDK.dll</HintPath>
-    </Reference>
-    <Reference Include="Newtonsoft.Json">
-      <HintPath>..\..\..\..\oldProject\MyProject\MyProject\bin\Newtonsoft.Json.dll</HintPath>
-    </Reference>
     <Reference Include="Quartz, Version=2.6.2.0, Culture=neutral, PublicKeyToken=f6b8c98a402cc8a4, processorArchitecture=MSIL">
       <HintPath>..\packages\Quartz.2.6.2\lib\net40\Quartz.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
-    <Reference Include="System.Net.Http" />
-    <Reference Include="System.Web" />
-    <Reference Include="System.Web.Mvc, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -61,49 +53,25 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AdminMenuTask.cs" />
-    <Compile Include="AdminPowerTask.cs" />
-    <Compile Include="AdminRoleMenuTask.cs" />
-    <Compile Include="AdminRolePowerTask.cs" />
-    <Compile Include="AdminUserRoleTask.cs" />
-    <Compile Include="AdminUserTask.cs" />
-    <Compile Include="JobControllTask.cs" />
-    <Compile Include="LogTask.cs" />
-    <Compile Include="SysExceptionTask.cs" />
-    <Compile Include="SysLogTask.cs" />
+    <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="WeiXinCodeTask.cs" />
-    <Compile Include="WeiXinMediaMessageTask.cs" />
-    <Compile Include="WeiXinMenuTask.cs" />
-    <Compile Include="WeiXinPayNotifySdk.cs" />
-    <Compile Include="WeiXinPaySdk.cs" />
-    <Compile Include="WeiXinRedPackSdk.cs" />
-    <Compile Include="WeiXinSdkTask.cs" />
-    <Compile Include="WeiXinReplyMessageTask.cs" />
-    <Compile Include="WeiXinReceiveMessageTask.cs" />
-    <Compile Include="WeiXinUserTask.cs" />
-    <Compile Include="XiaoWeiXinAppDecryptTask.cs" />
-    <Compile Include="XiaoWeiXinSdkTask.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+    <None Include="job_scheduling_data_2_0.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\MyProject.Core\MyProject.Core.csproj">
       <Project>{ccbb87d3-06a8-4675-b511-39ff4d21d527}</Project>
       <Name>MyProject.Core</Name>
     </ProjectReference>
-    <ProjectReference Include="..\MyProject.Data\MyProject.Data.csproj">
-      <Project>{e3e4e9bb-73f2-430f-8b5b-98354c5fc468}</Project>
-      <Name>MyProject.Data</Name>
+    <ProjectReference Include="..\MyProject.Task\MyProject.Task.csproj">
+      <Project>{4d11bd71-374b-418f-9571-dc525440896b}</Project>
+      <Name>MyProject.Task</Name>
     </ProjectReference>
-    <ProjectReference Include="..\MyProject.Services\MyProject.Services.csproj">
-      <Project>{61ba4f81-97a1-4a51-b88e-a3a9629f09aa}</Project>
-      <Name>MyProject.Services</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="job_scheduling_data_2_0.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
