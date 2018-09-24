@@ -44,14 +44,13 @@ namespace MyProject.Task
     }
 
     public  class MyJobTask : IJob
-    {
-        
-
+    { 
         public void Execute(IJobExecutionContext context)
         {
             var  log = new LogTask();
             log.AddLog(new Core.Entities.Log() { CreateTime = DateTime.Now, Msg = "job,start:" + DateTime.Now, Ret = 0 });
-        }
+        } 
+
 
     }
 }

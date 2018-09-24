@@ -1,4 +1,4 @@
-﻿using MyProject.Core.Entities;
+﻿using MyProject.Core.Entities; 
 using MyProject.Task;
 using Quartz;
 using Quartz.Impl;
@@ -16,7 +16,7 @@ namespace JobApplication
     {
         static void Main(string[] args)
         {
-            try {
+            try { 
                 var properties = new NameValueCollection();
                 properties["quartz.scheduler.instanceName"] = "我的作业";
 
@@ -41,7 +41,8 @@ namespace JobApplication
                 //数据源名称
                 properties["quartz.jobStore.dataSource"] = "MyP";
                 //连接字符串
-                properties["quartz.dataSource.MyP.connectionString"] = @"Server=.\SQLEXPRESS;Database=MyProject;Uid=sa;Pwd=123456;";
+                //properties["quartz.dataSource.MyP.connectionString"] = @"Server=.\SQLEXPRESS;Database=MyProject;Uid=sa;Pwd=123456;";
+                properties["quartz.dataSource.MyP.connectionString"] = @"Server=.;Database=MyProject;Uid=sa;Pwd=123456;";
                 //sqlserver版本
                 properties["quartz.dataSource.MyP.provider"] = "SqlServer-20";
 
@@ -52,34 +53,35 @@ namespace JobApplication
                 // First we must get a reference to a scheduler
                 ISchedulerFactory sf = new StdSchedulerFactory(properties);
                 IScheduler sched = sf.GetScheduler();
-               
 
-                //IJobDetail job = JobBuilder.Create<MyJobTask>()
-                //  .WithIdentity("job3", "group21")
-                //  .Build();
 
-                ////什么时候开始执行
-                //DateTime runTime = Convert.ToDateTime("2018-9-18 17:30:00");
-                //ITrigger trigger = TriggerBuilder.Create()
-                //.WithIdentity("trigger3", "group1")
-                //.StartAt(runTime)
-                //.WithSimpleSchedule(x => x
-                //.WithIntervalInSeconds(60) //1秒一次真男人
-                //.RepeatForever())//无限循环
-                //.Build();
+                IJobDetail job = JobBuilder.Create<MyJobTask>()
+                  .WithIdentity("job2", "group21")
+                  .Build();
 
-                //sched.ScheduleJob(job, trigger);
+                //什么时候开始执行
+                DateTime runTime = Convert.ToDateTime("2018-9-18 17:30:00");
+                ITrigger trigger = TriggerBuilder.Create()
+                .WithIdentity("trigger2", "group1")
+                .StartAt(runTime)
+                .WithSimpleSchedule(x => x
+                .WithIntervalInSeconds(60) //1秒一次真男人
+                .RepeatForever())//无限循环
+                .Build();
+
+                sched.ScheduleJob(job, trigger);
 
 
                 //启动任务
                 Console.WriteLine("Start:" + DateTime.Now);
-                var trigger = new MyTriggerListener();
-                trigger.Name="trigger";
-                sched.ListenerManager.AddTriggerListener(trigger, KeyMatcher<TriggerKey>.KeyEquals(new TriggerKey("trigger2", "group1"))); 
+                //var trigger = new MyTriggerListener();
+                //trigger.Name="trigger";
+                //sched.ListenerManager.AddTriggerListener(trigger, KeyMatcher<TriggerKey>.KeyEquals(new TriggerKey("trigger2", "group1"))); 
                 sched.Start();
             }
             catch (Exception e) {
-                Console.WriteLine("errormsg:" + e); 
+                Console.WriteLine("errormsg:" + e);
+                Console.Read();
             }
           
            
@@ -97,9 +99,7 @@ namespace JobApplication
     public class YouJob : IJob
     { 
         public void Execute(IJobExecutionContext context)
-        {
-            var log = new LogTask();
-            log.AddLog(new Log() { CreateTime = DateTime.Now, Msg = "job,start:" + DateTime.Now, Ret = 0 });
+        { 
             Console.WriteLine("Youtime:" + DateTime.Now);
         }
 
