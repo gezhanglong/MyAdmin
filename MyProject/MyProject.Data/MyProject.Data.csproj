@@ -47,6 +47,7 @@
     <Compile Include="Daos\AdminUserRoleDao.cs" />
     <Compile Include="Daos\JobControllDao.cs" />
     <Compile Include="Daos\LogDao.cs" />
+    <Compile Include="Daos\QRTZ_JOB_DETAILSDao.cs" />
     <Compile Include="Daos\SysExceptionDao.cs" />
     <Compile Include="Daos\SysLogDao.cs" />
     <Compile Include="Daos\WeiXinCodeDao.cs" />
