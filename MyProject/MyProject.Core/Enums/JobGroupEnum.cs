@@ -121,36 +121,6 @@ namespace MyProject.Core.Enums
         TriggersGroup10 = 10,
     }
 
-    /// <summary>
-    /// 调度
-    /// </summary>
-    public enum SchedulerEnum
-    {
-        /// <summary>
-        /// 调度1
-        /// </summary>
-        [Description("调度1")]
-        Scheduler1 = 1,
-        /// <summary>
-        /// 调度2
-        /// </summary>
-        [Description("调度2")]
-        Scheduler2 = 2,
-        /// <summary>
-        /// 调度3
-        /// </summary>
-        [Description("调度3")]
-        Scheduler3 = 3,
-        /// <summary>
-        /// 调度4
-        /// </summary>
-        [Description("调度4")]
-        Scheduler4 = 4,
-        /// <summary>
-        /// 调度5
-        /// </summary>
-        [Description("调度5")]
-        Scheduler5 = 5,
-       
-    }
+   
+     
 }

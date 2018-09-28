@@ -12,7 +12,7 @@ namespace MyProject.Data.Daos
     [DbFactory("MyP")]
     public class QRTZ_JOB_DETAILSDao : BaseDao<QRTZ_JOB_DETAILS>
     {
-        public PagedList<QRTZ_JOB_DETAILS> GetPagedList(string jname, int pageIndex, int pageSize)
+        public PagedList<QRTZ_JOB_DETAILS> GetPagedListJob(string jname, int pageIndex, int pageSize)
         {
             var sql = Sql.Builder;
             if (!string.IsNullOrEmpty(jname))
@@ -21,6 +21,12 @@ namespace MyProject.Data.Daos
             }
             sql.OrderBy("SCHED_NAME"); 
             return PagedList<QRTZ_JOB_DETAILS>(pageIndex, pageSize, sql);
+        }
+
+        public List<QRTZ_JOB_DETAILS> GetListJobName()
+        {
+            var sql = Sql.Builder.Select("JOB_NAME").From("QRTZ_JOB_DETAILS").OrderBy("SCHED_NAME");
+            return Query<QRTZ_JOB_DETAILS>(sql).ToList();
         }
 
         public QRTZ_JOB_DETAILS GetJob( string  jname)
@@ -45,8 +51,8 @@ namespace MyProject.Data.Daos
 
         public int UpdateJob(QRTZ_JOB_DETAILS model)
         {
-            var sql = Sql.Builder.Append("update QRTZ_JOB_DETAILS set SCHED_NAME=@0,JOB_GROUP=@1,[DESCRIPTION]=@2,JOB_CLASS_NAME=@3 where JOB_NAME=@4"
-                , model.SCHED_NAME, model.JOB_GROUP, model.DESCRIPTION, model.JOB_CLASS_NAME, model.JOB_NAME);
+            var sql = Sql.Builder.Append("update QRTZ_JOB_DETAILS set [DESCRIPTION]=@0,JOB_CLASS_NAME=@1 where JOB_NAME=@2"
+                , model.DESCRIPTION, model.JOB_CLASS_NAME, model.JOB_NAME);
             return Execute(sql);
         }
     }

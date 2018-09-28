@@ -1,95 +1,118 @@
-using System;
-using MyProject.Services.ORM;
+ï»¿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
-namespace MyProject.Core.Entities
+namespace MyProject.Core.Dtos
 {
-    /// <summary>
-    /// ´¥·¢Æ÷ĞÅÏ¢±í
-    /// </summary>
-    [TableName("QRTZ_TRIGGERS")]
-    [PrimaryKey("SCHED_NAME,TRIGGER_NAME,TRIGGER_GROUP,JOB_NAME,JOB_GROUP")]
-    public class QRTZ_TRIGGERS
+    public class QRTZ_TRIGGERSDto
     {
-        
         /// <summary>
-        /// ÈÎÎñµ÷¶ÈÃû³Æ
+        /// ä»»åŠ¡è°ƒåº¦åç§°
         /// </summary>
         public string SCHED_NAME { get; set; }
-        
+
         /// <summary>
-        /// ´¥·¢Æ÷Ãû³Æ
+        /// è§¦å‘å™¨åç§°
         /// </summary>
         public string TRIGGER_NAME { get; set; }
-        
+
         /// <summary>
-        /// ´¥·¢Æ÷ËùÊô×é
+        /// è§¦å‘å™¨æ‰€å±ç»„
         /// </summary>
         public string TRIGGER_GROUP { get; set; }
-        
+
         /// <summary>
-        /// jobÃû³Æ
+        /// jobåç§°
         /// </summary>
         public string JOB_NAME { get; set; }
-        
+
         /// <summary>
-        /// jobËùÊô×é
+        /// jobæ‰€å±ç»„
         /// </summary>
         public string JOB_GROUP { get; set; }
-        
+
         /// <summary>
-        /// ÃèÊö
+        /// æè¿°
         /// </summary>
         public string DESCRIPTION { get; set; }
-        
+
         /// <summary>
-        /// ÏÂ´ÎÖ´ĞĞÊ±¼ä
+        /// ä¸‹æ¬¡æ‰§è¡Œæ—¶é—´
         /// </summary>
-        public long? NEXT_FIRE_TIME { get; set; }
-        
+        public long NEXT_FIRE_TIME { get; set; }
+
         /// <summary>
-        /// ÉÏ´ÎÖ´ĞĞÊ±¼ä
+        /// ä¸Šæ¬¡æ‰§è¡Œæ—¶é—´
         /// </summary>
-        public long? PREV_FIRE_TIME { get; set; }
-        
+        public long PREV_FIRE_TIME { get; set; }
+
         /// <summary>
-        /// ÓÅÏÈ¼¶
+        /// ä¼˜å…ˆçº§
         /// </summary>
         public int? PRIORITY { get; set; }
-        
+
         /// <summary>
-        /// Ö´ĞĞ×´Ì¬£ºWAITING£¬PAUSED£¬ACQUIRED·Ö±ğÎª£ºµÈ´ı£¬ÔİÍ££¬ÔËĞĞÖĞ
+        /// æ‰§è¡ŒçŠ¶æ€ï¼šWAITINGï¼ŒPAUSEDï¼ŒACQUIREDåˆ†åˆ«ä¸ºï¼šç­‰å¾…ï¼Œæš‚åœï¼Œè¿è¡Œä¸­
         /// </summary>
         public string TRIGGER_STATE { get; set; }
-        
+
         /// <summary>
-        /// ´¥·¢Æ÷ÀàĞÍ£ºsimpleºÍcron
+        /// è§¦å‘å™¨ç±»å‹ï¼šsimpleå’Œcron
         /// </summary>
         public string TRIGGER_TYPE { get; set; }
-        
+
         /// <summary>
-        /// ¿ªÊ¼Ö´ĞĞÊ±¼ä
+        /// å¼€å§‹æ‰§è¡Œæ—¶é—´
         /// </summary>
         public long START_TIME { get; set; }
-        
+
         /// <summary>
-        /// ½áÊøÖ´ĞĞÊ±¼ä
+        /// ç»“æŸæ‰§è¡Œæ—¶é—´
         /// </summary>
         public long? END_TIME { get; set; }
-        
+
         /// <summary>
-        /// ÈÕ³ÌÃû³Æ
+        /// 
         /// </summary>
         public string CALENDAR_NAME { get; set; }
-        
+
         /// <summary>
         /// 
         /// </summary>
         public int MISFIRE_INSTR { get; set; }
-        
+
         /// <summary>
         /// 
         /// </summary>
         public byte[] JOB_DATA { get; set; }
+
+        /// <summary>
+        /// é‡å¤æ¬¡æ•° -1ä¸ºæ— é™
+        /// </summary>
+        public int REPEAT_COUNT { get; set; }
+
+        /// <summary>
+        /// é‡å¤é—´éš”
+        /// </summary>
+        public long REPEAT_INTERVAL { get; set; }
+
+        /// <summary>
+        /// å·²è§¦å‘æ¬¡æ•°
+        /// </summary>
+        public int TIMES_TRIGGERED { get; set; }
+
+        /// <summary>
+        ///  cronè¡¨è¾¾å¼
+        /// </summary>
+        public string  CRON_EXPRESSION { get; set; }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public string  TIME_ZONE_ID { get; set; }
+
         
     }
 }

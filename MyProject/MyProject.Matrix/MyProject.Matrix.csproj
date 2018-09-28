@@ -159,6 +159,7 @@
     <Compile Include="Controllers\ExcelLog\ExcelLogController.cs" />
     <Compile Include="Controllers\Job\JobController.cs" />
     <Compile Include="Controllers\Job\ViewModels\JobModel.cs" />
+    <Compile Include="Controllers\Job\ViewModels\TriggersModel.cs" />
     <Compile Include="Controllers\WeiXinMediaMessage\WeiXinMediaMessageController.cs" />
     <Compile Include="Controllers\WeiXinMenu\WeiXinMenuController.cs" />
     <Compile Include="Controllers\WeiXinReceiveMessage\WeiXinReceiveMessageController.cs" />
@@ -629,6 +630,8 @@
     <Content Include="Views\XiaoApi\WxCodeIndex.cshtml" />
     <None Include="Views\Job\JobList.cshtml" />
     <Content Include="Views\Job\JobSave.cshtml" />
+    <Content Include="Views\Job\TriggerList.cshtml" />
+    <Content Include="Views\Job\TriggerSave.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Content\UploadImg\" />

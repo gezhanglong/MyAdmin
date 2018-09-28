@@ -20,7 +20,7 @@ namespace MyProject.Web.Controllers.Test
         public ActionResult Testcase()
         {
             var result1 = new DateTime(636728598000000000).AddHours(8);
-           
+            var result2 = DateTime.Now.Ticks;
                 return Content("");
         }
 

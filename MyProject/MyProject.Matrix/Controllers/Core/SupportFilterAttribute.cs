@@ -102,13 +102,13 @@ namespace MyProject.Matrix.Controllers.Core
                 {
                     controller = Area + "/" + controller;
                 }
-                perm = (List<PermDto>)HttpContext.Current.Session[filePath];
-                if (perm == null)
-                {
+               // perm = (List<PermDto>)HttpContext.Current.Session[filePath];
+                //if (perm == null)
+                //{
                     var user = _adminUserTask.GetByUserName(account);
                     perm = _powersTask.GetPermList(user.RoleId, controller); //获取当前用户的权限列表
                     HttpContext.Current.Session[filePath] = perm;//获取的劝降放入会话由Controller调用 
-                }
+                //}
                 //当用户访问index时，只要权限>0就可以访问
                 if (actionName.ToLower() == "index")
                 {

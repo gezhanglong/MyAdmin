@@ -57,17 +57,18 @@ namespace JobApplication
 
 
                 //IJobDetail job = JobBuilder.Create<MyJob2>()
-                //  .WithIdentity("job1", "group22")
+                //  .WithIdentity("job6", "6")
                 //  .Build();
 
                 ////什么时候开始执行
-                //DateTime runTime = Convert.ToDateTime("2018-9-18 17:30:00");
+                //DateTime runTime = Convert.ToDateTime("2018-9-28 10:30:00");
                 //ITrigger trigger = TriggerBuilder.Create()
-                //.WithIdentity("trigger1", "group2")
+                //.WithIdentity("trigger6", "6")
                 //.StartAt(runTime)
-                //.WithSimpleSchedule(x => x
-                //.WithIntervalInSeconds(60) //1秒一次真男人
-                //.RepeatForever())//无限循环
+                //.WithCronSchedule("0 0/5 16 * * ? *") 
+                ////.WithSimpleSchedule(x => x 
+                ////.WithIntervalInSeconds(60) //1秒一次真男人
+                ////.RepeatForever())//无限循环
                 //.Build();
 
                 //sched.ScheduleJob(job, trigger);
@@ -110,7 +111,7 @@ namespace JobApplication
     {
         public void Execute(IJobExecutionContext context)
         {
-            System.Threading.Thread.Sleep(1000 * 60 * 10);//挂起10分钟
+            //System.Threading.Thread.Sleep(1000 * 60 * 10);//挂起10分钟
             Console.WriteLine("time2:" + DateTime.Now);
         }
 

@@ -21,6 +21,15 @@ namespace MyProject.Matrix.Controllers
             Response.End();
             return new EmptyResult();
         }
+
+        //alert
+        protected ActionResult AlertMsg(string msg)
+        {
+            var script = string.Format("<script>alert('{0}');</script>", msg);
+            Response.Write(script);
+            Response.End();
+            return new EmptyResult();
+        }
         
         //刷新父窗口
         protected ActionResult CloseParentBox(string msg, string returnUrl)

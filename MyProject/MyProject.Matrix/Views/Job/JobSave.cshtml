@@ -7,13 +7,13 @@
     $(function () {
         $("body").css({ "background-color": "#F9F9F9", "margin-top": "0px" });
         if ($("#JOB_NAME").val() != "") {
-            $("#JOB_NAME").attr("disabled", "disabled");
+            $("#JOB_NAME").attr("readonly unselectable", "on");
         }
         if ($("#SCHED_NAME").val() != "") {
-            $("#SCHED_NAME").attr("disabled", "disabled");
+            $("#SCHED_NAME").attr("readonly unselectable", "on");
         }
         if ($("#JOB_GROUP").val() != "") {
-            $("#JOB_GROUP").attr("disabled", "disabled");
+            $("#JOB_GROUP").attr("readonly unselectable", "on");
         }
     });
 </script>
@@ -22,14 +22,14 @@
         <h5>用户信息</h5>
     </div>
     <div class="widget-content nopadding">
-        @using (Html.BeginForm("Save", "Job", FormMethod.Post, new { @class = "formular", id = "form1" }))
+        @using (Html.BeginForm("JobSave", "Job", FormMethod.Post, new { @class = "formular", id = "form1" }))
         { 
             <table class="table table-bordered table-striped">
                 <tbody>
                     <tr class="even gradeC">
                         <td style="width: 150px;">@Html.LabelFor(c => c.SCHED_NAME)</td>
                         <td>
-                            @Html.TextBoxFor(c => c.SCHED_NAME, new { @class = "span11", @style = "width:50%;height: 30px;" })
+                             @Html.DropDownListFor(c => c.SCHED_NAME, ViewData["schedulerList"] as List<SelectListItem>, new { @style = "width:50%;height: 30px;" })  
                             <span style="color:red;"> @Html.ValidationMessage("SCHED_NAME")</span>
                         </td>
                     </tr>
@@ -43,8 +43,7 @@
                     <tr class="even gradeA">
                         <td>@Html.LabelFor(c => c.JOB_GROUP)</td>
                         <td>
-                             @Html.DropDownListFor(c => c.JOB_GROUP, ViewData["JobGroupList"] as List<SelectListItem>, new { @style = "width:50%;height: 30px;" })
-                          @* @Html.TextBoxFor(c => c.JOB_GROUP, new { @class = "span11", @style = "width:50%;height: 30px;" })*@
+                             @Html.DropDownListFor(c => c.JOB_GROUP, ViewData["JobGroupList"] as List<SelectListItem>, new { @style = "width:50%;height: 30px;" }) 
                             <span style="color:red;"> @Html.ValidationMessage("JOB_GROUP")</span>
                         </td>
                     </tr>

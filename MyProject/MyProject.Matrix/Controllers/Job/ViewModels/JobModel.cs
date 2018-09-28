@@ -11,7 +11,7 @@ namespace MyProject.Matrix.Controllers.Job.ViewModels
         /// <summary>
         /// 任务调度名称
         /// </summary>
-        [Display(Name = "任务调度名称"), Required(ErrorMessage = "请输入任务调度名称")]
+        [Display(Name = "任务调度名称"), Required(ErrorMessage = "请选择任务调度名称")]
         public string SCHED_NAME { get; set; }
 
         /// <summary>
@@ -23,7 +23,7 @@ namespace MyProject.Matrix.Controllers.Job.ViewModels
         /// <summary>
         /// job所属组
         /// </summary>
-        [Display(Name = "job所属组"), Required(ErrorMessage = "请输入组名")]
+        [Display(Name = "job所属组"), Required(ErrorMessage = "请选择组名")]
         public string JOB_GROUP { get; set; }
 
         /// <summary>
