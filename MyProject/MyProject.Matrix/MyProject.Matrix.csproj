@@ -628,6 +628,7 @@
     <Content Include="Views\ExcelLog\Index.cshtml" />
     <Content Include="Views\ExcelLog\SaveImage.cshtml" />
     <Content Include="Views\XiaoApi\WxCodeIndex.cshtml" />
+    <Content Include="Views\Job\FiredTriggersList.cshtml" />
     <None Include="Views\Job\JobList.cshtml" />
     <Content Include="Views\Job\JobSave.cshtml" />
     <Content Include="Views\Job\TriggerList.cshtml" />

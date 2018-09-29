@@ -114,8 +114,8 @@
 
         function DeletePost(url, data) {
             if (confirm('是否确定删除?')) {
-                $.post(url, data, function () {
-                    alert('删除成功');
+                $.post(url, data, function (msg) {
+                    alert(msg);
                     window.location.reload();
                 });
             }

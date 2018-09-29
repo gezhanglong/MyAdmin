@@ -19,7 +19,7 @@ namespace JobApplication
         {
             try { 
                 var properties = new NameValueCollection();
-                properties["quartz.scheduler.instanceName"] = "我的作业";
+                properties["quartz.scheduler.instanceName"] = "我的作业1";
 
                 // 设置线程池
                 properties["quartz.threadPool.type"] = "Quartz.Simpl.SimpleThreadPool, Quartz";
@@ -56,19 +56,20 @@ namespace JobApplication
                 IScheduler sched = sf.GetScheduler();
 
 
-                //IJobDetail job = JobBuilder.Create<MyJob2>()
+                //IJobDetail job = JobBuilder.Create<YouJob>()
                 //  .WithIdentity("job6", "6")
                 //  .Build();
 
                 ////什么时候开始执行
-                //DateTime runTime = Convert.ToDateTime("2018-9-28 10:30:00");
+                //DateTime runTime = Convert.ToDateTime("2018-9-29 13:35:00");
                 //ITrigger trigger = TriggerBuilder.Create()
                 //.WithIdentity("trigger6", "6")
                 //.StartAt(runTime)
-                //.WithCronSchedule("0 0/5 16 * * ? *") 
-                ////.WithSimpleSchedule(x => x 
-                ////.WithIntervalInSeconds(60) //1秒一次真男人
-                ////.RepeatForever())//无限循环
+                //    //.WithCronSchedule("0 0/5 16 * * ? *")
+                //    .WithSimpleSchedule(x => x
+                //    .WithIntervalInSeconds(60) //1秒一次真男人
+                //    .WithRepeatCount(5))//循环5次
+                //    // .RepeatForever())//无限循环
                 //.Build();
 
                 //sched.ScheduleJob(job, trigger);
@@ -79,7 +80,7 @@ namespace JobApplication
                 //var trigger = new MyTriggerListener();
                 //trigger.Name="trigger";
                 //sched.ListenerManager.AddTriggerListener(trigger, KeyMatcher<TriggerKey>.KeyEquals(new TriggerKey("trigger2", "group1"))); 
-                sched.Start();
+                sched.Start(); 
             }
             catch (Exception e) {
                 Console.WriteLine("errormsg:" + e);
@@ -106,17 +107,18 @@ namespace JobApplication
         }
 
     }
-
+     
     public class MyJob2 : IJob
     {
         public void Execute(IJobExecutionContext context)
         {
-            //System.Threading.Thread.Sleep(1000 * 60 * 10);//挂起10分钟
+            System.Threading.Thread.Sleep(1000 * 60 * 10);//挂起10分钟
             Console.WriteLine("time2:" + DateTime.Now);
         }
 
     }
 
+    //触发器监听
     public class MyTriggerListener : ITriggerListener
     {
         private string name;

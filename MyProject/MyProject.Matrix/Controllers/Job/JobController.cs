@@ -77,9 +77,9 @@ namespace MyProject.Matrix.Controllers.Job
                         JOB_DATA=new byte[0]
                     };
                    var result=  _job.AddJob(model);
-                   if (result <=0)
+                   if (result.Ret == -1)
                     {
-                        ModelState.AddModelError("JOB_NAME", "保存失败");
+                        ModelState.AddModelError("JOB_NAME", result.Msg);
                         return View(savemodel);
                     }
                    return CloseParentBox("保存成功", "/Job/JobList");
@@ -90,7 +90,12 @@ namespace MyProject.Matrix.Controllers.Job
                 model.JOB_CLASS_NAME = savemodel.JOB_CLASS_NAME;
                 model.DESCRIPTION = savemodel.DESCRIPTION;
 
-                _job.UpdateJob(model);
+                var result = _job.UpdateJob(model);
+                if (result.Ret == -1)
+                {
+                    ModelState.AddModelError("JOB_NAME", result.Msg);
+                    return View(savemodel);
+                }
                 return CloseParentBox("修改成功", "/Job/JobList");
             }
             return View(savemodel);
@@ -99,9 +104,9 @@ namespace MyProject.Matrix.Controllers.Job
        
         [SupportFilter]
         [HttpPost]
-        public void JobDelete(string jname)
+        public ActionResult JobDelete(string jname)
         {
-            _job.DelJob(jname);
+            return Content(_job.DelJob(jname).Msg); 
         } 
         #endregion
 
@@ -153,8 +158,8 @@ namespace MyProject.Matrix.Controllers.Job
                 model.TRIGGER_STATE = trigger.TRIGGER_STATE;
                 model.TRIGGER_TYPE = trigger.TRIGGER_TYPE;
                 model.CRON_EXPRESSION = trigger.CRON_EXPRESSION;
-                model.REPEAT_COUNT = model.REPEAT_COUNT; 
-                model.REPEAT_INTERVAL = trigger.REPEAT_INTERVAL / 60 / 60/1000.00;
+                model.REPEAT_COUNT = trigger.REPEAT_COUNT; 
+                model.REPEAT_INTERVAL = trigger.REPEAT_INTERVAL / 60/1000.00;
                 model.START_TIME= new DateTime(Convert.ToInt64(trigger.START_TIME)).AddHours(8);
                 if (trigger.END_TIME != null)
                 {
@@ -165,7 +170,7 @@ namespace MyProject.Matrix.Controllers.Job
             {
                 model.START_TIME = DateTime.Now;
                 model.REPEAT_COUNT = -1;//无限循环
-                model.REPEAT_INTERVAL = 1;
+                model.REPEAT_INTERVAL = 5;
             }
             return View(model);
         }
@@ -212,14 +217,14 @@ namespace MyProject.Matrix.Controllers.Job
                         JOB_NAME = jobModel.JOB_NAME,
                         JOB_GROUP = jobModel.JOB_GROUP, 
                         DESCRIPTION = savemodel.DESCRIPTION,
-                        NEXT_FIRE_TIME = savemodel.START_TIME.AddHours(-8).AddMilliseconds(savemodel.REPEAT_INTERVAL * 60*60 * 1000).Ticks, 
+                        NEXT_FIRE_TIME = savemodel.START_TIME.AddHours(-8).AddMilliseconds(savemodel.REPEAT_INTERVAL *60 * 1000).Ticks, 
                         PRIORITY=savemodel.PRIORITY,
                         TRIGGER_STATE=savemodel.TRIGGER_STATE,
                         TRIGGER_TYPE = savemodel.TRIGGER_TYPE,
                         START_TIME = savemodel.START_TIME.AddHours(-8).Ticks, 
                         CRON_EXPRESSION=savemodel.CRON_EXPRESSION,
                         REPEAT_COUNT=savemodel.REPEAT_COUNT,
-                        REPEAT_INTERVAL=Convert.ToInt64(savemodel.REPEAT_INTERVAL*60*1000) 
+                        REPEAT_INTERVAL = Convert.ToInt64(savemodel.REPEAT_INTERVAL  * 60 * 1000) 
                     };
                     if (savemodel.END_TIME != null)
                     {
@@ -228,9 +233,7 @@ namespace MyProject.Matrix.Controllers.Job
                     var result = _job.AddTriggers(model);
                     if (result.Ret==-1)
                     {
-                        var script = string.Format("<script>alert('{0}');</script>", result.Msg);
-                        Response.Write(script);
-                        Response.End();
+                        ModelState.AddModelError("JOB_NAME", result.Msg);
                         return View(savemodel);
                     }
                     return CloseParentBox(result.Msg, "/Job/TriggerList");
@@ -245,7 +248,7 @@ namespace MyProject.Matrix.Controllers.Job
                 model.START_TIME = savemodel.START_TIME.AddHours(-8).Ticks; 
                 model.CRON_EXPRESSION = savemodel.CRON_EXPRESSION;
                 model.REPEAT_COUNT = savemodel.REPEAT_COUNT;
-                model.REPEAT_INTERVAL = Convert.ToInt64(savemodel.REPEAT_INTERVAL * 60*60 * 1000);
+                model.REPEAT_INTERVAL = Convert.ToInt64(savemodel.REPEAT_INTERVAL *60 * 1000);
                 if (savemodel.END_TIME != null)
                 {
                     model.END_TIME = Convert.ToDateTime(savemodel.END_TIME).AddHours(-8).Ticks;
@@ -253,9 +256,7 @@ namespace MyProject.Matrix.Controllers.Job
                 var result = _job.UpdateTriggers(model);
                 if (result.Ret == -1)
                 {
-                    var script = string.Format("<script>alert('{0}');</script>", result.Msg);
-                    Response.Write(script);
-                    Response.End();
+                    ModelState.AddModelError("JOB_NAME", result.Msg);
                     return View(savemodel);
                 }
                 return CloseParentBox(result.Msg, "/Job/TriggerList");
@@ -266,12 +267,30 @@ namespace MyProject.Matrix.Controllers.Job
 
         [SupportFilter]
         [HttpPost]
-        public void TriggerDelete(string tname)
+        public ActionResult TriggerDelete(string tname)
         {
-            _job.DelTriggers(tname);
+           return  Content(_job.DelTriggers(tname).Msg);
         }
         #endregion
 
+        #region fired_triggers 操作 
+        public ActionResult FiredTriggersList()
+        { 
+            var model = _job.GetListFiredTriggers();
+            return View(model);
+        } 
+        #endregion
+         
     }
-   
+    public class JobMatrix : IJob
+    {
+        public void Execute(IJobExecutionContext context)
+        {
+            System.Threading.Thread.Sleep(1000 * 60 * 10);//挂起10分钟
+            var _log = new LogTask();
+            var log = new Log() {CreateTime=DateTime.Now,Msg="jobmatrix66666"+DateTime.Now,Ret=0 };
+            _log.AddLog(log); 
+        }
+
+    }
 }

@@ -6,16 +6,22 @@
 <script type="text/javascript">
     $(function () {
         $("body").css({ "background-color": "#F9F9F9", "margin-top": "0px" });
-        if ($("#JOB_NAME").val() != "") {
-            $("#JOB_NAME").attr("readonly unselectable", "on");
+        if ($("#JOB_NAME").val() != "") {//如果是修改有些参数不可修改
+            $("#JOB_NAME").attr("disabled", "disabled");
         }
         if ($("#SCHED_NAME").val() != "") {
-            $("#SCHED_NAME").attr("readonly unselectable", "on");
+            $("#SCHED_NAME").attr("disabled", "disabled");
         }
         if ($("#JOB_GROUP").val() != "") {
-            $("#JOB_GROUP").attr("readonly unselectable", "on");
+            $("#JOB_GROUP").attr("disabled", "disabled");
         }
     });
+
+    function formDate(form) {
+        $("#JOB_NAME").removeAttr("disabled");
+        $("#SCHED_NAME").removeAttr("disabled");
+        $("#JOB_GROUP").removeAttr("disabled");
+    }
 </script>
 <div class="widget-box" style="margin-top: 0; display: block;" id="div_opt_1">
     <div class="widget-title">
@@ -30,41 +36,42 @@
                         <td style="width: 150px;">@Html.LabelFor(c => c.SCHED_NAME)</td>
                         <td>
                              @Html.DropDownListFor(c => c.SCHED_NAME, ViewData["schedulerList"] as List<SelectListItem>, new { @style = "width:50%;height: 30px;" })  
-                            <span style="color:red;"> @Html.ValidationMessage("SCHED_NAME")</span>
+                            
                         </td>
                     </tr>
                     <tr class="even gradeA">
                         <td>@Html.LabelFor(c => c.JOB_NAME)</td>
                         <td>
                             @Html.TextBoxFor(c => c.JOB_NAME, new { @class = "span11", @style = "width:50%;height: 30px;"})
-                            <span style="color:red;"> @Html.ValidationMessage("JOB_NAME")</span>
+                            
                         </td>
                     </tr>
                     <tr class="even gradeA">
                         <td>@Html.LabelFor(c => c.JOB_GROUP)</td>
                         <td>
                              @Html.DropDownListFor(c => c.JOB_GROUP, ViewData["JobGroupList"] as List<SelectListItem>, new { @style = "width:50%;height: 30px;" }) 
-                            <span style="color:red;"> @Html.ValidationMessage("JOB_GROUP")</span>
+                             
                         </td>
                     </tr>
                     <tr class="even gradeA">
                         <td>@Html.LabelFor(c => c.JOB_CLASS_NAME)</td>
                         <td>
                             @Html.TextBoxFor(c => c.JOB_CLASS_NAME, new { @class = "span11", @style = "width:50%;height: 30px;" })
-                            <span style="color:red;"> @Html.ValidationMessage("JOB_CLASS_NAME")</span>
+                            
                         </td>
                     </tr>
                       <tr class="even gradeA">
                         <td>@Html.LabelFor(c => c.DESCRIPTION)</td>
                         <td>
                             @Html.TextBoxFor(c => c.DESCRIPTION, new { @class = "span11", @style = "width:50%;height: 30px;" })
-                            <span style="color:red;"> @Html.ValidationMessage("DESCRIPTION")</span>
+                             
                         </td>
                     </tr>
                     <tr class="odd gradeA">
                         <td></td>
                         <td>
-                            <button type="submit" class="btn btn-success btn-mini">保存</button>
+                            <button type="submit" class="btn btn-success btn-mini" onclick="return formDate(this.form1)">保存</button>
+                             <span style="color:red;"> @Html.ValidationSummary()</span>
                         </td>
                     </tr> 
                 </tbody>
@@ -72,4 +79,6 @@
         }
     </div>
 </div>
+
+
 

@@ -7,13 +7,13 @@
     $(function () {
         $("body").css({ "background-color": "#F9F9F9", "margin-top": "0px" });
         if ($("#JOB_NAME").val() != "") {
-            $("#JOB_NAME").attr("readonly ", "on");
+            $("#JOB_NAME").attr("disabled", "disabled");
         }
         if ($("#TRIGGER_NAME").val() != "") {
-            $("#TRIGGER_NAME").attr("readonly ", "on");
+            $("#TRIGGER_NAME").attr("disabled", "disabled");
         }
         if ($("#TRIGGER_GROUP").val() != "") {
-            $("#TRIGGER_GROUP").attr("readonly ", "on");
+            $("#TRIGGER_GROUP").attr("disabled", "disabled");
         }
         if ($("#TRIGGER_TYPE").val() == "SIMPLE") {
             $("#cronId").css("display", "none");
@@ -37,6 +37,11 @@
         });
         
     });
+    function formDate(form) {
+        $("#JOB_NAME").removeAttr("disabled");
+        $("#TRIGGER_NAME").removeAttr("disabled");
+        $("#TRIGGER_GROUP").removeAttr("disabled");
+    }
 </script>
 <div class="widget-box" style="margin-top: 0; display: block;" id="div_opt_1">
     <div class="widget-title">
@@ -114,7 +119,7 @@
                         <td>@Html.LabelFor(c => c.REPEAT_INTERVAL)</td>
                         <td>
                             @Html.TextBoxFor(c => c.REPEAT_INTERVAL, new { @class = "span11", @style = "width:50%;height: 30px;"})
-                           <span style="color:yellowgreen;">单位：小时</span>
+                           <span style="color:yellowgreen;">单位：分钟</span>
                         </td>
                     </tr>
                     <tr class="even gradeA">
@@ -134,7 +139,7 @@
                     <tr class="odd gradeA">
                         <td></td>
                         <td>
-                            <button type="submit" class="btn btn-success btn-mini">保存</button>
+                            <button type="submit" class="btn btn-success btn-mini" onclick="return formDate(this.form1)">保存</button>
                             <span style="color:red;"> @Html.ValidationSummary()</span>
                         </td>
                     </tr> 

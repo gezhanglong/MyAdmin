@@ -57,7 +57,7 @@
                   <th>开始时间</th>   
                   <th>结束时间</th>
                   <th>重复次数</th>
-                  <th>重复间隔</th>
+                  <th>重复间隔(毫秒)</th>
                   <th>cron表达式</th> 
                   <th>操作</th>
                 </tr>
@@ -101,7 +101,20 @@
                                 @item.PRIORITY 
                             </td>
                               <td style="text-align:center;">
-                               @item.TRIGGER_STATE
+                               @if (item.TRIGGER_STATE == "PAUSED")
+                               {
+                                    <text> <p style="color:yellow;">暂停</p></text> 
+                               }
+                               else if (item.TRIGGER_STATE == "ACQUIRED")
+                               {
+                                    <text> <p style="color:greenyellow;">运行中</p></text> 
+                               }else if (new DateTime(item.NEXT_FIRE_TIME).AddHours(8).AddMinutes(1) < DateTime.Now && item.TRIGGER_STATE == "WAITING")
+                               {
+                                  <text> <p style="color:red;">调度停止</p></text>
+                               }else
+                               { 
+                                    <text> <p style="color:green;">等待</p></text> 
+                               } 
                             </td>
                             <td style="text-align:center;">
                                @item.TRIGGER_TYPE
@@ -120,7 +133,7 @@
                                   } 
                             </td>
                             <td style="text-align:center;">
-                                @item.REPEAT_COUNT 
+                                @item.REPEAT_COUNT/@item.TIMES_TRIGGERED
                             </td>
                               <td style="text-align:center;">
                                @item.REPEAT_INTERVAL
@@ -185,8 +198,8 @@
 
         function DeletePost(url, data) {
             if (confirm('是否确定删除?')) {
-                $.post(url, data, function () {
-                    alert('删除成功');
+                $.post(url, data, function (msg) {
+                    alert(msg);
                     window.location.reload();
                 });
             }

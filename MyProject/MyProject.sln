@@ -19,6 +19,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JobApplication", "JobApplic
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JobNo2Application", "JobNo2Application\JobNo2Application.csproj", "{C4EA7AF6-9B4B-415D-A70F-9C6F54DDD1C3}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JobWinFormApplication", "JobWinFormApplication\JobWinFormApplication.csproj", "{F24770A5-8232-4F28-AB2B-2F058498CBB1}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -61,6 +63,10 @@ Global
 		{C4EA7AF6-9B4B-415D-A70F-9C6F54DDD1C3}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C4EA7AF6-9B4B-415D-A70F-9C6F54DDD1C3}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C4EA7AF6-9B4B-415D-A70F-9C6F54DDD1C3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F24770A5-8232-4F28-AB2B-2F058498CBB1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F24770A5-8232-4F28-AB2B-2F058498CBB1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F24770A5-8232-4F28-AB2B-2F058498CBB1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F24770A5-8232-4F28-AB2B-2F058498CBB1}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

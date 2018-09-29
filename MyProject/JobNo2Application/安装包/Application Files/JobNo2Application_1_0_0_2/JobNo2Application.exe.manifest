@@ -1,0 +1,101 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<asmv1:assembly xsi:schemaLocation="urn:schemas-microsoft-com:asm.v1 assembly.adaptive.xsd" manifestVersion="1.0" xmlns:asmv1="urn:schemas-microsoft-com:asm.v1" xmlns="urn:schemas-microsoft-com:asm.v2" xmlns:asmv2="urn:schemas-microsoft-com:asm.v2" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:co.v1="urn:schemas-microsoft-com:clickonce.v1" xmlns:asmv3="urn:schemas-microsoft-com:asm.v3" xmlns:dsig="http://www.w3.org/2000/09/xmldsig#" xmlns:co.v2="urn:schemas-microsoft-com:clickonce.v2">
+  <asmv1:assemblyIdentity name="JobNo2Application.exe" version="1.0.0.2" publicKeyToken="8ade14d9409c7796" language="neutral" processorArchitecture="msil" type="win32" />
+  <application />
+  <entryPoint>
+    <assemblyIdentity name="JobNo2Application" version="1.0.0.0" language="neutral" processorArchitecture="msil" />
+    <commandLine file="JobNo2Application.exe" parameters="" />
+  </entryPoint>
+  <trustInfo>
+    <security>
+      <applicationRequestMinimum>
+        <PermissionSet Unrestricted="true" ID="Custom" SameSite="site" />
+        <defaultAssemblyRequest permissionSetReference="Custom" />
+      </applicationRequestMinimum>
+      <requestedPrivileges xmlns="urn:schemas-microsoft-com:asm.v3">
+        <!--
+          UAC 清单选项
+          如果要更改 Windows 用户帐户控制级别，请用以下节点之一替换
+          requestedExecutionLevel 节点。
+
+        <requestedExecutionLevel  level="asInvoker" uiAccess="false" />
+        <requestedExecutionLevel  level="requireAdministrator" uiAccess="false" />
+        <requestedExecutionLevel  level="highestAvailable" uiAccess="false" />
+
+          如果要利用文件和注册表虚拟化提供
+          向后兼容性，请删除 requestedExecutionLevel 节点。
+    -->
+        <requestedExecutionLevel level="asInvoker" uiAccess="false" />
+      </requestedPrivileges>
+    </security>
+  </trustInfo>
+  <dependency>
+    <dependentOS>
+      <osVersionInfo>
+        <os majorVersion="5" minorVersion="1" buildNumber="2600" servicePackMajor="0" />
+      </osVersionInfo>
+    </dependentOS>
+  </dependency>
+  <dependency>
+    <dependentAssembly dependencyType="preRequisite" allowDelayedBinding="true">
+      <assemblyIdentity name="Microsoft.Windows.CommonLanguageRuntime" version="4.0.30319.0" />
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="Common.Logging.dll" size="44544">
+      <assemblyIdentity name="Common.Logging" version="3.3.1.0" publicKeyToken="AF08829B84F0328E" language="neutral" processorArchitecture="msil" />
+      <hash>
+        <dsig:Transforms>
+          <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+        </dsig:Transforms>
+        <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
+        <dsig:DigestValue>fUQ1d5kk9zndCr0BF7OA+kz2O7pVK8brng0p4kuF5tE=</dsig:DigestValue>
+      </hash>
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="Common.Logging.Core.dll" size="10240">
+      <assemblyIdentity name="Common.Logging.Core" version="3.3.1.0" publicKeyToken="AF08829B84F0328E" language="neutral" processorArchitecture="msil" />
+      <hash>
+        <dsig:Transforms>
+          <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+        </dsig:Transforms>
+        <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
+        <dsig:DigestValue>Q9Iabvl7i54CmUvh6u4tc+qtEPLcH6EA/Vdjb/r/RGw=</dsig:DigestValue>
+      </hash>
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="JobNo2Application.exe" size="7168">
+      <assemblyIdentity name="JobNo2Application" version="1.0.0.0" language="neutral" processorArchitecture="msil" />
+      <hash>
+        <dsig:Transforms>
+          <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+        </dsig:Transforms>
+        <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
+        <dsig:DigestValue>gBZTBbKwHQzv6bwVrd3FcV5gSwRp4PJCwLrZrd4+YYw=</dsig:DigestValue>
+      </hash>
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="Quartz.dll" size="893440">
+      <assemblyIdentity name="Quartz" version="2.6.2.0" publicKeyToken="F6B8C98A402CC8A4" language="neutral" processorArchitecture="msil" />
+      <hash>
+        <dsig:Transforms>
+          <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+        </dsig:Transforms>
+        <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
+        <dsig:DigestValue>kX01+97I8czs2w38rX2+WQZ5iIE9cSUhtK7lYQfGhLw=</dsig:DigestValue>
+      </hash>
+    </dependentAssembly>
+  </dependency>
+  <file name="JobNo2Application.exe.config" size="506">
+    <hash>
+      <dsig:Transforms>
+        <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+      </dsig:Transforms>
+      <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
+      <dsig:DigestValue>eCx4+aMURWmMIhK/3x/j3DaB1gGXuVNcNye2l66lX3A=</dsig:DigestValue>
+    </hash>
+  </file>
+<publisherIdentity name="CN=ZL\admin" issuerKeyHash="27f3efeb70142f297ac7811acf2a54d8a38ebc3c" /><Signature Id="StrongNameSignature" xmlns="http://www.w3.org/2000/09/xmldsig#"><SignedInfo><CanonicalizationMethod Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#" /><SignatureMethod Algorithm="http://www.w3.org/2000/09/xmldsig#rsa-sha256" /><Reference URI=""><Transforms><Transform Algorithm="http://www.w3.org/2000/09/xmldsig#enveloped-signature" /><Transform Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#" /></Transforms><DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" /><DigestValue>x1xwiikTcPQiuAeJVTakbZssxHpmdvO6t94jTCskjwE=</DigestValue></Reference></SignedInfo><SignatureValue>20TiV3t8yvt/H8SPh7dLcBI+9e8t4GMCLfmFMRBiOSYDqtNNY+JrTRTPSFFp95JR1fsw/ZGHJeFjAaTDsTGgwoLen69p44GR5PQGx4HaEMDL+5uTTKnwO1PARChSWgivTNu878DDABsj35/7yJUQZi5yukIpbsuPqayUHGJ3k2o=</SignatureValue><KeyInfo Id="StrongNameKeyInfo"><KeyValue><RSAKeyValue><Modulus>3BBbqi7k3aMRLiTwciw4ueR1vLl8pCrozH2gS6t6nnaid9wToEyYY7b9tod67kmTkU8H2BAyraf/+CWzHg9g5N47fKnjURd3HkkITMldPeMDyU6wNq6pGqqvXfuBm6Fja6bGFOY5Ykq/x0IbDWWhS0+DCsIR6kSZXx+4Hy5OfeE=</Modulus><Exponent>AQAB</Exponent></RSAKeyValue></KeyValue><msrel:RelData xmlns:msrel="http://schemas.microsoft.com/windows/rel/2005/reldata"><r:license xmlns:r="urn:mpeg:mpeg21:2003:01-REL-R-NS" xmlns:as="http://schemas.microsoft.com/windows/pki/2005/Authenticode"><r:grant><as:ManifestInformation Hash="018f242b4c23deb7baf376667ac42c9b6da436558907b822f47013298a705cc7" Description="" Url=""><as:assemblyIdentity name="JobNo2Application.exe" version="1.0.0.2" publicKeyToken="8ade14d9409c7796" language="neutral" processorArchitecture="msil" type="win32" /></as:ManifestInformation><as:SignedBy /><as:AuthenticodePublisher><as:X509SubjectName>CN=ZL\admin</as:X509SubjectName></as:AuthenticodePublisher></r:grant><r:issuer><Signature Id="AuthenticodeSignature" xmlns="http://www.w3.org/2000/09/xmldsig#"><SignedInfo><CanonicalizationMethod Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#" /><SignatureMethod Algorithm="http://www.w3.org/2000/09/xmldsig#rsa-sha256" /><Reference URI=""><Transforms><Transform Algorithm="http://www.w3.org/2000/09/xmldsig#enveloped-signature" /><Transform Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#" /></Transforms><DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" /><DigestValue>8i/XLYjXRoawe0CsVgkI2h5Dhs9rdZl9cJUU0xGiuPE=</DigestValue></Reference></SignedInfo><SignatureValue>rH09NW0W1osw0RQQReB+DvGGN/NYvcCEPBb6WliANOgiJIZGpuumcOFeJrymvs1/bkaiPZGSFDlGmSb6K2YaUwi/OfKCB8enN6m2FHG8D+dUYx1S4iu5ajxmZQytfurRjF9Ipgs8igoOHkZ7fi7v+xTGtep4BgCOjQeo+ud41n4=</SignatureValue><KeyInfo><KeyValue><RSAKeyValue><Modulus>3BBbqi7k3aMRLiTwciw4ueR1vLl8pCrozH2gS6t6nnaid9wToEyYY7b9tod67kmTkU8H2BAyraf/+CWzHg9g5N47fKnjURd3HkkITMldPeMDyU6wNq6pGqqvXfuBm6Fja6bGFOY5Ykq/x0IbDWWhS0+DCsIR6kSZXx+4Hy5OfeE=</Modulus><Exponent>AQAB</Exponent></RSAKeyValue></KeyValue><X509Data><X509Certificate>MIIBuTCCASKgAwIBAgIQMANgSOF3DqBDr2pjC/R/fjANBgkqhkiG9w0BAQsFADAbMRkwFwYDVQQDHhAAWgBMAFwAYQBkAG0AaQBuMB4XDTE4MDkyOTA3MjM0NloXDTE5MDkyOTEzMjM0NlowGzEZMBcGA1UEAx4QAFoATABcAGEAZABtAGkAbjCBnzANBgkqhkiG9w0BAQEFAAOBjQAwgYkCgYEA3BBbqi7k3aMRLiTwciw4ueR1vLl8pCrozH2gS6t6nnaid9wToEyYY7b9tod67kmTkU8H2BAyraf/+CWzHg9g5N47fKnjURd3HkkITMldPeMDyU6wNq6pGqqvXfuBm6Fja6bGFOY5Ykq/x0IbDWWhS0+DCsIR6kSZXx+4Hy5OfeECAwEAATANBgkqhkiG9w0BAQsFAAOBgQBP+mN379C5ljLnhUK9kxCbpU4Dz6mOB/Ao2TXU+08XCwo2gnliHJ/s2hX5v9ZUuXFhV1WQEsPzHfNTw40ITZwOpkkEOW7XGs0WRU+QfevLZG1DAYXIbwvo1I7s2KzfJupEvPmzZwjbiRx5qGm+9Xg17uv51GR/c90zILbkLP3pDQ==</X509Certificate></X509Data></KeyInfo></Signature></r:issuer></r:license></msrel:RelData></KeyInfo></Signature></asmv1:assembly>

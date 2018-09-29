@@ -28,7 +28,7 @@ namespace MyProject.Data.Daos
 
         public void UpdateCronTriggers(QRTZ_TRIGGERSDto model)
         { 
-            var sqlc = Sql.Builder.Append("update QRTZ_CRON_TRIGGERS setCRON_EXPRESSION=@0,TIME_ZONE_ID=@1 where TRIGGER_NAME=@2"
+            var sqlc = Sql.Builder.Append("update QRTZ_CRON_TRIGGERS set CRON_EXPRESSION=@0,TIME_ZONE_ID=@1 where TRIGGER_NAME=@2"
               , model.CRON_EXPRESSION, model.TIME_ZONE_ID, model.TRIGGER_NAME);
             Execute(sqlc); 
         }

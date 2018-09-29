@@ -46,6 +46,7 @@ namespace MyProject.Task
         private readonly QRTZ_SIMPLE_TRIGGERSDao _qrtz_simple_triggers = new QRTZ_SIMPLE_TRIGGERSDao();
         private readonly QRTZ_CRON_TRIGGERSDao _qrtz_cron_triggers = new QRTZ_CRON_TRIGGERSDao();
         private readonly QRTZ_SCHEDULER_STATEDao _qrtz_scheduler_state = new QRTZ_SCHEDULER_STATEDao();
+        private readonly QRTZ_FIRED_TRIGGERSDao _qrtz_fired_triggers = new QRTZ_FIRED_TRIGGERSDao();
         private readonly RequestResultDto _result = new RequestResultDto() { Ret=-1,Msg=""};
 
         #region  Job 操作 
@@ -64,26 +65,50 @@ namespace MyProject.Task
             return _qrtz_job_details.GetJob(jname);
         }
 
-        public void DelJob(string jname)
-        {
-            _qrtz_job_details.DelJob(jname);
-        }
-
-        public void UpdateJob(QRTZ_JOB_DETAILS model)
-        {
-            _qrtz_job_details.UpdateJob(model);
-        }
-        public int AddJob(QRTZ_JOB_DETAILS model)
+        public RequestResultDto DelJob(string jname)
         {
             try
             {
-                return Convert.ToInt32(_qrtz_job_details.AddJob(model));
+                _qrtz_job_details.DelJob(jname);
+                _result.Ret = 0;
+                _result.Msg = "删除成功";
             }
             catch (Exception e)
             {
-                return 0;
+                _result.Msg = e.Message;
             }
+            return _result;
+           
+        }
 
+        public RequestResultDto UpdateJob(QRTZ_JOB_DETAILS model)
+        {
+            try
+            {
+                _qrtz_job_details.UpdateJob(model);
+                _result.Ret = 0;
+                _result.Msg = "修改成功";
+            }
+            catch (Exception e)
+            {
+                _result.Msg = e.Message;
+            }
+            return _result;
+           
+        }
+        public RequestResultDto AddJob(QRTZ_JOB_DETAILS model)
+        {
+            try
+            {
+                _qrtz_job_details.AddJob(model);
+                _result.Ret = 0;
+                _result.Msg = "添加成功";
+            }
+            catch (Exception e)
+            {
+                _result.Msg = e.Message;
+            }
+            return _result; 
         } 
         #endregion
 
@@ -120,7 +145,7 @@ namespace MyProject.Task
              try
             {
                 _qrtz_triggers.UpdateTriggers(model);
-                if (model.TRIGGER_STATE == "SIMPLE")
+                if (model.TRIGGER_TYPE == "SIMPLE")
                 {
                     _qrtz_simple_triggers.UpdateSimpleTriggers(model);
                 }
@@ -166,6 +191,13 @@ namespace MyProject.Task
         public List<QRTZ_SCHEDULER_STATE> GetListScheduler()
         {
             return _qrtz_scheduler_state.GetListScheduler();
+        }
+        #endregion
+
+        #region  fired_triggers 操作
+        public List<QRTZ_FIRED_TRIGGERS> GetListFiredTriggers()
+        {
+            return _qrtz_fired_triggers.GetListFiredTriggers();
         }
         #endregion
     }

@@ -4,15 +4,16 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{E3E4E9BB-73F2-430F-8B5B-98354C5FC468}</ProjectGuid>
-    <OutputType>Library</OutputType>
+    <ProjectGuid>{F24770A5-8232-4F28-AB2B-2F058498CBB1}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>MyProject.Data</RootNamespace>
-    <AssemblyName>MyProject.Data</AssemblyName>
+    <RootNamespace>JobWinFormApplication</RootNamespace>
+    <AssemblyName>JobWinFormApplication</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
@@ -22,6 +23,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
     <OutputPath>bin\Release\</OutputPath>
@@ -36,45 +38,44 @@
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Deployment" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Daos\AdminMenuDao.cs" />
-    <Compile Include="Daos\AdminPowerDao.cs" />
-    <Compile Include="Daos\AdminRoleMenuDao.cs" />
-    <Compile Include="Daos\AdminRolePowerDao.cs" />
-    <Compile Include="Daos\AdminUserDao.cs" />
-    <Compile Include="Daos\AdminUserRoleDao.cs" />
-    <Compile Include="Daos\JobControllDao.cs" />
-    <Compile Include="Daos\LogDao.cs" />
-    <Compile Include="Daos\QRTZ_CRON_TRIGGERSDao.cs" />
-    <Compile Include="Daos\QRTZ_FIRED_TRIGGERSDao.cs" />
-    <Compile Include="Daos\QRTZ_JOB_DETAILSDao.cs" />
-    <Compile Include="Daos\QRTZ_SCHEDULER_STATEDao.cs" />
-    <Compile Include="Daos\QRTZ_SIMPLE_TRIGGERSDao.cs" />
-    <Compile Include="Daos\QRTZ_TRIGGERSDao.cs" />
-    <Compile Include="Daos\SysExceptionDao.cs" />
-    <Compile Include="Daos\SysLogDao.cs" />
-    <Compile Include="Daos\WeiXinCodeDao.cs" />
-    <Compile Include="Daos\WeiXinMediaMessageDao.cs" />
-    <Compile Include="Daos\WeiXinMenuDao.cs" />
-    <Compile Include="Daos\WeiXinReplyMessageDao.cs" />
-    <Compile Include="Daos\WeiXinReceiveMessageDao.cs" />
-    <Compile Include="Daos\WeiXinUserDao.cs" />
+    <Compile Include="Form1.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Form1.Designer.cs">
+      <DependentUpon>Form1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="Form1.resx">
+      <DependentUpon>Form1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\MyProject.Core\MyProject.Core.csproj">
-      <Project>{ccbb87d3-06a8-4675-b511-39ff4d21d527}</Project>
-      <Name>MyProject.Core</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\MyProject.Services\MyProject.Services.csproj">
-      <Project>{61ba4f81-97a1-4a51-b88e-a3a9629f09aa}</Project>
-      <Name>MyProject.Services</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <WCFMetadata Include="Service References\" />
+    <None Include="App.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

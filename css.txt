@@ -3,4 +3,17 @@
 3、table再多也不会把td撑大
     #ext{table-layout:fixed;} 
     #ext td {white-space:nowrap;overflow:hidden;word-break:keep-all;text-overflow:ellipsis }
-3、给div加滚动条 ：overflow: scroll; 
+4、给div加滚动条 ：overflow: scroll; 
+
+5.1、属性disabled="disabled" 不可修改，不可提交数据，变灰，对所有input元素有效
+       技巧：jquery提交前把disabled属性去掉
+       例子： 
+             //jquery部分
+             function formDate(form) {
+                  $("#JOB_NAME").removeAttr("disabled"); 
+              }
+              //提交按钮加上这句
+              onclick="return formDate(this.form1)"
+
+5.2、属性readonly="true"  不可修改，可提交数据，不变灰，对input(text/password)和textarea元素有效
+       小技巧：diabled可用readonly代替，background-color:#cccccc;加上灰色背景色就可以。
