@@ -56,6 +56,7 @@
     <Compile Include="Daos\SysExceptionDao.cs" />
     <Compile Include="Daos\SysLogDao.cs" />
     <Compile Include="Daos\WeiXinCodeDao.cs" />
+    <Compile Include="Daos\WeiXinConfigDao.cs" />
     <Compile Include="Daos\WeiXinMediaMessageDao.cs" />
     <Compile Include="Daos\WeiXinMenuDao.cs" />
     <Compile Include="Daos\WeiXinReplyMessageDao.cs" />

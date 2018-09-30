@@ -1,5 +1,54 @@
 alter talbe dbo.AdminUser add Email nvarchar(50) --建字段
 
+---------------建表格式化---------------------------
+
+--建表
+USE [MyProject]
+GO
+
+--判断是否有这个表
+IF EXISTS (SELECT * FROM dbo.sysobjects WHERE id = OBJECT_ID(N'[dbo].[WeiXinConfig]') AND OBJECTPROPERTY(id, N'ISUSERTABLE') = 1)
+DROP TABLE [dbo].[WeiXinConfig]
+GO
+
+--创建表
+CREATE TABLE [dbo].[WeiXinConfig] (
+  Category int NOT NULL,                --类别 1公众号；2小程序；
+  WeiXinId varchar(50)  NOT NULL ,      --微信号 
+  AppId varchar(50)  NOT NULL ,         --微信appid
+  Appsecret varchar(50) NOT NULL,       --微信appsecret
+  ApiUrl varchar(100) NULL,             --与微信服务器通信的接口url
+  ApiToken varchar(50) NULL,            --与微信服务器通信的接口token
+  WeiXinName   nvarchar(100) NOT NULL,  --微信名称
+  AccessToken varchar(500) NULL,        --微信accesstoken（两个小时过期）
+  JsApiToken varchar(500) NULL,         --微信Jsapitoken（两个小时过期）
+  TokenUpdateTime datetime NULL,        --accesstoken，Jsapitoken更新时间
+  MchId varchar(50) NULL,               --商户ID
+  PartnerKey varchar(50) NULL,          --商户key
+  CertUrl Varchar(100) NULL,            --服务器安装证书地址(发红包需要)
+  Remark nvarchar(500) NULL ,           --备注
+  CreateTime datetime NOT NULL,         --操作时间
+  Creater nvarchar(50) NOT NULL,        --操作人
+)
+GO
+
+--加主键、索引
+ALTER TABLE [dbo].[WeiXinConfig] WITH NOCHECK ADD
+  CONSTRAINT [PK_WeiXinConfig] PRIMARY KEY  CLUSTERED
+  (
+    WeiXinId,
+    AppId 
+  ) 
+GO
+
+--加索引
+--CREATE clustered INDEX IDX_c_WeiXinConfig ON WeiXinConfig(WeiXinId)       --聚集索引
+CREATE nonclustered INDEX IDX_n_WeiXinConfig ON WeiXinConfig(CreateTime)  --非聚集索引
+--exec sp_helpindex WeiXinConfig --查询索引
+--drop index WeiXinConfig.IDX_c_WeiXinConfig --删除索引
+GO
+-----------------------------------------------------
+
 --建表
 USE [MyProject]
 GO

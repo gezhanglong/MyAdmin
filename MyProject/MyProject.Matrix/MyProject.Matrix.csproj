@@ -160,6 +160,8 @@
     <Compile Include="Controllers\Job\JobController.cs" />
     <Compile Include="Controllers\Job\ViewModels\JobModel.cs" />
     <Compile Include="Controllers\Job\ViewModels\TriggersModel.cs" />
+    <Compile Include="Controllers\WeiXinConfig\ViewModels\ConfigModel.cs" />
+    <Compile Include="Controllers\WeiXinConfig\WeiXinConfigController.cs" />
     <Compile Include="Controllers\WeiXinMediaMessage\WeiXinMediaMessageController.cs" />
     <Compile Include="Controllers\WeiXinMenu\WeiXinMenuController.cs" />
     <Compile Include="Controllers\WeiXinReceiveMessage\WeiXinReceiveMessageController.cs" />
