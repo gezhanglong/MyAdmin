@@ -59,12 +59,19 @@ namespace MyProject.Matrix.Controllers.WeiXinConfig
                 {
                     model = new MyProject.Core.Entities.WeiXinConfig
                     {
-                        WeiXinName = savemodel.SCHED_NAME,
-                        JOB_NAME = savemodel.JOB_NAME,
-                        JOB_GROUP = savemodel.JOB_GROUP,
-                        JOB_CLASS_NAME = savemodel.JOB_CLASS_NAME,
-                        DESCRIPTION = savemodel.DESCRIPTION,
-                        JOB_DATA = new byte[0]
+                        WeiXinName = savemodel.WeiXinName,
+                        WeiXinId = savemodel.WeiXinId,
+                        Category = savemodel.Category,
+                        ApiToken = savemodel.ApiToken,
+                        ApiUrl = savemodel.ApiUrl,
+                        AppId = savemodel.AppId,
+                        Appsecret = savemodel.Appsecret,
+                        MchId = savemodel.MchId,
+                        PartnerKey = savemodel.PartnerKey,
+                        CertUrl = savemodel.CertUrl,
+                        Remark = savemodel.Remark,
+                        Creater = GetCurrentAdmin(),
+                        CreateTime = DateTime.Now
                     };
                     var result = _task.AddConfig(model);
                     if (result.Ret == -1)
@@ -77,8 +84,18 @@ namespace MyProject.Matrix.Controllers.WeiXinConfig
             }
             else
             {
-                model.JOB_CLASS_NAME = savemodel.JOB_CLASS_NAME;
-                model.DESCRIPTION = savemodel.DESCRIPTION;
+                model.WeiXinName = savemodel.WeiXinName;
+                model.Category = savemodel.Category;
+                model.ApiToken = savemodel.ApiToken;
+                model.ApiUrl = savemodel.ApiUrl;
+                model.AppId = savemodel.AppId;
+                model.Appsecret = savemodel.Appsecret;
+                model.MchId = savemodel.MchId;
+                model.PartnerKey = savemodel.PartnerKey;
+                model.CertUrl = savemodel.CertUrl;
+                model.Remark = savemodel.Remark;
+                model.Creater = GetCurrentAdmin();
+                model.CreateTime = DateTime.Now;
 
                 var result = _task.UpdateConfig(model);
                 if (result.Ret == -1)
