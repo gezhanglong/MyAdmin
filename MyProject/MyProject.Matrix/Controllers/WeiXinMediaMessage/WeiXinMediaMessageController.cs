@@ -21,7 +21,7 @@ namespace MyProject.Matrix.Controllers.WeiXinMediaMessage
     public class WeiXinMediaMessageController : BaseController
     {
         private readonly WeiXinMediaMessageTask _message = new WeiXinMediaMessageTask();
-        private readonly WeiXinSdkTask _sdk = new WeiXinSdkTask();
+        private readonly WeiXinSdkTask _sdk = new WeiXinSdkTask("","");
 
         [SupportFilter]
         public ActionResult Index(int pageIndex=1, int pageSize=15)

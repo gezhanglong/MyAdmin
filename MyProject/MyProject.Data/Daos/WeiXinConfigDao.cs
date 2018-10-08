@@ -23,6 +23,13 @@ namespace MyProject.Data.Daos
             return PagedList<WeiXinConfig>(pageIndex, pageSize, sql);
         }
 
+        public List<WeiXinConfig> GetListConfig()
+        {
+            var sql = Sql.Builder.Where("1=1").OrderBy("CreateTime desc");
+            return Query<WeiXinConfig>(sql).ToList();
+        }
+
+
         public WeiXinConfig GetConfig(string weixinId)
         {
             var sql = Sql.Builder.Where("weixinId=@0", weixinId);
@@ -47,6 +54,13 @@ namespace MyProject.Data.Daos
         {
             var sql = Sql.Builder.Append("update WeiXinConfig set Category=@0,ApiUrl=@2,ApiToken=@3,WeiXinName=@4,MchId=@5,PartnerKey=@6,CertUrl=@7,Remark=@8,CreateTime=@9,Creater=@10 where WeiXinId=@1"
                 , model.Category, model.WeiXinId, model.ApiUrl, model.ApiToken, model.WeiXinName, model.MchId, model.PartnerKey, model.CertUrl, model.Remark, model.CreateTime, model.Creater);
+            return Execute(sql);
+        }
+
+        public int UpdateToken(WeiXinConfig model)
+        {
+            var sql = Sql.Builder.Append("update WeiXinConfig set AccessToken=@0,JsApiToken=@2,TokenUpdateTime=@3 where WeiXinId=@1"
+                , model.AccessToken, model.WeiXinId, model.JsApiToken, model.TokenUpdateTime);
             return Execute(sql);
         }
     }

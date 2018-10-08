@@ -17,7 +17,7 @@ namespace MyProject.Web.Controllers.WeiXinShare
 {
     public class WeiXinShareController : Controller
     {
-        private readonly WeiXinSdkTask _sdk = new WeiXinSdkTask();
+        private readonly WeiXinSdkTask _sdk = new WeiXinSdkTask("wx6d6715c94a2f0d19", "d4624c36b6795d1d99dcf0547af5443d");
         private static readonly LogTask _log = new LogTask();
         public ActionResult Index()
         {
@@ -26,7 +26,7 @@ namespace MyProject.Web.Controllers.WeiXinShare
             {
                 return Redirect(_sdk.OauthUrl(Server.UrlEncode("http://gxyzhanglong.eicp.net:40298/WeiXinShare/Index?r=" + Guid.NewGuid().ToString("N"))));
             }
-            var token = _sdk.GetAccessToken(code, WeiXinSdkTask.appID, WeiXinSdkTask.appsecret); 
+            var token = _sdk.GetAccessToken(code); 
             var userinfo = _sdk.GetUserInfo(token.access_token, token.openid); 
             ViewBag.WxNickName = userinfo.nickname;
             ViewBag.Score = 888;

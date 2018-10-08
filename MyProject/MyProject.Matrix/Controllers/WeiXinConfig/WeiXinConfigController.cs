@@ -16,16 +16,16 @@ namespace MyProject.Matrix.Controllers.WeiXinConfig
 
         #region 操作
         [SupportFilter]
-        public ActionResult Index(string weixinId, int pageIndex = 1, int pageSize = 5)
+        public ActionResult Index(string wxId, int pageIndex = 1, int pageSize = 5)
         {
             ViewBag.perm = GetPermission();
-            var model = _task.GetPagedListConfig(weixinId, pageIndex, pageSize);
+            var model = _task.GetPagedListConfig(wxId, pageIndex, pageSize);
             return View(model);
         }
 
 
         [SupportFilter]
-        public ActionResult Save(string weixinId)
+        public ActionResult Save(string wxId)
         {
             var categoryList = new List<SelectListItem>();
             categoryList.Insert(0, new SelectListItem { Text = "公众号", Value = "1" });
@@ -33,9 +33,9 @@ namespace MyProject.Matrix.Controllers.WeiXinConfig
             ViewData["categoryList"] = categoryList;
 
             var model = new ConfigModel();
-            if (!string.IsNullOrEmpty(weixinId))
+            if (!string.IsNullOrEmpty(wxId))
             {
-                var job = _task.GetConfig(weixinId);
+                var job = _task.GetConfig(wxId);
                 if (job == null)
                     return AlertMsg("参数错误", HttpContext.Request.UrlReferrer.PathAndQuery);
 
@@ -53,6 +53,26 @@ namespace MyProject.Matrix.Controllers.WeiXinConfig
             ViewData["categoryList"] = categoryList;
 
             var model = _task.GetConfig(savemodel.WeiXinId);
+            if (model.AppId == savemodel.AppId)
+            {
+                ModelState.AddModelError("WeiXinName", "appid已存在");
+                return View(savemodel);
+            }
+            if (model.WeiXinId == savemodel.WeiXinId)
+            {
+                ModelState.AddModelError("WeiXinName", "微信号已存在");
+                return View(savemodel);
+            }
+            if (model.WeiXinName == savemodel.WeiXinName)
+            {
+                ModelState.AddModelError("WeiXinName", "微信名称已存在");
+                return View(savemodel);
+            }
+            if (model.ApiToken == savemodel.ApiToken)
+            {
+                ModelState.AddModelError("WeiXinName", "接口token已存在");
+                return View(savemodel);
+            }
             if (model == null)
             {
                 if (ModelState.IsValid)
@@ -111,9 +131,9 @@ namespace MyProject.Matrix.Controllers.WeiXinConfig
 
         [SupportFilter]
         [HttpPost]
-        public ActionResult Delete(string jname)
+        public ActionResult Delete(string wxId)
         {
-            return Content(_task.DelConfig(jname).Msg);
+            return Content(_task.DelConfig(wxId).Msg);
         }
         #endregion 
 

@@ -28,9 +28,8 @@ namespace MyProject.Matrix.Controllers.Api
         public ActionResult Get(string signature, string timestamp, string nonce, string echostr)
         {
             var token = XiaoWeiXinSdkTask.Token;//微信公众平台后台设置的Token
-            if (string.IsNullOrEmpty(token)) return Content("请先设置Token！");
-            var ent = ""; 
-            if (!BasicAPI.CheckSignature(signature, timestamp, nonce, token, out ent))
+            if (string.IsNullOrEmpty(token)) return Content("请先设置Token！"); 
+            if (!CheckSignature(XiaoWeiXinSdkTask.Token))
             {
                 return Content("参数错误！");
             }

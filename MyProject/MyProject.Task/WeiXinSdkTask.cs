@@ -23,10 +23,14 @@ namespace MyProject.Task
     /// </summary>
     public class WeiXinSdkTask
     {
-        public static string appID = "wx6d6715c94a2f0d19";
-        public static string appsecret = "d4624c36b6795d1d99dcf0547af5443d";
-        public static string Token = "zlwx2015";
-        public static string domain = ResultHelper.GetBaseUrl();//域名
+        public string appId { get; set; }
+        public string appsecret { get; set; }
+        public string domain { get { return ResultHelper.GetBaseUrl(); } } 
+        public WeiXinSdkTask(string appid, string appsecret)
+        {
+            this.appId = appid;
+            this.appsecret = appsecret; 
+        }
         private readonly WeiXinReceiveMessageTask _receiveMessage = new WeiXinReceiveMessageTask();
         private readonly WeiXinReplyMessageTask _replyMessage = new WeiXinReplyMessageTask(); 
         private readonly WeiXinUserTask _userTask = new WeiXinUserTask();
@@ -355,19 +359,13 @@ namespace MyProject.Task
         public string AccountToken()
         {
             var token = "";
-            try
-            { 
-                token = CacheHelper.Get("AccountToken") as string;
-                if (string.IsNullOrEmpty(token))
-                {
-                    token = BasicAPI.GetAccessToken(appID, appsecret).access_token;
-                    CacheHelper.Set("AccountToken", token, 60 * 60);//缓存一个小时 
-                }
-            }
-            catch (Exception e)
+            var _wxconfig = new WeiXinConfigTask();
+            var configList = _wxconfig.GetConfig();
+            var config = configList.Where(c => c.AppId==this.appId).ToList();
+            if (config != null && config.Count > 0)
             {
-                SysExceptionTask.AddException(e, "获取AccountToken");
-            }
+                token = config[0].AccessToken;
+            } 
             return token;
         }
 
@@ -379,19 +377,13 @@ namespace MyProject.Task
         public string JsApiToken()
         {
             var token = "";
-            try
+            var _wxconfig = new WeiXinConfigTask();
+            var configList = _wxconfig.GetConfig();
+            var config = configList.Where(c => c.AppId == this.appId).ToList();
+            if (config != null && config.Count > 0)
             {
-                token = CacheHelper.Get("JsApiToken") as string;
-                if (string.IsNullOrEmpty(token))
-                {
-                    token = JSAPI.GetTickect(this.AccountToken()).ticket;
-                    CacheHelper.Set("JsApiToken", token, 60 * 60);//缓存一个小时 
-                }
-            }
-            catch (Exception e)
-            {
-                SysExceptionTask.AddException(e, "获取JsApiToken");
-            }
+                token = config[0].JsApiToken;
+            } 
             return token;
         }
 
@@ -402,15 +394,15 @@ namespace MyProject.Task
         /// <returns></returns>
         public string OauthUrl(string redirectUrl, string scope = "snsapi_userinfo")
         {
-            return string.Format("https://open.weixin.qq.com/connect/oauth2/authorize?appid={0}&redirect_uri={1}&response_type=code&scope={2}&state=1#wechat_redirect", appID, redirectUrl, scope);
+            return string.Format("https://open.weixin.qq.com/connect/oauth2/authorize?appid={0}&redirect_uri={1}&response_type=code&scope={2}&state=1#wechat_redirect", appId, redirectUrl, scope);
         }
 
         //通过code换取网页授权access_token
-        public OAuthDto GetAccessToken(string code, string appId, string appSecret)
+        public OAuthDto GetAccessToken(string code)
         {
             var textParas = new Dictionary<string, string>{ 
                 {"appid",appId},
-                {"secret",appSecret},
+                {"secret",appsecret},
                 {"code",code},
                 {"grant_type","authorization_code"}
                 

@@ -21,7 +21,7 @@ namespace MyProject.Matrix.Controllers.WeiXinReplyMessage
     {
         private readonly WeiXinReplyMessageTask _message = new WeiXinReplyMessageTask();
         private readonly WeiXinMediaMessageTask _mediaMessage = new WeiXinMediaMessageTask();
-        private readonly WeiXinSdkTask _sdk = new WeiXinSdkTask();
+        private readonly WeiXinSdkTask _sdk = new WeiXinSdkTask("wx6d6715c94a2f0d19", "d4624c36b6795d1d99dcf0547af5443d");
 
         [SupportFilter]
         public ActionResult Index(int pageIndex = 1, int pageSize = 15)

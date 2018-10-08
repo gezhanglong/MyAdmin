@@ -10,7 +10,7 @@ namespace MyProject.Web.Controllers.ApiWeb
 {
     public class ApiWebController : Controller
     {
-        private readonly WeiXinSdkTask _sdk = new WeiXinSdkTask();
+        private readonly WeiXinSdkTask _sdk = new WeiXinSdkTask("","");
 
         public ActionResult Index()
         {
@@ -70,7 +70,7 @@ namespace MyProject.Web.Controllers.ApiWeb
             var obj = new JsApiConfigModel
             {
                 debug = debug,
-                appId = WeiXinSdkTask.appID,
+                appId = _sdk.appId,
                 timestamp = timestamp,
                 nonceStr = nonceStr,
                 jsApiList = jsApiList,

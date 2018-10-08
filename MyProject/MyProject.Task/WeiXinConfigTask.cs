@@ -2,6 +2,7 @@
 using MyProject.Core.Entities;
 using MyProject.Data.Daos;
 using MyProject.Services.MvcPager;
+using MyProject.Services.Utility;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,7 +16,7 @@ namespace MyProject.Task
         private readonly WeiXinConfigDao _config = new WeiXinConfigDao();
         private readonly RequestResultDto _result = new RequestResultDto() { Ret = -1, Msg = "" };
 
-        #region  Job 操作
+        #region   操作
         public PagedList<WeiXinConfig> GetPagedListConfig(string weixinId, int pageIndex, int pageSize)
         {
             return _config.GetPagedListConfig(weixinId, pageIndex, pageSize);
@@ -57,6 +58,22 @@ namespace MyProject.Task
             return _result;
 
         }
+        public RequestResultDto UpdateToken(WeiXinConfig model)
+        {
+            try
+            {
+                _config.UpdateToken(model);
+                _result.Ret = 0;
+                _result.Msg = "更新成功";
+            }
+            catch (Exception e)
+            {
+                _result.Msg = e.Message;
+            }
+            return _result;
+
+        }
+
         public RequestResultDto AddConfig(WeiXinConfig model)
         {
             try
@@ -72,5 +89,29 @@ namespace MyProject.Task
             return _result;
         }
         #endregion
+
+        /// <summary>
+        /// 获取WeiXinConfig并缓存5分钟
+        /// </summary>
+        /// <returns></returns>
+        public List<WeiXinConfig> GetConfig()
+        {
+            var config = new List<WeiXinConfig>();
+            try
+            {
+                config = CacheHelper.Get("WeiXinConfig") as List<WeiXinConfig>;
+                if (config == null || config.Count <= 0)
+                {
+                    config = _config.GetListConfig();
+                    CacheHelper.Set("WeiXinConfig", config, 60 * 5);//缓存5分钟 
+                }
+            }
+            catch (Exception e)
+            {
+                SysExceptionTask.AddException(e, "获取WeiXinConfig");
+            }
+            return config;
+        }
+
     }
 }

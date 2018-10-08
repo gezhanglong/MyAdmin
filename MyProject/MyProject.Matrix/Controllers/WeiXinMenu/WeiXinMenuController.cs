@@ -276,7 +276,7 @@ namespace MyProject.Matrix.Controllers.WeiXinMenu
                 }
 
             }
-            var sdk = new WeiXinSdkTask();
+            var sdk = new WeiXinSdkTask("","");
             var result =  CustomMenuAPI.Create(sdk.AccountToken(), JsonConvert.SerializeObject(menuModel));
             if (result)
             {

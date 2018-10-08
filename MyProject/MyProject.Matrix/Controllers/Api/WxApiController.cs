@@ -17,8 +17,8 @@ using Tencent;
 namespace MyProject.Matrix.Controllers.Api
 {
     public class WxApiController : Controller
-    {
-        private readonly WeiXinSdkTask _sdk = new WeiXinSdkTask();
+    { 
+        private readonly WeiXinConfigTask _config = new WeiXinConfigTask();
         private readonly LogTask _log = new LogTask();
 
         #region 公众号接收信息接口
@@ -26,10 +26,9 @@ namespace MyProject.Matrix.Controllers.Api
         [ActionName("Index")]
         public ActionResult Get(string signature, string timestamp, string nonce, string echostr)
         {
-            var token = WeiXinSdkTask.Token;//微信公众平台后台设置的Token
-            if (string.IsNullOrEmpty(token)) return Content("请先设置Token！");
-            var ent = "";
-            if (!BasicAPI.CheckSignature(signature, timestamp, nonce, token, out ent))
+            var appid = "";
+            var appsecret = "";
+            if (!CheckSignature(out appid,out appsecret)) 
             { 
                 return Content("参数错误！");
             }
@@ -39,59 +38,80 @@ namespace MyProject.Matrix.Controllers.Api
         [HttpPost]
         [ActionName("Index")]
         public ActionResult Post(string signature, string timestamp, string nonce, string echostr)
-        {
-            WeixinMessage message = null;
-            var safeMode = Request.QueryString.Get("encrypt_type") == "aes";
-            using (var streamReader = new StreamReader(Request.InputStream))
+        { 
+            try
             {
-                var decryptMsg = string.Empty;
-                var msg = streamReader.ReadToEnd();
-
-                #region 解密
-                if (safeMode)
+                var appid = "";
+                var appsecret = "";
+                if (CheckSignature(out appid,out appsecret))
                 {
-                    var msg_signature = Request.QueryString.Get("msg_signature");
-                    var wxBizMsgCrypt = new WXBizMsgCrypt(WeiXinSdkTask.Token, WeiXinSdkTask.appsecret, WeiXinSdkTask.appID);
-                    var ret = wxBizMsgCrypt.DecryptMsg(msg_signature, timestamp, nonce, msg, ref decryptMsg);
-                    if (ret != 0)//解密失败
+                    WeixinMessage message = null;
+                    string msgBody = "";
+                    Stream s = System.Web.HttpContext.Current.Request.InputStream;
+                    byte[] b = new byte[s.Length];
+                    s.Read(b, 0, (int)s.Length);
+                    msgBody = Encoding.UTF8.GetString(b);
+                    if (string.IsNullOrWhiteSpace(msgBody))
                     {
-                        _log.AddLog(new Log() { Msg = "message:" + ret + "request:" + msg,Ret=0,CreateTime=DateTime.Now });
+                        _log.AddLog(new Log() { Msg = "lkpost过来的数据包：空" + msgBody.Length + DateTime.Now.ToString(),CreateTime=DateTime.Now,Ret=0  });
+
+                        return null;
                     }
+                    _log.AddLog(new Log() { Msg = "msgBody:" + msgBody.Length, CreateTime = DateTime.Now, Ret = 0 });
+
+                    message = AcceptMessageAPI.Parse(msgBody);
+                    WeiXinSdkTask _sdk = new WeiXinSdkTask(appid,appsecret);
+                    var response = _sdk.Execute(message);//处理接收到的信息
+                    _log.AddLog(new Log() { Msg = "response:" + response, CreateTime = DateTime.Now, Ret = 0 });
+                    return new ContentResult
+                    {
+                        Content = response,
+                        ContentType = "text/xml",
+                        ContentEncoding = System.Text.UTF8Encoding.UTF8
+                    }; 
+
                 }
                 else
                 {
-                    decryptMsg = msg;
-                }
-                #endregion
+                    _log.AddLog(new Log() { Msg = "lk消息真实性效验，不通过", CreateTime = DateTime.Now, Ret = 0 });
 
-                message = AcceptMessageAPI.Parse(decryptMsg);
+                }
             }
-            var response = _sdk.Execute(message);//处理接收到的信息
-            var encryptMsg = string.Empty;
-            #region 加密
-            if (safeMode)
+            catch (Exception ex)
             {
-                var msg_signature = Request.QueryString.Get("msg_signature");
-                var wxBizMsgCrypt = new WXBizMsgCrypt(WeiXinSdkTask.Token, WeiXinSdkTask.appsecret, WeiXinSdkTask.appID);
-                var ret = wxBizMsgCrypt.EncryptMsg(response, timestamp, nonce, ref encryptMsg);
-                if (ret != 0)//加密失败
+                _log.AddLog(new Log() { Msg = "lk出错：" + ex.Message + DateTime.Now.ToString(), CreateTime = DateTime.Now, Ret = 0 });
+
+            }
+
+            return Content(""); //返回空串表示有响应
+        }
+
+        public bool CheckSignature(out string appid,out string appsecret)
+        { 
+            string signature = System.Web.HttpContext.Current.Request.QueryString["signature"] == null ? "" : System.Web.HttpContext.Current.Request.QueryString["signature"].Trim();
+            string timestamp = System.Web.HttpContext.Current.Request.QueryString["timestamp"] == null ? "" : System.Web.HttpContext.Current.Request.QueryString["timestamp"].Trim();
+            string nonce = System.Web.HttpContext.Current.Request.QueryString["nonce"] == null ? "" : System.Web.HttpContext.Current.Request.QueryString["nonce"].Trim();
+            var configList = _config.GetConfig(); 
+            appid = "";
+            appsecret = "";
+            foreach (var item in configList)
+            {
+                string[] arrTmp = { item.ApiToken, timestamp, nonce };
+                Array.Sort(arrTmp);
+                string tmpStr = string.Join("", arrTmp);
+                tmpStr = FormsAuthentication.HashPasswordForStoringInConfigFile(tmpStr, "SHA1");//对该字符串进行sha1加密
+                tmpStr = tmpStr.ToLower();//对字符串中的字母部分进行小写转换，非字母字符不作处理 
+                if (tmpStr == signature) //开发者获得加密后的字符串可与signature对比
                 {
-                    SysLogTask.AddLog(new SysLogDto() { Message = "message:" + ret + "response:" + response, Module = LogModuleEnum.WeiXin, Operator = "zl", Result = "加密失败", Type = LogTypeEnum.WeiXinREceive });
+                    _log.AddLog(new Log() {CreateTime=DateTime.Now,Ret=0,Msg="当前微信号:"+item.WeiXinId });
+                    appid = item.AppId;
+                    appsecret = item.Appsecret;
+                    return true;
                 }
             }
-            else
-            {
-                encryptMsg = response;
-            }
-            #endregion
 
-            return new ContentResult
-            {
-                Content = encryptMsg,
-                ContentType = "text/xml",
-                ContentEncoding = System.Text.UTF8Encoding.UTF8
-            };
-        } 
+            return false;
+        }
         #endregion 
 
         /// <summary>
@@ -115,6 +135,8 @@ namespace MyProject.Matrix.Controllers.Api
             _log.AddLog(new Log() { Msg = "结果:null" , Ret = 0, CreateTime = DateTime.Now });
             return Content("");
         }
+
+        
 
     }
 }

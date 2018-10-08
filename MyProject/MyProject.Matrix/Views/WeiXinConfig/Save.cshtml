@@ -1,0 +1,109 @@
+﻿@{
+    ViewBag.Title = ""; 
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@model MyProject.Matrix.Controllers.WeiXinConfig.ViewModels.ConfigModel
+<script type="text/javascript">
+    $(function () {
+        $("body").css({ "background-color": "#F9F9F9", "margin-top": "0px" }); 
+    }); 
+</script>
+<div class="widget-box" style="margin-top: 0; display: block;" id="div_opt_1">
+    <div class="widget-title">
+        <h5>用户信息</h5>
+    </div>
+    <div class="widget-content nopadding">
+        @using (Html.BeginForm("Save", "WeiXinConfig", FormMethod.Post, new { @class = "formular", id = "form1" }))
+        { 
+            <table class="table table-bordered table-striped">
+                <tbody>
+                    <tr class="even gradeA">
+                        <td>@Html.LabelFor(c => c.WeiXinId)</td>
+                        <td>
+                            @Html.TextBoxFor(c => c.WeiXinId, new { @class = "span11", @style = "width:50%;height: 30px;"})
+                            
+                        </td>
+                    </tr>
+                     <tr class="even gradeA">
+                        <td>@Html.LabelFor(c => c.WeiXinName)</td>
+                        <td>
+                            @Html.TextBoxFor(c => c.WeiXinName, new { @class = "span11", @style = "width:50%;height: 30px;"})
+                            
+                        </td>
+                    </tr>
+                    <tr class="even gradeC">
+                        <td style="width: 150px;">@Html.LabelFor(c => c.Category)</td>
+                        <td>
+                             @Html.DropDownListFor(c => c.Category, ViewData["categoryList"] as List<SelectListItem>, new { @style = "width:50%;height: 30px;" })  
+                             
+                        </td>
+                    </tr> 
+                     <tr class="even gradeA">
+                        <td>@Html.LabelFor(c => c.AppId)</td>
+                        <td>
+                            @Html.TextBoxFor(c => c.AppId, new { @class = "span11", @style = "width:90%;height: 30px;"})
+                            
+                        </td>
+                    </tr>
+                     <tr class="even gradeA">
+                        <td>@Html.LabelFor(c => c.Appsecret)</td>
+                        <td>
+                            @Html.TextBoxFor(c => c.Appsecret, new { @class = "span11", @style = "width:90%;height: 30px;"})
+                            
+                        </td>
+                    </tr>
+                    <tr class="even gradeA">
+                        <td>@Html.LabelFor(c => c.ApiToken)</td>
+                        <td>
+                            @Html.TextBoxFor(c => c.ApiToken, new { @class = "span11", @style = "width:90%;height: 30px;"})
+                           
+                        </td>
+                    </tr>
+                    <tr class="even gradeA">
+                        <td>@Html.LabelFor(c => c.ApiUrl)</td>
+                        <td>
+                            @Html.TextBoxFor(c => c.ApiUrl, new { @class = "span11", @style = "width:90%;height: 30px;"})
+                           
+                        </td>
+                    </tr>
+                    <tr class="even gradeA">
+                        <td>@Html.LabelFor(c => c.MchId)</td>
+                        <td>
+                            @Html.TextBoxFor(c => c.MchId, new { @class = "span11", @style = "width:90%;height: 30px;"})
+                           
+                        </td>
+                    </tr>
+                    <tr class="even gradeA">
+                        <td>@Html.LabelFor(c => c.PartnerKey)</td>
+                        <td>
+                            @Html.TextBoxFor(c => c.PartnerKey, new { @class = "span11", @style = "width:90%;height: 30px;"})
+                           
+                        </td>
+                    </tr>
+                    <tr class="even gradeA">
+                        <td>@Html.LabelFor(c => c.CertUrl)</td>
+                        <td>
+                            @Html.TextBoxFor(c => c.CertUrl, new { @class = "span11", @style = "width:90%;height: 30px;"})
+                            <span style="color:yellowgreen;">    如：C:\\m.xxx.com\\kwx\\apiclient_cert.p12</span>
+                        </td>
+                    </tr>  
+                    <tr class="even gradeA">
+                        <td>@Html.LabelFor(c => c.Remark)</td>
+                        <td>
+                            @Html.TextBoxFor(c => c.Remark, new { @class = "span11", @style = "width:100%;height: 30px;"})
+                           
+                        </td>
+                    </tr> 
+                    <tr class="odd gradeA">
+                        <td></td>
+                        <td>
+                            <button type="submit" class="btn btn-success btn-mini" onclick="return formDate(this.form1)">保存</button>
+                            <span style="color:red;"> @Html.ValidationSummary()</span>
+                        </td>
+                    </tr> 
+                </tbody>
+            </table> 
+        }
+    </div>
+</div>
+

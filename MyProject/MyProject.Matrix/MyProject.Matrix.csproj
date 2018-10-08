@@ -635,6 +635,8 @@
     <Content Include="Views\Job\JobSave.cshtml" />
     <Content Include="Views\Job\TriggerList.cshtml" />
     <Content Include="Views\Job\TriggerSave.cshtml" />
+    <Content Include="Views\WeiXinConfig\Index.cshtml" />
+    <Content Include="Views\WeiXinConfig\Save.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Content\UploadImg\" />

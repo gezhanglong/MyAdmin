@@ -13,6 +13,8 @@ using System.Web;
 using System.Web.Mvc;
 using MyProject.Services.Extensions;
 using MyProject.Core.Dtos;
+using Deepleo.Weixin.SDK;
+using Deepleo.Weixin.SDK.JSSDK;
 
 namespace MyProject.Matrix.Controllers.Job
 {
@@ -282,15 +284,40 @@ namespace MyProject.Matrix.Controllers.Job
         #endregion
          
     }
-    public class JobMatrix : IJob
+
+    /// <summary>
+    /// 刷新公众号token
+    /// </summary>
+    public class WxUpdateToken : IJob
     {
         public void Execute(IJobExecutionContext context)
         {
-            System.Threading.Thread.Sleep(1000 * 60 * 10);//挂起10分钟
-            var _log = new LogTask();
-            var log = new Log() {CreateTime=DateTime.Now,Msg="jobmatrix66666"+DateTime.Now,Ret=0 };
-            _log.AddLog(log); 
-        }
+            var msg = "";
+            var _log = new LogTask(); 
+            var _wxconfig = new WeiXinConfigTask();
+            var configList = _wxconfig.GetConfig();
+            foreach (var item in configList)
+            {
+                var config = _wxconfig.GetConfig(item.WeiXinId);
+                if (config != null)
+                {
+                    try
+                    {
+                        item.AccessToken = BasicAPI.GetAccessToken(item.AppId, item.Appsecret).access_token;
+                        item.JsApiToken = JSAPI.GetTickect(item.AccessToken).ticket;
+                        item.TokenUpdateTime = DateTime.Now;
+                        msg= _wxconfig.UpdateToken(item).Msg;
+                    }
+                    catch (Exception e)
+                    {
+                        var log = new Log() { CreateTime = DateTime.Now, Msg = "公众号token更新错误：" + e.Message + ";时间：" + DateTime.Now, Ret = 0 };
+                        _log.AddLog(log);
+                    }
+                }
 
+                var log1 = new Log() { CreateTime = DateTime.Now, Msg = "公众号token更新：" + item.WeiXinId + "执行：" + msg + ";时间：" + DateTime.Now, Ret = 0 };
+                _log.AddLog(log1);
+            }
+        }
     }
 }
