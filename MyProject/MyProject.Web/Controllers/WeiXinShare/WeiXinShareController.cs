@@ -48,7 +48,7 @@ namespace MyProject.Web.Controllers.WeiXinShare
                 //{"sign", CryptHelper.MD5Hash(unionid + key).ToLower()},
             };
            // var ss = CryptHelper.MD5(unionid + key, 32).ToLower();
-            var result = WebUtils.DoPost("https://api.lkgame.com/wechat/getopenidbyunionid", dict);
+            var result = WebUtils.DoPost("https://apiqa.lkgame.com/superlottery/sendgood?integralaward=1&integraltype=1&cashbalanceaward=1", dict);
             return View();
         }
 

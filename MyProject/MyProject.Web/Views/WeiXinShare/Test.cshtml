@@ -18,10 +18,11 @@
 <script src="~/Scripts/jquery-3.0.0.min.js"></script> 
 <script type="text/javascript">
     $(function () {
-        $("#btnid").click(function () {
-            $.post("https://apiqa.lkgame.com/superlottery/dosharew?UnionId=oxC3qvz5VNrOms3Qbhv7nmKYeMu0&roundcode=20180918011", {}, function (data) {
+        //https://apiqa.lkgame.com/superlottery/dosharew?UnionId=oxC3qvz5VNrOms3Qbhv7nmKYeMu0&roundcode=20180918011
+        //$("#btnid").click(function () {
+        $.post("https://apiqa.lkgame.com/superlottery/sendgood?integralaward=1&integraltype=1&cashbalanceaward=1", {}, function (data) {
                 alert(data);
-            }); 
+           //}); 
         });
        
     });
