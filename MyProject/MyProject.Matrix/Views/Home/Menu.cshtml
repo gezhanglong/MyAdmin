@@ -3,7 +3,7 @@
 }
 @model List<MyProject.Matrix.Controllers.SysManage.ViewModels.MenuModel>
 <ul> 
-    <li class="active"><a hre="/Home/FirstIndex" id="0"><i class="icon icon-home"></i> <span>首页</span></a> </li>
+    <li class="active"><a hre="/Home/FirstIndex" id="0"><i class="icon icon-home"></i> <span style="cursor:default">首页</span></a> </li>
     @foreach (var item in Model.Where(c => c.ParentId == 0))
     {
         var activeHtml = "<li>"; 
@@ -19,11 +19,11 @@
         {
             UrlHtml = "hre='"+@item.LinkUrl+"'";
         }
-       @Html.Raw(activeHtml)<a @Html.Raw(UrlHtml) id="@item.MenuId"><i class="icon icon-tint"></i> <span>@item.MenuName</span>@Html.Raw(childsHtml)</a> 
+       @Html.Raw(activeHtml)<a @Html.Raw(UrlHtml) id="@item.MenuId"><i class="icon icon-tint"></i> <span style="cursor:default">@item.MenuName</span>@Html.Raw(childsHtml)</a> 
             <ul>
                 @foreach (var child in Model.Where(c => c.ParentId == item.MenuId))
                 { 
-                     <li><a hre="@child.LinkUrl" id="@child.MenuId"> <span>@child.MenuName</span></a></li>
+                     <li><a hre="@child.LinkUrl" id="@child.MenuId"> <span style="cursor:default">@child.MenuName</span></a></li>
                 }
             </ul>
         @Html.Raw("</li>") 

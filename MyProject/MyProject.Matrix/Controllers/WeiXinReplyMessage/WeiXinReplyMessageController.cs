@@ -20,8 +20,8 @@ namespace MyProject.Matrix.Controllers.WeiXinReplyMessage
     public class WeiXinReplyMessageController : BaseController
     {
         private readonly WeiXinReplyMessageTask _message = new WeiXinReplyMessageTask();
-        private readonly WeiXinMediaMessageTask _mediaMessage = new WeiXinMediaMessageTask();
-        private readonly WeiXinSdkTask _sdk = new WeiXinSdkTask("wx6d6715c94a2f0d19", "d4624c36b6795d1d99dcf0547af5443d");
+        private readonly WeiXinMediaMessageTask _mediaMessage = new WeiXinMediaMessageTask(); 
+        private readonly WeiXinConfigTask _config = new WeiXinConfigTask();
 
         [SupportFilter]
         public ActionResult Index(int pageIndex = 1, int pageSize = 15)
@@ -58,6 +58,7 @@ namespace MyProject.Matrix.Controllers.WeiXinReplyMessage
             picurlList.Insert(0, new SelectListItem { Text = "请选择", Value = string.Empty });
             ViewData["picurlList"] = picurlList;
             model.MsgType = "1";
+            ViewData["ConfigList"] = _config.GetListConfig().ToSelectList(c => c.WeiXinId, c => c.WeiXinName);
             #endregion
             if (id !=null)
             { 
@@ -182,7 +183,8 @@ namespace MyProject.Matrix.Controllers.WeiXinReplyMessage
                         ArticleCount=model.ArticleCount,
                         Articles=model.Articles,
                         PicUrl=model.PicUrl,
-                        Url=model.Url
+                        Url=model.Url,
+                        WeiXinId=model.WeiXinId
                     };
                     _message.Add(info);
                 }
@@ -207,6 +209,7 @@ namespace MyProject.Matrix.Controllers.WeiXinReplyMessage
                         info.Articles=model.Articles;
                         info.PicUrl=model.PicUrl;
                         info.Url = model.Url;
+                        info.WeiXinId = model.WeiXinId;
                         _message.Update(info);
                     }
                 }
@@ -234,7 +237,8 @@ namespace MyProject.Matrix.Controllers.WeiXinReplyMessage
             ViewData["MediaIdList"] = madiaList;
             var picurlList = _mediaMessage.GetList().Where(c => c.MediaType == "image").ToSelectList(c => c.Url, c => c.MediaType + "-" + c.MediaTitle);
             picurlList.Insert(0, new SelectListItem { Text = "请选择", Value = string.Empty });
-            ViewData["picurlList"] = picurlList;   
+            ViewData["picurlList"] = picurlList;
+            ViewData["ConfigList"] = _config.GetListConfig().ToSelectList(c => c.WeiXinId, c => c.WeiXinName);
             #endregion
 
             return View(model);
@@ -261,24 +265,25 @@ namespace MyProject.Matrix.Controllers.WeiXinReplyMessage
             {
                 return Json("数据异常或者openid为空");
             }
+            var config = _config.GetConfig(reply.WeiXinId); 
             var openId = reply.Openid;
             var result = false ;
             switch (Convert.ToInt32(reply.MsgType))
             {
                 case (int)WeiXinMessageTypeEnum.text:
-                    result = ReplayActiveMessageAPI.RepayText(_sdk.AccountToken(),openId, reply.Content);
+                    result = ReplayActiveMessageAPI.RepayText(config.AccessToken, openId, reply.Content);
                     break;
                 case (int)WeiXinMessageTypeEnum.image:
-                    result = ReplayActiveMessageAPI.RepayImage(_sdk.AccountToken(),openId, reply.MediaId);
+                    result = ReplayActiveMessageAPI.RepayImage(config.AccessToken, openId, reply.MediaId);
                     break;
                 case (int)WeiXinMessageTypeEnum.video:
-                    result = ReplayActiveMessageAPI.RepayVedio(_sdk.AccountToken(),openId, reply.MediaId,reply.ThumbMediaId, reply.Title, reply.Description);
+                    result = ReplayActiveMessageAPI.RepayVedio(config.AccessToken, openId, reply.MediaId, reply.ThumbMediaId, reply.Title, reply.Description);
                     break;
                 case (int)WeiXinMessageTypeEnum.voice:
-                    result = ReplayActiveMessageAPI.RepayVoice(_sdk.AccountToken(),openId, reply.MediaId);
+                    result = ReplayActiveMessageAPI.RepayVoice(config.AccessToken, openId, reply.MediaId);
                     break;
                 case (int)WeiXinMessageTypeEnum.music:
-                    result = ReplayActiveMessageAPI.RepayMusic(_sdk.AccountToken() ,openId, reply.Title, reply.Description, reply.MusicURL, reply.HQMusicUrl, reply.ThumbMediaId);
+                    result = ReplayActiveMessageAPI.RepayMusic(config.AccessToken, openId, reply.Title, reply.Description, reply.MusicURL, reply.HQMusicUrl, reply.ThumbMediaId);
                     break;
                 case (int)WeiXinMessageTypeEnum.news:
                     var weiXinNewList = new List<WeixinNews>();
@@ -298,7 +303,7 @@ namespace MyProject.Matrix.Controllers.WeiXinReplyMessage
                         weiXinNewList.Add(weiXinNew);
                     }
 
-                    result = ReplayActiveMessageAPI.RepayNews(_sdk.AccountToken(),openId, weiXinNewList);
+                    result = ReplayActiveMessageAPI.RepayNews(config.AccessToken, openId, weiXinNewList);
                     break;
             }
             return Json(result);

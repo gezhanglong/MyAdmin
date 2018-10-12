@@ -28,8 +28,9 @@ namespace MyProject.Matrix.Controllers.WeiXinConfig
         public ActionResult Save(string wxId)
         {
             var categoryList = new List<SelectListItem>();
-            categoryList.Insert(0, new SelectListItem { Text = "公众号", Value = "1" });
-            categoryList.Insert(1, new SelectListItem { Text = "小程序", Value = "2" });
+            categoryList.Insert(0, new SelectListItem { Text = "请选择", Value = string.Empty });
+            categoryList.Insert(1, new SelectListItem { Text = "公众号", Value = "1" });
+            categoryList.Insert(2, new SelectListItem { Text = "小程序", Value = "2" });
             ViewData["categoryList"] = categoryList;
 
             var model = new ConfigModel();
@@ -48,33 +49,35 @@ namespace MyProject.Matrix.Controllers.WeiXinConfig
         public ActionResult Save(ConfigModel savemodel)
         {
             var categoryList = new List<SelectListItem>();
-            categoryList.Insert(0, new SelectListItem { Text = "公众号", Value = "1" });
-            categoryList.Insert(1, new SelectListItem { Text = "小程序", Value = "2" });
+            categoryList.Insert(0, new SelectListItem { Text = "请选择", Value = string.Empty });
+            categoryList.Insert(1, new SelectListItem { Text = "公众号", Value = "1" });
+            categoryList.Insert(2, new SelectListItem { Text = "小程序", Value = "2" });
             ViewData["categoryList"] = categoryList;
 
             var model = _task.GetConfig(savemodel.WeiXinId);
-            if (model.AppId == savemodel.AppId)
+           
+            if (savemodel.Category <=0)
             {
-                ModelState.AddModelError("WeiXinName", "appid已存在");
-                return View(savemodel);
-            }
-            if (model.WeiXinId == savemodel.WeiXinId)
-            {
-                ModelState.AddModelError("WeiXinName", "微信号已存在");
-                return View(savemodel);
-            }
-            if (model.WeiXinName == savemodel.WeiXinName)
-            {
-                ModelState.AddModelError("WeiXinName", "微信名称已存在");
-                return View(savemodel);
-            }
-            if (model.ApiToken == savemodel.ApiToken)
-            {
-                ModelState.AddModelError("WeiXinName", "接口token已存在");
-                return View(savemodel);
-            }
-            if (model == null)
-            {
+                if (model.AppId == savemodel.AppId)
+                {
+                    ModelState.AddModelError("WeiXinName", "appid已存在");
+                    return View(savemodel);
+                }
+                if (model.WeiXinId == savemodel.WeiXinId)
+                {
+                    ModelState.AddModelError("WeiXinName", "微信号已存在");
+                    return View(savemodel);
+                }
+                if (model.WeiXinName == savemodel.WeiXinName)
+                {
+                    ModelState.AddModelError("WeiXinName", "微信名称已存在");
+                    return View(savemodel);
+                }
+                if (model.ApiToken == savemodel.ApiToken)
+                {
+                    ModelState.AddModelError("WeiXinName", "接口token已存在");
+                    return View(savemodel);
+                }
                 if (ModelState.IsValid)
                 {
                     model = new MyProject.Core.Entities.WeiXinConfig
@@ -103,13 +106,9 @@ namespace MyProject.Matrix.Controllers.WeiXinConfig
                 }
             }
             else
-            {
-                model.WeiXinName = savemodel.WeiXinName;
-                model.Category = savemodel.Category;
+            { 
                 model.ApiToken = savemodel.ApiToken;
-                model.ApiUrl = savemodel.ApiUrl;
-                model.AppId = savemodel.AppId;
-                model.Appsecret = savemodel.Appsecret;
+                model.ApiUrl = savemodel.ApiUrl; 
                 model.MchId = savemodel.MchId;
                 model.PartnerKey = savemodel.PartnerKey;
                 model.CertUrl = savemodel.CertUrl;

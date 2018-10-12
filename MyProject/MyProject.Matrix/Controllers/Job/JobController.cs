@@ -295,7 +295,7 @@ namespace MyProject.Matrix.Controllers.Job
             var msg = "";
             var _log = new LogTask(); 
             var _wxconfig = new WeiXinConfigTask();
-            var configList = _wxconfig.GetConfig();
+            var configList = _wxconfig.GetListConfig(); 
             foreach (var item in configList)
             {
                 var config = _wxconfig.GetConfig(item.WeiXinId);

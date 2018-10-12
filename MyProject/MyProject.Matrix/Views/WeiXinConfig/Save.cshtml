@@ -5,8 +5,30 @@
 @model MyProject.Matrix.Controllers.WeiXinConfig.ViewModels.ConfigModel
 <script type="text/javascript">
     $(function () {
-        $("body").css({ "background-color": "#F9F9F9", "margin-top": "0px" }); 
-    }); 
+        $("body").css({ "background-color": "#F9F9F9", "margin-top": "0px", "overflow-y": "auto" });
+        if ($("#WeiXinId").val() != "") {
+            $("#WeiXinId").attr("disabled", "disabled");
+        }
+        if ($("#WeiXinName").val() != "") {
+            $("#WeiXinName").attr("disabled", "disabled");
+        }
+        if ($("#Category").val() != "") {
+            $("#Category").attr("disabled", "disabled");
+        }
+        if ($("#AppId").val() != "") {
+            $("#AppId").attr("disabled", "disabled");
+        }
+        if ($("#Appsecret").val() != "") {
+            $("#Appsecret").attr("disabled", "disabled");
+        }
+    });
+    function formDate(form) {
+        $("#WeiXinId").removeAttr("disabled");
+        $("#WeiXinName").removeAttr("disabled");
+        $("#Category").removeAttr("disabled");
+        $("#AppId").removeAttr("disabled");
+        $("#Appsecret").removeAttr("disabled");
+    }
 </script>
 <div class="widget-box" style="margin-top: 0; display: block;" id="div_opt_1">
     <div class="widget-title">

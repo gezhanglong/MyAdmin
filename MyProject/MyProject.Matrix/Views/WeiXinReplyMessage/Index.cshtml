@@ -11,7 +11,14 @@
 @using MyProject.Matrix.Controllers.Core;
 @using MyProject.Services.Extensions;
 @model PagedList<MyProject.Core.Entities.WeiXinReplyMessage> 
-
+@section Style
+    { 
+    <style type="text/css">
+        th{white-space: nowrap;}
+        td{white-space: nowrap;}
+        td {text-align: center;}
+    </style> 
+    }
 <body style="background-color:#F9F9F9;margin-top:0px;"> 
 <div class="widget-box" style="margin-top:0;">
           <div class="widget-title"> 
@@ -34,10 +41,12 @@
                   </div>
 
               </div>
-            <table class="table table-bordered table-striped"> 
+              <div style="overflow:auto;">
+                <table class="table table-bordered table-striped"> 
                 <thead>
-                <tr>
+                <tr> 
                   <th>ID</th>
+                    <th>微信号</th>
                     <th>触发类型</th>
                   <th>关键字/key值</th>
                   <th>回复类型</th>
@@ -62,6 +71,9 @@
                         <tr >
                             <td style="text-align:center;">
                                 @item.Id
+                            </td> 
+                            <td style="text-align:center;">
+                                @item.WeiXinId
                             </td>
                              <td style="text-align:center;">
                                 @item.ReplayType
@@ -151,6 +163,7 @@
                   }
               </tbody>
             </table>  
+              </div>
           </div> 
         </div>
        <div style="">

@@ -64,7 +64,7 @@ namespace MyProject.Task
                    #region 文字消息
 		            string userMessage = message.Body.Content.Value;
                     receiveMessage.Content=userMessage;//用于记录接收信息
-                    var reply = _replyMessage.GetMessage( userMessage); //查找回复信息表
+                    var reply = _replyMessage.GetMessage( userMessage,myUserName); //查找回复信息表
                     result= Repay(reply, openId, myUserName);
 	                #endregion
                     break;
@@ -147,7 +147,7 @@ namespace MyProject.Task
                                 {
                                     _userTask.AddUser(userinfo);//保存用户关注数据
                                 } 
-                                reply = _replyMessage.GetMessageByReplayType(eventType, eventKey); //查找回复信息表 
+                                reply = _replyMessage.GetMessageByReplayType(eventType, eventKey,myUserName); //查找回复信息表 
                                 result = Repay(reply, openId, myUserName); 
                             #endregion
                             break;
@@ -245,8 +245,8 @@ namespace MyProject.Task
                             break;
                         case "click"://自定义菜单事件 
                             #region 自定义菜单事件
-                            { 
-                                reply = _replyMessage.GetMessageByReplayType(eventType, eventKey); //查找回复信息表 
+                            {
+                                reply = _replyMessage.GetMessageByReplayType(eventType, eventKey, myUserName); //查找回复信息表 
                                 result = Repay(reply, openId, myUserName);
                             }
                             #endregion
@@ -360,7 +360,7 @@ namespace MyProject.Task
         {
             var token = "";
             var _wxconfig = new WeiXinConfigTask();
-            var configList = _wxconfig.GetConfig();
+            var configList = _wxconfig.GetListConfig();
             var config = configList.Where(c => c.AppId==this.appId).ToList();
             if (config != null && config.Count > 0)
             {
@@ -378,7 +378,7 @@ namespace MyProject.Task
         {
             var token = "";
             var _wxconfig = new WeiXinConfigTask();
-            var configList = _wxconfig.GetConfig();
+            var configList = _wxconfig.GetListConfig();
             var config = configList.Where(c => c.AppId == this.appId).ToList();
             if (config != null && config.Count > 0)
             {

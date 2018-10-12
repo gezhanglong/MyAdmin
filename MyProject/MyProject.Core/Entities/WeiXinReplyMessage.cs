@@ -86,6 +86,11 @@ namespace MyProject.Core.Entities
         /// <summary>
         /// 用于测试，填写后就能够发送给这个openid下
         /// </summary>		 
-        public string Openid { get; set; } 
+        public string Openid { get; set; }
+
+        /// <summary>
+        /// 微信号
+        /// </summary>
+        public string WeiXinId { get; set; }
     }
 }

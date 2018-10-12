@@ -5,7 +5,7 @@
 @model MyProject.Core.Entities.WeiXinMediaMessage
 <script type="text/javascript">
     $(function () {
-        $("body").css({ "background-color": "#F9F9F9", "margin-top": "0px" });
+        $("body").css({ "background-color": "#F9F9F9", "margin-top": "0px", "overflow-y": "auto" });
 
     });
 </script>
@@ -19,6 +19,12 @@
             @Html.HiddenFor(c => c.Id)
             <table class="table table-bordered table-striped">
                 <tbody> 
+                      <tr class="even gradeC">
+                        <td style="width: 150px;">微信号：</td>
+                        <td>
+                            @Html.DropDownList("WeiXinId" ,ViewData["ConfigList"] as List<SelectListItem>, new { @style = "width:50%;height: 30px;" }) 
+                        </td>
+                    </tr>
                     <tr class="even gradeA">
                         <td>素材标题：</td>
                         <td>

@@ -22,6 +22,12 @@ namespace MyProject.Task
             return _config.GetPagedListConfig(weixinId, pageIndex, pageSize);
         }
 
+        public List<WeiXinConfig> GetListConfig()
+        {
+            return _config.GetListConfig();
+        }
+
+
         public WeiXinConfig GetConfig(string weixinId)
         {
             return _config.GetConfig(weixinId);
@@ -89,29 +95,6 @@ namespace MyProject.Task
             return _result;
         }
         #endregion
-
-        /// <summary>
-        /// 获取WeiXinConfig并缓存5分钟
-        /// </summary>
-        /// <returns></returns>
-        public List<WeiXinConfig> GetConfig()
-        {
-            var config = new List<WeiXinConfig>();
-            try
-            {
-                config = CacheHelper.Get("WeiXinConfig") as List<WeiXinConfig>;
-                if (config == null || config.Count <= 0)
-                {
-                    config = _config.GetListConfig();
-                    CacheHelper.Set("WeiXinConfig", config, 60 * 5);//缓存5分钟 
-                }
-            }
-            catch (Exception e)
-            {
-                SysExceptionTask.AddException(e, "获取WeiXinConfig");
-            }
-            return config;
-        }
-
+         
     }
 }

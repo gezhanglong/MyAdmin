@@ -11,6 +11,14 @@
 @using MyProject.Matrix.Controllers.Core;
 @using MyProject.Services.Extensions;
 @model PagedList<MyProject.Core.Dtos.QRTZ_TRIGGERSDto>  
+@section Style
+    { 
+    <style type="text/css">
+        th{white-space: nowrap;}
+        td{white-space: nowrap;}
+        td {text-align: center;}
+    </style> 
+    }
 
 <body style="background-color:#F9F9F9;margin-top:0px;"> 
 <div class="widget-box" style="margin-top:0;">
@@ -39,8 +47,8 @@
                   </div>
 
               </div>
-
-            <table class="table table-bordered table-striped"> 
+            <div style="overflow:auto;">
+                <table class="table table-bordered table-striped"> 
                 <thead>
                 <tr>
                   <th>任务调度名称</th>
@@ -158,6 +166,7 @@
                    }
               </tbody>
             </table>  
+            </div>
           </div> 
         </div>
        <div style="">

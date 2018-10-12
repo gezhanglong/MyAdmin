@@ -8,7 +8,7 @@
 <script src="~/Content/kindeditor-4.1.4/kindeditor-all-min.js"></script>
 <script type="text/javascript">
     $(function () {
-        $("body").css({ "background-color": "#F9F9F9", "margin-top": "0px" });
+        $("body").css({ "background-color": "#F9F9F9", "margin-top": "0px","overflow-y": "auto" });
         //编辑器
         var editor = KindEditor.create('textarea[name="Content"]', {
             uploadJson: "",
@@ -31,6 +31,12 @@
                         <td>@Html.LabelFor(c=>c.Openid)：</td>
                         <td> 
                              @Html.TextBoxFor(c => c.Openid, new { }) 用于测试
+                        </td>
+                    </tr> 
+                     <tr class="even gradeC">
+                        <td>@Html.LabelFor(c => c.WeiXinId):</td>
+                        <td>
+                            @Html.DropDownListFor(c => c.WeiXinId ,ViewData["ConfigList"] as List<SelectListItem>, new { @style = "width:50%;height: 30px;" }) 
                         </td>
                     </tr>
                     <tr>

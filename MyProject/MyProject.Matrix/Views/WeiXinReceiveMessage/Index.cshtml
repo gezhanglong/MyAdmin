@@ -5,13 +5,20 @@
 @using MyProject.Services.MvcPager; 
 @using MyProject.Services.Extensions;
 @model PagedList<MyProject.Core.Entities.WeiXinReceiveMessage> 
-
+@section Style
+    { 
+    <style type="text/css">
+        th{white-space: nowrap;}
+        td{white-space: nowrap;}
+        td {text-align: center;}
+    </style> 
+    }
 <body style="background-color:#F9F9F9;margin-top:0px;"> 
 <div class="widget-box" style="margin-top:0;">
           <div class="widget-title"> 
             <h5>微信接收信息记录</h5>
           </div>
-          <div class="widget-content nopadding" style="overflow-y: auto;">
+          <div class="widget-content nopadding">
               <div class="">
                   <div id="DataTables_Table_0_length" class="dataTables_length" style ="width: 100%;">
                      @using (Html.BeginForm("Index", "WeiXinReceiveMessage", FormMethod.Get))
@@ -47,7 +54,8 @@
                   </div>
 
               </div>
-            <table class="table table-bordered table-striped"> 
+              <div style="overflow:auto;">
+                  <table class="table table-bordered table-striped"> 
                 <thead>
                 <tr>
                   <th>ID</th>
@@ -147,7 +155,9 @@
                         </tr>
                    }
               </tbody>
-            </table>  
+            </table>
+              </div>
+              
           </div> 
         </div>
        <div style="">

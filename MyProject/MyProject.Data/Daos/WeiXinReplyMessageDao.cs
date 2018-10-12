@@ -41,9 +41,11 @@ namespace MyProject.Data.Daos
         /// </summary>
         /// <param name="matchKey"></param>
         /// <returns></returns>
-        public WeiXinReplyMessage GetMessage(string matchKey)
+        public WeiXinReplyMessage GetMessage(string matchKey,string weiXinId)
         {
-            var sql = Sql.Builder.Select("*").From("WeiXinReplyMessage").Where(string.Format("MatchKey like'%{0}%'", matchKey)); 
+            var sql = Sql.Builder.Select("*").From("WeiXinReplyMessage")
+                .Where("WeiXinId=@0", weiXinId)
+                .Where(string.Format("MatchKey like'%{0}%'", matchKey)); 
             return FirstOrDefault<WeiXinReplyMessage>(sql);
         }
 
@@ -52,16 +54,16 @@ namespace MyProject.Data.Daos
         /// </summary>
         /// <param name="replayType"></param>
         /// <returns></returns>
-        public WeiXinReplyMessage GetMessageByReplayType(string replayType, string matchKey)
+        public WeiXinReplyMessage GetMessageByReplayType(string replayType, string matchKey, string weiXinId)
         {
             if (!string.IsNullOrEmpty(matchKey))
             {
-                var sql = Sql.Builder.Select("*").From("WeiXinReplyMessage").Where("ReplayType=@0 and MatchKey=@1", replayType, matchKey);
+                var sql = Sql.Builder.Select("*").From("WeiXinReplyMessage").Where("ReplayType=@0 and MatchKey=@1 and WeiXinId=@2", replayType, matchKey,weiXinId);
                 return FirstOrDefault<WeiXinReplyMessage>(sql);
             }
             else
             {
-                var sql = Sql.Builder.Select("*").From("WeiXinReplyMessage").Where("ReplayType=@0", replayType);
+                var sql = Sql.Builder.Select("*").From("WeiXinReplyMessage").Where("ReplayType=@0 and WeiXinId=@1", replayType,weiXinId);
                 return FirstOrDefault<WeiXinReplyMessage>(sql);
             }
            

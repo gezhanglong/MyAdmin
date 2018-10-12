@@ -5,7 +5,7 @@
 @model MyProject.Matrix.Controllers.Job.ViewModels.JobModel
 <script type="text/javascript">
     $(function () {
-        $("body").css({ "background-color": "#F9F9F9", "margin-top": "0px" });
+        $("body").css({ "background-color": "#F9F9F9", "margin-top": "0px", "overflow-y": "auto" });
         if ($("#JOB_NAME").val() != "") {//如果是修改有些参数不可修改
             $("#JOB_NAME").attr("disabled", "disabled");
         }

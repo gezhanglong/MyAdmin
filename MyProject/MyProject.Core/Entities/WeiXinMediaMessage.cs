@@ -18,6 +18,12 @@ namespace MyProject.Core.Entities
         /// Id
         /// </summary>		 
         public int Id { get; set; }
+
+        /// <summary>
+        /// 微信号
+        /// </summary>
+        public string WeiXinId { get; set; }
+
         /// <summary>
         /// 素材ID
         /// </summary>		 

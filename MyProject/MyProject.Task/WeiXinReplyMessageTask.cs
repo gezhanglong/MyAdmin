@@ -53,13 +53,13 @@ namespace MyProject.Task
         #endregion
 
         #region 前端
-        public WeiXinReplyMessage GetMessage( string matchKey)
+        public WeiXinReplyMessage GetMessage(string matchKey, string weiXinId)
         {
-            return _dao.GetMessage( matchKey);
+            return _dao.GetMessage( matchKey,weiXinId);
         }
-        public WeiXinReplyMessage GetMessageByReplayType(string replayType,string matchKey)
+        public WeiXinReplyMessage GetMessageByReplayType(string replayType, string matchKey, string weiXinId)
         {
-            return _dao.GetMessageByReplayType(replayType,matchKey);
+            return _dao.GetMessageByReplayType(replayType, matchKey, weiXinId);
         }
         #endregion
     }

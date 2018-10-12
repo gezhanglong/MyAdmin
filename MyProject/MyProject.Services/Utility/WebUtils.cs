@@ -284,7 +284,7 @@ namespace MyProject.Services.Utility
             reqStream.Close();
 
             HttpWebResponse rsp = (HttpWebResponse)req.GetResponse();
-            Encoding encoding = Encoding.GetEncoding(rsp.CharacterSet);//"ISO-8859-1"
+            Encoding encoding = Encoding.GetEncoding("ISO-8859-1");//rsp.CharacterSet
             return GetResponseAsString(rsp, encoding);
         }
 

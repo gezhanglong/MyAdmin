@@ -20,8 +20,8 @@ namespace MyProject.Matrix.Controllers.WeiXinMediaMessage
 {
     public class WeiXinMediaMessageController : BaseController
     {
-        private readonly WeiXinMediaMessageTask _message = new WeiXinMediaMessageTask();
-        private readonly WeiXinSdkTask _sdk = new WeiXinSdkTask("","");
+        private readonly WeiXinMediaMessageTask _message = new WeiXinMediaMessageTask(); 
+        private readonly WeiXinConfigTask _config = new WeiXinConfigTask();
 
         [SupportFilter]
         public ActionResult Index(int pageIndex=1, int pageSize=15)
@@ -35,6 +35,7 @@ namespace MyProject.Matrix.Controllers.WeiXinMediaMessage
         {
             ViewData["MediaList"] = WeiXinMediaMessageEnum.image.ToSelectList();
             ViewData["MediaTypeList"] = WeiXinMediaTypeMessageEnum.Forever.ToSelectList();
+            ViewData["ConfigList"] = _config.GetListConfig().ToSelectList(c => c.WeiXinId, c => c.WeiXinName) ;
             return View();
         }
 
@@ -66,16 +67,18 @@ namespace MyProject.Matrix.Controllers.WeiXinMediaMessage
             var fileItem = new FileItem(filename, bytes,"image/jpeg");
             var fileParas = new Dictionary<string, FileItem>{
             {"file",fileItem}
-            };
+            }; 
+            var weixinid=Request.Form["WeiXinId"];
+            var config = _config.GetConfig(weixinid); 
             var textParas = new Dictionary<string, string>{
-                {"access_token",_sdk.AccountToken()},//
+                {"access_token",config.AccessToken},//
                 {"type",type}
              };
             var result = JsonConvert.DeserializeObject<MediaResult>(WebUtils.DoPost(url, textParas, fileParas));
 
             if (result == null || result.errcode != null)
             {
-                return CloseParentBox("上传失败errcode:" + result.errcode + ";errmsg:" + result.errmsg, "");
+                return AlertMsg("上传失败errcode:" + result.errcode + ";errmsg:" + result.errmsg, HttpContext.Request.UrlReferrer.PathAndQuery); 
             }
             var info = new MyProject.Core.Entities.WeiXinMediaMessage
             {
@@ -85,7 +88,8 @@ namespace MyProject.Matrix.Controllers.WeiXinMediaMessage
                 MediaTitle = mediaTitle,
                 MediaType = type,
                 MediaId = result.media_id,
-                Url = result.url
+                Url = result.url,
+                WeiXinId = weixinid
             };
             _message.Add(info);
             return CloseParentBox("操作成功", "/WeiXinMediaMessage/index");
@@ -118,11 +122,12 @@ namespace MyProject.Matrix.Controllers.WeiXinMediaMessage
                     
                     return Json(result);
                 }
+                var config = _config.GetConfig(media.WeiXinId); 
                 var textParas = new Dictionary<string, string>{ 
                 {"media_id",media.MediaId},
-                {"access_token",_sdk.AccountToken()}
+                {"access_token",config.AccessToken}
              };
-                result = JsonConvert.DeserializeObject<MediaResult>(WebUtils.DoPost("https://api.weixin.qq.com/cgi-bin/material/del_material?access_token=" + _sdk.AccountToken(), "{\"media_id\":\"" + media.MediaId+"\"}"));
+                result = JsonConvert.DeserializeObject<MediaResult>(WebUtils.DoPost("https://api.weixin.qq.com/cgi-bin/material/del_material?access_token=" + config.AccessToken, "{\"media_id\":\"" + media.MediaId+"\"}"));
                  if (result.errcode == "0")
                  {
                      _message.DeleteById(Convert.ToInt32(id));

@@ -5,7 +5,7 @@
 @model MyProject.Matrix.Controllers.AdminUsers.ViewModels.SaveAdminUserModel
 <script type="text/javascript">
     $(function () {
-        $("body").css({ "background-color": "#F9F9F9", "margin-top": "0px" }); 
+        $("body").css({ "background-color": "#F9F9F9", "margin-top": "0px", "overflow-y": "auto" });
         if ($("#AdminUserId").val() >0) {//如果是修改，就隐藏用户和密码；
             $("#UserName").parent().parent().css("display", "none");
             $("#Password").parent().parent().css("display", "none");

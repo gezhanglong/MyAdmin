@@ -229,5 +229,11 @@ namespace MyProject.Matrix.Controllers.WeiXinReplyMessage.Models
         /// </summary>	  	 	 
         [Display(Name = "Openid")]
         public string Openid { get; set; }
+
+        /// <summary>
+        /// 微信号
+        /// </summary>	  	 	 
+        [Display(Name = "微信号")]
+        public string WeiXinId { get; set; }
     }
 }

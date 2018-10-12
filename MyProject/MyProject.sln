@@ -1,8 +1,6 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2012
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MyProject", "MyProject\MyProject.csproj", "{6962C927-1852-46CE-9823-8807EE2626F3}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MyProject.Core", "MyProject.Core\MyProject.Core.csproj", "{CCBB87D3-06A8-4675-B511-39FF4D21D527}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MyProject.Data", "MyProject.Data\MyProject.Data.csproj", "{E3E4E9BB-73F2-430F-8B5B-98354C5FC468}"
@@ -27,10 +25,6 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{6962C927-1852-46CE-9823-8807EE2626F3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{6962C927-1852-46CE-9823-8807EE2626F3}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{6962C927-1852-46CE-9823-8807EE2626F3}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{6962C927-1852-46CE-9823-8807EE2626F3}.Release|Any CPU.Build.0 = Release|Any CPU
 		{CCBB87D3-06A8-4675-B511-39FF4D21D527}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{CCBB87D3-06A8-4675-B511-39FF4D21D527}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{CCBB87D3-06A8-4675-B511-39FF4D21D527}.Release|Any CPU.ActiveCfg = Release|Any CPU

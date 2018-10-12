@@ -91,7 +91,7 @@ namespace MyProject.Matrix.Controllers.Api
             string signature = System.Web.HttpContext.Current.Request.QueryString["signature"] == null ? "" : System.Web.HttpContext.Current.Request.QueryString["signature"].Trim();
             string timestamp = System.Web.HttpContext.Current.Request.QueryString["timestamp"] == null ? "" : System.Web.HttpContext.Current.Request.QueryString["timestamp"].Trim();
             string nonce = System.Web.HttpContext.Current.Request.QueryString["nonce"] == null ? "" : System.Web.HttpContext.Current.Request.QueryString["nonce"].Trim();
-            var configList = _config.GetConfig(); 
+            var configList = _config.GetListConfig(); 
             appid = "";
             appsecret = "";
             foreach (var item in configList)
