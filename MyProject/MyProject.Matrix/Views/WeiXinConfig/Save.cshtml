@@ -6,21 +6,25 @@
 <script type="text/javascript">
     $(function () {
         $("body").css({ "background-color": "#F9F9F9", "margin-top": "0px", "overflow-y": "auto" });
-        if ($("#WeiXinId").val() != "") {
-            $("#WeiXinId").attr("disabled", "disabled");
+
+        if ($("#Id").val() > 0) {
+            if ($("#WeiXinId").val() != "") {
+                $("#WeiXinId").attr("disabled", "disabled");
+            }
+            if ($("#WeiXinName").val() != "") {
+                $("#WeiXinName").attr("disabled", "disabled");
+            }
+            if ($("#Category").val() != "") {
+                $("#Category").attr("disabled", "disabled");
+            }
+            if ($("#AppId").val() != "") {
+                $("#AppId").attr("disabled", "disabled");
+            }
+            if ($("#Appsecret").val() != "") {
+                $("#Appsecret").attr("disabled", "disabled");
+            }
         }
-        if ($("#WeiXinName").val() != "") {
-            $("#WeiXinName").attr("disabled", "disabled");
-        }
-        if ($("#Category").val() != "") {
-            $("#Category").attr("disabled", "disabled");
-        }
-        if ($("#AppId").val() != "") {
-            $("#AppId").attr("disabled", "disabled");
-        }
-        if ($("#Appsecret").val() != "") {
-            $("#Appsecret").attr("disabled", "disabled");
-        }
+       
     });
     function formDate(form) {
         $("#WeiXinId").removeAttr("disabled");
@@ -37,6 +41,7 @@
     <div class="widget-content nopadding">
         @using (Html.BeginForm("Save", "WeiXinConfig", FormMethod.Post, new { @class = "formular", id = "form1" }))
         { 
+             @Html.HiddenFor(c => c.Id)
             <table class="table table-bordered table-striped">
                 <tbody>
                     <tr class="even gradeA">

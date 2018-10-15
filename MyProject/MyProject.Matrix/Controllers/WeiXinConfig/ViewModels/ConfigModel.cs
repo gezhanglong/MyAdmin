@@ -8,9 +8,11 @@ namespace MyProject.Matrix.Controllers.WeiXinConfig.ViewModels
 {
     public class ConfigModel
     {
+        public int Id { get; set; }
         /// <summary>
-        /// 
+        /// 类别
         /// </summary>
+        [Display(Name = "类别"), Required(ErrorMessage = "请选择类别")]
         public int Category { get; set; }
 
         /// <summary>

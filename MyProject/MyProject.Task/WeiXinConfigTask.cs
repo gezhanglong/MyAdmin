@@ -94,6 +94,11 @@ namespace MyProject.Task
             }
             return _result;
         }
+
+        public WeiXinConfig Check(string weiXinName, string appId, string apiToken)
+        {
+            return _config.Check(weiXinName,appId,apiToken);
+        }
         #endregion
          
     }

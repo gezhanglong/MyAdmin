@@ -63,5 +63,11 @@ namespace MyProject.Data.Daos
                 , model.AccessToken, model.WeiXinId, model.JsApiToken, model.TokenUpdateTime);
             return Execute(sql);
         }
+
+        public WeiXinConfig Check(string weiXinName, string appId, string apiToken)
+        {
+            var sql = Sql.Builder.Where("WeiXinName=@0 or AppId=@1 or ApiToken=@2", weiXinName, appId, apiToken);
+            return FirstOrDefault<WeiXinConfig>(sql);
+        }
     }
 }

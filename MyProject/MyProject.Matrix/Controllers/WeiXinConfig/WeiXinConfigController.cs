@@ -41,6 +41,7 @@ namespace MyProject.Matrix.Controllers.WeiXinConfig
                     return AlertMsg("参数错误", HttpContext.Request.UrlReferrer.PathAndQuery);
 
                 model = EntityMapper.Map<MyProject.Core.Entities.WeiXinConfig, ConfigModel>(job);
+                model.Id = job.Category;
             }
             return View(model);
         }
@@ -56,28 +57,19 @@ namespace MyProject.Matrix.Controllers.WeiXinConfig
 
             var model = _task.GetConfig(savemodel.WeiXinId);
            
-            if (savemodel.Category <=0)
+            if (savemodel.Id <=0)
             {
-                if (model.AppId == savemodel.AppId)
-                {
-                    ModelState.AddModelError("WeiXinName", "appid已存在");
-                    return View(savemodel);
-                }
-                if (model.WeiXinId == savemodel.WeiXinId)
+                if (model !=null && model.WeiXinId == savemodel.WeiXinId)
                 {
                     ModelState.AddModelError("WeiXinName", "微信号已存在");
                     return View(savemodel);
                 }
-                if (model.WeiXinName == savemodel.WeiXinName)
+                var check = _task.Check(savemodel.WeiXinName, savemodel.AppId, savemodel.ApiToken);
+                if (check !=null)
                 {
-                    ModelState.AddModelError("WeiXinName", "微信名称已存在");
+                    ModelState.AddModelError("WeiXinName", "appid或微信名称或接口token已存在");
                     return View(savemodel);
-                }
-                if (model.ApiToken == savemodel.ApiToken)
-                {
-                    ModelState.AddModelError("WeiXinName", "接口token已存在");
-                    return View(savemodel);
-                }
+                } 
                 if (ModelState.IsValid)
                 {
                     model = new MyProject.Core.Entities.WeiXinConfig
