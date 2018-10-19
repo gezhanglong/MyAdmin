@@ -481,5 +481,13 @@ namespace MyProject.Task
             }
             return result;
         }
+
+
+        //发送小程序卡片信息
+        public string RepayMiniprogrampage(string openId,string title,string appid,string pagepath, string media_id)
+        {   
+            return WebUtils.DoPost("https://api.weixin.qq.com/cgi-bin/message/custom/send?access_token=" + AccountToken(), "{\"touser\":\"" + openId + "\",\"msgtype\":\"miniprogrampage\",\"miniprogrampage\":{\"title\":\"" + title + "\",\"appid\":\"" + appid + "\",\"pagepath\":\"" + pagepath + "\",\"thumb_media_id\":\"" + media_id + "\"}}");
+ 
+        }
     }
 }
