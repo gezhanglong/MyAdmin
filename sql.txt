@@ -1,3 +1,25 @@
+--查询所有表的数据行数
+select   a.name as 表名,max(b.rows) as 记录条数   from   sysobjects   a   ,sysindexes   b     
+  where   a.id=b.id   and   a.xtype='u'   
+group   by   a.name   
+order by max(b.rows) desc
+
+--查询表索引
+SELECT 索引名称=a.name 
+,表名=c.name 
+,索引字段名=d.name 
+,索引字段位置=d.colid 
+FROM  sysindexes a 
+JOIN sysindexkeys b  ON  a.id=b.id  AND  a.indid=b.indid 
+JOIN sysobjects c  ON  b.id=c.id 
+JOIN syscolumns d  ON  b.id=d.id AND  b.colid=d.colid 
+WHERE  a.indid  NOT IN(0,255) 
+-- and &nbsp; c.xtype='U'  and  c.status>0 --查所有用户表 
+AND  c.name='userbind' --查指定表 
+
+
+
+
 alter talbe dbo.AdminUser add Email nvarchar(50) --建字段
 
 ---------------建表格式化---------------------------
