@@ -91,11 +91,11 @@ namespace JobApplication
         }
     }
 
-    public class MyJob : IJob
+    public class IpProxyJob : IJob
     { 
         public void Execute(IJobExecutionContext context)
-        { 
-            Console.WriteLine("time:"+DateTime.Now); 
+        {
+            CustmizeProcessorAndPipeline
         }
 
     }

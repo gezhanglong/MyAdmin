@@ -233,6 +233,20 @@
     <None Include="App.config" />
     <None Include="packages.config" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\MyProject.Core\MyProject.Core.csproj">
+      <Project>{ccbb87d3-06a8-4675-b511-39ff4d21d527}</Project>
+      <Name>MyProject.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\MyProject.Services\MyProject.Services.csproj">
+      <Project>{61BA4F81-97A1-4A51-B88E-A3A9629F09AA}</Project>
+      <Name>MyProject.Services</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\MyProject.Task\MyProject.Task.csproj">
+      <Project>{4d11bd71-374b-418f-9571-dc525440896b}</Project>
+      <Name>MyProject.Task</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

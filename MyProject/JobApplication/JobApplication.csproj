@@ -88,6 +88,10 @@
       <Project>{4d11bd71-374b-418f-9571-dc525440896b}</Project>
       <Name>MyProject.Task</Name>
     </ProjectReference>
+    <ProjectReference Include="..\spiderApplication\spiderApplication.csproj">
+      <Project>{4f74c480-e6ee-4ed2-96b2-53c52d38c50d}</Project>
+      <Name>spiderApplication</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <BootstrapperPackage Include=".NETFramework,Version=v4.5">

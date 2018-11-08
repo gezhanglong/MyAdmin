@@ -14,6 +14,8 @@ using DotnetSpider.Core.Downloader;
 using DotnetSpider.Extension.Model;
 using DotnetSpider.Extension.Model.Attribute;
 using DotnetSpider.Extension.Pipeline;
+using MyProject.Core.Entities;
+using MyProject.Task;
 
 namespace spiderApplication
 {
@@ -21,20 +23,25 @@ namespace spiderApplication
     {
         static void Main(string[] args)
         {
-            CustmizeProcessorAndPipeline();
+            var run =new  CustmizeProcessorAndPipeline();
+            run.DoRun();
             Console.WriteLine("Press any key to continue...");
             Console.Read();
         }
 
 
-        public static void CustmizeProcessorAndPipeline()
+       
+    }
+    public class CustmizeProcessorAndPipeline
+    {
+        public void DoRun()
         {
             // Config encoding, header, cookie, proxy etc... 定义采集的 Site 对象, 设置 Header、Cookie、代理等
-            var site = new Site { EncodingName = "UTF-8", RemoveOutboundLinks = true ,Domains= "www.cnblogs.com".Split(';') };
+            var site = new Site { EncodingName = "UTF-8", RemoveOutboundLinks = true, Domains = "www.xicidaili.com".Split(';') };
             //for (int i = 1; i < 5; ++i)
             //{
-                // Add start/feed urls. 添加初始采集链接
-                site.AddStartUrl($"https://www.cnblogs.com/post/prevnext?postId=5525467&blogId=43926&dateCreated=2016%2F5%2F24+23%3A47%3A00&postType=1");
+            // Add start/feed urls. 添加初始采集链接
+            site.AddStartUrl($"http://www.xicidaili.com/nn/1");
             //}
             Spider spider = Spider.Create(site,
                 // use memoery queue scheduler. 使用内存调度
@@ -46,29 +53,44 @@ namespace spiderApplication
             spider.Downloader = new HttpClientDownloader();
             spider.ThreadNum = 1;
             spider.EmptySleepTime = 3000;
-           // spider.Deep = 4;
-            // Start crawler 启动爬虫
-            spider.Run();
-
+             //spider.Deep = 4;
+            // 启动爬虫
+            spider.Run(); 
         }
+
     }
 
     public class YoukuPipeline : BasePipeline
-    {
-        private static long count = 0;
-         
+    { 
         public override void Process(IEnumerable<ResultItems> resultItems, ISpider spider)
         {
-            foreach (var resultItem in resultItems)
+            var _ipProxyTask = new IpProxyTask();
+            //var count = _ipProxyTask.GetPagedList(1, 100).Count; 
+            //if(count>=100)
+            //{
+            //    spider.Exit();
+            //    return;
+            //}
+            var num = 0;
+            try
             {
-                StringBuilder builder = new StringBuilder();
-                foreach (YoukuVideo entry in resultItem.Results["VideoResult"])
+                
+                foreach (var resultItem in resultItems)
                 {
-                    count++;
-                    builder.Append($" [YoukuVideo {count}] {entry.Name}");
+                    foreach (IpProxy entry in resultItem.Results["IpProxyResult"])
+                    {
+                        var result = _ipProxyTask.AddIpProxy(entry);
+                        if(result.Ret==0)
+                        {
+                            num++; 
+                        }
+                    }
                 }
-                Console.WriteLine(builder);
+            }catch(Exception e)
+            {
+                Console.WriteLine(e.Message);
             }
+            Console.WriteLine("ok:"+num);
         }
     }
 
@@ -77,29 +99,56 @@ namespace spiderApplication
         protected override void Handle(Page page)
         {
             // 利用 Selectable 查询并构造自己想要的数据对象 
-            var totalVideoElements = page.Selectable.SelectList(Selectors.XPath("*")).Nodes();
-            List<YoukuVideo> results = new List<YoukuVideo>();
+            var totalVideoElements = page.Selectable.SelectList(Selectors.XPath("//tr/td[2] | //tr/td[3] | //tr/td[4] | //tr/td[5] | //tr/td[6]")).Nodes().ToList();
+            List<IpProxy> results = new List<IpProxy>();
+            var i = 1;
+            var j = 0;
+            var name = "";
             foreach (var videoElement in totalVideoElements)
             {
-                var video = new YoukuVideo();
-                video.Name = videoElement.Select(Selectors.XPath("//a[@title]")).GetValue();
-                results.Add(video);
-            }
+
+                
+                if (i%5==0)
+                { 
+                    var proxy = new IpProxy();
+                    var strs = name.Split(':');
+                    proxy.CreateTime = DateTime.Now;
+                    proxy.FlushTime = DateTime.Now;
+                    proxy.Host = strs[1];
+                    proxy.Port = strs[2];
+                    proxy.Serve = strs[3];
+                    proxy.IsHide = strs[4];
+                    proxy.HttpType= videoElement.GetValue();
+                    results.Add(proxy);
+                    name = "";
+                    j++;
+                }else
+                {
+                    if(i%(3+j*5)==0)
+                    {
+                        name = name + ":" + videoElement.XPath("a").GetValue();
+                    }
+                    else
+                    {
+                        name = name + ":" + videoElement.GetValue();
+                    }
+                    
+                }
+                
+                i++;
+            } 
 
             // Save data object by key. 以自定义KEY存入page对象中供Pipeline调用
-            page.AddResultItem("VideoResult", results);
+            page.AddResultItem("IpProxyResult", results);
 
             // Add target requests to scheduler. 解析需要采集的URL
-            foreach (var url in page.Selectable.SelectList(Selectors.XPath("//ul[@class='yk-pages']")).Links().Nodes())
+            foreach (var url in page.Selectable.SelectList(Selectors.XPath("//*[@id='body']/div[2]/a[position()<3]")).Links().Nodes())
             {
                 page.AddTargetRequest(new Request(url.GetValue(), null));
-            } 
+            }
         }
     }
 
-    public class YoukuVideo
-    {
-        public string Name { get; set; }
-    }
+    
 
 }

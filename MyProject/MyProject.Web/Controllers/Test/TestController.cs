@@ -11,10 +11,10 @@ namespace MyProject.Web.Controllers.Test
     public class TestController : Controller
     { 
 
-        public ActionResult TestNo1()
+        public ActionResult TestNo1(string host, int post)
         {
-            var num = DateTimeExtensions.GetMillisecondByDateTime(Convert.ToDateTime("2018-8-29 11:05:00"));
-            return Content(num.ToString());
+            string str = WebUtils.DoGetProxy("http://www.baidu.com",host,post);
+            return Content(str);
         }
 
         public ActionResult Testcase()

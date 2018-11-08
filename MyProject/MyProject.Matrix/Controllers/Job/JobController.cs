@@ -291,7 +291,7 @@ namespace MyProject.Matrix.Controllers.Job
     public class WxUpdateToken : IJob
     {
         public void Execute(IJobExecutionContext context)
-        {
+        { 
             var msg = "";
             var _log = new LogTask(); 
             var _wxconfig = new WeiXinConfigTask();
@@ -317,7 +317,7 @@ namespace MyProject.Matrix.Controllers.Job
 
                 var log1 = new Log() { CreateTime = DateTime.Now, Msg = "公众号token更新：" + item.WeiXinId + "执行：" + msg + ";时间：" + DateTime.Now, Ret = 0 };
                 _log.AddLog(log1);
-            }
+            } 
         }
     }
 }

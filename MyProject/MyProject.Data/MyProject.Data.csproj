@@ -45,6 +45,7 @@
     <Compile Include="Daos\AdminRolePowerDao.cs" />
     <Compile Include="Daos\AdminUserDao.cs" />
     <Compile Include="Daos\AdminUserRoleDao.cs" />
+    <Compile Include="Daos\IpProxyDao.cs" />
     <Compile Include="Daos\JobControllDao.cs" />
     <Compile Include="Daos\LogDao.cs" />
     <Compile Include="Daos\QRTZ_CRON_TRIGGERSDao.cs" />

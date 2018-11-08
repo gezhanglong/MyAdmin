@@ -55,6 +55,7 @@
     <Compile Include="AdminRolePowerTask.cs" />
     <Compile Include="AdminUserRoleTask.cs" />
     <Compile Include="AdminUserTask.cs" />
+    <Compile Include="IpProxyTask.cs" />
     <Compile Include="JobControllTask.cs" />
     <Compile Include="LogTask.cs" />
     <Compile Include="SysExceptionTask.cs" />

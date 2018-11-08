@@ -497,5 +497,34 @@ namespace MyProject.Services.Utility
         }
 
 
+        /// <summary>
+        /// 通过代理 请求数据
+        /// </summary>
+        /// <param name="url"></param>
+        /// <returns></returns>
+        public static string DoGetProxy(string url,string host,int post)
+        {
+            HttpWebRequest req = (HttpWebRequest)WebRequest.Create(url);
+            req.Method = "GET";
+            req.KeepAlive = true;
+            req.UserAgent = "ADCSDK";
+            req.ContentType = "application/x-www-form-urlencoded;charset=utf-8";
+            req.Timeout = 30000;//请求30秒
+            WebProxy myProxy = new WebProxy(host, post);
+            req.Proxy= myProxy;
+
+            try
+            {
+                var rsp = (HttpWebResponse)req.GetResponse();
+                if (string.IsNullOrEmpty(rsp.CharacterSet))
+                    return "Error";
+                return rsp.StatusDescription;
+            }
+            catch(Exception e)
+            {
+                return "Error:"+e.Message;
+            }
+           
+        }
     }
 }
