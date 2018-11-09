@@ -16,6 +16,7 @@ using DotnetSpider.Extension.Model.Attribute;
 using DotnetSpider.Extension.Pipeline;
 using MyProject.Core.Entities;
 using MyProject.Task;
+using DotnetSpider.Core.Proxy;
 
 namespace spiderApplication
 {
@@ -37,7 +38,7 @@ namespace spiderApplication
         public void DoRun()
         {
             // Config encoding, header, cookie, proxy etc... 定义采集的 Site 对象, 设置 Header、Cookie、代理等
-            var site = new Site { EncodingName = "UTF-8", RemoveOutboundLinks = true, Domains = "www.xicidaili.com".Split(';') };
+            var site = new Site { EncodingName = "UTF-8", RemoveOutboundLinks = true, Domains = "www.xicidaili.com".Split(';')  };
             //for (int i = 1; i < 5; ++i)
             //{
             // Add start/feed urls. 添加初始采集链接
@@ -138,10 +139,10 @@ namespace spiderApplication
                 i++;
             } 
 
-            // Save data object by key. 以自定义KEY存入page对象中供Pipeline调用
+            //  以自定义KEY存入page对象中供Pipeline调用
             page.AddResultItem("IpProxyResult", results);
 
-            // Add target requests to scheduler. 解析需要采集的URL
+            //  解析需要采集的URL
             foreach (var url in page.Selectable.SelectList(Selectors.XPath("//*[@id='body']/div[2]/a[position()<3]")).Links().Nodes())
             {
                 page.AddTargetRequest(new Request(url.GetValue(), null));
