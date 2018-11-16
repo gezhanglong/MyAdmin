@@ -59,6 +59,7 @@ namespace MyProject.Task
                     _ipProxyDao.AddIpProxy(model);
                     _result.Ret = 0;
                     _result.Msg = "添加成功";
+                    return _result;
                 }
             }
             catch (Exception e)

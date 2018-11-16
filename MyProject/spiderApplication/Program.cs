@@ -64,7 +64,7 @@ namespace spiderApplication
     public class YoukuPipeline : BasePipeline
     { 
         public override void Process(IEnumerable<ResultItems> resultItems, ISpider spider)
-        {
+        { 
             var _ipProxyTask = new IpProxyTask();
             //var count = _ipProxyTask.GetPagedList(1, 100).Count; 
             //if(count>=100)

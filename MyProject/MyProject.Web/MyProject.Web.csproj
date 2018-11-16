@@ -20,6 +20,7 @@
     <IISExpressAnonymousAuthentication />
     <IISExpressWindowsAuthentication />
     <IISExpressUseClassicPipelineMode />
+    <UseGlobalApplicationHostFile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -111,6 +112,7 @@
   <ItemGroup>
     <Compile Include="Controllers\ApiWeb\ApiWebController.cs" />
     <Compile Include="Controllers\RedisTest\RedisTestController.cs" />
+    <Compile Include="Controllers\Test\QueueController.cs" />
     <Compile Include="Controllers\Test\TestController.cs" />
     <Compile Include="Controllers\WeiXinShare\WeiXinShareController.cs" />
     <Compile Include="Global.asax.cs">

@@ -10,16 +10,21 @@ namespace MyProject.Web.Controllers.RedisTest
     public class RedisTestController : Controller
     { 
 
-        public ActionResult Index()
+        public ActionResult Index(string rankname,int  userid,double score=1)
         {
             var redis = new RedisHelper("MyRedis");
             //redis.Item_Set<string>("my", "yyyyyy");
-            var value = redis.Item_Get<string>("my");
-            //redis.SortedSet_Add<int>("smy", 34, 3400);
-            //redis.SortedSet_Add<int>("smy", 3, 3);
-            //redis.SortedSet_Add<int>("smy", 340, 340);
-            var desc = redis.GetRangeWithScoresFromSortedSetDesc("smy", 0,10); 
-            return Content(value);
+            //var value = redis.Item_Get<string>("my");
+            redis.SortedSet_Add<int>(rankname, userid, score); 
+            var desc = redis.GetRangeWithScoresFromSortedSetDesc(rankname, 0,10);
+            var str="";
+            foreach(var item in desc)
+            {
+                str += "userid:" + item.Key + ";score:" + item.Value + "\n";
+            }
+            str += "    SortedSet_Get:" + redis.SortedSet_Get(rankname, userid);
+            str += "    SortedSet_GetItemIndexDesc:" + redis.SortedSet_GetItemIndexDesc(rankname, userid);
+            return Content(str);
             
         }
 
