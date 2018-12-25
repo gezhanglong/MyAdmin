@@ -3,6 +3,7 @@ using MyProject.Services.Utility;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading;
 using System.Web;
 using System.Web.Mvc;
 
@@ -12,13 +13,18 @@ namespace MyProject.Web.Controllers.Test
     {
 
         public ActionResult TestNo1(string host, int post)
-        {
-            string str = WebUtils.DoGetProxy("http://www.baidu.com", host, post);
-            return Content(str);
+        { 
+            Thread task = new Thread(new ParameterizedThreadStart(A_FallEvent));
+            return Content("");
         }
-
+        public void A_FallEvent(object str)
+        {
+             str = "冲出A";
+        }
         public ActionResult Testcase()
         {
+            var res = DateTimeExtensions.TimestampToDateTime(1445866601);
+            var time = DateTimeExtensions.GenerateTimeStamp(new DateTime());
             var result1 = new DateTime(636728598000000000).AddHours(8);
             var result2 = DateTime.Now.Ticks;
             return Content("");
@@ -108,11 +114,11 @@ namespace MyProject.Web.Controllers.Test
         }
     }
 
-    public class MyeventC:MyeventB
-    {
-        public MyeventC(MyeventA a)
-        {
+    //public class MyeventC:MyeventB
+    //{
+    //    //public MyeventC(MyeventA a)
+    //    //{
 
-        }
-    }
+    //    //}
+    //}
 }

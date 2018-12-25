@@ -119,9 +119,12 @@ namespace MyProject.Matrix.Controllers.Api
        /// </summary>
        /// <param name="loginInfo"></param>
        /// <returns></returns>
-        public ActionResult GetInfo(WechatLoginInfo loginInfo)
+        public ActionResult GetInfo1(WechatLoginInfo loginInfo)
         {
-            XiaoWeiXinAppDecryptTask _appDecrypt = new XiaoWeiXinAppDecryptTask(XiaoWeiXinSdkTask.appID, XiaoWeiXinSdkTask.appsecret);
+            loginInfo.iv = "8lQK9zSsprNF4nt7EWr28g==";
+            loginInfo.code = " 023nkGR901amAw1KKkV90nGzR90nkGRj";
+            loginInfo.encryptedData = "P7Laqsb2NRvDXEc8A2c+6EVUHGdPkX3StB/waXPAkQSeZIK5Qu5L5xKQWgPoJ5nl+RZCZuxpKM6njeuFlfGV1uGTyPiMhOvOInioZI+xv+/Ufgxs7H/YnECc5oc5I78abmdpv/g/kerzUg9TW5tbiYG065HUlXJc+v1wPbhybKgU4PqLAHWpXtU7NPxn6Tsm89nQLJMm8c6QP3/uLckrJmJRMISKAPppuBROfVWDPYhGClsLf00t+SCLIsyVX2GPAOOgIYucXGXyd/9BsiguwkaNUiQRYm2sqwjIqvbWg5AY1Cxi7JWB09JcRJdjU7UG07Vk6juCMgCJ8CRn4XyjUpWfQ2tTP1DvS5bZ5yHcDX8KaZWkt4Is+WcG2kc2JR4exsfftYoDuZ23tRIgS6Ophl23In1epUIwIc65eRcRaCpiLemNt3RPjBnXC90EIKGTRTp1ogrA5teVz/s+TyxCIg==";
+            XiaoWeiXinAppDecryptTask _appDecrypt = new XiaoWeiXinAppDecryptTask("wx32506441a78e116c", "c4cc7d0c56eaae726009bcec74d99ab5");
             return Json(new RequestResultDto() { Msg =JsonConvert.SerializeObject(_appDecrypt.Decrypt(loginInfo)), Ret = 0 }, JsonRequestBehavior.AllowGet);
         }
 

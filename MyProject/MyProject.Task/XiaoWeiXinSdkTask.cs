@@ -465,12 +465,12 @@ namespace MyProject.Task
             if (code == null)
             {
 
-                byte[] postdate;
-                var accountToken = "13_6vjroJaJTjv1MbU4ukGR0N9AMyoZdf4QjRqfFW__3WYLTAspwYNxlpNFx7Bx6kbfXb1zP-HSU7OAZy8RyIVTrH-h4V1OhQ0VNzJkQNcJGUFrPx6TMl9Q4HF5ruVL6046iowEACUgxusQ-oOTXTRhAJAGCA";
+                byte[] postdate; 
+                var accountToken = "16_lt7_qia0hGG3_h3hxN7VXhp6dmZ7gBQ4tBzA--mCacT3xkhjmXIOcKvglP-Wsr1B9YLzykfLc7sUCkmZhNEl4JHoq1RyZ1KOBY_PNycbaihq682qqHujIwT9pfz-ui3oZ67hrokyHWN9IT7mQALjAEAGQB";
                 var str = WebUtils.DoPostSaveImage("https://api.weixin.qq.com/wxa/getwxacodeunlimit?access_token=" + accountToken, JsonConvert.SerializeObject(wxcode), out postdate);
+                var strtest = WebUtils.DoPost("https://api.weixin.qq.com/wxa/getwxacodeunlimit?access_token=" + accountToken, JsonConvert.SerializeObject(wxcode));
                 if (str)
-                {
-
+                { 
                     var _WeiXinCode = new WeiXinCode()
                     {
                         CreateTime = DateTime.Now,

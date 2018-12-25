@@ -79,6 +79,22 @@ namespace MyProject.Services.Utility
             return false;
         }
 
+        public bool Item_Set<T>(string key, T t,DateTime time)
+        {
+            try
+            {
+                using (IRedisClient redis = prcms[_path].GetClient())
+                {
+                    return redis.Set<T>(key, t,time);
+                }
+            }
+            catch (Exception ex)
+            {
+                // LogInfo
+            }
+            return false;
+        }
+
         /// <summary>
         /// 获取单体
         /// </summary>
