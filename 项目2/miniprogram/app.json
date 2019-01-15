@@ -2,7 +2,7 @@
   "pages": [
     "pages/myfirst/myfirst",
     "pages/myinfo/myinfo",
-    "pages/myindex/myindex",
+    "pages/myindex/myindex",  
     "pages/index/index",
     "pages/userConsole/userConsole",
     "pages/storageConsole/storageConsole",
