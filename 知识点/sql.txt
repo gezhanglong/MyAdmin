@@ -1,3 +1,10 @@
+--删除表中重复的数据，保留一条数据
+with a as(
+select *,row_number() over(partition by openid order by createtime) rankid
+from userbind)
+delete from a where rankid>1
+
+
 --查询所有表的数据行数
 select   a.name as 表名,max(b.rows) as 记录条数   from   sysobjects   a   ,sysindexes   b     
   where   a.id=b.id   and   a.xtype='u'   

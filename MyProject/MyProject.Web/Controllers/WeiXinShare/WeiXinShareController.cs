@@ -40,15 +40,18 @@ namespace MyProject.Web.Controllers.WeiXinShare
 
         public ActionResult Test()
         {
-            var unionid = "ok0Ues-AdEBEbo00iTzUzerErr3w";
-            //var key = "buyu20180808websitedb"; 
+            var unionid = "ok0Ues51PAh5nKaz53slvacjdD5E";
+            var key = "lkwx7877787952213dddddeddss";
+            var msg = "您好";
             var dict = new Dictionary<string, string>  
             {
                 {"unionid",unionid},
-                //{"sign", CryptHelper.MD5Hash(unionid + key).ToLower()},
+                {"msg",msg},
+                {"sign", CryptHelper.MD5Hash(msg+"_"+unionid+"_" + key).ToLower()},
             };
-           // var ss = CryptHelper.MD5(unionid + key, 32).ToLower();
-            var result = WebUtils.DoPost("https://apiqa.lkgame.com/superlottery/sendgood?integralaward=1&integraltype=1&cashbalanceaward=1", dict);
+            // var ss = CryptHelper.MD5(unionid + key, 32).ToLower();
+            // var result = WebUtils.DoPost("https://apiqa.lkgame.com/superlottery/sendgood?integralaward=1&integraltype=1&cashbalanceaward=1", dict);
+            var result = WebUtils.DoPost("http://m.lkgame.com/api/sendtextcustom", dict);
             return View();
         }
 

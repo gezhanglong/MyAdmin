@@ -1,0 +1,39 @@
+{
+  "pages": [
+    "pages/myfirst/myfirst",
+    "pages/myinfo/myinfo",
+    "pages/myindex/myindex",  
+    "pages/index/index",
+    "pages/userConsole/userConsole",
+    "pages/storageConsole/storageConsole",
+    "pages/databaseGuide/databaseGuide",
+    "pages/addFunction/addFunction",
+    "pages/deployFunctions/deployFunctions",
+    "pages/chooseLib/chooseLib"
+  ],
+  "window": {
+    "backgroundColor": "#47379e",
+    "backgroundTextStyle": "light",
+    "navigationBarBackgroundColor": "#daae30",
+    "navigationBarTitleText": "个人相册",
+    "navigationBarTextStyle": "black"
+  },
+  "tabBar": {  
+    "backgroundColor":"#47379e",
+    "selectedColor":"#e14c76",
+    "list": [
+      {
+        "pagePath": "pages/myfirst/myfirst",
+        "text": "首页",
+        "iconPath":"/images/icon_1.png",
+        "selectedIconPath":"/images/icon_1_2.png"
+      },
+      {
+        "pagePath": "pages/myinfo/myinfo",
+        "text": "我的",
+        "iconPath": "/images/icon_3.png",
+        "selectedIconPath": "/images/icon_3_2.png"
+      }
+    ]
+  } 
+}
