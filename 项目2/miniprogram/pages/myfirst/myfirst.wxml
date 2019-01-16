@@ -1,1 +1,7 @@
-<text>个人相册，记录点滴瞬间。</text>
+<view class="container"> 
+  <view class='headurl'>头像：</view>
+  <image src='{{headurl}}'></image>
+  <view class='namenick'>昵称：{{namenick}}</view>
+  <view class='openid'>openid:{{openid}}</view>
+  <view class='unionid'>unionid:{{unionid}}</view>
+</view>
