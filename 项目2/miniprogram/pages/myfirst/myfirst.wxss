@@ -1,1 +1,33 @@
 /* miniprogram/pages/myfirst/myfirst.wxss */
+page{ 
+    background-color: #F8F8F8;
+    font-size: 16px;
+    font-family: -apple-system-font,Helvetica Neue,Helvetica,sans-serif; 
+}
+
+.page__hd {
+    padding: 60px; 
+}
+.page__bd{
+  text-align: center;
+}
+.page__ft{
+  width: 100%;
+  text-align: center;
+  position:fixed; 
+  bottom: 10px;   
+}
+
+.hd__title{
+  text-align: center;
+  font:bolder;
+} 
+image{
+  width: 200rpx;
+  height:200rpx; 
+  border-radius: 50%;
+}
+.page__ft_text{ 
+  font-size: 0.8em;
+}
+

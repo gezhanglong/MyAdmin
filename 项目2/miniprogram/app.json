@@ -12,14 +12,14 @@
     "pages/chooseLib/chooseLib"
   ],
   "window": {
-    "backgroundColor": "#47379e",
+    "backgroundColor": "#F8F8F8",
     "backgroundTextStyle": "light",
-    "navigationBarBackgroundColor": "#daae30",
+    "navigationBarBackgroundColor": "#F8F8F8",
     "navigationBarTitleText": "个人相册",
     "navigationBarTextStyle": "black"
   },
   "tabBar": {  
-    "backgroundColor":"#47379e",
+    "backgroundColor":"#F8F8F8",
     "selectedColor":"#e14c76",
     "list": [
       {

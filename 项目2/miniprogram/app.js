@@ -8,8 +8,10 @@ App({
       wx.cloud.init({
         traceUser: true,
       })
-    }
-
-    this.globalData = {openid:''}
+    } 
+  },
+  globalData:{ 
+    openid:"",
+    nickname:"",
   }
 })

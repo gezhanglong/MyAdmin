@@ -17,7 +17,8 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    console.log(app.globalData.openid);
+    var getAppInfo = app.globalData.openid;
+    console.log("openid:"+getAppInfo) 
     if (app.globalData.openid=='')
     { 
       wx.getSetting({
@@ -26,23 +27,41 @@ Page({
           {
             wx.getUserInfo({
               success: res => {
-                console.log(res.userInfo.nickName);
+                console.log(res.userInfo.nickName); 
                 this.setData({
                    headurl: res.userInfo.avatarUrl,
                    namenick: res.userInfo.nickName 
                    })   
-              },
-            })
-            wx.cloud.callFunction({
-              name: 'login', 
-              success: res => {
-                this.setData({ headurl=res.result.unionid, openid=res.result.openid })
-              },
-            })
+                app.globalData.nickname = res.userInfo.nickName
+                this.onGetOpenid()//调用云函数
+              }, 
+            }) 
           }
         }
       }) 
      
+    }else
+    {
+      console.log("已登录");
     }
-  } 
+  },
+  onGetOpenid: function () { 
+    // 调用云函数
+    wx.cloud.callFunction({
+      name: 'login',
+      data: {},
+      success: res => {
+        console.log('[云函数] [login] user openid: ', res.result.openid)
+        app.globalData.openid = res.result.openid 
+        this.setData({ 
+          openid: app.globalData.openid
+        })  
+      },
+      fail: err => {
+        console.error('[云函数] [login] 调用失败', err) 
+      }
+    })
+  }
+
+
 })
