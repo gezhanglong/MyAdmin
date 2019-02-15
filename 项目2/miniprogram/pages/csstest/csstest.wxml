@@ -1,0 +1,104 @@
+<!--miniprogram/pages/csstest/csstest.wxml-->
+<view class='page'>
+  <view class='page_text'>/csstest.wxml</view>
+  <view class='page_text'>/csstest.wxml</view>
+  <view class='page_text'>my name is zl.</view>
+  <view class='page_text'>/csstest.wxml</view>
+  <view class='page_text'>/csstest.wxml</view>
+  <view class='page_text'>my name is zl.</view>
+  <view class='page_text'>/csstest.wxml</view>
+  <view class='page_text'>/csstest.wxml</view>
+  <view class='page_text'>my name is zl.</view>
+  <view class='page_text'>/csstest.wxml</view>
+  <view class='page_text'>/csstest.wxml</view>
+  <view class='page_text'>my name is zl.</view>
+  <view class='page_text'>/csstest.wxml</view>
+  <view class='page_text'>/csstest.wxml</view>
+  <view class='page_text'>my name is zl.</view>
+  <view class='page_text'>/csstest.wxml</view>
+  <view class='page_text'>/csstest.wxml</view>
+  <view class='page_text'>my name is zl.</view>
+  <view class='page_text'>/csstest.wxml</view>
+  <view class='page_text'>/csstest.wxml</view>
+  <view class='page_text'>my name is zl.</view>
+  <view class='page_text'>/csstest.wxml</view>
+  <view class='page_text'>/csstest.wxml</view>
+  <view class='page_text'>my name is zl.</view>
+  <view class='page_text'>/csstest.wxml</view>
+  <view class='page_text'>/csstest.wxml</view>
+  <view class='page_text'>my name is zl.</view>
+</view>
+<view class='page_1'>
+  <view class='page_1_text' bindtap='ontap1'>
+    <a src='#'>苹果</a>
+  </view>
+  <view class='page_1_text' bindtap='ontap2'>
+    <a src='#'>水果</a>
+  </view>
+  <view class='page_1_text' bindtap='ontap3'>
+    <a src='#'>橘子</a>
+  </view>
+</view>
+<view class='page_1_part1' hidden='{{hide1}}' style='background-color:{{backgroundcolor}}'>
+  <view class='page_part1_text'>部分一</view>
+</view>
+<view class='page_1_part1' hidden='{{hide2}}' style='background-color:{{backgroundcolor}}'>
+  <view class='page_part11_text'>部分二</view>
+</view>
+<view class='page_1_part1' hidden='{{hide3}}' style='background-color:{{backgroundcolor}}'>
+  <view class='page_part1_text'>部分三aaaaaaaa</view>
+</view>
+
+
+<scroll-view scroll-x class='page_4' scroll-left='{{scrollleft}}' scroll-with-animation='true'>
+  <view class='page_scroll'>
+    <view id='page41' class='page_4_1'>
+      <image src='http://java.tanzhoujiaoyu.com/webzl/images/t21.png'></image>
+    </view>
+    <view id='page42' class='page_4_1'>
+      <image src='http://java.tanzhoujiaoyu.com/webzl/images/t22.png'></image>
+    </view>
+    <view id='page43' class='page_4_1'>
+      <image src='http://java.tanzhoujiaoyu.com/webzl/images/t23.png'></image>
+    </view>
+  </view>
+</scroll-view>
+<view class='page_4_icon'>
+  <view class='page_4_iconinfo' style='background-color:{{color1}}'></view>
+  <view class='page_4_iconinfo' style='background-color:{{color2}}'></view>
+  <view class='page_4_iconinfo' style='background-color:{{color3}}'></view>
+</view>
+<view class='page_4_bt1' bindtap='onScroll' hover-class='page_4_bt1_hover'>click me scroll</view>
+<view class='page_4_bt1' bindtap='onScrollStop'>click me scroll</view>
+
+
+<view class='page_2'>
+  <view class='page_2_head'>
+    <view class='page_2_head_text'>大杂烩</view>
+  </view>
+  <view class='page_2_body'>
+    <view class='page_2_text'>
+      <image src='http://java.tanzhoujiaoyu.com/webzl/images/t21.png'></image>
+      <view class='page_2_text_name'>西瓜</view>
+    </view>
+    <view class='page_2_text'>
+      <image src='http://java.tanzhoujiaoyu.com/webzl/images/t23.png'></image>
+      <view class='page_2_text_name'>茄子</view>
+    </view>
+    <view class='page_2_text'>
+      <image src='http://java.tanzhoujiaoyu.com/webzl/images/t24.png'></image>
+      <view class='page_2_text_name'>冬瓜</view>
+    </view>
+  </view>
+  <view class='page_2_footer'>
+    <view b hover-class='page_2_footer_hover' class='page_2_footer_text'>点击击按钮</view>
+  </view>
+</view>
+<view class='page_3_box'>
+  <view class='page_3_1'>
+    <view class='page_3_1_title'>你好你好</view>
+    <view class='page_3_1_des'>哈哈哈哈哈哈</view>
+    <image src='http://java.tanzhoujiaoyu.com/webzl/images/html.png' class='page_3_1_img'></image>
+  </view>
+  <view class='page_3_2'></view>
+</view>

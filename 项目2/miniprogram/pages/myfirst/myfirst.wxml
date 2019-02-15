@@ -9,8 +9,9 @@
     <view class='info__mone'>
       <view>昵称：{{namenick}}</view>
     </view>
-  </view>
-  <view class='page__ft'>
+    <view class='btn_into' bindtap='onNavigateTo' bindtouchmove='onNindtouchmove'>进入</view>
+  </view> 
+  <!-- <view class='page__ft'>
     <view class='page__ft_text'>Copyright © 2008-2016 zl</view>
-  </view>
+  </view> -->
 </view>

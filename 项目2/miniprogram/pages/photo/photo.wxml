@@ -1,0 +1,6 @@
+<view wx:for='{{imgurls}}' class='imgcontent'>
+  <image mode='aspectFit' src='{{item.url}}' data-src='{{item.url}}' bindtap='onPreviewImage'></image>
+  <view>{{item.name}}</view>
+  <view>日期：{{item.date}}</view>
+</view>
+ 

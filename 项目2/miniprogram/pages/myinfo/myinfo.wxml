@@ -2,22 +2,31 @@
   <view class='page__hd'>
     欢迎：{{nickname}}
   </view>
-  <view class='page__bd'> 
-    <view class='page__bd_updateimg' bindtap='onUpdateimg'>
-    上传图片
-    <image src='{{imgurl}}'></image>
-    <view>{{fileid}}</view>
-    </view> 
+  <view class='page__bd'>
+    <view class='page__bd_update'>
+      <view>上传图片:</view>
+      <view class='page__bd_update_all'> 
+        <view class='page__bd_update_img' bindtap='onUpdateimg'>
+          <view class='page__bd_update_add'></view>
+        </view>
+          <image class='page__bd_update_url' wx:if='{{imgurl}}' src='{{imgurl}}'></image>
+      </view>
+      <view style='clear:both;'></view>
+    </view>
     <form bindsubmit='onSubmit'>
       <view class='page__bd_title'>
-      标题：
-      <input name='title' placeholder='请输入标题'></input>
+      <view class='page__bd_title_t'>
+       标题：
+      </view> 
+        <input id='title_text' name='title' value='{{title}}' placeholder='请输入标题'></input>
       </view>
-      <view class='page__bd_des'> 
-      描述：
-      <input name='des' placeholder='请输入描述'></input>
+      <view class='page__bd_des'>
+       <view class='page__bd_des_d'>
+       描述：
+      </view>  
+        <input name='des'  value='{{des}}' placeholder='请输入描述'></input>
       </view>
-      <button form-type='submit'>提交</button>
+      <button class='btn_submit' form-type='submit'>提交</button>
     </form>
   </view>
 </view>

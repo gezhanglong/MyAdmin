@@ -11,6 +11,8 @@ Page({
     imgurl:'',
     cloudimgurl:'',
     fileid:'',
+    title:'',
+    des:''
   },
 
   /**
@@ -56,9 +58,9 @@ Page({
       sourceType: ['album', 'camera'],
       success:function(res){
         console.log(res); 
-        const filePath = res.tempFilePaths[0];
+        const filePath = res.tempFilePaths[0]; 
         wx.cloud.uploadFile({//上传图片
-          cloudPath: 'my-image1' + filePath.match(/\.[^.]+?$/)[0],
+          cloudPath: 'my-image' + Date.parse(new Date()) + filePath.match(/\.[^.]+?$/)[0],
           filePath: filePath,
           success:function(res){ 
             const cloudfileid=res.fileID;
@@ -74,12 +76,11 @@ Page({
                 that.setData({
                   cloudimgurl: res.tempFilePath,
                 })
-              },
-              fail:function(res){
-                console.log("下载失败："+res.errMsg+";code:"+res.errCode)
               }
-            })
-
+            }) 
+          },
+          fail: function (res) {
+            console.log("下载失败：" + res.errMsg + ";code:" + res.errCode)
           }
         })
        
@@ -89,17 +90,42 @@ Page({
 
   onSubmit:function(e){
     var that = this;
-    console.log("form:"+e.detail.value.des)
+    console.log("form:" + e.detail.value.des + ",imgurl:" + that.data.cloudimgurl)
+    if (that.data.cloudimgurl.length<=0)
+    {
+      wx.showToast({
+        icon: 'none',
+        title: '无图片地址信息'
+      })
+      return;
+    }
     const db = wx.cloud.database()
-    db.collection('user').add({
+    db.collection('photoinfo').add({
       data:{
         imgurl: that.data.cloudimgurl,
         title:e.detail.value.title,
         des:e.detail.value.des,
-        time:new Date
+        time:new Date()
       },
       success:function(res){
-        console.log("提交："+res)
+        wx.showModal({
+          title: '提示',
+          content: res.errMsg,
+          showCancel:false,
+          success(res) {
+            if (res.confirm) { 
+              that.setData({
+                imgurl: '',
+                cloudimgurl: '',
+                fileid: '', 
+                title: '',
+                des: ''
+              })
+            } else if (res.cancel) {
+              
+            }
+          }
+        }) 
       }
     })
   },

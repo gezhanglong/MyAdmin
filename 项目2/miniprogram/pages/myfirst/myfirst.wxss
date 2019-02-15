@@ -26,8 +26,23 @@ image{
   width: 200rpx;
   height:200rpx; 
   border-radius: 50%;
+  margin: 10px;
 }
 .page__ft_text{ 
   font-size: 0.8em;
 }
 
+.btn_into{ 
+  height: 60px; 
+  line-height: 60px; 
+  text-decoration:underline;
+  font-size: 17px;
+  font-weight: bolder;
+  color: red;
+  padding-top: 20px;
+}
+
+.btn_into:active{   
+  text-shadow: 1px 1px 20px red;
+}
+ 

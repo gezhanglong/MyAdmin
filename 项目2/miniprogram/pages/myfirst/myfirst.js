@@ -61,7 +61,12 @@ Page({
         console.error('[云函数] [login] 调用失败', err) 
       }
     })
+  },
+  onNavigateTo:function(){
+    wx.navigateTo({
+      url: '/pages/photo/photo'
+    })
   }
-
+  
 
 })
