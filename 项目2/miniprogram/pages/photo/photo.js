@@ -27,13 +27,33 @@ Page({
     const db = wx.cloud.database()
     const photoCollection = db.collection('photoinfo').get({
       success(res) {  //获取集合并遍历数据
+        var fileList=[];
         for(var i=0;i<res.data.length;i++)
         { 
-          var newarray = { url: res.data[i].imgurl, name: res.data[i].des, date: res.data[i].time.getFullYear() + "-" + (res.data[i].time.getMonth() + 1) + "-" + res.data[i].time.getDate() + " " + res.data[i].time.getHours() + ":" + res.data[i].time.getMinutes() + ":" + res.data[i].time.getSeconds() }; 
+          fileList.push(res.data[i].imgurl);
+        }
+        console.log("res:" +JSON.stringify(res.data));
+        console.log("fileList:" + fileList);
+        if(fileList.length>0)
+        {
+          wx.cloud.getTempFileURL({//下载图片 获得图片地址  
+            fileList: fileList,
+            success: function (des) {
+              console.log("下载成功：" +JSON.stringify(des.fileList));
+              for (var j = 0; j < des.fileList.length; j++) {
+                for (var i = 0; i < res.data.length; i++) {
+                  if (des.fileList[j].fileID == res.data[i].imgurl) {
+                    var newarray = { url: des.fileList[j].tempFileURL, name: res.data[i].des, date: res.data[i].time.getFullYear() + "-" + (res.data[i].time.getMonth() + 1) + "-" + res.data[i].time.getDate() + " " + res.data[i].time.getHours() + ":" + res.data[i].time.getMinutes() + ":" + res.data[i].time.getSeconds() };
+                    that.setData({
+                      imgurls: that.data.imgurls.concat(newarray),
+                    });
+                  }
+                }
 
-          that.setData({
-            imgurls: that.data.imgurls.concat(newarray),
-          });  
+              }
+
+            }
+          }) 
         }
        
       },

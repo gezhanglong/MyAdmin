@@ -9,6 +9,7 @@ page{
     padding: 60px; 
 }
 .page__bd{
+  padding: 60px; 
   text-align: center;
 }
 .page__ft{

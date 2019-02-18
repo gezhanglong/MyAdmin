@@ -7,6 +7,7 @@ Page({
    * 页面的初始数据
    */
   data: {
+    isuser:false,
     nickname: '', 
     imgurl:'',
     cloudimgurl:'',
@@ -20,25 +21,28 @@ Page({
    */
   onLoad: function (options) { 
     this.setData({
-      nickname:app.globalData.nickname,
-    })
+      nickname: "无管理员信息",
+    }) 
+    this.onLogin();
+  },
+
+  //到数据库拿管理员信息
+  onLogin:function(){
+    if (app.globalData.openid <= 0) {
+      return;
+    }
     const db = wx.cloud.database()
     db.collection('user').where({
       _openid: app.globalData.openid
     }).get({
       success: res => {
-        if (res.data.length<=0){
-          wx.showToast({
-            icon: 'none',
-            title: '无管理员信息'
-          })
+        if (res.data.length <= 0) {
           return
         }
-       
-        wx.showToast({
-          icon: 'success',
-          title: '登录成功'
-        }) 
+        this.setData({
+          isuser: true,
+          nickname: "欢迎：" + app.globalData.nickname,
+        })
       },
       fail: err => {
         wx.showToast({
@@ -50,8 +54,16 @@ Page({
     })
   },
   
+  //选择图片并上传图片并下载图片
   onUpdateimg:function(){
-    var that = this;
+    var that = this; 
+    if (!that.data.isuser) {
+      wx.showToast({
+        icon: 'none',
+        title: '无管理员信息，不能操作上传!'
+      })
+      return;
+    }
     wx.chooseImage({//选择图片
       count:1,
       sizeType: ['original', 'compressed'],
@@ -59,9 +71,13 @@ Page({
       success:function(res){
         console.log(res); 
         const filePath = res.tempFilePaths[0]; 
+        const cloudPath = 'my-image' + Date.parse(new Date()) + filePath.match(/\.[^.]+?$/)[0];
         wx.cloud.uploadFile({//上传图片
-          cloudPath: 'my-image' + Date.parse(new Date()) + filePath.match(/\.[^.]+?$/)[0],
-          filePath: filePath,
+          cloudPath, 
+          filePath,
+          header: { 
+            "Content-Type": "multipart/form-data" 
+          },
           success:function(res){ 
             const cloudfileid=res.fileID;
             that.setData({
@@ -80,7 +96,7 @@ Page({
             }) 
           },
           fail: function (res) {
-            console.log("下载失败：" + res.errMsg + ";code:" + res.errCode)
+            console.log("上传失败：" + res.errMsg + ";code:" + res.errCode)
           }
         })
        
@@ -88,8 +104,17 @@ Page({
     })
   },
 
-  onSubmit:function(e){
+  //提交数据
+  onSubmit:function(e){ 
     var that = this;
+    if(!that.data.isuser)
+    {
+      wx.showToast({
+        icon: 'none',
+        title: '无管理员信息，不能操作上传!'
+      })
+      return;
+    }
     console.log("form:" + e.detail.value.des + ",imgurl:" + that.data.cloudimgurl)
     if (that.data.cloudimgurl.length<=0)
     {
@@ -102,7 +127,7 @@ Page({
     const db = wx.cloud.database()
     db.collection('photoinfo').add({
       data:{
-        imgurl: that.data.cloudimgurl,
+        imgurl: that.data.fileid,
         title:e.detail.value.title,
         des:e.detail.value.des,
         time:new Date()
@@ -128,5 +153,12 @@ Page({
         }) 
       }
     })
+  },
+
+  /**
+  * 生命周期函数--监听页面显示
+  */
+  onShow: function () {
+    this.onLogin();
   },
 })

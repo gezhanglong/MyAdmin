@@ -1,15 +1,15 @@
-<view class='page'>
-  <view class='page__hd'>
-    <view class='hd__title'>登录成功</view>
-  </view>
+<view class='page'> 
   <view class='page__bd'>
     <view class='info__headurl'>
       <image src='{{headurl}}'></image>
     </view>
     <view class='info__mone'>
-      <view>昵称：{{namenick}}</view>
+      <view wx:if="{{namenick.length>0}}">您好：{{namenick}}</view>
+      <button wx:else open-type="getUserInfo" lang="zh_CN" bindgetuserinfo="onGotUserInfo">
+        请授权
+      </button>
     </view>
-    <view class='btn_into' bindtap='onNavigateTo' bindtouchmove='onNindtouchmove'>进入</view>
+    <view class='btn_into' bindtap='onNavigateTo' bindtouchmove='onNindtouchmove'>欢迎来到小嘉文相册>>进入</view>
   </view> 
   <!-- <view class='page__ft'>
     <view class='page__ft_text'>Copyright © 2008-2016 zl</view>

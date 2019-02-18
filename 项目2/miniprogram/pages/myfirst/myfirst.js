@@ -23,6 +23,7 @@ Page({
     { 
       wx.getSetting({
         success:res=>{ 
+          console.log("authsetting:"+JSON.stringify(res));
           if (res.authSetting['scope.userInfo'])
           {
             wx.getUserInfo({
@@ -30,7 +31,7 @@ Page({
                 console.log(res.userInfo.nickName); 
                 this.setData({
                    headurl: res.userInfo.avatarUrl,
-                   namenick: res.userInfo.nickName 
+                   namenick: res.userInfo.nickName , 
                    })   
                 app.globalData.nickname = res.userInfo.nickName
                 this.onGetOpenid()//调用云函数
@@ -63,10 +64,26 @@ Page({
     })
   },
   onNavigateTo:function(){
+    if(this.data.openid<=0)
+    {
+      wx.showToast({
+        icon: 'none',
+        title: '请授权后访问'
+      })
+      return;
+    }
     wx.navigateTo({
       url: '/pages/photo/photo'
     })
-  }
+  },
+  onGotUserInfo(e) {
+    this.setData({
+      headurl: e.detail.userInfo.avatarUrl,
+      namenick: e.detail.userInfo.nickName, 
+    })   
+    app.globalData.nickname = e.detail.userInfo.nickName;
+    this.onGetOpenid()//调用云函数
+  },
   
 
 })

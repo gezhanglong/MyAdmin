@@ -1,6 +1,6 @@
 <view class='page'>
   <view class='page__hd'>
-    欢迎：{{nickname}}
+    {{nickname}}
   </view>
   <view class='page__bd'>
     <view class='page__bd_update'>

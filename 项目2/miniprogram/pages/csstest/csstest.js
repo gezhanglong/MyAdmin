@@ -57,7 +57,7 @@ Page({
      hide2: 'hide',
      hide3: 'hide',
      backgroundcolor:'red'
-   })
+   }) 
  }, 
   ontap2: function () { 
     this.setData({

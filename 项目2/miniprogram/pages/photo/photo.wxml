@@ -3,4 +3,5 @@
   <view>{{item.name}}</view>
   <view>日期：{{item.date}}</view>
 </view>
+<button open-type='share'>分享</button> 
  
