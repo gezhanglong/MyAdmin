@@ -1,0 +1,21 @@
+<view class='page'>
+  <view class='page__bd'>
+    <view class='page__bd_update'>
+      <view>上传图片:</view>
+      <view class='page__bd_update_all'>
+        <view class='page__bd_update_img' bindtap='onUpdateimg'>
+          <view class='page__bd_update_add'></view>
+        </view>
+        <image class='page__bd_update_url' wx:if='{{imgurl}}' src='{{imgurl}}'></image>
+      </view>
+      <view style='clear:both;'></view>
+    </view>
+    <button class='btn_submit' bindtap='onSubmit'>提交</button>
+  </view>
+
+  <view wx:for='{{imgurls}}' class='imgcontent'>
+    <image mode='aspectFit' src='{{item.url}}' data-src='{{item.url}}' bindtap='onPreviewImage'></image>
+    <view>{{item.name}}</view>
+    <view>日期：{{item.date}}</view>
+  </view>
+</view>

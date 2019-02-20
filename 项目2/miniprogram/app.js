@@ -13,5 +13,6 @@ App({
   globalData:{ 
     openid:"",
     nickname:"",
+    headurl:"",
   }
 })

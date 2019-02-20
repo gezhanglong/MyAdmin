@@ -34,6 +34,7 @@ Page({
                    namenick: res.userInfo.nickName , 
                    })   
                 app.globalData.nickname = res.userInfo.nickName
+                app.globalData.headurl = res.userInfo.avatarUrl
                 this.onGetOpenid()//调用云函数
               }, 
             }) 
@@ -82,6 +83,7 @@ Page({
       namenick: e.detail.userInfo.nickName, 
     })   
     app.globalData.nickname = e.detail.userInfo.nickName;
+    app.globalData.headurl = e.detail.userInfo.avatarUrl
     this.onGetOpenid()//调用云函数
   },
   

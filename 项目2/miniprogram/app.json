@@ -1,9 +1,7 @@
 {
-  "pages": [ 
-    
+  "pages": [
     "pages/myfirst/myfirst",
-    "pages/myinfo/myinfo", 
-    "pages/myindex/myindex",
+    "pages/updateimgfirst/updateimgfirst",
     "pages/index/index",
     "pages/userConsole/userConsole",
     "pages/storageConsole/storageConsole",
@@ -12,7 +10,10 @@
     "pages/deployFunctions/deployFunctions",
     "pages/chooseLib/chooseLib",
     "pages/photo/photo",
-    "pages/csstest/csstest"
+    "pages/csstest/csstest",
+    "pages/user/user", 
+    "pages/updateimg/updateimg",
+    "pages/userinfo/userinfo"
   ],
   "window": {
     "backgroundColor": "#F8F8F8",
@@ -32,7 +33,7 @@
         "selectedIconPath": "/images/icon_1_2.png"
       },
       {
-        "pagePath": "pages/myinfo/myinfo",
+        "pagePath": "pages/user/user",
         "text": "我的",
         "iconPath": "/images/icon_3.png",
         "selectedIconPath": "/images/icon_3_2.png"
