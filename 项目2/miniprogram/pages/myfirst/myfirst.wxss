@@ -9,8 +9,10 @@ page{
     padding: 60px; 
 }
 .page__bd{
-  padding: 60px; 
-  text-align: center;
+  padding: 10px;  
+  position:absolute;
+  top:150px;
+  right:0px;  
 }
 .page__ft{
   width: 100%;
@@ -23,9 +25,9 @@ page{
   text-align: center;
   font:bolder;
 } 
-image{
-  width: 200rpx;
-  height:200rpx; 
+#headurl{
+  width: 100rpx;
+  height:100rpx; 
   border-radius: 50%;
   margin: 10px;
 }
@@ -45,5 +47,19 @@ image{
 
 .btn_into:active{   
   text-shadow: 1px 1px 20px red;
+}
+
+#bd_image{
+  width:100%; 
+  position: relative; 
+  margin-top:100px; 
+}
+
+.info__headurl{
+  margin-left:130px; 
+}
+
+.info__mone{
+  margin-left:120px; 
 }
  

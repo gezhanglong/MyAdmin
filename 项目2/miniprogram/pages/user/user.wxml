@@ -1,14 +1,12 @@
 <view class='page'> 
-  <view class='page__bd'>
-    <view class='info__headurl'>
+ <view class='info__headurl'>
       <image src='{{headurl}}'></image>
-    </view>
-    <view class='info__mone'>
-      <view>您好：{{nickname}}</view> 
+       <view id='info__name'>管理员：{{nickname}}</view> 
     </view> 
-    <button wx:if='{{isuser}}'  bindtap='onUserNavigateTo'>用户管理</button>
-    <button wx:if='{{isuser}}'  bindtap='onFirstImgNavigateTo'>上传首页图片</button>
-    <button wx:if='{{isuser}}'  bindtap='onImgNavigateTo'>上传内容图片</button> 
+  <view class='page__bd'> 
+    <button class='btn_3' wx:if='{{isadmin}}'  bindtap='onUserNavigateTo'>用户列表</button>
+    <button class='btn_3' wx:if='{{isuser}}'  bindtap='onFirstImgNavigateTo'>上传首页图片</button>
+    <button class='btn_3' wx:if='{{isuser}}'  bindtap='onImgNavigateTo'>上传内容图片</button>  
   </view> 
   <view class='page__ft'>
     <view class='page__ft_text'>Copyright © 2019-2019 zl</view>

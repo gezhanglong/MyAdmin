@@ -15,11 +15,12 @@
 }
 .page__bd_update_img {
   position: relative;
-  width: 55px;
-  height: 55px;
+  width: 44px;
+  height: 44px;
   border: 1px solid #d9d9d9;
   float: left;
   margin-left: 10px;
+  border-radius:10px; 
 }
 
 .page__bd_update_img:after {
@@ -43,8 +44,8 @@
 
 .page__bd_update_url {
   position: relative;
-  width: 55px;
-  height: 55px;
+  width: 44px;
+  height: 44px;
   margin-left: 5px;
 }
 
@@ -62,4 +63,11 @@
 
 .btn_submit{
   margin-top: 10px;
+}
+
+.note{
+  font-size: 0.7em;
+  color: red;
+  margin:10px;
+
 }

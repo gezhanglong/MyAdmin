@@ -12,8 +12,8 @@
     </view>
     <button class='btn_submit' bindtap='onSubmit'>提交</button>
   </view>
-
   <view wx:for='{{imgurls}}' class='imgcontent'>
+    <icon type="clear" size="30" color="purple" bindtap='onDel' data-id='{{item.id}}' data-fileid='{{item.fileid}}' />
     <image mode='aspectFit' src='{{item.url}}' data-src='{{item.url}}' bindtap='onPreviewImage'></image>
     <view>{{item.name}}</view>
     <view>日期：{{item.date}}</view>

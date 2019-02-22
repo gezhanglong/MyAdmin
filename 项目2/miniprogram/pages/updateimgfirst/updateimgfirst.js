@@ -188,7 +188,7 @@ Page({
             if (res.confirm) {  
               for (var i = 0; i < that.data.ids.length; i++) {
                 var id = that.data.ids[i] ;
-                db.collection('photoinfofirst').doc(id).remove({
+                db.collection('photoinfofirst').doc(id).remove({//删除数据库数据
                   success: function (res) {
                     console.log("删除成功id：" + id + ";msg:" + JSON.stringify(res));
                   },
@@ -198,7 +198,7 @@ Page({
                   }
                 });
               } 
-              wx.cloud.deleteFile({
+              wx.cloud.deleteFile({//删除存储文件
                 fileList:that.data.fileList,
                 success: res => { 
                   console.log("删除成功："+res.fileList)

@@ -1,6 +1,6 @@
 /* miniprogram/pages/myfirst/myfirst.wxss */
 page{ 
-    background-color: #F8F8F8;
+  background: linear-gradient(#f89faa,#fad0c4); 
     font-size: 16px;
     font-family: -apple-system-font,Helvetica Neue,Helvetica,sans-serif; 
 }
@@ -8,31 +8,48 @@ page{
 
 .page__bd{
   padding: 20px; 
-  text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center; 
 }
+
+button{
+  margin-top:20px; 
+  width: 250px;
+  height: 50px;
+}
+ 
+/* #btn_3{ 
+  background: linear-gradient(to bottom right, #FFF687,#F6416C);  
+} */
+ 
 .page__ft{
   width: 100%;
   text-align: center;
   position:fixed; 
   bottom: 10px;   
 }
+ 
 
-.hd__title{
-  text-align: center;
-  font:bolder;
-} 
-image{
-  width: 200rpx;
-  height:200rpx; 
-  border-radius: 50%;
-  margin: 10px;
+ .info__headurl{ 
+   border-bottom: 1px solid #fad0c4;
+}  
+
+.info__headurl image{
+  width: 150rpx;
+  height:150rpx; 
+  border-radius: 50%; 
+  float: left; 
+  margin:12px; 
 }
+#info__name{ 
+  line-height: 200rpx;
+  padding-right:80px;
+  color: white;
+}
+
 .page__ft_text{ 
   font-size: 0.8em;
 }
 
-button{
-  line-height:2;
-  margin-top: 20px; 
-}
- 
+

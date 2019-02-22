@@ -1,2 +1,5 @@
-<!--miniprogram/pages/userinfo/userinfo.wxml-->
-<text>miniprogram/pages/userinfo/userinfo.wxml</text>
+ 
+<view wx:for='{{userlist}}' class='list_info'>
+  <view class='info_openid'>{{item.openid}}</view>
+  <view class='info_name'>{{item.nickname}}</view>
+</view>

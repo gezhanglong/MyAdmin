@@ -1,1 +1,10 @@
-/* miniprogram/pages/userinfo/userinfo.wxss */
+page{
+  text-align: center;
+}
+.list_info{
+  height: 50px; 
+  border-radius: 10px;
+  box-shadow: 0px 0px 5px burlywood;
+  margin-top: 20px;
+  line-height: 25px;
+}

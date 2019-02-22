@@ -72,7 +72,7 @@ Page({
               for (var j = 0; j < des.fileList.length; j++) {
                 for (var i = 0; i < res.data.length; i++) {
                   if (des.fileList[j].fileID == res.data[i].imgurl) {
-                    var newarray = { url: des.fileList[j].tempFileURL, name: res.data[i].des, date: res.data[i].time.getFullYear() + "-" + (res.data[i].time.getMonth() + 1) + "-" + res.data[i].time.getDate() + " " + res.data[i].time.getHours() + ":" + res.data[i].time.getMinutes() + ":" + res.data[i].time.getSeconds() };
+                    var newarray = { id: res.data[i]._id, fileid:des.fileList[j].fileID, url: des.fileList[j].tempFileURL, name: res.data[i].des, date: res.data[i].time.getFullYear() + "-" + (res.data[i].time.getMonth() + 1) + "-" + res.data[i].time.getDate() + " " + res.data[i].time.getHours() + ":" + res.data[i].time.getMinutes() + ":" + res.data[i].time.getSeconds() };
                     that.setData({
                       imgurls: that.data.imgurls.concat(newarray),
                     });
@@ -177,19 +177,7 @@ Page({
           showCancel: false,
           success(res) {
             if (res.confirm) {
-              that.setData({
-                imgurl: '',
-                cloudimgurl: '',
-                fileid: '', 
-                imgurls:[],
-              })
-              wx.showLoading({
-                title: '加载中...',
-              })
-              setTimeout(function () {
-                that.onPhoto();
-                wx.hideLoading()
-              }, 2000)    
+              that.onSetTimeout();
             } else if (res.cancel) {
 
             }
@@ -206,6 +194,51 @@ Page({
       current: current, // 当前显示图片的http链接
       urls: [current] // 需要预览的图片http链接列表
     })
+  },
+
+  //删除数据库数据
+  onDel:function(e){
+    var that = this;
+    const db = wx.cloud.database();
+    db.collection('photoinfo').doc(e.target.dataset.id).remove({//删除数据库数据
+      success: function (res) {
+        console.log("删除成功id：" + e.target.dataset.id + ";msg:" + JSON.stringify(res));
+      },
+      fail: function (res) {
+        console.log("删除失败id：" + e.target.dataset.id + ";msg:" + JSON.stringify(res)); 
+      }
+    });
+    var fileList=[];
+    fileList.push(e.target.dataset.fileid);
+    wx.cloud.deleteFile({//删除存储文件
+      fileList: fileList,
+      success: res => {
+        console.log("删除成功：" + res.fileList)
+      },
+      fail: err => {
+        console.log("删除失败：" + err)
+      }
+    })
+   
+    that.onSetTimeout();
+  },
+
+  //延迟2秒执行
+  onSetTimeout:function(){
+    var that = this;
+    wx.showLoading({
+      title: '刷新中...',
+    })
+    setTimeout(function () {
+      that.setData({
+        imgurl: '',
+        cloudimgurl: '',
+        fileid: '',
+        imgurls: [],
+      })
+      that.onPhoto();
+      wx.hideLoading()
+    }, 2000)    
   },
 
 

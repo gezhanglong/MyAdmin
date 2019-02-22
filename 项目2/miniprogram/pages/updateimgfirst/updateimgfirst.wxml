@@ -26,7 +26,7 @@
       <button class='btn_submit' form-type='submit'>提交</button> 
     </form> 
   </view>
-  <view>注释：首页图片只有一张，重新上传会覆盖原来的图片</view>
+  <view class='note'>注释：首页图片只有一张，重新上传会覆盖原来的图片</view>
     <view wx:for='{{imgurls}}' class='imgcontent'>
     <image mode='aspectFit' src='{{item.url}}' data-src='{{item.url}}' bindtap='onPreviewImage'></image> 
   </view>

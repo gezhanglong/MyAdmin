@@ -4,17 +4,43 @@ Page({
   /**
    * 页面的初始数据
    */
-  data: {
-
+  data: { 
+    userlist:[],
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
-  onLoad: function (options) {
-
+  onLoad: function (options) { 
+    var that = this;
+    if (that.data.openid <= 0) {
+      return;
+    }
+    const db = wx.cloud.database()
+    db.collection('user').where({  
+      userpower:1 //0最高权限，1普通权限
+    }).get({
+      success(res) {  //获取集合并遍历数据
+      console.log("userlist:"+JSON.stringify(res));
+        var fileList = [];
+        for (var i = 0; i < res.data.length; i++) {
+          var newarray = { openid: res.data[i]._openid, nickname: res.data[i].name};
+          that.setData({
+            userlist: that.data.userlist.concat(newarray),
+          });
+        } 
+      },
+      fail: err => {
+        wx.showToast({
+          icon: 'none',
+          title: '查询记录失败'
+        })
+        console.error('[数据库] [查询记录] 失败：', err)
+      }
+    })
   },
 
+ 
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
