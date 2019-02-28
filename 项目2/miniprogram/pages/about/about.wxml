@@ -1,0 +1,19 @@
+
+<view class='we-about'>
+  <view class='we-name'>电影推荐</view>
+  <view class='we-intro'>
+    <view class='we-intro-item'>
+      <view class='we-intro-title'>后端支持</view>
+      <view class='we-intro-content'>豆瓣API：https://douban.com/skjdf/xsdfj</view>
+       <view class='we-intro-content'>百度地图API：https://baidu.com/skjdf/xsdfj</view>
+    </view>
+    <view class='we-intro-item'>
+      <view class='we-intro-title'>作者</view>
+      <view class='we-intro-content'>zl:https://zl.com</view> 
+    </view>
+    <view class='we-intro-item'>
+      <view class='we-intro-title'>项目所使用的API</view>
+      <view class='we-intro-content'>wx.request、wx.chooseImage、wx.previewImage、wx.playVoice、wx.saveFile、wx.setStorage、wx.getStorage、wx.clearStorage、wx.getStorageInfo、wx.getLocation、wx.getSystemInfo、wx.onAccelerometerChange、wx.showToast、wx.showModal、wx.showActionSheet、wx.setNavigationBarTitle、wx.navigateTo、wx.redirectTo、wx.login</view> 
+    </view>
+  </view>
+</view>

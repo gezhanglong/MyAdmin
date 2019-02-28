@@ -1,5 +1,6 @@
 {
   "pages": [
+    "pages/about/about",
     "pages/myfirst/myfirst",
     "pages/updateimgfirst/updateimgfirst",
     "pages/index/index",
@@ -11,9 +12,9 @@
     "pages/chooseLib/chooseLib",
     "pages/photo/photo",
     "pages/csstest/csstest",
-    "pages/user/user", 
+    "pages/user/user",
     "pages/updateimg/updateimg",
-    "pages/userinfo/userinfo"
+    "pages/userinfo/userinfo" 
   ],
   "window": {
     "backgroundColor": "#F8F8F8",
