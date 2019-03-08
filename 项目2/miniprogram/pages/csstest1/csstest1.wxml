@@ -1,0 +1,80 @@
+ 
+  <!-- 轮播1 -->
+  <view class='scrolls' style='left: {{num}}rpx;'>
+    <view class='lists'>
+      <image class='left-img' src='https://img3.doubanio.com/view/movie_gallery_frame_hot_rec/normal/public/3674027aa7e3c20.jpg'></image>
+      <view class='right-txt'>
+        <view class='right-title'>《权力的游戏》回归倒计时！三月神剧追不停</view>
+        <view class='right-des'>太刺激了！</view>
+      </view>
+    </view>
+    <view class='lists'>
+      <image class='left-img' src='https://img1.doubanio.com/view/movie_gallery_frame_hot_rec/normal/public/b0ed0262c6bbddb.jpg'></image>
+      <view class='right-txt'>
+        <view class='right-title'>《绿皮书》能让我们对黑人电影改观吗？</view>
+        <view class='right-des'>中国大银幕上的黑人电影小史。</view>
+      </view>
+    </view>
+    <view class='lists'>
+      <image class='left-img' src='https://img1.doubanio.com/view/movie_gallery_frame_hot_rec/normal/public/ed058084dca6d59.jpg'></image>
+      <view class='right-txt'>
+        <view class='right-title'>《遗传厄运》导演恐怖新作《仲夏夜惊魂》</view>
+        <view class='right-des'>小清新恐怖片，预告诡异唯美~</view>
+      </view>
+    </view> 
+  </view>
+
+    <!-- 轮播2 {{scrollleft}}-->
+   <scroll-view scroll-x class='page_4' scroll-left='{{scrollleft}}rpx' scroll-with-animation='true' >
+  <view class='page_scroll'>
+    <view class='lists'> 
+     <image class='left-img' src='https://img3.doubanio.com/view/movie_gallery_frame_hot_rec/normal/public/3674027aa7e3c20.jpg' bindtap='onPreviewImage'  data-src='https://img3.doubanio.com/view/movie_gallery_frame_hot_rec/normal/public/3674027aa7e3c20.jpg'></image> 
+      <view class='right-txt'>
+        <view class='right-title'>《权力的游戏》回归倒计时！三月神剧追不停</view>
+        <view class='right-des'>太刺激了！</view>
+      </view>
+    </view>
+    <view class='lists'>
+      <image class='left-img' src='https://img1.doubanio.com/view/movie_gallery_frame_hot_rec/normal/public/b0ed0262c6bbddb.jpg'></image>
+      <view class='right-txt'>
+        <view class='right-title'>《绿皮书》能让我们对黑人电影改观吗？</view>
+        <view class='right-des'>中国大银幕上的黑人电影小史。</view>
+      </view>
+    </view>
+    <view class='lists'>
+      <image class='left-img' src='https://img1.doubanio.com/view/movie_gallery_frame_hot_rec/normal/public/ed058084dca6d59.jpg'></image>
+      <view class='right-txt'>
+        <view class='right-title'>《遗传厄运》导演恐怖新作《仲夏夜惊魂》</view>
+        <view class='right-des'>小清新恐怖片，预告诡异唯美~</view>
+      </view>
+    </view> 
+  </view>
+</scroll-view>
+
+<!--transition:left 10s;  -->
+<view class='guess' style='top: {{guessHeight}}rpx;left: {{guessWidth}}rpx;opacity:{{guessopacity}};'>
+  猜
+</view>
+
+
+<!-- 滑动改变样式 -->
+<view class='content'>
+  <view class='content-box' bindtouchstart='onBtnstart' bindtouchend='onBtnend'>
+    <view class='box-img box-img1'></view>
+    <view class='box-title'>代金券或立减优惠</view>
+    <view class='box-des'>商户营销和运营的能力，给用户发放代金券或立减优惠的相关说明</view>
+    <button class='{{btnclass}}'>查看文档</button>
+  </view>
+  <view class='content-box'>
+    <view class='box-img box-img2'></view>
+    <view class='box-title'>现金红包</view>
+    <view class='box-des'>提供给商户营销的能力，商户给用户派发现金红包相关说明 </view>
+    <button class='box-bnt'>查看文档</button>
+  </view>
+  <view class='content-box'>
+    <view class='box-img box-img3'></view>
+    <view class='box-title'>企业付款</view>
+    <view class='box-des'>企业付款至用户微信支付零钱或银行卡</view>
+    <button class='box-bnt'>查看文档</button>
+  </view>
+</view>

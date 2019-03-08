@@ -1,0 +1,12 @@
+<template name='list'>
+<block wx:for="{{cells}}" wx:for-item="cellsitem" wx:for-index="cellsindex" wx:key="cells">
+  <view class='cells'>
+    <block wx:for="{{cellsitem}}" wx:for-item="cellitem" wx:for-index="cellindex" wx:key="cells">
+    <view class='cell'>
+      <view class='cells-title'>{{cellitem.title}}</view>
+      <view class='cells-des'>{{cellitem.des}}</view>
+      </view>
+    </block>
+  </view>
+</block>
+</template>

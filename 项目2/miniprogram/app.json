@@ -1,5 +1,8 @@
 {
   "pages": [
+    "pages/csstest1/csstest1",
+    "pages/csstest/csstest",
+    "pages/systeminfo/systeminfo",
     "pages/about/about",
     "pages/myfirst/myfirst",
     "pages/updateimgfirst/updateimgfirst",
@@ -11,7 +14,6 @@
     "pages/deployFunctions/deployFunctions",
     "pages/chooseLib/chooseLib",
     "pages/photo/photo",
-    "pages/csstest/csstest",
     "pages/user/user",
     "pages/updateimg/updateimg",
     "pages/userinfo/userinfo" 
