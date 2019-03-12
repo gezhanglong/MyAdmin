@@ -58,7 +58,7 @@ page{
 /*   ///////////////////////// */
  
 
-.guess{
+/* .guess{
   width: 60rpx;
   height: 60rpx;
   position: fixed; 
@@ -68,6 +68,31 @@ page{
   line-height: 60rpx;
   color: white;
   z-index: 99;   
+} */
+
+.guess2{
+  width: 260rpx;
+  height: 260rpx;
+  position: fixed;  
+  text-align: center;
+  z-index: 99;   
+}
+
+.guess-txt{
+  display: inline-block;
+  width: 260rpx;
+  height: 50rpx;
+  font-size: 28rpx;
+  color: rgb(236, 122, 193);
+  /* border: 2px dotted yellow;  */
+}
+
+.guess-img{
+  display: inline-block;
+  width: 200rpx;
+  height: 160rpx;
+  margin-left:40rpx;
+
 }
 
 

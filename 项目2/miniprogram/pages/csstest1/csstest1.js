@@ -15,6 +15,8 @@ Page({
     guessHeight: 0,//‘猜’当前高度
     guesssetInter: '',//‘猜’定时器句柄
     guessopacity:1.0,//'猜'透明度
+    guesstextshow: 'hidden',//'猜'提示语是否显示 
+    guesstext: ''//'猜'提示语
   },
  //控制css样式
   onBtnstart:function(){
@@ -74,21 +76,47 @@ Page({
     var that = this;
     that.data.guesssetInter = setInterval(
       function () {
-        var width = Math.floor(Math.random() * that.data.windowWidth);
-        var height = Math.floor(Math.random() * that.data.windowHeight); 
-        for(var i=0;i<5;i++){
-          setTimeout(function () { 
-          }, 5000)  
-          that.setData({ guessopacity: 1 - parseFloat(i / 10) });
+        var width = Math.floor(Math.random() * (that.data.windowWidth-260));
+        var height = Math.floor(Math.random() * (that.data.windowHeight - 260));
+        
+        for(var i=0;i<20;i++){
+          that.onSleep(300)
+          that.setData({ guessopacity: 1 - parseFloat(i / 20) });
           console.log("透明度：" + that.data.guessopacity); 
         }
        
-        that.setData({ guessWidth: width, guessHeight: height, guessopacity:1.0});
+        that.setData({
+           guessWidth: width,
+            guessHeight: height,
+            guessopacity:1.0,
+            guesstextshow: 'hidden',  
+             });
         console.log("猜：" + width + ";" + height); 
       }
-      , 20000);
+      , 6000);
   },
 
+  onSleep: function (numberMillis) {
+    var now = new Date();
+    var exitTime = now.getTime() + numberMillis;
+    while(true) {
+      now = new Date();
+      if (now.getTime() > exitTime)
+        return;
+    }
+  }, 
+
+  onGuessTap:function(){  
+    var i = Math.floor(Math.random() * 3); 
+    var text = ['为什么要点我！', '我可爱么！', '你好丑哟！'];
+
+    this.setData({
+      guesstextshow: 'visible', 
+      guessopacity: 1.0, 
+      guesstext:text[i],
+    })
+  },
+  
   //预览图片
   onPreviewImage: function (e) {
     var current = e.target.dataset.src;
@@ -103,19 +131,20 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-      //  this.startSetInter();//轮播方法
-    this.onCrolltolower();//轮播方法
-    this.onGuessSetInter();//'猜'定时器
+     
     var that = this;
+     //  that.startSetInter();//轮播方法
     wx.getSystemInfo({//获取系统信息方法
       success: function (res) { 
         that.setData({
           windowWidth: res.windowWidth * res.pixelRatio,
-          windowHeight: res.windowHeight * res.pixelRatio
-        })
+          windowHeight: res.windowHeight * res.pixelRatio, 
+        }) 
         console.log("cells:" + JSON.stringify(res));
       }
     })
+    that.onGuessSetInter();//'猜'定时器
+    that.onCrolltolower();//轮播方法 
   },
 
   /**
