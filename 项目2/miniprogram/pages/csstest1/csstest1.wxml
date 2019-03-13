@@ -55,7 +55,7 @@
 <!-- <view class='guess' style='top: {{guessHeight}}rpx;left: {{guessWidth}}rpx;opacity:{{guessopacity}};'>
   猜
 </view>  -->
-<view  class='guess2' style='top: {{guessHeight}}rpx;left: {{guessWidth}}rpx;opacity:{{guessopacity}};' bindtap='onGuessTap'>  
+<view  class='guess2' style='top: {{guessHeight}}rpx;left: {{guessWidth}}rpx;{{guessopacity}}' bindtap='onGuessTap'>  
 <image class='guess-img' src='../../images/th2.png' ></image> 
 <view class='guess-txt' style='visibility:{{guesstextshow}};'>{{guesstext}}</view> 
 </view>

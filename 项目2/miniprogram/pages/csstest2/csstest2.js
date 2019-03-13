@@ -9,11 +9,11 @@ Page({
     setInter:'',
     internum:0,//定时器循环多少次
     imgcontent0: '',
-    transform0:'transform:rotate(0deg); ',
+    transform0:'  ',
     imgcontent1: '',
-    transform1: 'transform:rotate(0deg);opacity:0;',
+    transform1: ' ',
     imgcontent2: '',
-    transform2: 'transform:rotate(0deg);opacity:0;',
+    transform2: ' ',
     imgcontent3: '',
     imgcontent4: '',
     imgcontent5: '',
@@ -36,7 +36,7 @@ Page({
         if(that.data.internum==0){
           that.setData({
             imgcontent0: that.data.imgurls[0].url,
-            transform0: 'transform:rotate(360deg); ',
+            transform0: 'animation: myfirst2 2s linear, myfirst1 2s linear 2s ;',
             internum: 1, 
           }); 
         } else
@@ -45,14 +45,14 @@ Page({
              
             internum: 2,
             imgcontent1: that.data.imgurls[1].url,
-            transform1: 'transform:rotate(7deg);opacity:1;', 
+            transform1: 'animation: myfirst2 2s linear, myfirst1 2s linear 2s ;', 
           }); 
         } else
         if (that.data.internum == 2) {
           that.setData({ 
             internum: 3, 
             imgcontent2: that.data.imgurls[2].url,
-            transform2: 'transform:rotate(10deg);opacity:1;',
+            transform2: 'animation: myfirst2 2s linear, myfirst1 2s linear 2s ;',
           }); 
         }  
          else{
@@ -61,7 +61,7 @@ Page({
         console.log("定时器" + that.data.internum);
 
       }
-      , 5000);
+      , 2000);
   },
 
   /**
@@ -88,13 +88,13 @@ Page({
                   if (des.fileList[j].fileID == res.data[i].imgurl) {
                     var newarray = { url: des.fileList[j].tempFileURL, name: res.data[i].des, date: res.data[i].time.getFullYear() + "-" + (res.data[i].time.getMonth() + 1) + "-" + res.data[i].time.getDate() + " " + res.data[i].time.getHours() + ":" + res.data[i].time.getMinutes() + ":" + res.data[i].time.getSeconds() };
                     that.setData({
-                      imgurls: that.data.imgurls.concat(newarray),  
+                      imgurls: that.data.imgurls.concat(newarray),   
                     }); 
                   }
                 }
 
               }
-              that.startSetInter();
+             that.startSetInter();
             }
           })
         }

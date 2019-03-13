@@ -14,7 +14,7 @@ Page({
     guessWidth: 0,//‘猜’当前宽度
     guessHeight: 0,//‘猜’当前高度
     guesssetInter: '',//‘猜’定时器句柄
-    guessopacity:1.0,//'猜'透明度
+    guessopacity:'',//'猜'透明度动画
     guesstextshow: 'hidden',//'猜'提示语是否显示 
     guesstext: ''//'猜'提示语
   },
@@ -79,16 +79,16 @@ Page({
         var width = Math.floor(Math.random() * (that.data.windowWidth-260));
         var height = Math.floor(Math.random() * (that.data.windowHeight - 260));
         
-        for(var i=0;i<20;i++){
-          that.onSleep(300)
-          that.setData({ guessopacity: 1 - parseFloat(i / 20) });
-          console.log("透明度：" + that.data.guessopacity); 
-        }
+        // for(var i=0;i<20;i++){
+        //   that.onSleep(300)
+        //   that.setData({ guessopacity: 1 - parseFloat(i / 20) });
+        //   console.log("透明度：" + that.data.guessopacity); 
+        // }
        
         that.setData({
            guessWidth: width,
             guessHeight: height,
-            guessopacity:1.0,
+          guessopacity:'animation: actionOpacity 5s linear infinite;',
             guesstextshow: 'hidden',  
              });
         console.log("猜：" + width + ";" + height); 
@@ -111,8 +111,7 @@ Page({
     var text = ['为什么要点我！', '我可爱么！', '你好丑哟！'];
 
     this.setData({
-      guesstextshow: 'visible', 
-      guessopacity: 1.0, 
+      guesstextshow: 'visible',  
       guesstext:text[i],
     })
   },
