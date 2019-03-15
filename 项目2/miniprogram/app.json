@@ -1,9 +1,9 @@
 {
   "pages": [
-   
+    "pages/csstest3/csstest3",
+    "pages/csstest/csstest",
     "pages/csstest2/csstest2",
     "pages/csstest1/csstest1",
-    "pages/csstest/csstest",
     "pages/systeminfo/systeminfo",
     "pages/about/about",
     "pages/myfirst/myfirst",
@@ -19,6 +19,7 @@
     "pages/user/user",
     "pages/updateimg/updateimg",
     "pages/userinfo/userinfo"
+    
   ],
   "window": {
     "backgroundColor": "#F8F8F8",

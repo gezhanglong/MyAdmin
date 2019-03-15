@@ -102,3 +102,39 @@
   </view>
   <view class='page_3_2'></view>
 </view>
+
+<view class='page_3_box'>
+  <view class='page_3_1'>
+    <view class='page_3_1_title'>你好你好</view>
+    <view class='page_3_1_des'>哈哈哈哈哈哈</view>
+    <image src='http://java.tanzhoujiaoyu.com/webzl/images/html.png' class='page_3_1_img'></image>
+  </view>
+  <view class='page_3_2'></view>
+</view>
+
+<view class='page_3_box'>
+  <view class='page_3_1'>
+    <view class='page_3_1_title'>你好你好</view>
+    <view class='page_3_1_des'>哈哈哈哈哈哈</view>
+    <image src='http://java.tanzhoujiaoyu.com/webzl/images/html.png' class='page_3_1_img'></image>
+  </view>
+  <view class='page_3_2'></view>
+</view>
+
+<view class='page_3_box'>
+  <view class='page_3_1'>
+    <view class='page_3_1_title'>你好你好</view>
+    <view class='page_3_1_des'>哈哈哈哈哈哈</view>
+    <image src='http://java.tanzhoujiaoyu.com/webzl/images/html.png' class='page_3_1_img'></image>
+  </view>
+  <view class='page_3_2'></view>
+</view>
+
+<view class='page_3_box'>
+  <view class='page_3_1'>
+    <view class='page_3_1_title'>你好你好</view>
+    <view class='page_3_1_des'>哈哈哈哈哈哈</view>
+    <image src='http://java.tanzhoujiaoyu.com/webzl/images/html.png' class='page_3_1_img'></image>
+  </view>
+  <view class='page_3_2'></view>
+</view>
