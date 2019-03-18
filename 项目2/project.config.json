@@ -12,6 +12,11 @@
 	"appid": "wx4e19b520f7ca2419",
 	"projectname": "%E4%B8%AA%E4%BA%BA%E7%9B%B8%E5%86%8C",
 	"libVersion": "2.6.0",
+	"scripts": {
+		"beforeCompile": "",
+		"beforePreview": "",
+		"beforeUpload": ""
+	},
 	"condition": {
 		"search": {
 			"current": -1,

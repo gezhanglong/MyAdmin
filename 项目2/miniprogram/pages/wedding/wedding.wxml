@@ -3,26 +3,45 @@
   <view class='modelwindow' catchtouchmove='onCatchtouchmove'></view>
 
   <!-- 向上拉icon -->
-  <view class='update_icon' bindtap='onscrolltap' catchtouchmove='onCatchtouchmove'></view>
+  <view  wx:if="{{nickname.length>0}}" class='update_icon' bindtap='onscrolltap' catchtouchmove='onCatchtouchmove'></view> 
+      <button class='update_icon' wx:else open-type="getUserInfo" lang="zh_CN" bindgetuserinfo="onGetUserInfo"> 
+      </button>
+  <!-- 音乐 -->
+  <view class='music' bindtap='onMusic'>
+    <image class='music' src='../../images/music1.png' hidden='{{closemusic}}'></image>
+    <image class='music' src='../../images/music3.png' hidden='{{openmusic}}'></image>
+    <image class='music' style='{{music_move}}' src='../../images/music2.png' hidden='{{openmusic}}'></image>
+    <audio src="{{music_src}}" id="myAudio" controls loop hidden='true'></audio>
+  </view>
 
 
 
   <!-- scroll-view -->
-  <scroll-view scroll-y style="height:{{windowHeight}}px;" scroll-with-animation="true" scroll-into-view="{{toView}}"  bindscroll='onBindscroll'>
+  <scroll-view scroll-y style="height:{{windowHeight}}px;" scroll-with-animation="true" scroll-into-view="{{toView}}" bindscroll='onBindscroll'>
+ 
 
-    
+     <!-- 第三屏 -->
+    <view id='page_3' class='page_3' style='width:{{windowWidth}}px;height:{{windowHeight}}px;'>
+    <view class='page_3_gull1'>我是子弹  我是子弹  我是子弹  我是子弹</view>
+    <view class='page_3_gull2'>我是子弹</view>
+    <view class='page_3_gull3'>我是子弹</view>
+    <view class='page_3_gull4'>我是子弹</view>
+    <view class='page_3_gull5'>我是子弹</view>
+    </view>
 
+
+  
     <!-- 第一屏 -->
     <view id='page_1' class='page_1' style='width:{{windowWidth}}px;height:{{windowHeight}}px;'>
       <view class='page_1_name' style='{{animation_page_1_name}}'>
-      <view class='page_1_name1'>某某某</view>
-      <view>　　</view>
-       <view class='page_1_name2'>某某某</view>
+        <view class='page_1_name1'>某某某</view>
+        <view>　　</view>
+        <view class='page_1_name2'>某某某</view>
       </view>
-      <view class='page_1_img1'  style='{{animation_page_1_img1}}'>
+      <view class='page_1_img1' style='{{animation_page_1_img1}}'>
         <image mode='aspectFill' src='../../images/people.png'></image>
       </view>
-      <view class='page_1_img2'  style='{{animation_page_1_img2}}'>
+      <view class='page_1_img2' style='{{animation_page_1_img2}}'>
         <image mode='aspectFill top' src='../../images/gona_marrige.png'></image>
       </view>
     </view>
@@ -31,65 +50,78 @@
     <!-- 第二屏 -->
     <view id='page_2' class='page_2' style='width:{{windowWidth}}px;height:{{windowHeight}}px;'>
       <view class='page_2_img1' style='{{animation_page_2_img}}'>
-      <image mode='aspectFill'  src='../../images/words2.png'></image>
+        <image mode='aspectFill' src='../../images/words2.png'></image>
       </view>
-       <view class='page_2_img2' style='{{animation_page_2_img}}'>
-      <image mode='aspectFill' src='../../images/lovewords.png'></image>
+      <view class='page_2_img2' style='{{animation_page_2_img}}'>
+        <image mode='aspectFill' src='../../images/lovewords.png'></image>
       </view>
       <view class='page_2_text'>
-       <view style='{{animation_page_2_text1}}'>一生就这么一次，</view>
-      <view style='{{animation_page_2_text2}}'>谈一场以结婚为目的的恋爱吧。</view>
-      <view style='{{animation_page_2_text3}}'>不再因为任性而不肯低头，</view>
-      <view style='{{animation_page_2_text4}}'>不再因为固执而轻言分手。 </view>
-      <view style='{{animation_page_2_text5}}'>最后地坚信一次，一直走，就可以到白头。</view>
-      <view style='{{animation_page_2_text6}}'>惟愿这一生，执子之手，与子偕老。</view>
-      <view style='{{animation_page_2_text7}}'>你敢天长，我就敢地久。</view> 
-      </view> 
+        <view style='{{animation_page_2_text1}}'>一生就这么一次，</view>
+        <view style='{{animation_page_2_text2}}'>谈一场以结婚为目的的恋爱吧。</view>
+        <view style='{{animation_page_2_text3}}'>不再因为任性而不肯低头，</view>
+        <view style='{{animation_page_2_text4}}'>不再因为固执而轻言分手。 </view>
+        <view style='{{animation_page_2_text5}}'>最后地坚信一次，一直走，就可以到白头。</view>
+        <view style='{{animation_page_2_text6}}'>惟愿这一生，执子之手，与子偕老。</view>
+        <view style='{{animation_page_2_text7}}'>你敢天长，我就敢地久。</view>
+      </view>
     </view>
 
 
 
-    <!-- 第三屏 -->
-    <view id='page_3' class='page_3' style='width:{{windowWidth}}px;height:{{windowHeight}}px;'>第三页</view>
 
-        <!-- 第四屏 -->
+    <!-- 第四屏 -->
     <view id='page_4' class='page_4' style='width:{{windowWidth}}px;height:{{windowHeight}}px;'>第四屏</view>
 
 
     <!-- 第五屏 -->
     <view id='page_5' class='page_5' style='width:{{windowWidth}}px;height:{{windowHeight}}px;'>
-      <view class='page_5_img1' >
-      <image mode='aspectFill'  src='../../images/words3.png' style='{{animation_page_5_img1}}'></image>
+      <view class='page_5_img1'>
+        <image mode='aspectFill' src='../../images/words3.png' style='{{animation_page_5_img1}}'></image>
       </view>
-       <view class='page_5_img2'>
-      <image mode='aspectFill' src='../../images/words4.png'></image>
+      <view class='page_5_img2'>
+        <image mode='aspectFill' src='../../images/words4.png'></image>
       </view>
       <view class='page_5_text' style='{{animation_page_5_text}}'>
-       <view >深思熟虑之后我们决定</view>
-      <view >为爱情做出重要的延续</view> 
-      </view> 
+        <view>深思熟虑之后我们决定</view>
+        <view>为爱情做出重要的延续</view>
+      </view>
       <view class='page_5_img3'>
-      <image mode='aspectFill' src='../../images/words5.png' style='{{animation_page_5_img3}}'></image>
+        <image mode='aspectFill' src='../../images/words5.png' style='{{animation_page_5_img3}}'></image>
       </view>
     </view>
 
+    <!-- 第六屏 -->
+    <view id='page_6' class='page_6' style='width:{{windowWidth}}px;height:{{windowHeight}}px;'>
+      <view class='page_6_map'>
+        <map id="map" longitude="113.324520" latitude="23.099994" scale="14" controls="{{controls}}" bindcontroltap="controltap" markers="{{markers}}" bindmarkertap="markertap" polyline="{{polyline}}" bindregionchange="regionchange" show-location style="width: 100%; height: 300px;z-index:3;"></map>
+      </view>
+      <view class='page_6_phone'>
+        <view class='page_6_phonename'>第一电话：</view>
+        <view class='page_6_phonenum' bindtap='onPhone' >88888888881</view>
+      </view>
+      <view class='page_6_phone'>
+        <view class='page_6_phonename'>第二电话：</view>
+        <view class='page_6_phonenum' bindtap='onPhone'>88888888882</view>
+      </view>
 
-      
-        <!-- 第六屏 -->
-    <view id='page_6' class='page_6' style='width:{{windowWidth}}px;height:{{windowHeight}}px;'>第六屏</view>
+    </view>
 
-  <!-- 第七屏 -->
+
+
+    <!-- 第七屏 -->
     <view id='page_7' class='page_7' style='width:{{windowWidth}}px;height:{{windowHeight}}px;'>
-     <view class='page_7_img1' style='{{animation_page_7_img1}}'>
-      <image mode='aspectFill'  src='../../images/people4.png'></image>
+      <view class='page_7_img1' style='{{animation_page_7_img1}}'>
+        <image mode='aspectFill' src='../../images/people4.png'></image>
       </view>
-       <view class='page_7_img2'  style='{{animation_page_7_img2}}'>
-      <image mode='aspectFill'  src='../../images/people1.png'></image>
+      <view class='page_7_img2' style='{{animation_page_7_img2}}'>
+        <image mode='aspectFill' src='../../images/people1.png'></image>
       </view>
-       <view class='page_7_img3'>
-      <image mode='aspectFill' src='../../images/wish.png'></image>
+      <view class='page_7_img3'>
+        <image mode='aspectFill' src='../../images/wish.png'></image>
       </view>
+      <button bindtap='onSendWish' style='position:relative; z-index:3;'>提交</button>
     </view>
-  
+
+
   </scroll-view>
 </view>

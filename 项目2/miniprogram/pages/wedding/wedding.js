@@ -1,3 +1,10 @@
+// {
+//   "navigationBarTitleText": "婚礼邀请函",
+//   "disableScroll": true,
+//   "navigationBarBackgroundColor": "#ff0000",
+//   "backgroundTextStyle": "light"
+// }
+const app = getApp();
 const pageList = ['page_1', 'page_2', 'page_3', 'page_4', 'page_5', 'page_6', 'page_7']; 
 Page({
 
@@ -6,9 +13,16 @@ Page({
    */
 
   data: {
+    headurl: "",
+    nickname: "",
+    openid: "", 
     windowWidth: 0,//当前屏幕宽度
     windowHeight: 0,//当前屏幕高度  
     toView: pageList[0],//滚动到该元素  
+    closemusic:'hidden',//关闭音乐
+    openmusic:'',//打开音乐
+    music_move: 'animation: animation_music_move 2s linear infinite;',//打开动画
+    music_src: 'https://7a6c-zltest-d3262f-1258495345.tcb.qcloud.la/陈坤-寻龙诀-(电影《寻龙诀》主题曲).mp3?sign=e79d315a1788f86d1f5ecf83fbe4f753&t=1552639934',//音乐地址
     animation_page_1_name:'',//第一屏动画
     animation_page_1_img1:'',
     animation_page_1_img2:'',
@@ -25,6 +39,161 @@ Page({
     animation_page_5_text: '', 
     animation_page_7_img1: '',//第七屏动画
     animation_page_7_img2: '', 
+    markers: [{//地图 
+      iconPath: '../../images/icon.png',
+      id: 0,
+      latitude: 23.099994,
+      longitude: 113.324520,
+      width: 30,
+      height: 30,
+      
+      callout: {
+        content: "光临",
+        color: "#2c8df6",
+        fontSize: 20,
+        borderRadius: 10,
+        bgColor: "",
+        display: "ALWAYS",
+        boxShadow: "2px 2px 10px #aaa"
+      },
+      label: {
+        color: "#000",
+        fontSize: 12,
+        content: "广州塔",
+        x: 34.780439,
+        y: 113.699774
+      } 
+    }],
+    polyline: [{
+      points: [{
+        longitude: 113.3245211,
+        latitude: 23.10229
+      }, {
+        longitude: 113.324520,
+        latitude: 23.21229
+      }],
+      color: '#FF0000DD',
+      width: 2,
+      dottedLine: true
+    }],
+    controls: [{
+      id: 1,
+      iconPath: '../../images/icon.png',
+      position: {
+        left: 0,
+        top: 300 - 50,
+        width: 30,
+        height: 30
+      },
+      clickable: true
+    }],
+  },
+
+  //授权
+  onGetUserInfo(e) {
+    this.setData({
+      headurl: e.detail.userInfo.avatarUrl,
+      nickname: e.detail.userInfo.nickName,
+    })
+    app.globalData.nickname = e.detail.userInfo.nickName;
+    app.globalData.headurl = e.detail.userInfo.avatarUrl
+    this.onGetOpenid()//调用云函数
+  },
+
+  onGetOpenid: function () {
+    // 调用云函数
+    wx.cloud.callFunction({
+      name: 'login',
+      data: {},
+      success: res => {
+        console.log('[云函数] [login] user openid: ', res.result.openid)
+        app.globalData.openid = res.result.openid
+        this.setData({
+          openid: app.globalData.openid
+        })
+      },
+      fail: err => {
+        console.error('[云函数] [login] 调用失败', err)
+      }
+    })
+  },
+
+
+  //提交祝福语
+  onSendWish:function(){
+    var that=this;
+    var itemList = ['恭喜恭喜', '恭喜发财', '财源滚滚']
+    wx.showActionSheet({
+      itemList: itemList ,
+      success(res) {  
+        that.onSubmit(itemList[res.tapIndex]) 
+        console.log(itemList[res.tapIndex])
+      },
+      fail(res) {
+        console.log(res.errMsg)
+      }
+    })
+  },
+
+    //提交数据
+  onSubmit: function (wishtext) {
+    console.log("1/"+wishtext)
+    var that = this; 
+    if (that.data.openid =='') {
+      wx.showToast({
+        icon: 'none',
+        title: '未登陆，请先登陆'
+      })
+      return;
+    }
+    console.log("2/" + wishtext)
+    const db = wx.cloud.database()
+    db.collection('wedding-zl').add({
+      data: {
+        headurl: that.data.headurl, 
+        openid: that.data.openid, 
+        nickname: that.data.nickname, 
+        wishtext: wishtext,
+        time: new Date()
+      },
+      success: function (res) {
+        wx.showModal({
+          title: '提示',
+          content: '提交成功，感谢您的祝福！',
+          showCancel: false, 
+        })
+      }
+    })
+  },
+
+  //打电话
+  onPhone:function(e){
+    console.log(JSON.stringify(e))
+    wx.makePhoneCall({
+      phoneNumber: e._relatedInfo.anchorTargetText  
+    })
+  },
+
+
+  //音乐控制方法
+  onMusic:function(){
+    var that = this;
+    console.log("music:" + that.data.closemusic )
+    if (that.data.closemusic =='hidden'){
+      that.setData({
+        closemusic: '',
+        openmusic: 'hidden',
+        music_move:'',
+      })
+      this.audioCtx.pause()//音乐暂停
+    }else {
+      that.setData({
+        closemusic: 'hidden',
+        openmusic: '',
+        music_move: 'animation: animation_music_move 2s linear infinite;',
+      })
+      this.audioCtx.play()//音乐播放
+    }
   },
 
   //控制scroll上下移动
@@ -80,6 +249,11 @@ Page({
    */
   onLoad: function (options) {
     var that = this;
+    that.setData({
+      headurl: app.globalData.headurl,
+      nickname: app.globalData.nickname,
+      openid: app.globalData.openid,  
+    })
     wx.getSystemInfo({//获取系统信息方法
       success: function (res) {
         that.setData({
@@ -176,6 +350,8 @@ Page({
    * 生命周期函数--监听页面初次渲染完成
    */
   onReady: function () {
+    this.audioCtx = wx.createAudioContext('myAudio')
+    //this.audioCtx.play()//音乐播放
     this.onSetOnPage_1();
   },
 
