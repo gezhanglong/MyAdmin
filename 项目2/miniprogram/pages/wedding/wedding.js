@@ -1,11 +1,8 @@
-// {
-//   "navigationBarTitleText": "婚礼邀请函",
-//   "disableScroll": true,
-//   "navigationBarBackgroundColor": "#ff0000",
-//   "backgroundTextStyle": "light"
-// }
+
 const app = getApp();
-const pageList = ['page_1', 'page_2', 'page_3', 'page_4', 'page_5', 'page_6', 'page_7']; 
+const pageList = ['page_1', 'page_2', 'page_3', 'page_4', 'page_5', 'page_6', 'page_7'];
+var islock = true; //防止快速点击开关
+
 Page({
 
   /**
@@ -39,38 +36,39 @@ Page({
     animation_page_5_text: '', 
     animation_page_7_img1: '',//第七屏动画
     animation_page_7_img2: '', 
+    isshowmap:'hidden',//隐藏显示地图
     markers: [{//地图 
       iconPath: '../../images/icon.png',
       id: 0,
-      latitude: 23.099994,
-      longitude: 113.324520,
+      latitude: 23.089205,
+      longitude: 113.309065,
       width: 30,
       height: 30,
       
       callout: {
-        content: "光临",
-        color: "#2c8df6",
-        fontSize: 20,
+        content: "6月1号(星期六)下午6点半晚宴\n期待您的到来",
+        color: "#000000",
+        fontSize: 18,
         borderRadius: 10,
-        bgColor: "",
+        bgColor: "#F8F8F8",
         display: "ALWAYS",
         boxShadow: "2px 2px 10px #aaa"
       },
       label: {
         color: "#000",
         fontSize: 12,
-        content: "广州塔",
-        x: 34.780439,
-        y: 113.699774
+        content: "设宴广州酒家贵宾厅",
+        x: 23.089205,
+        y: 113.309065
       } 
     }],
     polyline: [{
       points: [{
-        longitude: 113.3245211,
-        latitude: 23.10229
+        longitude: 113.309065,
+        latitude: 23.089205
       }, {
-        longitude: 113.324520,
-        latitude: 23.21229
+          longitude: 113.309065,
+          latitude: 23.089205
       }],
       color: '#FF0000DD',
       width: 2,
@@ -111,6 +109,7 @@ Page({
         this.setData({
           openid: app.globalData.openid
         })
+        this.onscrolltap(); //控制scroll上下移动
       },
       fail: err => {
         console.error('[云函数] [login] 调用失败', err)
@@ -197,48 +196,60 @@ Page({
   },
 
   //控制scroll上下移动
-  onscrolltap: function (event) {  
-    var that=this;
-    var islast=true;
-    for (let i = 0; i < pageList.length-1; ++i) {
-      if (pageList[i] === that.data.toView) {
-        islast=false;
-        that.setData({
-          toView: pageList[i + 1]
-        })  
-        switch (that.data.toView){
-          case 'page_2':
-            that.onSetOnPage_2();
+  onscrolltap: function () {
+    if (islock) {
+      islock = false; 
+      var that = this;
+      var islast = true;
+      for (let i = 0; i < pageList.length - 1; ++i) {
+        if (pageList[i] === that.data.toView) {
+          islast = false;
+          that.setData({
+            toView: pageList[i + 1]
+          })
+          switch (that.data.toView) {
+            case 'page_2':
+              that.onSetOnPage_2();
+              break;
+            case 'page_3':
+              that.onSetOffPage_2();
+              // that.onSetOnPage_2();
+              break;
+            case 'page_4':
+              // that.onSetOnPage_2();
+              break;
+            case 'page_5':
+              that.onSetOnPage_5();
+              break;
+            case 'page_6':
+              that.setData({
+                isshowmap: '',
+              })
+              that.onSetOffPage_5();
+              break;
+            case 'page_7':
+              that.setData({
+                isshowmap: 'hidden',
+              })
+              that.onSetOnPage_7();
+              break;
+          }
+          that.onSetOffPage_1();
           break;
-          case 'page_3':
-            that.onSetOffPage_2();
-            // that.onSetOnPage_2();
-            break;
-          case 'page_4':
-            // that.onSetOnPage_2();
-            break;
-          case 'page_5':
-            that.onSetOnPage_5();
-            break;
-          case 'page_6':
-            that.onSetOffPage_5(); 
-            break;
-          case 'page_7':
-            that.onSetOnPage_7();
-            break;
         }
-        that.onSetOffPage_1(); 
-        break;
       }
-    } 
-    if(islast){ 
-      that.setData({
-        toView: pageList[0]
-      }) 
-      that.onSetOnPage_1();
-      that.onSetOffPage_7(); 
+      if (islast) {
+        that.setData({
+          toView: pageList[0]
+        })
+        that.onSetOnPage_1();
+        that.onSetOffPage_7();
+      }
+      setTimeout(function () {//延长3秒 防止快速点击移动
+        islock=true;
+      }, 3000)  
+      console.log(that.data.toView)
     }
-    console.log(that.data.toView)
   },
 
 //模态窗的catchtouchmove事件，禁止模态下页面的滑动
@@ -351,7 +362,7 @@ Page({
    */
   onReady: function () {
     this.audioCtx = wx.createAudioContext('myAudio')
-    //this.audioCtx.play()//音乐播放
+    this.audioCtx.play()//音乐播放
     this.onSetOnPage_1();
   },
 
