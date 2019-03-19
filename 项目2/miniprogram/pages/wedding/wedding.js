@@ -1,4 +1,9 @@
-
+// {
+//   "navigationBarTitleText": "婚礼邀请函",
+//     "disableScroll": true,
+//       "navigationBarBackgroundColor": "#ff0000",
+//         "backgroundTextStyle": "light"
+// }
 const app = getApp();
 const pageList = ['page_1', 'page_2', 'page_3', 'page_4', 'page_5', 'page_6', 'page_7'];
 var islock = true; //防止快速点击开关
@@ -12,7 +17,8 @@ Page({
   data: {
     headurl: "",
     nickname: "",
-    openid: "", 
+    openid: "",  
+    wishlist:[],
     windowWidth: 0,//当前屏幕宽度
     windowHeight: 0,//当前屏幕高度  
     toView: pageList[0],//滚动到该元素  
@@ -31,6 +37,7 @@ Page({
     animation_page_2_text5: '',
     animation_page_2_text6: '',
     animation_page_2_text7: '', 
+    animation_page_4_img: '', //第四屏动画
     animation_page_5_img1: '',//第五屏动画
     animation_page_5_img3: '',
     animation_page_5_text: '', 
@@ -121,7 +128,7 @@ Page({
   //提交祝福语
   onSendWish:function(){
     var that=this;
-    var itemList = ['恭喜恭喜', '恭喜发财', '财源滚滚']
+    var itemList = ['祝你们百年好合，比翼双飞！', '祝你们幸福美满，早生贵子！', '祝福你们白头到老，举案齐眉!']
     wx.showActionSheet({
       itemList: itemList ,
       success(res) {  
@@ -135,8 +142,7 @@ Page({
   },
 
     //提交数据
-  onSubmit: function (wishtext) {
-    console.log("1/"+wishtext)
+  onSubmit: function (wishtext) { 
     var that = this; 
     if (that.data.openid =='') {
       wx.showToast({
@@ -144,8 +150,7 @@ Page({
         title: '未登陆，请先登陆'
       })
       return;
-    }
-    console.log("2/" + wishtext)
+    } 
     const db = wx.cloud.database()
     db.collection('wedding-zl').add({
       data: {
@@ -164,6 +169,58 @@ Page({
       }
     })
   },
+
+  //获取祝福语
+  onGetWishData:function(){
+    var that=this;
+    const db = wx.cloud.database()
+    db.collection('wedding-zl').orderBy('time','desc').get({
+      success: res => {  
+       
+        var num1 = 1, num2 = 1, num3 = 1, num4 = 1, num5 = 1;//记录每个跑道有多少个名单
+        var startnum=18;//动画最低运动18秒
+        var rate=30;
+        
+        for (var i = 0; i < res.data.length; i++) { 
+          var times=0;  
+            var tops = Math.floor(Math.random() * 250);//设置5个跑道每个跑道50px
+          var rates = Math.floor(Math.random() * rate);//每个跑道的名单隔多长时间
+          console.log("tops" + tops)
+           if(tops>=0 && tops<50){
+             times = startnum + num1 * rates; 
+             num1=num1+1;
+           } else if (tops >= 50 && tops < 100){
+             times = startnum + num2 * rates;
+             num2 = num2 + 1;
+           } else if (tops >= 100 && tops < 150) {
+             times = startnum + num3 * rates;
+             num3 = num3 + 1;
+           } else if (tops >= 150 && tops < 200) {
+             times = startnum + num4 * rates;
+             num4 = num4 + 1;
+           } else if (tops >= 200 && tops < 250) {
+             times = startnum + num5 * rates;
+             num5 = num5 + 1;
+           }
+          
+            var wish = { headurl: res.data[i].headurl, nickname: res.data[i].nickname, wishtext: res.data[i].wishtext, times: times, tops: tops };
+            that.setData({
+              wishlist: that.data.wishlist.concat(wish),
+            });  
+        } 
+      },
+      fail: err => {
+        wx.showToast({
+          icon: 'none',
+          title: '查询记录失败'
+        }) 
+        console.error('[数据库] [查询记录] 失败：', err) 
+      }
+    })
+
+  },
+
+  
 
   //打电话
   onPhone:function(e){
@@ -255,25 +312,7 @@ Page({
 //模态窗的catchtouchmove事件，禁止模态下页面的滑动
  onCatchtouchmove:function(){},
 
-  /**
-   * 生命周期函数--监听页面加载
-   */
-  onLoad: function (options) {
-    var that = this;
-    that.setData({
-      headurl: app.globalData.headurl,
-      nickname: app.globalData.nickname,
-      openid: app.globalData.openid,  
-    })
-    wx.getSystemInfo({//获取系统信息方法
-      success: function (res) {
-        that.setData({
-          windowWidth: res.screenWidth,
-          windowHeight: res.screenHeight,
-        }) 
-      }
-    })
-  },
+
 
   //初始化第一屏动画
   onSetOnPage_1:function(){
@@ -356,13 +395,34 @@ Page({
   },
 
 
+  /**
+   * 生命周期函数--监听页面加载
+   */
+  onLoad: function (options) {
+    var that = this;
+    that.setData({
+      headurl: app.globalData.headurl,
+      nickname: app.globalData.nickname,
+      openid: app.globalData.openid,
+    })
+    wx.getSystemInfo({//获取系统信息方法
+      success: function (res) {
+        that.setData({
+          windowWidth: res.screenWidth,
+          windowHeight: res.screenHeight,
+        })
+      }
+    })
+    that.onGetWishData();
+  },
+
 
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
   onReady: function () {
     this.audioCtx = wx.createAudioContext('myAudio')
-    this.audioCtx.play()//音乐播放
+    // this.audioCtx.play()//音乐播放
     this.onSetOnPage_1();
   },
 

@@ -2,10 +2,10 @@
   <!-- 模态窗 用来禁止scroll滑动 -->
   <view class='modelwindow' catchtouchmove='onCatchtouchmove'></view>
 
-  <!-- 向上拉icon --> 
-  <view  wx:if="{{nickname.length>0}}" class='update_icon' bindtap='onscrolltap' catchtouchmove='onCatchtouchmove'></view> 
-      <button wx:else class='update_icon' style='background-color:transparent; border:0px;'  open-type="getUserInfo" lang="zh_CN" bindgetuserinfo="onGetUserInfo"> 
-      </button>
+  <!-- 向上拉icon -->
+  <view wx:if="{{nickname.length>0}}" class='update_icon' bindtap='onscrolltap' catchtouchmove='onCatchtouchmove'></view>
+  <button id='loginbtn' wx:else class='update_icon' open-type="getUserInfo" lang="zh_CN" bindgetuserinfo="onGetUserInfo">
+  </button>
 
   <!-- 音乐 -->
   <view class='music' bindtap='onMusic'>
@@ -19,8 +19,16 @@
 
   <!-- scroll-view -->
   <scroll-view scroll-y style="height:{{windowHeight}}px;" scroll-with-animation="true" scroll-into-view="{{toView}}" bindscroll='onBindscroll'>
- 
- 
+
+  
+
+    <!-- 第四屏 -->
+    <view id='page_4' class='page_4' style='width:{{windowWidth}}px;height:{{windowHeight}}px;'>
+    <image mode='aspectFill'  src='../../images/2.jpg' style='{{}}'></image>
+    <image mode='aspectFill'  src='../../images/2_1.jpg' style='{{}}'></image>
+     <button bindtap='onSendWish' style='position:relative; z-index:3;bottom:80px;'>点击</button>
+    </view>
+
     <!-- 第一屏 -->
     <view id='page_1' class='page_1' style='width:{{windowWidth}}px;height:{{windowHeight}}px;'>
       <view class='page_1_name' style='{{animation_page_1_name}}'>
@@ -56,20 +64,19 @@
       </view>
     </view>
 
-
-     <!-- 第三屏 -->
+  <!-- 第三屏 -->
     <view id='page_3' class='page_3' style='width:{{windowWidth}}px;height:{{windowHeight}}px;'>
-    <view class='page_3_gull1'>我是子弹  我是子弹  我是子弹  我是子弹</view>
-    <view class='page_3_gull2'>我是子弹</view>
-    <view class='page_3_gull3'>我是子弹</view>
-    <view class='page_3_gull4'>我是子弹</view>
-    <view class='page_3_gull5'>我是子弹</view>
+      <block wx:for='{{wishlist}}'>
+        <view class='page_3_gull' style='animation: animation_page_3_gull {{item.times}}s linear infinite ;top: {{item.tops}}px;'>
+          <image class='page_3_headurl' mode='aspectFill' src='{{item.headurl}}'></image>
+          <view>
+            <view class='page_3_nickname'>{{item.nickname}}送来祝福：</view>
+            <view class='page_3_wishtext'>{{item.wishtext}}</view>
+          </view>
+
+        </view>
+      </block> 
     </view>
-
-
-    <!-- 第四屏 -->
-    <view id='page_4' class='page_4' style='width:{{windowWidth}}px;height:{{windowHeight}}px;'>第四屏</view>
-
 
     <!-- 第五屏 -->
     <view id='page_5' class='page_5' style='width:{{windowWidth}}px;height:{{windowHeight}}px;'>
@@ -88,37 +95,35 @@
       </view>
     </view>
 
-   <!-- 第六屏 -->
+    <!-- 第六屏 -->
     <view id='page_6' class='page_6' style='width:{{windowWidth}}px;height:{{windowHeight}}px;'>
       <view class='page_6_map'>
-        <map  hidden='{{isshowmap}}' id="map" longitude="113.324520" latitude="23.099994" scale="14" controls="{{controls}}" bindcontroltap="controltap" markers="{{markers}}" bindmarkertap="markertap" polyline="{{polyline}}" bindregionchange="regionchange" show-location style="width: 100%; height: 300px;z-index:3;"></map>
+        <map hidden='{{isshowmap}}' id="map" longitude="113.324520" latitude="23.099994" scale="14" controls="{{controls}}" bindcontroltap="controltap" markers="{{markers}}" bindmarkertap="markertap" polyline="{{polyline}}" bindregionchange="regionchange" show-location
+          style="width: 100%; height: 300px;z-index:3;"></map>
       </view>
       <view class='page_6_phone'>
         <view class='page_6_phonename  page_6_phonename_imag1'>新娘：</view>
-        <view class='page_6_phonenum' bindtap='onPhone' >88888888881</view>
+        <view class='page_6_phonenum' bindtap='onPhone'>88888888881</view>
       </view>
       <view class='page_6_phone'>
         <view class='page_6_phonename page_6_phonename_imag2'>新郎：</view>
         <view class='page_6_phonenum' bindtap='onPhone'>88888888882</view>
-      </view> 
+      </view>
     </view>
 
     <!-- 第七屏 -->
     <view id='page_7' class='page_7' style='width:{{windowWidth}}px;height:{{windowHeight}}px;'>
-      <view class='page_7_img1' style='{{animation_page_7_img1}}'>
+      <!-- <view class='page_7_img1' style='{{animation_page_7_img1}}'>
         <image mode='aspectFill' src='../../images/people4.png'></image>
       </view>
       <view class='page_7_img2' style='{{animation_page_7_img2}}'>
         <image mode='aspectFill' src='../../images/people1.png'></image>
-      </view>
+      </view> -->
       <view class='page_7_img3'>
         <image mode='aspectFill' src='../../images/wish.png'></image>
       </view>
       <button bindtap='onSendWish' style='position:relative; z-index:3;bottom:80px;'>提交祝福</button>
     </view>
-
-
-
 
   </scroll-view>
 </view>

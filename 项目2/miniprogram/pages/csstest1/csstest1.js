@@ -107,7 +107,7 @@ Page({
   }, 
 
   onGuessTap:function(){  
-    var i = Math.floor(Math.random() * 3); 
+    var i = Math.floor(Math.random() * 3); //随机数
     var text = ['为什么要点我！', '我可爱么！', '你好丑哟！'];
 
     this.setData({
