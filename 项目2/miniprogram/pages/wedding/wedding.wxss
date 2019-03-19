@@ -23,10 +23,10 @@ page {
   background-color: transparent;
 }
 
-/* .page_content{
+.page_content{
   background-repeat:repeat; 
   background-image: url("data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wCEAAYEBQYFBAYGBQYHBwYIChAKCgkJChQODwwQFxQYGBcUFhYaHSUfGhsjHBYWICwgIyYnKSopGR8tMC0oMCUoKSgBBwcHCggKEwoKEygaFhooKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKP/AABEIAC0ACQMBEQACEQEDEQH/xAGiAAABBQEBAQEBAQAAAAAAAAAAAQIDBAUGBwgJCgsQAAIBAwMCBAMFBQQEAAABfQECAwAEEQUSITFBBhNRYQcicRQygZGhCCNCscEVUtHwJDNicoIJChYXGBkaJSYnKCkqNDU2Nzg5OkNERUZHSElKU1RVVldYWVpjZGVmZ2hpanN0dXZ3eHl6g4SFhoeIiYqSk5SVlpeYmZqio6Slpqeoqaqys7S1tre4ubrCw8TFxsfIycrS09TV1tfY2drh4uPk5ebn6Onq8fLz9PX29/j5+gEAAwEBAQEBAQEBAQAAAAAAAAECAwQFBgcICQoLEQACAQIEBAMEBwUEBAABAncAAQIDEQQFITEGEkFRB2FxEyIygQgUQpGhscEJIzNS8BVictEKFiQ04SXxFxgZGiYnKCkqNTY3ODk6Q0RFRkdISUpTVFVWV1hZWmNkZWZnaGlqc3R1dnd4eXqCg4SFhoeIiYqSk5SVlpeYmZqio6Slpqeoqaqys7S1tre4ubrCw8TFxsfIycrS09TV1tfY2dri4+Tl5ufo6ery8/T19vf4+fr/2gAMAwEAAhEDEQA/APO6+OP6RPJdb/5DN/8A9fEn/oRr6vD/AMGHovyPwDOf+RjiP8cv/SmetV8ofv55Lrf/ACGb/wD6+JP/AEI19Xh/4MPRfkfgGc/8jHEf45f+lM9ar5Q/fzyXW/8AkM3/AP18Sf8AoRr6vD/wYei/I/AM5/5GOI/xy/8ASmetV8ofv55Lrf8AyGb/AP6+JP8A0I19Xh/4MPRfkfgGc/8AIxxH+OX/AKUz1qvlD9/PJdb/AOQzf/8AXxJ/6Ea+rw/8GHovyPwDOf8AkY4j/HL/ANKZ2f8Awmenf88bv/vlf/iq8f8Asut3X4/5H6R/r7l38k/uj/8AJHD6jMtzqFzOgISWVnAPXBJPNe1Sg4QjF9Ej8wzDERxOKq14bSlJq+9m2z//2Q==")
-} */
+}
 
 /* 模态窗 */
 
@@ -93,6 +93,7 @@ page {
   flex-direction: column;
   justify-content: center;
   text-align: center;
+  position: relative;
 }
 
 .page_1_name {
@@ -168,6 +169,47 @@ page {
   100% {
     opacity: 0.2;
     transform: scale(0.5, 0.5);
+  }
+}
+
+
+ 
+
+.page_1_gull {
+  position: absolute;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  left: -1000px;
+}
+
+.page_1_headurl {
+  width: 40px;
+  height: 40px;
+  border-radius: 25px;
+}
+
+.page_1_nickname {
+  color: #666;
+  font-size: 28rpx;
+  margin-left: 5px;
+  text-align:left; 
+}
+
+.page_1_wishtext {
+  color: #ccc;
+  font-size: 32rpx;
+  margin-left: 5px;
+}
+
+
+@keyframes animation_page_1_gull {
+  0% {
+    transform: translateX(2000px);
+  }
+
+  100% {
+    transform: translateX(-1000px);
   }
 }
 

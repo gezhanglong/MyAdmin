@@ -22,12 +22,6 @@
 
   
 
-    <!-- 第四屏 -->
-    <view id='page_4' class='page_4' style='width:{{windowWidth}}px;height:{{windowHeight}}px;'>
-    <image mode='aspectFill'  src='../../images/2.jpg' style='{{}}'></image>
-    <image mode='aspectFill'  src='../../images/2_1.jpg' style='{{}}'></image>
-     <button bindtap='onSendWish' style='position:relative; z-index:3;bottom:80px;'>点击</button>
-    </view>
 
     <!-- 第一屏 -->
     <view id='page_1' class='page_1' style='width:{{windowWidth}}px;height:{{windowHeight}}px;'>
@@ -42,6 +36,18 @@
       <view class='page_1_img2' style='{{animation_page_1_img2}}'>
         <image mode='aspectFill top' src='../../images/gona_marrige.png'></image>
       </view>
+<!--  -->
+      <block wx:for='{{wishlist}}'>
+        <view class='page_1_gull' style='animation: animation_page_1_gull {{item.move}}s linear infinite {{item.wait}}s;top: {{item.tops}}px;'>
+          <image class='page_1_headurl' mode='aspectFill' src='{{item.headurl}}'></image>
+          <view>
+            <view class='page_1_nickname'>{{item.nickname}}送来祝福：</view>
+            <view class='page_1_wishtext'>{{item.wishtext}}</view>
+          </view>
+
+        </view>
+      </block> 
+
     </view>
 
 
@@ -66,16 +72,15 @@
 
   <!-- 第三屏 -->
     <view id='page_3' class='page_3' style='width:{{windowWidth}}px;height:{{windowHeight}}px;'>
-      <block wx:for='{{wishlist}}'>
-        <view class='page_3_gull' style='animation: animation_page_3_gull {{item.times}}s linear infinite ;top: {{item.tops}}px;'>
-          <image class='page_3_headurl' mode='aspectFill' src='{{item.headurl}}'></image>
-          <view>
-            <view class='page_3_nickname'>{{item.nickname}}送来祝福：</view>
-            <view class='page_3_wishtext'>{{item.wishtext}}</view>
-          </view>
+      
+    </view>
 
-        </view>
-      </block> 
+    
+    <!-- 第四屏 -->
+    <view id='page_4' class='page_4' style='width:{{windowWidth}}px;height:{{windowHeight}}px;'>
+    <image mode='aspectFill'  src='../../images/2.jpg' style='{{}}'></image>
+    <image mode='aspectFill'  src='../../images/2_1.jpg' style='{{}}'></image>
+     <button bindtap='onSendWish' style='position:relative; z-index:3;bottom:80px;'>点击</button>
     </view>
 
     <!-- 第五屏 -->
@@ -113,12 +118,12 @@
 
     <!-- 第七屏 -->
     <view id='page_7' class='page_7' style='width:{{windowWidth}}px;height:{{windowHeight}}px;'>
-      <!-- <view class='page_7_img1' style='{{animation_page_7_img1}}'>
+      <view class='page_7_img1' style='{{animation_page_7_img1}}'>
         <image mode='aspectFill' src='../../images/people4.png'></image>
       </view>
       <view class='page_7_img2' style='{{animation_page_7_img2}}'>
         <image mode='aspectFill' src='../../images/people1.png'></image>
-      </view> -->
+      </view>
       <view class='page_7_img3'>
         <image mode='aspectFill' src='../../images/wish.png'></image>
       </view>

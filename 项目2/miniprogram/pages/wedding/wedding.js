@@ -1,9 +1,4 @@
-// {
-//   "navigationBarTitleText": "婚礼邀请函",
-//     "disableScroll": true,
-//       "navigationBarBackgroundColor": "#ff0000",
-//         "backgroundTextStyle": "light"
-// }
+
 const app = getApp();
 const pageList = ['page_1', 'page_2', 'page_3', 'page_4', 'page_5', 'page_6', 'page_7'];
 var islock = true; //防止快速点击开关
@@ -161,9 +156,13 @@ Page({
         time: new Date()
       },
       success: function (res) {
+        var wish = { headurl: that.data.headurl, nickname: that.data.nickname, wishtext: wishtext, wait: 0, move: 40, tops: 320 };
+        that.setData({
+          wishlist: that.data.wishlist.concat(wish),//提交祝福语成功后更新页面
+        });  
         wx.showModal({
           title: '提示',
-          content: '提交成功，感谢您的祝福！',
+          content: '提交成功，感谢您的祝福，首页将会播放你的祝福。',
           showCancel: false, 
         })
       }
@@ -177,33 +176,36 @@ Page({
     db.collection('wedding-zl').orderBy('time','desc').get({
       success: res => {  
        
-        var num1 = 1, num2 = 1, num3 = 1, num4 = 1, num5 = 1;//记录每个跑道有多少个名单
-        var startnum=18;//动画最低运动18秒
-        var rate=30;
+        var num1 = 0, num2 = 0, num3 = 0, num4 = 0, num5 = 0;//记录每个跑道有多少个名单
+        var space=5;//动画间隔
         
         for (var i = 0; i < res.data.length; i++) { 
-          var times=0;  
-            var tops = Math.floor(Math.random() * 250);//设置5个跑道每个跑道50px
-          var rates = Math.floor(Math.random() * rate);//每个跑道的名单隔多长时间
-          console.log("tops" + tops)
-           if(tops>=0 && tops<50){
-             times = startnum + num1 * rates; 
+          var move=0;//运行时间
+          var wait=0;//等待等待
+            var tops = Math.floor(Math.random() * 300);//设置5个跑道每个跑道50px  
+           if(tops>=0 && tops<60){
+            move=30;
+             wait = num1 * space
              num1=num1+1;
-           } else if (tops >= 50 && tops < 100){
-             times = startnum + num2 * rates;
+           } else if (tops >= 60 && tops < 120){
+             move = 26;
+             wait = num2 * space
              num2 = num2 + 1;
-           } else if (tops >= 100 && tops < 150) {
-             times = startnum + num3 * rates;
+           } else if (tops >= 120 && tops < 180) {
+             move = 28;
+             wait = num3 * space
              num3 = num3 + 1;
-           } else if (tops >= 150 && tops < 200) {
-             times = startnum + num4 * rates;
+           } else if (tops >= 180 && tops < 240) {
+             move =20;
+             wait = num4 * space
              num4 = num4 + 1;
-           } else if (tops >= 200 && tops < 250) {
-             times = startnum + num5 * rates;
+           } else if (tops >= 240 && tops < 240) {
+             move = 39;
+             wait = num5 * space
              num5 = num5 + 1;
            }
           
-            var wish = { headurl: res.data[i].headurl, nickname: res.data[i].nickname, wishtext: res.data[i].wishtext, times: times, tops: tops };
+          var wish = { headurl: res.data[i].headurl, nickname: res.data[i].nickname, wishtext: res.data[i].wishtext, wait: wait, move: move, tops: tops };
             that.setData({
               wishlist: that.data.wishlist.concat(wish),
             });  
@@ -304,7 +306,7 @@ Page({
       }
       setTimeout(function () {//延长3秒 防止快速点击移动
         islock=true;
-      }, 3000)  
+      }, 1000)  
       console.log(that.data.toView)
     }
   },
