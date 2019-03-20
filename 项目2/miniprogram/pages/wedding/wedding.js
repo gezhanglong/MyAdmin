@@ -39,10 +39,10 @@ Page({
     animation_page_2_text7: '',
     animation_page_4_img: '', //第四屏动画
     page_4_click: 0, //记录点击数值
-    page_4_img4: 'animation: animation_page_4 1s linear;',
-    page_4_img3: 'animation: animation_page_4 1.5s linear;',
-    page_4_img2: 'animation: animation_page_4 2s linear;',
-    page_4_img1: 'animation: animation_page_4 2.5s linear;', 
+    page_4_img4: '',
+    page_4_img3: '',
+    page_4_img2: '',
+    page_4_img1: '', 
     animation_page_5_img1: '', //第五屏动画
     animation_page_5_img3: '',
     animation_page_5_text: '',
@@ -351,9 +351,10 @@ Page({
               // that.onSetOnPage_2();
               break;
             case 'page_4':
-              // that.onSetOnPage_2();
+              that.onSetOnPage_4(); 
               break;
             case 'page_5':
+              that.onSetOffPage_4();
               that.onSetOnPage_5();
               break;
             case 'page_6':
@@ -398,37 +399,37 @@ Page({
         console.log("num:" + num + "," + num % 3 + "," + animation)
         that.setData({
           page_4_click: num + 1,
-          page_4_img4: 'z-index:0',
-          page_4_img3: 'z-index:0',
-          page_4_img2: 'z-index:0',
-          page_4_img1: 'animation: ' + animation + ' 2s linear;z-index:-1',
+          page_4_img4: 'z-index:10',
+          page_4_img3: 'z-index:10',
+          page_4_img2: 'z-index:10',
+          page_4_img1: 'animation: ' + animation + ' 2s linear;z-index:9',
         })
         break;
       case 1:
         that.setData({
           page_4_click: num + 1,
-          page_4_img4: 'z-index:0',
-          page_4_img3: 'z-index:0',
-          page_4_img2: 'animation: ' + animation + ' 2s linear;z-index:-2',
-          page_4_img1: 'z-index:-1;',
+          page_4_img4: 'z-index:10',
+          page_4_img3: 'z-index:10',
+          page_4_img2: 'animation: ' + animation + ' 2s linear;z-index:8',
+          page_4_img1: 'z-index:9;',
         })
         break;
       case 2:
         that.setData({
           page_4_click: num + 1, 
-          page_4_img4: 'z-index:0',
-          page_4_img3: 'animation: ' + animation + ' 2s linear;z-index:-3;', 
-          page_4_img2: 'z-index:-2;',
-          page_4_img1: 'z-index:-1;',
+          page_4_img4: 'z-index:10',
+          page_4_img3: 'animation: ' + animation + ' 2s linear;z-index:7;', 
+          page_4_img2: 'z-index:8;',
+          page_4_img1: 'z-index:9;',
         })  
         break;
       case 3:
         that.setData({
           page_4_click: num + 1,
-          page_4_img4: 'animation: ' + animation + ' 2s linear;z-index:-4;',
-          page_4_img3: 'z-index:-3;',
-          page_4_img2: 'z-index:-2;',
-          page_4_img1: 'z-index:-1;',
+          page_4_img4: 'animation: ' + animation + ' 2s linear;z-index:6;',
+          page_4_img3: 'z-index:7;',
+          page_4_img2: 'z-index:8;',
+          page_4_img1: 'z-index:9;',
         })
         break;
     }
@@ -485,6 +486,28 @@ Page({
       animation_page_2_text7: '',
     })
   },
+
+  //初始化第四屏动画
+  onSetOnPage_4: function () {
+    this.setData({
+      page_4_img4: 'animation: animation_page_4 1s linear;z-index:10',
+      page_4_img3: 'animation: animation_page_4 1.5s linear;z-index:10',
+      page_4_img2: 'animation: animation_page_4 2s linear;z-index:10',
+      page_4_img1: 'animation: animation_page_4 2.5s linear;z-index:10', 
+    })
+  },
+
+  //清除第四屏动画
+  onSetOffPage_4: function () {
+    this.setData({
+      page_4_img4: '',
+      page_4_img3: '',
+      page_4_img2: '',
+      page_4_img1: '', 
+    })
+  },
+
+ 
 
   //初始化第五屏动画
   onSetOnPage_5: function() {
@@ -565,6 +588,7 @@ Page({
   onHide: function() {
     this.onSetOffPage_1();
     this.onSetOffPage_2();
+    this.onSetOnPage_4();
     this.onSetOffPage_5();
     this.onSetOffPage_7();
   },

@@ -20,16 +20,7 @@
   <!-- scroll-view -->
   <scroll-view scroll-y style="height:{{windowHeight}}px;" scroll-with-animation="true" scroll-into-view="{{toView}}" bindscroll='onBindscroll'>
 
-      <!-- 第四屏 -->
-    <view id='page_4' class='page_4' style='width:{{windowWidth}}px;height:{{windowHeight}}px;'>
-    <image mode='aspectFill'  src='../../images/bd3.jpg' style='transform:rotate(0deg);{{page_4_img4}}'></image>
-    <image mode='aspectFill'  src='../../images/bd2.jpg' style='transform:rotate(-5deg);{{page_4_img3}}'></image>
-    <image mode='aspectFill'  src='../../images/2.jpg' style='transform:rotate(-10deg);{{page_4_img2}}'></image>
-    <image mode='aspectFill'  src='../../images/2_1.jpg' style='transform:rotate(-15deg);{{page_4_img1}}'></image>
-      <view class='page_4_icon page_4_left'  data-click='{{page_4_click}}' data-animation='animation_page_4_left' bindtap='onpageleft' catchtouchmove='onCatchtouchmove'></view>
-       <view class='page_4_icon page_4_right'  data-click='{{page_4_click}}' data-animation='animation_page_4_right' bindtap='onpageleft' catchtouchmove='onCatchtouchmove'></view> 
-    </view>
-
+   
 
     <!-- 第一屏 -->
     <view id='page_1' class='page_1' style='width:{{windowWidth}}px;height:{{windowHeight}}px;'>
@@ -83,7 +74,16 @@
       
     </view>
 
-    
+       <!-- 第四屏 -->
+    <view id='page_4' class='page_4' style='width:{{windowWidth}}px;height:{{windowHeight}}px;'>
+    <image mode='aspectFill'  src='../../images/bd3.jpg' style='transform:rotate(0deg);{{page_4_img4}}'></image>
+    <image mode='aspectFill'  src='../../images/bd2.jpg' style='transform:rotate(-5deg);{{page_4_img3}}'></image>
+    <image mode='aspectFill'  src='../../images/2.jpg' style='transform:rotate(-10deg);{{page_4_img2}}'></image>
+    <image mode='aspectFill'  src='../../images/2_1.jpg' style='transform:rotate(-15deg);{{page_4_img1}}'></image>
+      <view class='page_4_icon page_4_left'  data-click='{{page_4_click}}' data-animation='animation_page_4_left' bindtap='onpageleft' catchtouchmove='onCatchtouchmove'></view>
+       <view class='page_4_icon page_4_right'  data-click='{{page_4_click}}' data-animation='animation_page_4_right' bindtap='onpageleft' catchtouchmove='onCatchtouchmove'></view> 
+    </view>
+
 
 
     <!-- 第五屏 -->
