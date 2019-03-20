@@ -20,7 +20,15 @@
   <!-- scroll-view -->
   <scroll-view scroll-y style="height:{{windowHeight}}px;" scroll-with-animation="true" scroll-into-view="{{toView}}" bindscroll='onBindscroll'>
 
-  
+      <!-- 第四屏 -->
+    <view id='page_4' class='page_4' style='width:{{windowWidth}}px;height:{{windowHeight}}px;'>
+    <image mode='aspectFill'  src='../../images/bd3.jpg' style='transform:rotate(0deg);{{page_4_img4}}'></image>
+    <image mode='aspectFill'  src='../../images/bd2.jpg' style='transform:rotate(-5deg);{{page_4_img3}}'></image>
+    <image mode='aspectFill'  src='../../images/2.jpg' style='transform:rotate(-10deg);{{page_4_img2}}'></image>
+    <image mode='aspectFill'  src='../../images/2_1.jpg' style='transform:rotate(-15deg);{{page_4_img1}}'></image>
+      <view class='page_4_icon page_4_left'  data-click='{{page_4_click}}' data-animation='animation_page_4_left' bindtap='onpageleft' catchtouchmove='onCatchtouchmove'></view>
+       <view class='page_4_icon page_4_right'  data-click='{{page_4_click}}' data-animation='animation_page_4_right' bindtap='onpageleft' catchtouchmove='onCatchtouchmove'></view> 
+    </view>
 
 
     <!-- 第一屏 -->
@@ -36,8 +44,8 @@
       <view class='page_1_img2' style='{{animation_page_1_img2}}'>
         <image mode='aspectFill top' src='../../images/gona_marrige.png'></image>
       </view>
-<!--  -->
-      <block wx:for='{{wishlist}}'>
+      <!-- 弹幕 -->
+      <block wx:for='{{wishlist}}' wx:key='wishlist'>
         <view class='page_1_gull' style='animation: animation_page_1_gull {{item.move}}s linear infinite {{item.wait}}s;top: {{item.tops}}px;'>
           <image class='page_1_headurl' mode='aspectFill' src='{{item.headurl}}'></image>
           <view>
@@ -76,12 +84,7 @@
     </view>
 
     
-    <!-- 第四屏 -->
-    <view id='page_4' class='page_4' style='width:{{windowWidth}}px;height:{{windowHeight}}px;'>
-    <image mode='aspectFill'  src='../../images/2.jpg' style='{{}}'></image>
-    <image mode='aspectFill'  src='../../images/2_1.jpg' style='{{}}'></image>
-     <button bindtap='onSendWish' style='position:relative; z-index:3;bottom:80px;'>点击</button>
-    </view>
+
 
     <!-- 第五屏 -->
     <view id='page_5' class='page_5' style='width:{{windowWidth}}px;height:{{windowHeight}}px;'>
