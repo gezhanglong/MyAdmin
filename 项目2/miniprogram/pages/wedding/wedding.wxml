@@ -20,7 +20,59 @@
   <!-- scroll-view -->
   <scroll-view scroll-y style="height:{{windowHeight}}px;" scroll-with-animation="true" scroll-into-view="{{toView}}" bindscroll='onBindscroll'>
 
-     <!-- 第三屏 -->
+ 
+
+    <!-- 第一屏 -->
+    <view id='page_1' class='page_1' style='width:{{windowWidth}}px;height:{{windowHeight}}px;'>
+     <view class='page_1_content'>
+      <view class='page_1_name' style='{{animation_page_1_name}}'>
+        <view class='page_1_name1' >某某某</view>  
+        <view>　　</view>
+        <view class='page_1_name2' >某某</view>
+      </view>
+      <view class='page_1_img1' style='{{animation_page_1_img1}}'>
+        <image mode='aspectFill' src='../../images/people.png'></image>
+      </view>
+      <view class='page_1_img2' style='{{animation_page_1_img2}}'>
+        <image mode='aspectFill top' src='../../images/gona_marrige.png'></image>
+      </view>
+      <!-- 弹幕 -->
+      <block wx:for='{{wishlist}}' wx:key='wishlist'>
+        <view class='page_1_gull' style='animation: animation_page_1_gull {{item.move}}s linear infinite {{item.wait}}s;top: {{item.tops}}px;'>
+          <image class='page_1_headurl' mode='aspectFill' src='{{item.headurl}}'></image>
+          <view>
+            <view class='page_1_nickname'>{{item.nickname}}送来祝福：</view>
+            <view class='page_1_wishtext'>{{item.wishtext}}</view>
+          </view>
+
+        </view>
+      </block> 
+    </view>
+    </view>
+
+
+    <!-- 第二屏 -->
+    <view id='page_2' class='page_2' style='width:{{windowWidth}}px;height:{{windowHeight}}px;'>
+     <view class='page_2_content'>
+      <view class='page_2_img1' style='{{animation_page_2_img}}'>
+        <image mode='aspectFill' src='../../images/words2.png'></image>
+      </view>
+      <view class='page_2_img2' style='{{animation_page_2_img}}'>
+        <image mode='aspectFill' src='../../images/lovewords.png'></image>
+      </view>
+      <view class='page_2_text'>
+        <view style='{{animation_page_2_text1}}'>一生就这么一次，</view>
+        <view style='{{animation_page_2_text2}}'>谈一场以结婚为目的的恋爱吧。</view>
+        <view style='{{animation_page_2_text3}}'>不再因为任性而不肯低头，</view>
+        <view style='{{animation_page_2_text4}}'>不再因为固执而轻言分手。 </view>
+        <view style='{{animation_page_2_text5}}'>最后地坚信一次，一直走，就可以到白头。</view>
+        <view style='{{animation_page_2_text6}}'>惟愿这一生，执子之手，与子偕老。</view>
+        <view style='{{animation_page_2_text7}}'>你敢天长，我就敢地久。</view>
+      </view>
+           </view>
+    </view>
+
+    <!-- 第三屏 -->
     <view id='page_3' class='page_3' style='width:{{windowWidth}}px;height:{{windowHeight}}px;'>
       <view class='page_3_content'>
        <view class='page_3_content_img'> 
@@ -40,55 +92,6 @@
        </view>
       </view>
     </view>
-
-    <!-- 第一屏 -->
-    <view id='page_1' class='page_1' style='width:{{windowWidth}}px;height:{{windowHeight}}px;'>
-      <view class='page_1_name' style='{{animation_page_1_name}}'>
-        <view class='page_1_name1'>某某某</view>
-        <view>　　</view>
-        <view class='page_1_name2'>某某某</view>
-      </view>
-      <view class='page_1_img1' style='{{animation_page_1_img1}}'>
-        <image mode='aspectFill' src='../../images/people.png'></image>
-      </view>
-      <view class='page_1_img2' style='{{animation_page_1_img2}}'>
-        <image mode='aspectFill top' src='../../images/gona_marrige.png'></image>
-      </view>
-      <!-- 弹幕 -->
-      <block wx:for='{{wishlist}}' wx:key='wishlist'>
-        <view class='page_1_gull' style='animation: animation_page_1_gull {{item.move}}s linear infinite {{item.wait}}s;top: {{item.tops}}px;'>
-          <image class='page_1_headurl' mode='aspectFill' src='{{item.headurl}}'></image>
-          <view>
-            <view class='page_1_nickname'>{{item.nickname}}送来祝福：</view>
-            <view class='page_1_wishtext'>{{item.wishtext}}</view>
-          </view>
-
-        </view>
-      </block> 
-
-    </view>
-
-
-    <!-- 第二屏 -->
-    <view id='page_2' class='page_2' style='width:{{windowWidth}}px;height:{{windowHeight}}px;'>
-      <view class='page_2_img1' style='{{animation_page_2_img}}'>
-        <image mode='aspectFill' src='../../images/words2.png'></image>
-      </view>
-      <view class='page_2_img2' style='{{animation_page_2_img}}'>
-        <image mode='aspectFill' src='../../images/lovewords.png'></image>
-      </view>
-      <view class='page_2_text'>
-        <view style='{{animation_page_2_text1}}'>一生就这么一次，</view>
-        <view style='{{animation_page_2_text2}}'>谈一场以结婚为目的的恋爱吧。</view>
-        <view style='{{animation_page_2_text3}}'>不再因为任性而不肯低头，</view>
-        <view style='{{animation_page_2_text4}}'>不再因为固执而轻言分手。 </view>
-        <view style='{{animation_page_2_text5}}'>最后地坚信一次，一直走，就可以到白头。</view>
-        <view style='{{animation_page_2_text6}}'>惟愿这一生，执子之手，与子偕老。</view>
-        <view style='{{animation_page_2_text7}}'>你敢天长，我就敢地久。</view>
-      </view>
-    </view>
-
-
 
        <!-- 第四屏 -->
     <view id='page_4' class='page_4' style='width:{{windowWidth}}px;height:{{windowHeight}}px;'>

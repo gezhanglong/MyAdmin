@@ -1,7 +1,6 @@
 page {
   margin: 0;
-  padding: 0;
-  color: #1a2a3a;
+  padding: 0; 
   font-size: 16px;
 }
 
@@ -25,9 +24,9 @@ page {
   background-color: transparent;
 }
 
-/* .page_content{ 
-  background-color: #e74c3c; 
-} */
+.page_content{ 
+  background-color:#95a5a6; 
+}
 
 /* 模态窗 */
 
@@ -92,25 +91,38 @@ page {
 
 .page_1 {
   display: flex;
-  flex-direction: column;
+  flex-direction: row; 
   justify-content: center;
-  text-align: center;
-  position: relative;
+}
+
+
+.page_1_content {
+  width: 375px;
+  height: 100%;
+  background-color:#e74c3c;
+  display: flex;
+  flex-direction: column;
+  justify-content: center; 
+
 }
 
 .page_1_name {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-content:center;
   width: 100%;
-  height: 70px;
-  margin: 0px 0px 25px 0px;
+  height: 70px; 
   font-size: 24px;
-  background-repeat: no-repeat;
-  background-position-x: 45%;
+  background-position: 60% 50%;
+  background-repeat: no-repeat; 
   background-image: url("data:image/png;base64,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");
 }
 
-.page_1_name view {
-  display: inline-block;
-  line-height: 50px;
+.page_1_name view { 
+  line-height: 50px; 
+  color:#5a6a7a;
+
 }
 
 @keyframes animation_page_1_name {
@@ -128,6 +140,8 @@ page {
 .page_1_img1 {
   width: 100%;
   height: 280px;
+  text-align:center;
+  margin: 30px 0px;
 }
 
 @keyframes animation_page_1_img1 {
@@ -150,6 +164,7 @@ page {
 .page_1_img2 {
   width: 100%;
   height: 62px;
+   text-align:center;
 }
 
 .page_1_img2 image {
@@ -213,9 +228,15 @@ page {
 
 /* 第二屏 */
 
-.page_2 {
+.page_2 { 
   text-align: center;
   margin-top: 80px;
+}
+
+.page_2_content{
+  width: 375px;
+  height: 100%;
+  background-color:#e74c3c;
 }
 
 .page_2_img1, .page_2_img2 {
@@ -261,6 +282,7 @@ page {
   height: 35px;
   line-height: 20px;
   font-size: 16px;
+  color: #1a2a3a;
 }
 
 @keyframes animation_page_2 {
