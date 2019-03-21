@@ -20,7 +20,26 @@
   <!-- scroll-view -->
   <scroll-view scroll-y style="height:{{windowHeight}}px;" scroll-with-animation="true" scroll-into-view="{{toView}}" bindscroll='onBindscroll'>
 
-   
+     <!-- 第三屏 -->
+    <view id='page_3' class='page_3' style='width:{{windowWidth}}px;height:{{windowHeight}}px;'>
+      <view class='page_3_content'>
+       <view class='page_3_content_img'> 
+       <view>颜色颜色颜色</view>
+       </view>
+      <view class='page_3_content_img'> 
+       <image class='page_3_img' mode='aspectFit' src='https://7a6c-zltest-d3262f-1258495345.tcb.qcloud.la/my-image.jpg?sign=79db71a559bf9bd2bbb6a9bf41feeaf7&t=1553161317' style='animation: animation_page_3_img 2s linear;'></image>
+       <image class='page_3_img' mode='aspectFit' src='../../images/people1.png' style='animation: animation_page_2 2s,  animation_page_3_img 2s linear 2s;'></image>
+       </view>
+       <view class='page_3_content_img'>
+       <image class='page_3_img' mode='aspectFit' src='https://7a6c-zltest-d3262f-1258495345.tcb.qcloud.la/my-image1550656769000.jpg?sign=f3a32899c5c98f7417538bb812847587&t=1553161377' style='animation: animation_page_2 4s, animation_page_3_img 2s linear 4s;'></image>
+       <image class='page_3_img' mode='aspectFit' src='../../images/people1.png' style='animation: animation_page_2 6s,  animation_page_3_img 2s linear 6s;'></image>
+       </view>
+       <view class='page_3_content_img'>
+       <image class='page_3_img' mode='aspectFit' src='../../images/people1.png' style='animation: animation_page_2 8s, animation_page_3_img 2s linear 8s;'></image>
+       <image class='page_3_img' mode='aspectFit' src='../../images/people1.png' style='animation: animation_page_2 10s, animation_page_3_img 2s linear 10s;'></image>
+       </view>
+      </view>
+    </view>
 
     <!-- 第一屏 -->
     <view id='page_1' class='page_1' style='width:{{windowWidth}}px;height:{{windowHeight}}px;'>
@@ -69,10 +88,7 @@
       </view>
     </view>
 
-  <!-- 第三屏 -->
-    <view id='page_3' class='page_3' style='width:{{windowWidth}}px;height:{{windowHeight}}px;'>
-      
-    </view>
+
 
        <!-- 第四屏 -->
     <view id='page_4' class='page_4' style='width:{{windowWidth}}px;height:{{windowHeight}}px;'>
@@ -106,7 +122,7 @@
     <!-- 第六屏 -->
     <view id='page_6' class='page_6' style='width:{{windowWidth}}px;height:{{windowHeight}}px;'>
       <view class='page_6_map'>
-        <map hidden='{{isshowmap}}' id="map" longitude="113.324520" latitude="23.099994" scale="14" controls="{{controls}}" bindcontroltap="controltap" markers="{{markers}}" bindmarkertap="markertap" polyline="{{polyline}}" bindregionchange="regionchange" show-location
+        <map hidden='{{isshowmap}}' id="map" longitude="113.309065" latitude="23.089205" scale="14" controls="{{controls}}" bindcontroltap="controltap" markers="{{markers}}" bindmarkertap="markertap" polyline="{{polyline}}" bindregionchange="regionchange" show-location
           style="width: 100%; height: 300px;z-index:3;"></map>
       </view>
       <view class='page_6_phone'>

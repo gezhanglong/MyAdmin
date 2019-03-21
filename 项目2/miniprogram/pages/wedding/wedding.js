@@ -556,9 +556,10 @@ Page({
     })
     wx.getSystemInfo({ //获取系统信息方法
       success: function(res) {
+        console.log("系统信息："+JSON.stringify(res))
         that.setData({
-          windowWidth: res.screenWidth,
-          windowHeight: res.screenHeight,
+          windowWidth: res.windowWidth,
+          windowHeight: res.windowHeight,
         })
       }
     })
