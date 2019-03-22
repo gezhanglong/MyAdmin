@@ -1,0 +1,12 @@
+<view class='list'>
+<view class='list-item'>头像</view>
+<view class='list-item'>昵称  </view>
+<view class='list-item'>时间</view>
+<view class='list-item'>登录次数</view>
+</view>
+<view class='list' wx:for='{{loginDataList}}'>
+<image class='list-headurl' src='{{item.headurl}}'></image>
+<view class='list-item'>{{item.nickname}}</view>
+<view class='list-item'>{{item.firsttime}}</view>
+<view class='list-item'>{{item.logintimes}}</view>
+</view>

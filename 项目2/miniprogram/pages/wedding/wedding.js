@@ -17,7 +17,22 @@ Page({
   data: {
     headurl: "",
     nickname: "",
-    openid: "",
+    openid: "",//当前用户openid
+    wedding_openid: 'myopenid',//邀请函主人openid 
+    // man_name: '',
+    // man_phone: '',
+    // page3_img1: '',
+    // page3_img2: '',
+    // page3_img3: '',
+    // page3_img4: '',
+    // page3_img5: '',
+    // page3_img6: '',
+    // page4_img1: '',
+    // page4_img2: '',
+    // page4_img3: '',
+    // page4_img4: '',
+    // women_name: '',
+    // women_phone: '',
     wishlist: [],
     windowWidth: 0, //当前屏幕宽度
     windowHeight: 0, //当前屏幕高度  
@@ -132,17 +147,19 @@ Page({
 
   // 记录登录信息
   onLoginData() {
+    
     var that = this;
     const db = wx.cloud.database()
-    db.collection('wedding-zl-logininfo').where({
-      openid: that.data.openid
+    db.collection('wedding_login').where({
+      _openid: that.data.openid
     }).get({ //查询有没有这个openid
       success: res => {
-        if (res.data.length <= 0) {
-          db.collection('wedding-zl-logininfo').add({ //添加数据
-            data: {
+        
+        if (res.data.length <= 0) { 
+          db.collection('wedding_login').add({ //添加数据
+            data: { 
               headurl: that.data.headurl,
-              openid: that.data.openid,
+              wedding_openid: that.data.wedding_openid,
               nickname: that.data.nickname,
               firsttime: new Date(),
               endtime: new Date(),
@@ -156,7 +173,7 @@ Page({
             }
           })
         } else {
-          db.collection('wedding-zl-logininfo').doc(res.data[0]._id).update({ //更新数据
+          db.collection('wedding_login').doc(res.data[0]._id).update({ //更新数据
             data: {
               endtime: new Date(),
               logintimes: res.data[0].logintimes + 1,
@@ -175,6 +192,14 @@ Page({
       }
     })
 
+  },
+
+  //跳转
+  onNavigateTo: function () {  
+    var that = this;
+    wx.navigateTo({
+      url: '/pages/weddingInfo/weddingInfo?wedding_openid=' + that.data.wedding_openid,
+    })
   },
 
 
@@ -205,10 +230,10 @@ Page({
       return;
     }
     const db = wx.cloud.database()
-    db.collection('wedding-zl').add({
-      data: {
+    db.collection('wedding_wish').add({
+      data: { 
         headurl: that.data.headurl,
-        openid: that.data.openid,
+        wedding_openid: that.data.wedding_openid,
         nickname: that.data.nickname,
         wishtext: wishtext,
         time: new Date()
@@ -238,7 +263,9 @@ Page({
   onGetWishData: function() {
     var that = this;
     const db = wx.cloud.database()
-    db.collection('wedding-zl').orderBy('time', 'desc').get({
+    db.collection('wedding_wish').where({
+      wedding_openid: that.data.wedding_openid,
+    }).orderBy('time', 'desc').get({
       success: res => {
 
         var num1 = 0,
@@ -544,6 +571,42 @@ Page({
   },
 
 
+  // 获取配置信息
+  onGetWeddingConfig() {
+    var that = this; 
+    const db = wx.cloud.database()
+    db.collection('wedding_config').where({
+      wedding_openid: that.data.wedding_openid,
+    }).get({ 
+      success: res => { 
+        console.log("wedding_openid:" + JSON.stringify(res) + ";that.data.wedding_openid:" + that.data.wedding_openid)
+        if(res.data.length>0){
+          that.setData({
+            man_name: res.data[0].man_name,
+            man_phone: res.data[0].man_phone,
+            page3_img1: res.data[0].page3_img1,
+            page3_img2: res.data[0].page3_img2,
+            page3_img3: res.data[0].page3_img3,
+            page3_img4: res.data[0].page3_img4,
+            page3_img5: res.data[0].page3_img5,
+            page3_img6: res.data[0].page3_img6,
+            page4_img1: res.data[0].page4_img1,
+            page4_img2: res.data[0].page4_img2,
+            page4_img3: res.data[0].page4_img3,
+            page4_img4: res.data[0].page4_img4, 
+            women_name: res.data[0].women_name,
+            women_phone: res.data[0].women_phone,
+          });
+        } 
+      },
+      fail: err => {
+        console.error('[数据库] [查询记录] 失败：', err)
+      }
+    })
+
+  },
+
+
   /**
    * 生命周期函数--监听页面加载
    */
@@ -563,7 +626,9 @@ Page({
         })
       }
     })
+    that.onGetWeddingConfig();
     that.onGetWishData();
+
   },
 
 

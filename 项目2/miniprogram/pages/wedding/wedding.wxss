@@ -24,9 +24,24 @@ page {
   background-color: transparent;
 }
 
-.page_content{ 
+/* .page_content{ 
   background-color:#95a5a6; 
-}
+} */
+
+.page_num {
+  display: flex;
+  flex-direction: row; 
+  justify-content: flex-start;
+} 
+
+.page_num_content{
+  width: 375px;
+  height: 100%;
+  /* background-color:#e74c3c;  */
+  display: flex;
+  flex-direction: column;
+  justify-content: center; 
+} 
 
 /* 模态窗 */
 
@@ -89,23 +104,8 @@ page {
 
 /* 第一屏 */
 
-.page_1 {
-  display: flex;
-  flex-direction: row; 
-  justify-content: center;
-}
 
-
-.page_1_content {
-  width: 375px;
-  height: 100%;
-  background-color:#e74c3c;
-  display: flex;
-  flex-direction: column;
-  justify-content: center; 
-
-}
-
+ 
 .page_1_name {
   display: flex;
   flex-direction: row;
@@ -164,7 +164,8 @@ page {
 .page_1_img2 {
   width: 100%;
   height: 62px;
-   text-align:center;
+  text-align:center;
+  
 }
 
 .page_1_img2 image {
@@ -233,11 +234,7 @@ page {
   margin-top: 80px;
 }
 
-.page_2_content{
-  width: 375px;
-  height: 100%;
-  background-color:#e74c3c;
-}
+ 
 
 .page_2_img1, .page_2_img2 {
   width: 100%;
@@ -316,14 +313,7 @@ page {
   justify-content: center;
 }
 
-.page_3_content {
-  width: 375px;
-  height: 100%;
-  
-  display: flex;
-  flex-direction: column;
-  align-content: space-between;
-}
+ 
 
 .page_3_content_img {
   display: flex;
@@ -356,7 +346,7 @@ page {
   position: relative;
 }
 
-.page_4 image {
+.page_4_img {
   position: absolute;
   width: 300px;
   height: 450px;
@@ -481,6 +471,7 @@ page {
 .page_5_img2 {
   width: 100%;
   height: 60px;
+  margin: 30px 0px;
 }
 
 .page_5_img2 image {
@@ -529,15 +520,12 @@ page {
   margin-top: 50px;
 }
 
-.page_6_phonenum {
-  /* color: #F8F8F8; */
-  color: black;
+.page_6_phonenum { 
+  color: #1a2a3a;
   width: 130px;
   height: 42px;
   line-height: 45px;
-  display: inline-block;
-  /* box-shadow: 0px 0px 5px gray;
- border-radius: 5px;   */
+  display: inline-block; 
   position: relative;
   z-index: 3;
 }
