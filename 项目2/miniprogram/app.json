@@ -1,5 +1,6 @@
 {
   "pages": [
+    "pages/myfirst/myfirst",
     "pages/wedding/wedding",
     "pages/weddingInfo/weddingInfo",
     "pages/systeminfo/systeminfo", 
@@ -7,8 +8,7 @@
     "pages/csstest/csstest",
     "pages/csstest2/csstest2",
     "pages/csstest1/csstest1",
-    "pages/about/about",
-    "pages/myfirst/myfirst",
+    "pages/about/about", 
     "pages/updateimgfirst/updateimgfirst",
     "pages/index/index",
     "pages/userConsole/userConsole",

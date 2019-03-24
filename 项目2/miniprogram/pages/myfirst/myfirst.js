@@ -10,7 +10,9 @@ Page({
     headurl:"",
     namenick:"",
     openid:"",
-    unionid:""
+    unionid:"",
+    wedding_text:'创建自己的邀请函',
+    iswedding:false,
   },
 
   /**
@@ -58,6 +60,7 @@ Page({
         this.setData({ 
           openid: app.globalData.openid
         })  
+        this.onwedding();
       },
       fail: err => {
         console.error('[云函数] [login] 调用失败', err) 
@@ -77,6 +80,75 @@ Page({
       url: '/pages/photo/photo'
     })
   },
+
+  //判断该用户是婚礼邀请函的邀请人
+  onwedding:function(){  
+    var that=this;
+    const db = wx.cloud.database()
+    db.collection('wedding_config').where({
+      wedding_openid: that.data.openid
+    }).get({
+      success(res) {
+        console.log('res.total:' + res.total)
+        if (res.data.length >= 1) {
+          that.setData({
+            wedding_text: res.data[0].man_name+'的邀请函',
+            iswedding: true,
+          })
+        }
+      },
+      fail: err => {
+        console.error('[数据库] [查询记录] 失败：', err)
+      }
+    }) 
+
+  },
+
+
+  onNavigateToWedding: function () {
+    var that = this;
+    if (that.data.openid <= 0) {
+      wx.showToast({
+        icon: 'none',
+        title: '请授权后访问'
+      })
+      return;
+    }  
+    wx.navigateTo({
+      url: '/pages/wedding/wedding?wedding_openid=' + that.data.openid
+    })
+  },
+  
+  //邀请函模板1
+  onNavigateToTemplet1: function () {
+    var that = this;
+    if (that.data.openid <= 0) {
+      wx.showToast({
+        icon: 'none',
+        title: '请授权后访问'
+      })
+      return;
+    }
+    wx.navigateTo({
+      url: "/pages/wedding/wedding?wedding_openid=templet1"
+    })
+  },
+
+  //邀请函邀请人配置页
+  onNavigateToWeddingConfig: function () {
+    var that = this;
+    if (that.data.openid <= 0) {
+      wx.showToast({
+        icon: 'none',
+        title: '请授权后访问'
+      })
+      return;
+    }
+    wx.navigateTo({
+      url: '/pages/about/about'
+    })
+  },
+
   onGotUserInfo(e) {
     this.setData({
       headurl: e.detail.userInfo.avatarUrl,

@@ -18,21 +18,7 @@ Page({
     headurl: "",
     nickname: "",
     openid: "",//当前用户openid
-    wedding_openid: 'myopenid',//邀请函主人openid 
-    // man_name: '',
-    // man_phone: '',
-    // page3_img1: '',
-    // page3_img2: '',
-    // page3_img3: '',
-    // page3_img4: '',
-    // page3_img5: '',
-    // page3_img6: '',
-    // page4_img1: '',
-    // page4_img2: '',
-    // page4_img3: '',
-    // page4_img4: '',
-    // women_name: '',
-    // women_phone: '',
+    wedding_openid: 'oeff30PoY7RSlZOPFraxExftT66A',//邀请函主人openid  
     wishlist: [],
     windowWidth: 0, //当前屏幕宽度
     windowHeight: 0, //当前屏幕高度  
@@ -64,13 +50,14 @@ Page({
     animation_page_7_img1: '', //第七屏动画
     animation_page_7_img2: '',
     isshowmap: 'hidden', //隐藏显示地图
+    isshowbtn:'hidden',//是否显示 邀请人主任的功能按钮
     markers: [{ //地图 
       iconPath: '../../images/icon.png',
       id: 0,
       latitude: 23.089205,
       longitude: 113.309065,
-      width: 30,
-      height: 30,
+      width: 60,
+      height: 60,
 
       callout: {
         content: "6月1号(星期六)下午6点半晚宴\n期待您的到来",
@@ -106,9 +93,9 @@ Page({
       iconPath: '../../images/icon.png',
       position: {
         left: 0,
-        top: 300 - 50,
-        width: 30,
-        height: 30
+        top: 600 - 100,
+        width: 60,
+        height: 60
       },
       clickable: true
     }],
@@ -125,7 +112,7 @@ Page({
     this.onGetOpenid() //调用云函数
   },
 
-  onGetOpenid: function() {
+  onGetOpenid: function() { 
     // 调用云函数
     wx.cloud.callFunction({
       name: 'login',
@@ -135,7 +122,12 @@ Page({
         app.globalData.openid = res.result.openid
         this.setData({
           openid: app.globalData.openid
-        })
+        })  
+        if (this.data.wedding_openid == this.data.openid) {//如果打开的是邀请人主人的，就显示功能按钮 
+          this.setData({
+            isshowbtn: '',
+          });
+        } 
         this.onscrolltap(); //控制scroll上下移动方法
         this.onLoginData(); //记录登录信息
       },
@@ -151,7 +143,8 @@ Page({
     var that = this;
     const db = wx.cloud.database()
     db.collection('wedding_login').where({
-      _openid: that.data.openid
+      _openid: that.data.openid,
+      wedding_openid:that.data.wedding_openid
     }).get({ //查询有没有这个openid
       success: res => {
         
@@ -230,33 +223,55 @@ Page({
       return;
     }
     const db = wx.cloud.database()
-    db.collection('wedding_wish').add({
-      data: { 
-        headurl: that.data.headurl,
-        wedding_openid: that.data.wedding_openid,
-        nickname: that.data.nickname,
-        wishtext: wishtext,
-        time: new Date()
+    db.collection('wedding_wish').where({
+      _openid:that.data.openid
+    }).count({
+      success:function(res){
+        if(res.total<=0){
+          db.collection('wedding_wish').add({
+            data: {
+              headurl: that.data.headurl,
+              wedding_openid: that.data.wedding_openid,
+              nickname: that.data.nickname,
+              wishtext: wishtext,
+              time: new Date()
+            },
+            success: function (res) {
+              var wish = {
+                headurl: that.data.headurl,
+                nickname: that.data.nickname,
+                wishtext: wishtext,
+                wait: 0,
+                move: 40,
+                tops: 320
+              };
+              that.setData({
+                wishlist: that.data.wishlist.concat(wish), //提交祝福语成功后更新页面
+              });
+              wx.showModal({
+                title: '提示',
+                content: '提交成功，感谢您的祝福!',
+                showCancel: false,
+              })
+            }
+          })
+        }else{
+          wx.showModal({
+            title: '提示',
+            content: '您的祝福已收到！',
+            showCancel: false,
+          })
+        }
       },
-      success: function(res) {
-        var wish = {
-          headurl: that.data.headurl,
-          nickname: that.data.nickname,
-          wishtext: wishtext,
-          wait: 0,
-          move: 40,
-          tops: 320
-        };
-        that.setData({
-          wishlist: that.data.wishlist.concat(wish), //提交祝福语成功后更新页面
-        });
+      fail:function(err){
         wx.showModal({
           title: '提示',
-          content: '提交成功，感谢您的祝福，首页将会播放你的祝福。',
+          content: '网络开小差，请稍后提交！',
           showCancel: false,
         })
       }
     })
+  
   },
 
   //获取祝福语
@@ -266,8 +281,7 @@ Page({
     db.collection('wedding_wish').where({
       wedding_openid: that.data.wedding_openid,
     }).orderBy('time', 'desc').get({
-      success: res => {
-
+      success: res => { 
         var num1 = 0,
           num2 = 0,
           num3 = 0,
@@ -410,7 +424,7 @@ Page({
       }
       setTimeout(function() { //延长3秒 防止快速点击移动
         islock = true;
-      }, 1000)
+      }, 100)
       console.log(that.data.toView)
     }
   },
@@ -596,8 +610,8 @@ Page({
             page4_img4: res.data[0].page4_img4, 
             women_name: res.data[0].women_name,
             women_phone: res.data[0].women_phone,
-          });
-        } 
+          }); 
+        }
       },
       fail: err => {
         console.error('[数据库] [查询记录] 失败：', err)
@@ -616,6 +630,7 @@ Page({
       headurl: app.globalData.headurl,
       nickname: app.globalData.nickname,
       openid: app.globalData.openid,
+      wedding_openid:options.wedding_openid,
     })
     wx.getSystemInfo({ //获取系统信息方法
       success: function(res) {
@@ -625,7 +640,7 @@ Page({
           windowHeight: res.windowHeight,
         })
       }
-    })
+    })   
     that.onGetWeddingConfig();
     that.onGetWishData();
 
@@ -637,7 +652,7 @@ Page({
    */
   onReady: function() {
     this.audioCtx = wx.createAudioContext('myAudio')
-    // this.audioCtx.play()//音乐播放
+   //this.audioCtx.play()//音乐播放
     this.onSetOnPage_1();
   },
 
@@ -683,7 +698,30 @@ Page({
   /**
    * 用户点击右上角分享
    */
-  onShareAppMessage: function() {
-
+  onShareAppMessage: function(res) {
+    var that = this;
+    var path ='/pages/wedding/wedding';
+    if (this.data.wedding_openid == this.data.openid) {//如果打开的是邀请人主人的，就显示功能按钮 
+      path = '/pages/wedding/wedding?wedding_openid=' + that.data.wedding_openid;
+    } 
+    if (res.from === 'button') {
+      console.log("来自页面内转发按钮");
+      console.log(res.target);
+    }
+    else {
+      console.log("来自右上角转发菜单")
+    } 
+    return {
+      title: that.data.man_name + "的邀请函",
+      path: path,
+      imageUrl: "",  //自定义图片路径，可以是本地文件路径、代码包文件路径或者网络图片路径，支持PNG及JPG，不传入 imageUrl 则使用默认截图。显示图片长宽比是 5:4
+      success: (res) => {
+        console.log("转发成功", res);
+      },
+      fail: (res) => {
+        console.log("转发失败", res);
+      } 
+    }
+   
   }
 })
