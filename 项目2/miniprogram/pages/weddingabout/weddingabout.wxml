@@ -1,0 +1,27 @@
+
+<view class='we-about'>
+  <!-- <view class='we-name'>了解</view> -->
+  <view class='we-intro'>
+    <view class='we-intro-item'>
+      <view class='we-intro-title'>项目概况</view>
+      <view class='we-intro-content'>该项目是免费的婚礼邀请函制作小程序。基于小程序、云开发提供的基础服务进行开发和运营。</view> 
+    </view>
+    <view class='we-intro-item'>
+      <view class='we-intro-title'>项目现状</view>
+      <view class='we-intro-content'>初始阶段，模板只有一个，以后会考虑增加；效果还需提升，请不惜指教，谢谢！！</view> 
+    </view>
+    <view class='we-intro-item'>
+      <view class='we-intro-title'>创建流程</view>
+      <view class='we-intro-content'>1、提供资料</view>  
+      <view class='we-intro-content'>2、作者将会在12小时之内，审核、优化你的资料；如无问题就可以上线属于你自己的邀请函；如有问题首页会提示原因。</view>  
+    </view>
+    <view class='we-intro-item'>
+      <view class='we-intro-title'>免责声明</view>
+      <view class='we-intro-content'>该项目是本着免费学习的态度运作，如有侵权行为，请联系作者，将第一时间改正。谢谢！！</view> 
+    </view>
+     <view class='we-intro-item'>
+      <view class='we-intro-title'>联系方式</view>
+      <view class='we-intro-content'> 邮箱：879211310@qq.com</view> 
+    </view>
+  </view>
+</view>

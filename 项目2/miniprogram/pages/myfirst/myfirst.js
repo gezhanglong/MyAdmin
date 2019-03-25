@@ -61,12 +61,15 @@ Page({
           openid: app.globalData.openid
         })  
         this.onwedding();
+        this.onlog(0);//0为首页记录
       },
       fail: err => {
         console.error('[云函数] [login] 调用失败', err) 
       }
     })
   },
+
+  //相册
   onNavigateTo:function(){
     if(this.data.openid<=0)
     {
@@ -78,6 +81,26 @@ Page({
     }
     wx.navigateTo({
       url: '/pages/photo/photo'
+    })
+  },
+
+  onlog:function(logtype){
+    var that=this;
+    const db = wx.cloud.database()
+    db.collection('all_log').add({ //添加数据
+      data: {
+        headurl: that.data.headurl, 
+        nickname: that.data.nickname,
+        openid:that.data.openid,
+        createtime: new Date(), 
+        logtype: logtype,
+      },
+      success: function (res) {
+        console.log('[数据库] [添加数据] 成功：', res)
+      },
+      fail: function (res) {
+        console.error('[数据库] [添加数据] 失败：', res)
+      }
     })
   },
 
@@ -104,7 +127,7 @@ Page({
 
   },
 
-
+  //邀请函邀请者
   onNavigateToWedding: function () {
     var that = this;
     if (that.data.openid <= 0) {
@@ -145,7 +168,7 @@ Page({
       return;
     }
     wx.navigateTo({
-      url: '/pages/about/about'
+      url: '/pages/weddingabout/weddingabout'
     })
   },
 

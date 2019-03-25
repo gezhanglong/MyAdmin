@@ -12,8 +12,7 @@ view{
   display: flex;
   flex-wrap:wrap;
   justify-content: center;
-  align-items: center;
-  align-content: space-around;
+  align-items: flex-start;
 }
 
 .we-name{
@@ -23,22 +22,22 @@ view{
 }
 
 .we-intro{
-  padding: 60rpx;
+  padding: 40rpx;
   height: 900rpx; 
 }
 
 .we-intro-item{
-  margin-bottom: 40rpx;
+  margin-top: 40rpx;
 }
 
 .we-intro-title{
-  margin-bottom: 10rpx;
-  color: #666;
-  font-size: 32rpx;
+  margin-bottom: 20rpx; 
+  color: #1a2a3a;
+  font-size: 40rpx;
 }
 
-.we-intro-content{ 
-  color: #ccc; 
-  font-size: 28rpx;
+.we-intro-content{  
+  color: #6a7a8a; 
+  font-size: 30rpx;
 }
  

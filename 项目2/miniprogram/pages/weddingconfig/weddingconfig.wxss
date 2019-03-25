@@ -1,0 +1,23 @@
+page{
+  margin: 0;
+  padding: 0;
+}
+ 
+.page__bd{  
+  display: flex;
+  flex-direction: row;
+  justify-content: center; 
+}
+
+.page__bd_item{
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  margin: 40rpx 0rpx;
+}
+
+.page__bd_key{
+  width: 200rpx;
+  text-align: right;
+  color: #1a2a3a;
+}
