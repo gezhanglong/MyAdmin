@@ -1,7 +1,8 @@
 {
   "pages": [
+      "pages/weddingconfig/weddingconfig",
     "pages/myfirst/myfirst",
-    "pages/weddingconfig/weddingconfig",
+ 
     
     "pages/weddingabout/weddingabout",
     "pages/wedding/wedding",

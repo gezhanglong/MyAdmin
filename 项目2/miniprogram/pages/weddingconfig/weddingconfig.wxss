@@ -2,6 +2,16 @@ page{
   margin: 0;
   padding: 0;
 }
+
+.tab_content{
+  display: flex;
+  justify-content: center; 
+}
+
+.tab_item{ 
+  width: 50%;
+  text-align: center;
+}
  
 .page__bd{  
   display: flex;
@@ -20,4 +30,9 @@ page{
   width: 200rpx;
   text-align: right;
   color: #1a2a3a;
+}
+
+.update_tempimage{
+  width: 100rpx;
+  height: 100rpx;
 }

@@ -1,36 +1,49 @@
-<view class='page'> 
+<view class='page'>
+  <view class='tab_content'>
+    <view class='tab_item'>基本资料</view>
+    <view class='tab_item' bindtap='onTab'>图片资料</view>
+  </view>
+  <view  hidden='{{hidebase}}'>
     <form bindsubmit='onSubmit' class='page__bd'>
       <view class='page__bd_item'>
         <view class='page__bd_key'>
           姓名1：
         </view>
-        <input class='page__bd_value' name='man_name'  value='{{man_name}}' placeholder='请输入姓名1'></input>
+        <input class='page__bd_value' name='man_name' value='{{man_name}}' placeholder='请输入姓名1'></input>
       </view>
       <view class='page__bd_item'>
         <view class='page__bd_key'>
           手机号1：
         </view>
-        <input class='page__bd_value' type='number'  maxlength='11' name='man_phone' value='{{man_phone}}' placeholder='请输入手机号1'></input>
+        <input class='page__bd_value' type='number' maxlength='11' name='man_phone' value='{{man_phone}}' placeholder='请输入手机号1'></input>
       </view>
       <view class='page__bd_item'>
         <view class='page__bd_key'>
           姓名2：
         </view>
-        <input class='page__bd_value' name='women_name'  value='{{women_name}}' placeholder='请输入姓名2'></input>
+        <input class='page__bd_value' name='women_name' value='{{women_name}}' placeholder='请输入姓名2'></input>
       </view>
       <view class='page__bd_item'>
         <view class='page__bd_key'>
           手机号2：
         </view>
-        <input class='page__bd_value' type='number' maxlength='11'  name='women_phone' value='{{women_phone}}' placeholder='请输入手机号2'></input>
+        <input class='page__bd_value' type='number' maxlength='11' name='women_phone' value='{{women_phone}}' placeholder='请输入手机号2'></input>
       </view>
       <view class='page__bd_item'>
         <view class='page__bd_key'>
           宴客地址：
         </view>
         <input class='page__bd_value' name='address' value='{{address}}' placeholder='请输入宴客详细地址'></input>
-      </view> 
-       <button class='btn_submit' form-type='submit'>提交</button>
-    </form> 
-   
+      </view>
+      <button class='btn_submit' form-type='submit'>提交</button>
+    </form>
+  </view>
+
+
+  <view hidden='{{hideimage}}'>
+    <button bindtap='onChooseImage'>上传</button>
+    <block wx:for='{{tempImages}}' wx:key='key'>
+      <image mode='aspectFit' class='update_tempimage' src='{{item.url}}'></image>
+    </block>
+  </view>
 </view>

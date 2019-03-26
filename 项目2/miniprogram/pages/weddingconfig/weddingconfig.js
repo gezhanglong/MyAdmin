@@ -7,7 +7,9 @@ Page({
    * 页面的初始数据
    */
   data: {
-
+    tempImages:[],//选择图片预览图url
+    hidebase:'',//隐藏 基本资料tab
+    hideimage:'hidden'//隐藏 图片资料tab
   },
 
   onshowToast:function(text){
@@ -98,6 +100,68 @@ Page({
       })
 
     }
+
+  },
+
+  onTab:function(){
+    this.setData({
+      hideimage: '',
+      hidebase: 'hidden',
+    })
+  },
+
+  //选择图片
+  onChooseImage: function () {
+    var that = this; 
+    wx.chooseImage({//选择图片
+      count: 3,
+      sizeType: ['original', 'compressed'],
+      sourceType: ['album', 'camera'],
+      success: function (res) {
+        console.log(JSON.stringify(res));
+        for(var i=0;i<res.tempFilePaths.length;i++){
+          var filePath = res.tempFilePaths[i];
+          var newarray = { url: filePath};
+          that.setData({
+            tempImages: that.data.tempImages.concat(newarray), 
+          }); 
+        } 
+      }
+    })
+  },
+
+  //上传图片并下载图片
+  onUpdateimg:function(){
+
+    // const cloudPath = app.globalData.openid + "/" + Date.parse(new Date()) + filePath.match(/\.[^.]+?$/)[0];
+    // wx.cloud.uploadFile({//上传图片
+    //   cloudPath,
+    //   filePath,
+    //   header: {
+    //     "Content-Type": "multipart/form-data"
+    //   },
+    //   success: function (res) {
+    //     const cloudfileid = res.fileID;
+    //     that.setData({
+    //       imgurl: filePath,
+    //       fileid: cloudfileid,
+    //       previewimgurl: filePath,
+    //     }),
+    //       console.log("上传成功：" + cloudfileid);
+    //     wx.cloud.downloadFile({//下载图片 获得图片地址  
+    //       fileID: that.data.fileid,
+    //       success: function (res) {
+    //         console.log("下载成功：" + res.tempFilePath),
+    //           that.setData({
+    //             cloudimgurl: res.tempFilePath,
+    //           })
+    //       }
+    //     })
+    //   },
+    //   fail: function (res) {
+    //     console.log("上传失败：" + res.errMsg + ";code:" + res.errCode)
+    //   }
+    // })
 
   },
 
