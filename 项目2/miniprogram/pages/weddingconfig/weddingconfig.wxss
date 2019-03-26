@@ -10,7 +10,10 @@ page{
 
 .tab_item{ 
   width: 50%;
+  height: 100rpx;
+  line-height: 100rpx;
   text-align: center;
+  
 }
  
 .page__bd{  
@@ -33,6 +36,6 @@ page{
 }
 
 .update_tempimage{
-  width: 100rpx;
-  height: 100rpx;
+  width: 200rpx;
+  height: 200rpx;
 }

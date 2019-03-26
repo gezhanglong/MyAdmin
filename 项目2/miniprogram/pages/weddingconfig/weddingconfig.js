@@ -9,7 +9,9 @@ Page({
   data: {
     tempImages:[],//选择图片预览图url
     hidebase:'',//隐藏 基本资料tab
-    hideimage:'hidden'//隐藏 图片资料tab
+    basebottom:'border-bottom: 2px solid #abcdef;',
+    hideimage:'hidden',//隐藏 图片资料tab
+    imagebottom:'',
   },
 
   onshowToast:function(text){
@@ -107,6 +109,8 @@ Page({
     this.setData({
       hideimage: '',
       hidebase: 'hidden',
+      basebottom: '', 
+      imagebottom: 'border-bottom: 2px solid #abcdef;',
     })
   },
 

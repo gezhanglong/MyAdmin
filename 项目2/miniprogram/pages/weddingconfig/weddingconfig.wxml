@@ -1,7 +1,7 @@
 <view class='page'>
   <view class='tab_content'>
-    <view class='tab_item'>基本资料</view>
-    <view class='tab_item' bindtap='onTab'>图片资料</view>
+    <view class='tab_item' style='{{basebottom}}'>基本资料</view>
+    <view class='tab_item' bindtap='onTab'  style='{{imagebottom}}'>图片资料</view>
   </view>
   <view  hidden='{{hidebase}}'>
     <form bindsubmit='onSubmit' class='page__bd'>
@@ -41,7 +41,7 @@
 
 
   <view hidden='{{hideimage}}'>
-    <button bindtap='onChooseImage'>上传</button>
+    <button bindtap='onChooseImage'>选择3张横屏图片</button>
     <block wx:for='{{tempImages}}' wx:key='key'>
       <image mode='aspectFit' class='update_tempimage' src='{{item.url}}'></image>
     </block>
