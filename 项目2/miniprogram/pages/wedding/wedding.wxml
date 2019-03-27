@@ -16,13 +16,15 @@
   </view>
 
 
+ <navigator class='setup' url="/pages/weddingconfig/weddingconfig?templetId=templet_1&horizontalNum=6&verticalNum=4" hover-class="navigator-hover"  >
+    创建
+  </navigator>
+
 
   <!-- scroll-view -->
   <scroll-view scroll-y style="height:{{windowHeight}}px;" scroll-with-animation="true" scroll-into-view="{{toView}}" bindscroll='onBindscroll'>
 
-
-
-
+ 
 
     <!-- 第一屏 -->
     <view id='page_1' class='page_num' style='position: relative;width:{{windowWidth}}px;height:{{windowHeight}}px;'>

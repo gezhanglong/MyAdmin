@@ -14,5 +14,6 @@ App({
     openid:"",
     nickname:"",
     headurl:"",
+    iswedding:false,//该用户是否已经创建邀请函 true为已创建
   }
 })

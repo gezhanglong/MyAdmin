@@ -41,9 +41,14 @@
 
 
   <view hidden='{{hideimage}}'>
-    <button bindtap='onChooseImage'>选择3张横屏图片</button>
-    <block wx:for='{{tempImages}}' wx:key='key'>
+    <button class='image_btn' bindtap='onChooseImage' data-num='6'>选择{{horizontalNum}}张横屏图片</button>
+    <block class='tab_item' wx:for='{{tempImagesSix}}' wx:key='key'>
       <image mode='aspectFit' class='update_tempimage' src='{{item.url}}'></image>
     </block>
+     <button class='image_btn' bindtap='onChooseImage' data-num='4'>选择{{verticalNum}}张竖屏图片</button>
+    <block  class='tab_item' wx:for='{{tempImagesFour}}' wx:key='key'>
+      <image mode='aspectFit' class='update_tempimage' src='{{item.url}}'></image>
+    </block>
+     <button class='image_btn' bindtap='onUpdateimg' data-num='4'>提交</button>
   </view>
-</view>
+</view> 

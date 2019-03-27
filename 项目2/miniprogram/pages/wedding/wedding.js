@@ -19,6 +19,7 @@ Page({
     nickname: "",
     openid: "",//当前用户openid
     wedding_openid: 'oeff30PoY7RSlZOPFraxExftT66A',//邀请函主人openid  
+    iswedding:false,//是否已经创建，用来显示创建按钮
     wishlist: [],
     windowWidth: 0, //当前屏幕宽度
     windowHeight: 0, //当前屏幕高度  
@@ -631,6 +632,7 @@ Page({
       nickname: app.globalData.nickname,
       openid: app.globalData.openid,
       wedding_openid:options.wedding_openid,
+      iswedding:app.globalData.iswedding,
     })
     wx.getSystemInfo({ //获取系统信息方法
       success: function(res) {

@@ -117,7 +117,8 @@ Page({
           that.setData({
             wedding_text: res.data[0].man_name+'的邀请函',
             iswedding: true,
-          })
+          }) 
+          app.globalData.iswedding = true; 
         }
       },
       fail: err => {

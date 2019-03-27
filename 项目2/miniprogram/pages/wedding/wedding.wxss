@@ -102,6 +102,17 @@ page {
   }
 }
 
+/* 创建按钮 */
+
+.setup{
+  position:fixed;
+  bottom: 0;
+  left: 0;
+  width: 100rpx;
+  height: 50rpx;
+  z-index: 51;
+}
+
 /* 第一屏 */
 
 
