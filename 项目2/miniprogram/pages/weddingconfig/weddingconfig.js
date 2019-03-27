@@ -84,7 +84,8 @@ Page({
                 women_name: e.detail.value.women_name,
                 women_phone: e.detail.value.women_phone,
                 templetId: templetId,
-                time: new Date()
+                time: new Date(),
+                weddingtype:1,
               },
               success: function (res) {
                 that.onshowToast('提交成功');
@@ -95,6 +96,7 @@ Page({
                   imagebottom: 'border-bottom: 2px solid #abcdef;',
                   _id: res._id,
                 }) 
+                app.globalData.weddingtype = 1;//改变全局变量
                 console.log("_id:" + res._id) 
               },
               fail: function () {
@@ -226,7 +228,7 @@ Page({
             title: '上传进度：0%'
           }) 
           var interval = setInterval(function () {//定时检测上传进度
-            if (updaTeileidSix.length + updaTeileidFour.length == horizontalNum+verticalNum) {
+            if (updaTeileidSix.length + updaTeileidFour.length == parseInt(horizontalNum) + parseInt(verticalNum)) {
               clearInterval(interval);
               console.log("updaTeileidSix:" + updaTeileidSix)
               console.log("updaTeileidFour:" + updaTeileidFour)
@@ -235,8 +237,10 @@ Page({
                 data: {
                   page3_six: updaTeileidSix,
                   page4_four: updaTeileidFour,
+                  weddingtype: 2,
                 },
                 success: function (res) {
+                  app.globalData.weddingtype=2;//改变全局变量
                   that.onshowToast('提交成功,等待管理员审核!');
                   setTimeout(function () {
                     wx.switchTab({
@@ -249,9 +253,9 @@ Page({
                 }
               })
               wx.hideLoading()
-            } 
+            }  
             wx.showLoading({
-              title: '上传进度：' + ((10.00 / (horizontalNum + verticalNum)) * (updaTeileidSix.length + updaTeileidFour.length) * 10).toFixed(0)+ '%'
+              title: '上传进度：' + ((10.00 / (parseInt(horizontalNum) + parseInt(verticalNum))) * (updaTeileidSix.length + updaTeileidFour.length) * 10).toFixed(0)+ '%'
             }) 
           }, 1000) 
            
@@ -263,28 +267,7 @@ Page({
     }) 
   },
 
-  // 获取配置信息
-  onGetWeddingConfig() {
-    var that = this;
-    const db = wx.cloud.database()
-    db.collection('wedding_config').where({
-      wedding_openid: app.globalData.openid,
-    }).get({ 
-      success: res => {
-        that.setData({
-          hideimage: '',
-          hidebase: 'hidden',
-          basebottom: '',
-          imagebottom: 'border-bottom: 2px solid #abcdef;',
-          _id: res.data[0]._id,
-        }) 
-      },
-      fail: err => {
-        console.error('[数据库] [查询记录] 失败：', err)
-      }
-    })
-
-  },
+   
  
 
   /**
@@ -297,8 +280,16 @@ Page({
     this.setData({
       horizontalNum :options.horizontalNum,//横屏图片
       verticalNum: options.verticalNum//竖屏图片
-    })
-    this.onGetWeddingConfig();// 获取配置信息
+    }) 
+    if (app.globalData.weddingtype == 1) {
+      this.setData({
+        hideimage: '',
+        hidebase: 'hidden',
+        basebottom: '',
+        imagebottom: 'border-bottom: 2px solid #abcdef;',
+        _id: app.globalData.weddingconfigId,
+      })
+    }
   },
 
   /**

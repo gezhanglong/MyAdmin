@@ -68,6 +68,13 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    var textarray=[];
+    var item='clud:xxxx';
+    var item1 = 'clud:xxxx';
+    textarray.push(item);
+    textarray.push(item1);
+    console.log("textarray:"+JSON.stringify(textarray));
+     
     var that = this; 
     const db = wx.cloud.database()
     const photoCollection = db.collection('photoinfo').get({

@@ -16,7 +16,7 @@
   </view>
 
 
- <navigator class='setup' url="/pages/weddingconfig/weddingconfig?templetId=templet_1&horizontalNum=6&verticalNum=4" hover-class="navigator-hover"  >
+ <navigator hidden='{{iswedding}}' class='setup' url="/pages/weddingconfig/weddingconfig?templetId=templet_1&horizontalNum=6&verticalNum=4" hover-class="navigator-hover"  >
     创建
   </navigator>
 

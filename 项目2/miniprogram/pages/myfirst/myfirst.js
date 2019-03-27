@@ -12,7 +12,7 @@ Page({
     openid:"",
     unionid:"",
     wedding_text:'创建自己的邀请函',
-    iswedding:false,
+    weddingtype:0,
   },
 
   /**
@@ -113,12 +113,9 @@ Page({
     }).get({
       success(res) {
         console.log('res.total:' + res.total)
-        if (res.data.length >= 1) {
-          that.setData({
-            wedding_text: res.data[0].man_name+'的邀请函',
-            iswedding: true,
-          }) 
-          app.globalData.iswedding = true; 
+        if (res.data.length >= 1) { 
+          app.globalData.weddingtype = res.data[0].weddingtype; 
+          app.globalData.weddingconfigId = res.data[0]._id;
         }
       },
       fail: err => {

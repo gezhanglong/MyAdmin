@@ -19,7 +19,7 @@ Page({
     nickname: "",
     openid: "",//当前用户openid
     wedding_openid: 'oeff30PoY7RSlZOPFraxExftT66A',//邀请函主人openid  
-    iswedding:false,//是否已经创建，用来显示创建按钮
+    iswedding:"",//是否已经创建，用来显示创建按钮
     wishlist: [],
     windowWidth: 0, //当前屏幕宽度
     windowHeight: 0, //当前屏幕高度  
@@ -595,7 +595,7 @@ Page({
     }).get({ 
       success: res => { 
         console.log("wedding_openid:" + JSON.stringify(res) + ";that.data.wedding_openid:" + that.data.wedding_openid)
-        if(res.data.length>0){
+        if(res.data.length>0){ 
           that.setData({
             man_name: res.data[0].man_name,
             man_phone: res.data[0].man_phone,
@@ -632,7 +632,7 @@ Page({
       nickname: app.globalData.nickname,
       openid: app.globalData.openid,
       wedding_openid:options.wedding_openid,
-      iswedding:app.globalData.iswedding,
+      iswedding: app.globalData.weddingtype <= 1 ? '' :'hidden',
     })
     wx.getSystemInfo({ //获取系统信息方法
       success: function(res) {
