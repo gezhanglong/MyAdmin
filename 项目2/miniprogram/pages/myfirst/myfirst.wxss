@@ -1,70 +1,30 @@
 /* miniprogram/pages/myfirst/myfirst.wxss */
 page{ 
-    background-color: #F8F8F8;
-    font-size: 16px;
-    font-family: -apple-system-font,Helvetica Neue,Helvetica,sans-serif; 
+   margin: 0;
+   padding: 0;
+   background-color:#f39c12;
+   color: #34495e;
 }
 
-.page__hd {
-    padding: 60px; 
-}
-.page__bd{
-  padding: 10px;  
-  position:absolute;
-  top:150px;
-  right:0px;  
-}
-.page__ft{
-  width: 100%;
-  text-align: center;
-  position:fixed; 
-  bottom: 10px;   
-}
-
-.hd__title{
-  text-align: center;
-  font:bolder;
-} 
-#headurl{
-  width: 100rpx;
-  height:100rpx; 
-  border-radius: 50%;
-  margin: 10px;
-}
-.page__ft_text{ 
-  font-size: 0.8em;
-}
-
-.btn_into{ 
-  height: 60px; 
-  line-height: 60px; 
-  text-decoration:underline;
-  font-size: 17px;
-  font-weight: bolder;
-  color: red;
-  padding-top: 20px;
-}
-
-.btn_into:active{   
-  text-shadow: 1px 1px 20px red;
+.templet{
+   width: 750rpx;
+   height: 500rpx; 
+   margin-top: 40rpx;
+   padding-top: 10rpx;
+   display: flex;
+   flex-direction: column;
+   justify-content: space-between;
+   background-color: rebeccapurple;
 }
 
 .templetimg{
-  width: 100%;
-  height: 200rpx;
+  width: 600rpx;
+  height: 400rpx;
+  border-radius: 20rpx;
 }
 
-#bd_image{
-  width:100%; 
-  position: relative; 
-  margin-top:100px; 
+.templettext{
+  width: 600rpx;
+  height: 100rpx;
+  background-color: royalblue;
 }
-
-.info__headurl{
-  margin-left:130px; 
-}
-
-.info__mone{
-  margin-left:120px; 
-}
- 

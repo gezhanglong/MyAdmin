@@ -1,19 +1,10 @@
-<view class='page'>
-  <image id='bd_image' src='../../images/bd2.jpg' mode='scaleToFill'></image>
-  <view class='page__bd'>
-    <view class='info__headurl'>
-      <image id='headurl' src='{{headurl}}'></image>
-    </view>
-    <view class='info__mone'>
-      <view wx:if="{{namenick.length>0}}">您好：{{namenick}}</view>
-      <button wx:else open-type="getUserInfo" lang="zh_CN" bindgetuserinfo="onGotUserInfo">
-        请授权
-      </button>
-    </view>
-    <view class='btn_into' bindtap='onNavigateTo' bindtouchmove='onNindtouchmove'>欢迎来到小嘉文相册>>进入</view>
-  <view wx:for='{{allconfig}}'>
+<view class='page'> 
+  <button open-type="getUserInfo" lang="zh_CN" bindgetuserinfo="onGotUserInfo">
+    请授权
+  </button>
+  <view class='btn_into' bindtap='onNavigateTo' bindtouchmove='onNindtouchmove'>欢迎来到小嘉文相册>>进入</view>
+  <view class='templet' wx:for='{{allconfig}}'>
     <image class='templetimg' src='{{item.templetImg}}'></image>
-     <view class='btn_into' bindtap='onNavigateToTemplet1' data-templetid='{{item.templetId}}' bindtouchmove='onNindtouchmove'>{{item.templetText}}>>进入</view>
-  </view>  
+    <view class='templettext' bindtap='onNavigateToTemplet1' data-templetid='{{item.templetId}}' bindtouchmove='onNindtouchmove'>{{item.templetText}}>></view>
   </view>
 </view>
