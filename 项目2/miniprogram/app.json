@@ -1,11 +1,8 @@
 {
   "pages": [
-        "pages/csstest2/csstest2",
     "pages/myfirst/myfirst",
-      "pages/weddingconfig/weddingconfig",
-   
- 
-    
+    "pages/csstest2/csstest2", 
+    "pages/weddingconfig/weddingconfig", 
     "pages/weddingabout/weddingabout",
     "pages/wedding/wedding",
     "pages/weddingInfo/weddingInfo",

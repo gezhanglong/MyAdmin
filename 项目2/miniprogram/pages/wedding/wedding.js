@@ -19,6 +19,7 @@ Page({
     nickname: "",
     openid: "",//当前用户openid
     wedding_openid: 'oeff30PoY7RSlZOPFraxExftT66A',//邀请函主人openid  
+    templetId:'',//模板ID
     iswedding:"",//是否已经创建，用来显示创建按钮
     wishlist: [],
     windowWidth: 0, //当前屏幕宽度
@@ -592,23 +593,46 @@ Page({
     const db = wx.cloud.database()
     db.collection('wedding_config').where({
       wedding_openid: that.data.wedding_openid,
+      templetId: that.data.templetId,
     }).get({ 
       success: res => { 
         console.log("wedding_openid:" + JSON.stringify(res) + ";that.data.wedding_openid:" + that.data.wedding_openid)
         if(res.data.length>0){ 
+          wx.cloud.getTempFileURL({
+            fileList: res.data[0].page3_six,
+            success: res => {
+              console.log(res.fileList)
+              that.setData({ 
+                page3_img1: res.fileList[0].tempFileURL,
+                page3_img2: res.fileList[1].tempFileURL,
+                page3_img3: res.fileList[2].tempFileURL,
+                page3_img4: res.fileList[3].tempFileURL,
+                page3_img5: res.fileList[4].tempFileURL,
+                page3_img6: res.fileList[5].tempFileURL, 
+              }); 
+            },
+            fail: err => {
+              console.log(JSON.stringify(err))
+            }
+          })
+          wx.cloud.getTempFileURL({
+            fileList: res.data[0].page4_four,
+            success: res => {
+              console.log(res.fileList)
+              that.setData({
+                page4_img1: res.fileList[0].tempFileURL,
+                page4_img2: res.fileList[1].tempFileURL,
+                page4_img3: res.fileList[2].tempFileURL,
+                page4_img3: res.fileList[3].tempFileURL, 
+              });
+            },
+            fail: err => {
+              console.log(JSON.stringify(err))
+            }
+          })
           that.setData({
             man_name: res.data[0].man_name,
-            man_phone: res.data[0].man_phone,
-            page3_img1: res.data[0].page3_img1,
-            page3_img2: res.data[0].page3_img2,
-            page3_img3: res.data[0].page3_img3,
-            page3_img4: res.data[0].page3_img4,
-            page3_img5: res.data[0].page3_img5,
-            page3_img6: res.data[0].page3_img6,
-            page4_img1: res.data[0].page4_img1,
-            page4_img2: res.data[0].page4_img2,
-            page4_img3: res.data[0].page4_img3,
-            page4_img4: res.data[0].page4_img4, 
+            man_phone: res.data[0].man_phone,  
             women_name: res.data[0].women_name,
             women_phone: res.data[0].women_phone,
           }); 
@@ -632,6 +656,7 @@ Page({
       nickname: app.globalData.nickname,
       openid: app.globalData.openid,
       wedding_openid:options.wedding_openid,
+      templetId: options.templetId,
       iswedding: app.globalData.weddingtype <= 1 ? '' :'hidden',
     })
     wx.getSystemInfo({ //获取系统信息方法

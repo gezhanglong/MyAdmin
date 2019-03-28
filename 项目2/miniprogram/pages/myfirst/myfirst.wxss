@@ -49,6 +49,11 @@ page{
   text-shadow: 1px 1px 20px red;
 }
 
+.templetimg{
+  width: 100%;
+  height: 200rpx;
+}
+
 #bd_image{
   width:100%; 
   position: relative; 

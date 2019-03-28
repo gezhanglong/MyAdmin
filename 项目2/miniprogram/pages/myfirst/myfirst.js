@@ -10,9 +10,9 @@ Page({
     headurl:"",
     namenick:"",
     openid:"",
-    unionid:"",
-    wedding_text:'创建自己的邀请函',
+    unionid:"", 
     weddingtype:0,
+    allconfig:[],
   },
 
   /**
@@ -62,6 +62,7 @@ Page({
         })  
         this.onwedding();
         this.onlog(0);//0为首页记录
+        this.onAllConfig();//获取首页显示的配置信息
       },
       fail: err => {
         console.error('[云函数] [login] 调用失败', err) 
@@ -111,8 +112,7 @@ Page({
     db.collection('wedding_config').where({
       wedding_openid: that.data.openid
     }).get({
-      success(res) {
-        console.log('res.total:' + res.total)
+      success(res) { 
         if (res.data.length >= 1) { 
           app.globalData.weddingtype = res.data[0].weddingtype; 
           app.globalData.weddingconfigId = res.data[0]._id;
@@ -123,6 +123,27 @@ Page({
       }
     }) 
 
+  },
+
+  ////获取首页显示的配置信息
+  onAllConfig:function(){
+    var that = this;
+    const db = wx.cloud.database()
+    db.collection('all_config').where({
+      isShow: true
+    }).get({
+      success(res) { 
+        if (res.data.length >= 1) { 
+          that.setData({
+            allconfig:res.data,
+          }) 
+        }
+        console.log("that.data.allconfig:"+that.data.allconfig)
+      },
+      fail: err => {
+        console.error('[数据库] [查询记录] 失败：', err)
+      }
+    }) 
   },
 
   //邀请函邀请者
@@ -141,7 +162,7 @@ Page({
   },
   
   //邀请函模板1
-  onNavigateToTemplet1: function () {
+  onNavigateToTemplet1: function (e) { 
     var that = this;
     if (that.data.openid <= 0) {
       wx.showToast({
@@ -151,7 +172,7 @@ Page({
       return;
     }
     wx.navigateTo({
-      url: "/pages/wedding/wedding?wedding_openid=templet1"
+      url: "/pages/wedding/wedding?wedding_openid=" + e.target.dataset.templetid + "&templetId=" + e.target.dataset.templetid
     })
   },
 

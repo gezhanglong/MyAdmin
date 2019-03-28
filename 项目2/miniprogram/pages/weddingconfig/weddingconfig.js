@@ -198,7 +198,7 @@ Page({
               cloudPath,
               filePath: that.data.tempImagesSix[i].url,  
               success: function (res) { 
-                var newarray = { fileID: res.fileID }; 
+                var newarray = res.fileID;// { fileID: res.fileID }; 
                 updaTeileidSix.push(newarray);
                 console.log("上传成功：updaTeileidSix" + updaTeileidSix); 
               },
@@ -214,7 +214,7 @@ Page({
               cloudPath,
               filePath: that.data.tempImagesFour[i].url,
               success: function (res) {
-                var newarray = { fileID: res.fileID };
+                var newarray = res.fileID;//  { fileID: res.fileID };
                 updaTeileidFour.push(newarray);
 
                 console.log("上传成功：updaTeileidFour" + updaTeileidFour);

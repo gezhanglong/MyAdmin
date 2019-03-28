@@ -11,11 +11,9 @@
       </button>
     </view>
     <view class='btn_into' bindtap='onNavigateTo' bindtouchmove='onNindtouchmove'>欢迎来到小嘉文相册>>进入</view>
-    <view class='btn_into' bindtap='onNavigateToTemplet1' bindtouchmove='onNindtouchmove'>邀请函模板_1>>进入</view>
-
-      <view class='btn_into' bindtap='onNavigateToWedding' bindtouchmove='onNindtouchmove'>{{wedding_text}}>>进入</view>
-
-      <view class='btn_into' bindtap='onNavigateToWeddingConfig' bindtouchmove='onNindtouchmove'>{{wedding_text}}>>进入</view>
-
+  <view wx:for='{{allconfig}}'>
+    <image class='templetimg' src='{{item.templetImg}}'></image>
+     <view class='btn_into' bindtap='onNavigateToTemplet1' data-templetid='{{item.templetId}}' bindtouchmove='onNindtouchmove'>{{item.templetText}}>>进入</view>
+  </view>  
   </view>
 </view>
