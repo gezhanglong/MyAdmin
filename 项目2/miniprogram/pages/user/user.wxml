@@ -1,14 +1,14 @@
-<view class='page'> 
- <view class='info__headurl'>
-      <image src='{{headurl}}'></image>
-       <view id='info__name'>管理员：{{nickname}}</view> 
-    </view> 
-  <view class='page__bd'> 
-    <button class='btn_3' wx:if='{{isadmin}}'  bindtap='onUserNavigateTo'>用户列表</button>
-    <button class='btn_3' wx:if='{{isuser}}'  bindtap='onFirstImgNavigateTo'>上传首页图片</button>
-    <button class='btn_3' wx:if='{{isuser}}'  bindtap='onImgNavigateTo'>上传内容图片</button>  
-  </view> 
-  <view class='page__ft'>
-    <view class='page__ft_text'>Copyright © 2019-2019 zl</view>
+<view class='page'>
+  <button id='loginbtn' hidden='{{openid.length>0?"hidden":""}}' open-type="getUserInfo" lang="zh_CN" bindgetuserinfo="onGotUserInfo"> </button>
+  <view class='info__headurl'>
+    <image src='{{headurl}}'></image>
+    <view id='info__name'>{{nickname}}</view>
   </view>
+  <block wx:for='{{weddingconfig}}' wx:key='templet'>
+    <view class='templet' bindtap='onNavigateToTemplet1' data-templetid='{{item.templetId}}'  data-weddingtype='{{item.weddingtype}}' hover-class='templet_hover'>
+      <view class='templettext'>{{item.templetText}}</view>
+      <image class='templetimg' src='{{item.templetImg}}'></image>
+    </view>
+  </block>
+
 </view>

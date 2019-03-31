@@ -1,10 +1,28 @@
-/* miniprogram/pages/myfirst/myfirst.wxss */
 page{ 
    margin: 0;
    padding: 0;
    background-color:#f39c12;
-   color: #34495e;
+   color: #1a2a3a;
 }
+
+/* button 去掉边框 */
+
+#loginbtn::after {
+  border: none; 
+}
+
+/* button 去掉背景 */
+
+#loginbtn {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: transparent;
+  z-index: 99; 
+}
+
 
 .templet{
    width: 750rpx;
@@ -12,19 +30,40 @@ page{
    margin-top: 40rpx;
    padding-top: 10rpx;
    display: flex;
-   flex-direction: column;
-   justify-content: space-between;
-   background-color: rebeccapurple;
+   flex-direction: column; 
+   align-items: center;   
+}
+
+.templet_hover{
+  box-shadow: 0rpx 0rpx 50rpx gold;
 }
 
 .templetimg{
   width: 600rpx;
   height: 400rpx;
-  border-radius: 20rpx;
+  border-radius: 20rpx; 
+  z-index: -1;
 }
 
 .templettext{
   width: 600rpx;
-  height: 100rpx;
-  background-color: royalblue;
+  height: 100rpx; 
+  line-height: 100rpx;
+  text-align: center;  
+  border-radius: 20rpx;
+  position: relative;
+  z-index: -1;
+  animation: animation_templettext 3s linear infinite;
+}
+
+@keyframes animation_templettext {
+  0% {opacity: 1;} 
+  50% {opacity: 0;}
+  100% {opacity: 1;}
+}
+
+
+.templettext::after{
+  content: ">>";
+  position: absolute;  
 }

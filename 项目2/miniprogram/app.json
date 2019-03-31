@@ -26,8 +26,8 @@
   "window": {
     "backgroundColor": "#F8F8F8",
     "backgroundTextStyle": "light",
-    "navigationBarBackgroundColor": "#F8F8F8",
-    "navigationBarTitleText": "",
+    "navigationBarBackgroundColor": "#f39c12",
+    "navigationBarTitleText": "免费制作",
     "navigationBarTextStyle": "black"
   },
   "tabBar": {

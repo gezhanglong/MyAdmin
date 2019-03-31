@@ -14,7 +14,7 @@ App({
     openid:"",
     nickname:"",
     headurl:"",
-    weddingtype:0,//0未创建 1已提交基本资料 2已创建审核中 3审核通过 4通过不显示
-    weddingconfigId:'',//邀请函配置信息ID
+    // weddingtype:0,//0未创建 1已提交基本资料 2已创建审核中 3审核通过 4通过不显示
+    // weddingconfigId:'',//邀请函配置信息ID
   }
 })

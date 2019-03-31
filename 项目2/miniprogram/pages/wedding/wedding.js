@@ -657,7 +657,7 @@ Page({
       openid: app.globalData.openid,
       wedding_openid:options.wedding_openid,
       templetId: options.templetId,
-      iswedding: app.globalData.weddingtype <= 1 ? '' :'hidden',
+      iswedding: options.istemplet == 0 ? '' : 'hidden',//istemplet 0为模版 1为正式版
     })
     wx.getSystemInfo({ //获取系统信息方法
       success: function(res) {

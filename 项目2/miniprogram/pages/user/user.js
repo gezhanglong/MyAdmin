@@ -5,80 +5,146 @@ Page({
   /**
    * 页面的初始数据
    */
-  data: {
-    isadmin:false,
-    isuser: false, 
+  data: { 
     headurl: "",
-    nickname: "",
+    nickname: "请先授权",
     openid: "",
-    unionid: ""
+    unionid: "",
+    weddingconfig: [], 
   },
 
   /**
    * 生命周期函数--监听页面加载  app.globalData.openid
    */
-  onLoad: function (options) {
-   this.onLogin();
+  onLoad: function (options) { 
+    var that = this;
+    if (app.globalData.openid.length > 0) {
+    that.setData({
+      headurl: app.globalData.headurl,
+      nickname: app.globalData.nickname,
+      openid: app.globalData.openid, 
+    }) 
+      that.onwedding();
+    }
+  },
+  
+
+  onGotUserInfo(e) {
+   
+    this.setData({
+      headurl: e.detail.userInfo.avatarUrl,
+      nickname: e.detail.userInfo.nickName,
+    }) 
+    app.globalData.nickname = e.detail.userInfo.nickName;
+    app.globalData.headurl = e.detail.userInfo.avatarUrl
+    this.onGetOpenid()//调用云函数
   },
 
-  onLogin:function(){
-    this.setData({
-      headurl: app.globalData.headurl,
-      nickname: app.globalData.nickname.length > 0 ? app.globalData.nickname : "请授权后进入",
-      openid: app.globalData.openid,
-    });
-    var that = this;
-    if (that.data.openid <= 0) {
-      return;
-    }
-    const db = wx.cloud.database()
-    db.collection('user').where({
-      _openid: that.data.openid
-    }).get({
+  //获得openid
+  onGetOpenid: function () {
+    // 调用云函数
+    wx.cloud.callFunction({
+      name: 'login',
+      data: {},
       success: res => {
-
-        if (res.data.length <= 0) {
-          return
-        }
-        if (res.data[0].userpower == 0)//0最高权限，1普通权限
-        {
-          that.setData({
-            isuser: true,
-            isadmin: true,
-          })
-        } else {
-          that.setData({
-            isuser: true,
-          })
-        }
-
+        console.log('[云函数] [login] user openid: ', res.result.openid)
+        app.globalData.openid = res.result.openid
+        this.setData({
+          openid: app.globalData.openid
+        })
+        this.onwedding();
+        this.onlog(1);//0为我的记录 
       },
       fail: err => {
-        wx.showToast({
-          icon: 'none',
-          title: '查询记录失败'
-        })
-        console.error('[数据库] [查询记录] 失败：', err)
+        console.error('[云函数] [login] 调用失败', err)
       }
     })
   },
 
-  onUserNavigateTo:function(){ 
-    wx.navigateTo({
-      url: '/pages/userinfo/userinfo'
+  //添加记录
+  onlog: function (logtype) {
+    var that = this;
+    const db = wx.cloud.database()
+    db.collection('all_log').add({ //添加数据
+      data: {
+        headurl: that.data.headurl,
+        nickname: that.data.nickname,
+        openid: that.data.openid,
+        createtime: new Date(),
+        logtype: logtype,
+      },
+      success: function (res) {
+        console.log('[数据库] [添加数据] 成功：', res)
+      },
+      fail: function (res) {
+        console.error('[数据库] [添加数据] 失败：', res)
+      }
     })
   },
+
+  //判断该用户是婚礼邀请函的邀请人
+  onwedding: function () {
+    var that = this;
+    const db = wx.cloud.database()
+    db.collection('wedding_config').where({
+      wedding_openid: that.data.openid
+    }).get({
+      success(res) { 
+        var configList=[];
+        db.collection('all_config').where({ 
+        }).get({
+          success(les) { 
+            for (var i = 0; i < res.data.length; i++) {
+              for(var j=0;j<les.data.length;i++){
+                console.log("==" + res.data[i].templetId + ";" + les.data[j].templetId)
+                if (res.data[i].templetId == les.data[j].templetId){ 
+                  les.data[j].weddingtype = res.data[i].weddingtype;//json字符串里新增数据 
+                  that.setData({
+                    weddingconfig: that.data.weddingconfig.concat(les.data[j])
+                  }) 
+                }
+              }
+            }
+          },
+          fail: les => {
+            console.error('[数据库] [查询记录] 失败：', les)
+          }
+        }) 
+        console.log('that.data.weddingconfig:' + that.data.weddingconfig)
+      },
+      fail: err => {
+        console.error('[数据库] [查询记录] 失败：', err)
+      }
+    })
+
+  },
+
+  //邀请函模板1
+  onNavigateToTemplet1: function (e) {
+    var that = this;
+    if (that.data.openid <= 0) {
+      wx.showToast({
+        icon: 'none',
+        title: '请授权后访问'
+      })
+      return;
+    }
+    if(e.target.dataset.weddingtype<=1){
+      wx.navigateTo({
+        url: "/pages/weddingconfig/weddingconfig?templetId=templet_1&horizontalNum=6&verticalNum=4"
+      })
+    }
+    if (e.target.dataset.weddingtype==2){
+      wx.navigateTo({
+        url: "/pages/wedding/wedding?wedding_openid=" + that.data.openid + "&templetId=" + e.target.dataset.templetid + "&istemplet=1"
+      })
+    }
+   
+  },
+
+
+
   
-  onFirstImgNavigateTo: function() {
-    wx.navigateTo({
-      url: '/pages/updateimgfirst/updateimgfirst'
-    })
-  }, 
-  onImgNavigateTo: function () {
-    wx.navigateTo({
-      url: '/pages/updateimg/updateimg'
-    })
-  },
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
@@ -89,8 +155,7 @@ Page({
   /**
    * 生命周期函数--监听页面显示
    */
-  onShow: function () {
-    this.onLogin();
+  onShow: function () {  
   },
 
   /**

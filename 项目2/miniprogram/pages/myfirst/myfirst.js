@@ -8,47 +8,19 @@ Page({
    */
   data: {
     headurl:"",
-    namenick:"",
+    nickname:"",
     openid:"",
-    unionid:"", 
-    weddingtype:0,
-    allconfig:[],
+    unionid:"",  
+    allconfig:[], 
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    var getAppInfo = app.globalData.openid;
-    console.log("openid:"+getAppInfo) 
-    if (app.globalData.openid=='')
-    { 
-      wx.getSetting({
-        success:res=>{ 
-          console.log("authsetting:"+JSON.stringify(res));
-          if (res.authSetting['scope.userInfo'])
-          {
-            wx.getUserInfo({
-              success: res => {
-                console.log(res.userInfo.nickName); 
-                this.setData({
-                   headurl: res.userInfo.avatarUrl,
-                   namenick: res.userInfo.nickName , 
-                   })   
-                app.globalData.nickname = res.userInfo.nickName
-                app.globalData.headurl = res.userInfo.avatarUrl
-                this.onGetOpenid()//调用云函数
-              }, 
-            }) 
-          }
-        }
-      }) 
-     
-    }else
-    {
-      console.log("已登录");
-    }
+    this.onAllConfig();//获取首页显示的配置信息 
   },
+
   onGetOpenid: function () { 
     // 调用云函数
     wx.cloud.callFunction({
@@ -60,9 +32,9 @@ Page({
         this.setData({ 
           openid: app.globalData.openid
         })  
-        this.onwedding();
+       
         this.onlog(0);//0为首页记录
-        this.onAllConfig();//获取首页显示的配置信息
+       
       },
       fail: err => {
         console.error('[云函数] [login] 调用失败', err) 
@@ -70,21 +42,8 @@ Page({
     })
   },
 
-  //相册
-  onNavigateTo:function(){
-    if(this.data.openid<=0)
-    {
-      wx.showToast({
-        icon: 'none',
-        title: '请授权后访问'
-      })
-      return;
-    }
-    wx.navigateTo({
-      url: '/pages/photo/photo'
-    })
-  },
 
+  //添加记录
   onlog:function(logtype){
     var that=this;
     const db = wx.cloud.database()
@@ -105,25 +64,7 @@ Page({
     })
   },
 
-  //判断该用户是婚礼邀请函的邀请人
-  onwedding:function(){  
-    var that=this;
-    const db = wx.cloud.database()
-    db.collection('wedding_config').where({
-      wedding_openid: that.data.openid
-    }).get({
-      success(res) { 
-        if (res.data.length >= 1) { 
-          app.globalData.weddingtype = res.data[0].weddingtype; 
-          app.globalData.weddingconfigId = res.data[0]._id;
-        }
-      },
-      fail: err => {
-        console.error('[数据库] [查询记录] 失败：', err)
-      }
-    }) 
 
-  },
 
   ////获取首页显示的配置信息
   onAllConfig:function(){
@@ -147,19 +88,19 @@ Page({
   },
 
   //邀请函邀请者
-  onNavigateToWedding: function () {
-    var that = this;
-    if (that.data.openid <= 0) {
-      wx.showToast({
-        icon: 'none',
-        title: '请授权后访问'
-      })
-      return;
-    }  
-    wx.navigateTo({
-      url: '/pages/wedding/wedding?wedding_openid=' + that.data.openid
-    })
-  },
+  // onNavigateToWedding: function () {
+  //   var that = this;
+  //   if (that.data.openid <= 0) {
+  //     wx.showToast({
+  //       icon: 'none',
+  //       title: '请授权后访问'
+  //     })
+  //     return;
+  //   }  
+  //   wx.navigateTo({
+  //     url: '/pages/wedding/wedding?wedding_openid=' + that.data.openid
+  //   })
+  // },
   
   //邀请函模板1
   onNavigateToTemplet1: function (e) { 
@@ -172,29 +113,30 @@ Page({
       return;
     }
     wx.navigateTo({
-      url: "/pages/wedding/wedding?wedding_openid=" + e.target.dataset.templetid + "&templetId=" + e.target.dataset.templetid
+      url: "/pages/wedding/wedding?wedding_openid=" + e.target.dataset.templetid + "&templetId=" + e.target.dataset.templetid +"&istemplet=0"
     })
   },
 
   //邀请函邀请人配置页
-  onNavigateToWeddingConfig: function () {
-    var that = this;
-    if (that.data.openid <= 0) {
-      wx.showToast({
-        icon: 'none',
-        title: '请授权后访问'
-      })
-      return;
-    }
-    wx.navigateTo({
-      url: '/pages/weddingabout/weddingabout'
-    })
-  },
+  // onNavigateToWeddingConfig: function () {
+  //   var that = this;
+  //   if (that.data.openid <= 0) {
+  //     wx.showToast({
+  //       icon: 'none',
+  //       title: '请授权后访问'
+  //     })
+  //     return;
+  //   }
+  //   wx.navigateTo({
+  //     url: '/pages/weddingabout/weddingabout'
+  //   })
+  // },
 
+  //授权
   onGotUserInfo(e) {
     this.setData({
       headurl: e.detail.userInfo.avatarUrl,
-      namenick: e.detail.userInfo.nickName, 
+      nickname: e.detail.userInfo.nickName, 
     })   
     app.globalData.nickname = e.detail.userInfo.nickName;
     app.globalData.headurl = e.detail.userInfo.avatarUrl

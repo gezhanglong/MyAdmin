@@ -268,7 +268,37 @@ Page({
   },
 
    
- 
+  //判断该用户是婚礼邀请函的邀请人
+  onwedding: function () {
+    var that = this; 
+    const db = wx.cloud.database()
+    db.collection('wedding_config').where({
+      wedding_openid: app.globalData.openid,
+      templetId: templetId,
+    }).get({
+      success(res) {
+        console.log("res.data[0].weddingtype:" + res.data[0].weddingtype)
+        if (res.data[0].weddingtype == 1) { 
+          that.setData({
+            hideimage: '',
+            hidebase: 'hidden',
+            basebottom: '',
+            imagebottom: 'border-bottom: 2px solid #abcdef;',
+            _id: res.data[0]._id,
+          })
+        }
+        if(res.data[0].weddingtype==2){
+          wx.navigateTo({
+            url: "/pages/wedding/wedding?wedding_openid=" + app.globalData.openid + "&templetId=" + templetId + "&istemplet=1"
+          })
+        }
+      },
+      fail: err => {
+        console.error('[数据库] [查询记录] 失败：', err)
+      }
+    })
+
+  },
 
   /**
    * 生命周期函数--监听页面加载
@@ -281,15 +311,7 @@ Page({
       horizontalNum :options.horizontalNum,//横屏图片
       verticalNum: options.verticalNum//竖屏图片
     }) 
-    if (app.globalData.weddingtype == 1) {
-      this.setData({
-        hideimage: '',
-        hidebase: 'hidden',
-        basebottom: '',
-        imagebottom: 'border-bottom: 2px solid #abcdef;',
-        _id: app.globalData.weddingconfigId,
-      })
-    }
+    this.onwedding();
   },
 
   /**
