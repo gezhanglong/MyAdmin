@@ -1,14 +1,15 @@
 {
-  "pages": [
+  "pages": [ 
+    "pages/csstest4/csstest4",
     "pages/myfirst/myfirst",
-    "pages/csstest2/csstest2", 
-    "pages/weddingconfig/weddingconfig", 
+    "pages/csstest2/csstest2",
+    "pages/weddingconfig/weddingconfig",
     "pages/weddingabout/weddingabout",
     "pages/wedding/wedding",
     "pages/weddingInfo/weddingInfo",
     "pages/systeminfo/systeminfo",
     "pages/csstest3/csstest3",
-    "pages/csstest/csstest", 
+    "pages/csstest/csstest",
     "pages/csstest1/csstest1",
     "pages/updateimgfirst/updateimgfirst",
     "pages/index/index",
@@ -27,7 +28,7 @@
     "backgroundColor": "#F8F8F8",
     "backgroundTextStyle": "light",
     "navigationBarBackgroundColor": "#f39c12",
-    "navigationBarTitleText": "免费制作",
+    "navigationBarTitleText": "",
     "navigationBarTextStyle": "black"
   },
   "tabBar": {
