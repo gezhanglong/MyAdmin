@@ -7,14 +7,27 @@ Page({
   data: {
     windowWidth: 0,//当前屏幕宽度
     windowHeight: 0,//当前屏幕高度 
-    indicatorDots: false,//是否显示面板指示点
+    indicatorDots: true,//是否显示面板指示点
     autoplay: false,//是否自动切换
-    circular: false,//是否采用衔接滑动
-    vertical: false,//是否采用衔接滑动
-    interval: 6000,//自动切换时间间隔
+    circular: true,//是否采用衔接滑动
+    vertical: true,//滑动方向是否为纵向
+    interval: 600,//自动切换时间间隔
     duration: 600,//滑动动画时长
     previousMargin: '0',//前边距，可用于露出前一项的一小部分
     nextMargin: '0',//后边距，可用于露出后一项的一小部分
+  },
+
+  // onanimationfinish:function(e){
+  //   console.log("onanimationfinish:"+JSON.stringify(e))
+  // },
+
+  // ontransition: function (e) {
+  //   console.log("ontransition:" + JSON.stringify(e))
+  // },
+
+  onchange: function (e) {
+    console.log("onchange:" + JSON.stringify(e))
+    console.log("onchange:" + e.detail.current)
   },
 
   /**

@@ -1,11 +1,14 @@
 {
   "pages": [ 
+   
+       "pages/wedding/wedding",
+    "pages/wedding2/wedding2",
     "pages/csstest4/csstest4",
-    "pages/myfirst/myfirst",
+"pages/myfirst/myfirst",
     "pages/csstest2/csstest2",
     "pages/weddingconfig/weddingconfig",
     "pages/weddingabout/weddingabout",
-    "pages/wedding/wedding",
+    
     "pages/weddingInfo/weddingInfo",
     "pages/systeminfo/systeminfo",
     "pages/csstest3/csstest3",

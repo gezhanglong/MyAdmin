@@ -1,10 +1,19 @@
-<view class='page_content'>
-  <!-- 模态窗 用来禁止scroll滑动 -->
-  <view class='modelwindow' catchtouchmove='onCatchtouchmove'></view>
 
+  <!-- 模态窗 用来禁止scroll滑动 -->
+<view class='modelwindow' catchtouchmove='onCatchtouchmove' style='{{loader}}'>
+<!-- <image class='loader_img' src='../../images/nevellson.png'></image> -->
+<view class='loader_text'>LOADING</view>
+<view class='loader'> 
+<view class='circle'>
+</view>
+</view>
+</view> 
+
+
+<view class='page_content'>
   <!-- 向上拉icon -->
-  <view wx:if="{{openid.length>0}}" class='update_icon' hover-class='update_hover' bindtap='onscrolltap' catchtouchmove='onCatchtouchmove'></view>
-  <button id='loginbtn' wx:else class='update_icon'  open-type="getUserInfo" lang="zh_CN" bindgetuserinfo="onGetUserInfo">
+  <view wx:if="{{openid.length>0}}" class='update_icon' hover-class='update_hover'></view>
+  <button id='loginbtn' wx:else class='update_icon' open-type="getUserInfo" lang="zh_CN" bindgetuserinfo="onGetUserInfo">
   </button>
 
   <!-- 音乐 -->
@@ -16,163 +25,171 @@
   </view>
 
 
- <navigator hidden='{{iswedding}}' class='setup' url="/pages/weddingconfig/weddingconfig?templetId=templet_1&horizontalNum=6&verticalNum=4" hover-class="navigator-hover"  >
+  <navigator hidden='{{iswedding}}' class='setup' url="/pages/weddingconfig/weddingconfig?templetId=templet_1&horizontalNum=6&verticalNum=4" hover-class="navigator-hover">
     创建
   </navigator>
 
-
-  <!-- scroll-view -->
-  <scroll-view scroll-y style="height:{{windowHeight}}px;" scroll-with-animation="true" scroll-into-view="{{toView}}" bindscroll='onBindscroll'>
-
- 
-
-    <!-- 第一屏 -->
-    <view id='page_1' class='page_num' style='position: relative;width:{{windowWidth}}px;height:{{windowHeight}}px;'>
-      <view class='page_num_content'>
-        <view class='page_1_name' style='{{animation_page_1_name}}'>
-          <view class='page_1_name1'>{{man_name}}</view>
-          <view>　　</view>
-          <view class='page_1_name2'>{{women_name}}</view>
-        </view>
-        <view class='page_1_img1' style='{{animation_page_1_img1}}'>
-          <image mode='aspectFill' src='../../images/people.png'></image>
-        </view>
-        <view class='page_1_img2' style='{{animation_page_1_img2}}'>
-          <image mode='aspectFill top' src='../../images/gona_marrige.png'></image>
-        </view>
-        <!-- 弹幕 -->
-        <block wx:for='{{wishlist}}' wx:key='wishlist'>
-          <view class='page_1_gull' style='animation: animation_page_1_gull {{item.move}}s linear infinite {{item.wait}}s;top: {{item.tops}}px;'>
-            <image class='page_1_headurl' mode='aspectFill' src='{{item.headurl}}'></image>
-            <view>
-              <view class='page_1_nickname'>{{item.nickname}}送来祝福：</view>
-              <view class='page_1_wishtext'>{{item.wishtext}}</view>
-            </view>
-
-          </view>
-        </block>
-      </view>
-    </view>
+  <!-- 地图 -->
+  <view class='page_6_map'>
+    <map hidden='{{isshowmap}}' id="map" longitude="113.309065" latitude="23.089205" scale="14" controls="{{controls}}" bindcontroltap="controltap" markers="{{markers}}" bindmarkertap="markertap" polyline="{{polyline}}" bindregionchange="regionchange" show-location
+      style="position: fixed;width: 100%; height: 600rpx;z-index:51; margin-bottom: 100rpx;"></map>
+  </view>
 
 
-    <!-- 第二屏 -->
-    <view id='page_2' class='page_num' style='width:{{windowWidth}}px;height:{{windowHeight}}px;'>
-      <view class='page_num_content'>
-        <view class='page_2_img1' style='{{animation_page_2_img}}'>
-          <image mode='aspectFill' src='../../images/words2.png'></image>
-        </view>
-        <view class='page_2_img2' style='{{animation_page_2_img}}'>
-          <image mode='aspectFill' src='../../images/lovewords.png'></image>
-        </view>
-        <view class='page_2_text'>
-          <view style='{{animation_page_2_text1}}'>一生就这么一次，</view>
-          <view style='{{animation_page_2_text2}}'>谈一场以结婚为目的的恋爱吧。</view>
-          <view style='{{animation_page_2_text3}}'>不再因为任性而不肯低头，</view>
-          <view style='{{animation_page_2_text4}}'>不再因为固执而轻言分手。 </view>
-          <view style='{{animation_page_2_text5}}'>最后地坚信一次，一直走，就可以到白头。</view>
-          <view style='{{animation_page_2_text6}}'>惟愿这一生，执子之手，与子偕老。</view>
-          <view style='{{animation_page_2_text7}}'>你敢天长，我就敢地久。</view>
-        </view>
-      </view>
-    </view>
+
+  <swiper indicator-dots="{{indicatorDots}}" autoplay="{{autoplay}}" circular="{{circular}}" vertical="{{vertical}}" interval="{{interval}}" duration="{{duration}}" previous-margin="{{previousMargin}}px" next-margin="{{nextMargin}}px" style='height:{{windowHeight}}px'
+    bindchange='onchange'>
 
     <!-- 第三屏 -->
-    <view id='page_3' class='page_num' style='width:{{windowWidth}}px;height:{{windowHeight}}px;'>
-      <view class='page_num_content'>
-        <view class='page_3_content_img'>
-          <view>婚纱照</view>
-        </view>
-        <view class='page_3_content_img'>
-          <image class='page_3_img' mode='aspectFit' src='{{page3_img1}}' style='animation: animation_page_3_img 2s linear;'></image>
-          <image class='page_3_img' mode='aspectFit' src='{{page3_img2}}' style='animation: animation_page_2 2s,  animation_page_3_img 2s linear 2s;'></image>
-        </view>
-        <view class='page_3_content_img'>
-          <image class='page_3_img' mode='aspectFit' src='{{page3_img3}}' style='animation: animation_page_2 4s, animation_page_3_img 2s linear 4s;'></image>
-          <image class='page_3_img' mode='aspectFit' src='{{page3_img4}}' style='animation: animation_page_2 6s,  animation_page_3_img 2s linear 6s;'></image>
-        </view>
-        <view class='page_3_content_img'>
-          <image class='page_3_img' mode='aspectFit' src='{{page3_img5}}' style='animation: animation_page_2 8s, animation_page_3_img 2s linear 8s;'></image>
-          <image class='page_3_img' mode='aspectFit' src='{{page3_img6}}' style='animation: animation_page_2 10s, animation_page_3_img 2s linear 10s;'></image>
+    <swiper-item>
+      <view id='page_3' class='page_num' style='width:{{windowWidth}}px;height:{{windowHeight}}px;'>
+        <view class='page_num_content' style='position:relative;'> 
+        <image class='page_3_hua' mode='aspectFill'  src='../../images/20190407.png'  ></image> 
+            <!-- <image class='page_3_img'  src='{{page3_img1}}' style='top:5%;left:5%;' ></image>
+            <image class='page_3_img'  src='{{page3_img2}}'  style='top:5%;left:50%;'></image> 
+            <image class='page_3_img' src='{{page3_img3}}'  style='top:30%;left:30%;'></image>
+            <image class='page_3_img'  src='{{page3_img4}}'  style='top:50%;left:30%;'></image> 
+            <image class='page_3_img'  src='{{page3_img5}}'  style='top:65%;left:5%;'></image>
+            <image class='page_3_img'  src='{{page3_img6}}'  style='top:65%;left:50%;'></image>  -->
         </view>
       </view>
-    </view>
+    </swiper-item>
+
+    <!-- 第一屏 -->
+    <swiper-item>
+      <view id='page_1' class='page_num' style='position: relative;width:{{windowWidth}}px;height:{{windowHeight}}px;'>
+        <view class='page_num_content'>
+          <view class='page_1_name' style='{{animation_page_1_name}}'>
+            <view class='page_1_name1'>{{man_name}}</view>
+            <view>　　</view>
+            <view class='page_1_name2'>{{women_name}}</view>
+          </view>
+          <view class='page_1_img1' style='{{animation_page_1_img1}}'>
+            <image mode='aspectFill' src='../../images/people.png'></image>
+          </view>
+          <view class='page_1_img2' style='{{animation_page_1_img2}}'>
+            <image mode='aspectFill top' src='../../images/gona_marrige.png'></image>
+          </view>
+          <!-- 弹幕 -->
+          <block wx:for='{{wishlist}}' wx:key='wishlist'>
+            <view class='page_1_gull' style='animation: animation_page_1_gull {{item.move}}s linear infinite {{item.wait}}s;top: {{item.tops}}px;'>
+              <image class='page_1_headurl' mode='aspectFill' src='{{item.headurl}}'></image>
+              <view>
+                <view class='page_1_nickname'>{{item.nickname}}送来祝福：</view>
+                <view class='page_1_wishtext'>{{item.wishtext}}</view>
+              </view>
+
+            </view>
+          </block>
+        </view>
+      </view>
+    </swiper-item>
+
+    <!-- 第二屏 -->
+    <swiper-item>
+      <view id='page_2' class='page_num' style='width:{{windowWidth}}px;height:{{windowHeight}}px;'>
+        <view class='page_num_content'>
+          <view class='page_2_img1' style='{{animation_page_2_img}}'>
+            <image mode='aspectFill' src='../../images/words2.png'></image>
+          </view>
+          <view class='page_2_img2' style='{{animation_page_2_img}}'>
+            <image mode='aspectFill' src='../../images/lovewords.png'></image>
+          </view>
+          <view class='page_2_text'>
+            <view style='{{animation_page_2_text1}}'>一生就这么一次，</view>
+            <view style='{{animation_page_2_text2}}'>谈一场以结婚为目的的恋爱吧。</view>
+            <view style='{{animation_page_2_text3}}'>不再因为任性而不肯低头，</view>
+            <view style='{{animation_page_2_text4}}'>不再因为固执而轻言分手。 </view>
+            <view style='{{animation_page_2_text5}}'>最后地坚信一次，一直走，就可以到白头。</view>
+            <view style='{{animation_page_2_text6}}'>惟愿这一生，执子之手，与子偕老。</view>
+            <view style='{{animation_page_2_text7}}'>你敢天长，我就敢地久。</view>
+          </view>
+        </view>
+      </view>
+    </swiper-item>
+
 
 
     <!-- 第四屏 -->
-    <view id='page_4' class='page_num' style='width:{{windowWidth}}px;height:{{windowHeight}}px;'>
-      <view class='page_num_content' style=' position: relative;' > 
-        <image class='page_4_img' mode='aspectFill' src='{{page4_img1}}' style='transform:rotate(0deg);{{page_4_img4}}'></image>
-        <image class='page_4_img' mode='aspectFill' src='{{page4_img2}}' style='transform:rotate(-5deg);{{page_4_img3}}'></image>
-        <image class='page_4_img' mode='aspectFill' src='{{page4_img3}}' style='transform:rotate(-10deg);{{page_4_img2}}'></image>
-        <image class='page_4_img' mode='aspectFill' src='{{page4_img4}}' style='transform:rotate(-15deg);{{page_4_img1}}'></image> 
-        <view class='page_4_icon page_4_left' data-click='{{page_4_click}}' data-animation='animation_page_4_left' bindtap='onpageleft' catchtouchmove='onCatchtouchmove'></view>
-        <view class='page_4_icon page_4_right' data-click='{{page_4_click}}' data-animation='animation_page_4_right' bindtap='onpageleft' catchtouchmove='onCatchtouchmove'></view>
-      </view>
-    </view>
-
-     <!-- 第五屏 -->
-    <view id='page_5' class='page_num' style='width:{{windowWidth}}px;height:{{windowHeight}}px;'>
-      <view class='page_num_content'>
-        <view class='page_5_img1'>
-          <image mode='aspectFill' src='../../images/words3.png' style='{{animation_page_5_img1}}'></image>
-        </view>
-        <view class='page_5_img2'>
-          <image mode='aspectFill' src='../../images/words4.png'></image>
-        </view>
-        <view class='page_5_text' style='{{animation_page_5_text}}'>
-          <view>深思熟虑之后我们决定</view>
-          <view>为爱情做出重要的延续</view>
-        </view>
-        <view class='page_5_img3'>
-          <image mode='aspectFill' src='../../images/words5.png' style='{{animation_page_5_img3}}'></image>
+    <swiper-item>
+      <view id='page_4' class='page_num' style='width:{{windowWidth}}px;height:{{windowHeight}}px;'>
+        <view class='page_num_content' style=' position: relative;'>
+          <image class='page_4_img' mode='aspectFill' src='{{page4_img1}}' style='transform:rotate(0deg);{{page_4_img4}}'></image>
+          <image class='page_4_img' mode='aspectFill' src='{{page4_img2}}' style='transform:rotate(-5deg);{{page_4_img3}}'></image>
+          <image class='page_4_img' mode='aspectFill' src='{{page4_img3}}' style='transform:rotate(-10deg);{{page_4_img2}}'></image>
+          <image class='page_4_img' mode='aspectFill' src='{{page4_img4}}' style='transform:rotate(-15deg);{{page_4_img1}}'></image>
+          <view class='page_4_icon page_4_left' data-click='{{page_4_click}}' data-animation='animation_page_4_left' bindtap='onpageleft' catchtouchmove='onCatchtouchmove'></view>
+          <view class='page_4_icon page_4_right' data-click='{{page_4_click}}' data-animation='animation_page_4_right' bindtap='onpageleft' catchtouchmove='onCatchtouchmove'></view>
         </view>
       </view>
-    </view>
+    </swiper-item>
 
-  
+    <!-- 第五屏 -->
+    <swiper-item>
+      <view id='page_5' class='page_num' style='width:{{windowWidth}}px;height:{{windowHeight}}px;'>
+        <view class='page_num_content'>
+          <view class='page_5_img1'>
+            <image mode='aspectFill' src='../../images/words3.png' style='{{animation_page_5_img1}}'></image>
+          </view>
+          <view class='page_5_img2'>
+            <image mode='aspectFill' src='../../images/words4.png'></image>
+          </view>
+          <view class='page_5_text' style='{{animation_page_5_text}}'>
+            <view>深思熟虑之后我们决定</view>
+            <view>为爱情做出重要的延续</view>
+          </view>
+          <view class='page_5_img3'>
+            <image mode='aspectFill' src='../../images/words5.png' style='{{animation_page_5_img3}}'></image>
+          </view>
+        </view>
+      </view>
+    </swiper-item>
+
+ 
    <!-- 第六屏 -->
-    <view id='page_6' class='page_num' style='width:{{windowWidth}}px;height:{{windowHeight}}px;'>
-      <view class='page_num_content'>
-        <view class='page_6_map'>
-          <map hidden='{{isshowmap}}' id="map" longitude="113.309065" latitude="23.089205" scale="14" controls="{{controls}}" bindcontroltap="controltap" markers="{{markers}}" bindmarkertap="markertap" polyline="{{polyline}}" bindregionchange="regionchange" show-location
-            style="width: 100%; height: 600rpx;z-index:51; margin-bottom: 100rpx;"></map>
-        </view>
-        <view class='page_6_phone'>
-        <image class='page_6_phonename_imag1' src='../../images/people1.png'></image>
-          <view class='page_6_phonename  '>新娘：</view>
-          <view class='page_6_phonenum' bindtap='onPhone'>{{women_phone}}</view>
-        </view>
-        <view class='page_6_phone'>
-        <image class='page_6_phonename_imag1' src='../../images/people4.png'></image>
-          <view class='page_6_phonename page_6_phonename_imag2'>新郎：</view>
-          <view class='page_6_phonenum' bindtap='onPhone'>{{man_phone}}</view>
-        </view>
-        
-      </view>
-    </view>
-
-
- <!-- 第七屏 -->
-    <view id='page_7' class='page_num' style='position: relative;width:{{windowWidth}}px;height:{{windowHeight}}px;'>
-      <view class='page_num_content'>
-      <view>
-       <view class='page_7_img1' style='{{animation_page_7_img1}}'>
-          <image mode='aspectFill' src='../../images/people4.png'></image>
-        </view>
-        <view class='page_7_img2' style='{{animation_page_7_img2}}'>
-          <image mode='aspectFill' src='../../images/people1.png'></image>
-        </view>
-      </view> 
-        <view class='page_7_img3'>
-          <image mode='aspectFill' src='../../images/wish.png'></image>
+    <swiper-item>
+      <view id='page_6' class='page_num' style='width:{{windowWidth}}px;height:{{windowHeight}}px;'>
+        <view class='page_num_content'> 
+        <view class='page_6_content'>
+         <view class='page_6_phone'>
+            <view class='page_6_phonename'>时间：{{datetime}}</view>
+          </view>
+           <view class='page_6_phone'>
+            <view class='page_6_phonename'>地址：{{address}}</view>
+          </view>
+          <view class='page_6_phone'>  
+            <view class='page_6_phonenum' bindtap='onPhone' data-phone='{{women_phone}}'>联系新娘</view>   
+            <view class='page_6_phonenum' bindtap='onPhone' data-phone='{{man_phone}}'>联系新郎</view> 
+          </view>  
         </view> 
-        <view bindtap='onNavigateTo' style='bottom:50px;' class='page_7_btn' hidden='{{isshowbtn}}' >
-          登录信息
         </view>
-         <button bindtap='onSendWish' class='page_7_btn'>送上祝福</button>
-      </view> 
-    </view>
+      </view>
+    </swiper-item>
+
+    <!-- 第七屏 -->
+    <swiper-item>
+
+      <view id='page_7' class='page_num' style='position: relative;width:{{windowWidth}}px;height:{{windowHeight}}px;'>
+        <view class='page_num_content'>
+          <view>
+            <view class='page_7_img1' style='{{animation_page_7_img1}}'>
+              <image mode='aspectFill' src='../../images/people4.png'></image>
+            </view>
+            <view class='page_7_img2' style='{{animation_page_7_img2}}'>
+              <image mode='aspectFill' src='../../images/people1.png'></image>
+            </view>
+          </view>
+          <view class='page_7_img3'>
+            <image mode='aspectFill' src='../../images/wish.png'></image>
+          </view>
+          <view bindtap='onNavigateTo' style='bottom:50px;' class='page_7_btn' hidden='{{isshowbtn}}'>
+            登录信息
+          </view>
+          <button bindtap='onSendWish' class='page_7_btn'>送上祝福</button>
+        </view>
+      </view>
+    </swiper-item>
+  </swiper>
 
 
-  </scroll-view>
 </view>

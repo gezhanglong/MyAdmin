@@ -1,9 +1,12 @@
- <view class="page-swiper">
+ <view class="page-swiper" >
       <swiper
         indicator-dots="{{indicatorDots}}" autoplay="{{autoplay}}" circular="{{circular}}" vertical="{{vertical}}"
-        interval="{{interval}}" duration="{{duration}}" previous-margin="{{previousMargin}}px" next-margin="{{nextMargin}}px"> 
+        interval="{{interval}}" duration="{{duration}}" previous-margin="{{previousMargin}}px" next-margin="{{nextMargin}}px" style='height:{{windowHeight}}px' bindchange='onchange'  > 
           <swiper-item>
-            <view class="swiper-item" style=' width:{{windowWidth}}px;  height:{{windowHeight}}px;background-color: rebeccapurple;'></view>
+            <view  style=' width:{{windowWidth}}px;  height:{{windowHeight}}px;background-color: rebeccapurple;'></view>
+          </swiper-item> 
+           <swiper-item>
+            <view style=' width:{{windowWidth}}px;  height:{{windowHeight}}px;background-color: red;'></view>
           </swiper-item> 
       </swiper>
     </view>

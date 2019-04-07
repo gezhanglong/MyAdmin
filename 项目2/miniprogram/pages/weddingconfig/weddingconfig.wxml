@@ -35,6 +35,12 @@
         </view>
         <input class='page__bd_value' name='address' value='{{address}}' placeholder='请输入宴客详细地址'></input>
       </view>
+       <view class='page__bd_item'>
+        <view class='page__bd_key'>
+          宴客时间：
+        </view>
+        <input class='page__bd_value' name='datetime' value='{{datetime}}' placeholder='请输入宴客时间'></input>
+      </view>
       <button class='btn_submit' form-type='submit'>提交</button>
     </form>
   </view>

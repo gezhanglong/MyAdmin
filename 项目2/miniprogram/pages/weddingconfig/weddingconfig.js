@@ -77,6 +77,7 @@ Page({
             const db = wx.cloud.database()
             db.collection('wedding_config').add({
               data: {
+                datetime: e.detail.value.datetime,
                 address: e.detail.value.address,
                 man_name: e.detail.value.man_name,
                 man_phone: e.detail.value.man_phone, 
