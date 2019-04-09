@@ -3,5 +3,142 @@ page{
   padding: 0;
   
 }
+/* 园 */
+ .cirle{
+   position: fixed;
+   top: 100rpx;
+   left: 50rpx;
+   width: 200rpx;
+   height: 200rpx; 
+   border: 3rpx solid yellowgreen;
+   border-radius: 50%;  
+   background-color: #1a2a3a;
+  
+   animation: animation_circle 1.5s linear infinite;
+ }
 
+ @keyframes animation_circle {
+  0% { 
+        box-shadow: 0 0 0 transparent;
+  }
+ 100%{ 
+       box-shadow: 0 0 40px #ffcfa9, 0 0 60px #b9a018; 
+  } 
+}
+
+/* 价格 */
+
+.price{
+  width: 300rpx;
+  height: 500rpx;
+  position: fixed;
+  top: 400rpx;
+  left: 50rpx;
+  background-color: darkolivegreen;
+  /* box-shadow: 0rpx 5rpx 15rpx gold; */
+  box-shadow: 1px 2px 2px 0 #aaa;
+}
+
+.tag{
+  position: absolute;
+  width: 120%;
+  height: 50rpx;
+  top: 50rpx;
+  left: -30rpx;
+  background-color:#d2d2d2; 
+}
+
+.tag::after{
+  content: "";
+  border-top: 15px solid #d2d2d2;
+  border-left: 15px solid transparent;
+  border-bottom: 15px solid transparent;
+  position: absolute;
+  top: 50rpx;
+}
+
+.tag::before{
+  content: "";
+  border-top: 15px solid #d2d2d2;
+  border-right: 15px solid transparent;
+  border-bottom: 15px solid transparent;
+  position: absolute;
+  top: 50rpx;
+  right: 0rpx;
+}
+
+
+/* 图片 */
+.img{
+width: 600rpx;
+height: 300rpx;
+border: 2rpx solid green;
+position: relative;
+top:50rpx;
+left: 10rpx; 
+}
+
+.img_1{
+  width: 150rpx;
+  height: 200rpx;
+  position: absolute;
+  left: 200rpx;
+  top: 50rpx;
+  background-color: gainsboro;
+  transform: rotate(5deg); 
+  animation: animation_img_1 2s forwards 1 cubic-bezier(0.63, 0.15, 0.03, 0.12);
+}
  
+ .img_2{
+  width: 150rpx;
+  height: 200rpx;
+  position: absolute;
+  left: 200rpx;
+  top: 50rpx;
+  background-color: gainsboro;
+  transform: rotate(10deg); 
+   animation: animation_img_2 2s forwards 1s cubic-bezier(0.63, 0.15, 0.03, 0.12);
+}
+
+.img_3{
+  width: 150rpx;
+  height: 200rpx;
+  position: absolute;
+  left: 200rpx;
+  top: 50rpx;
+  background-color: gainsboro;
+  transform: rotate(15deg);
+   animation: animation_img_3 2s forwards 2s cubic-bezier(0.63, 0.15, 0.03, 0.12);
+}
+
+
+ @keyframes animation_img_1 {
+  0% { 
+       left: 200rpx;
+       transform: rotate(5deg);
+  }
+ 100%{ 
+      left: 0rpx;
+      transform: rotate(0deg);
+  } 
+}
+
+ @keyframes animation_img_2 {
+  0% { 
+       transform: rotate(10deg);
+  }
+ 100%{ 
+     transform: rotate(0deg);
+  } 
+}
+
+ @keyframes animation_img_3 {
+  0% { 
+         left: 200rpx;
+       transform: rotate(15deg);
+  }
+ 100%{ 
+      left: 400rpx;
+      transform: rotate(0deg);
+  } 
+}
