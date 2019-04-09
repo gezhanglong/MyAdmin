@@ -406,19 +406,19 @@ page {
   height: 200rpx;  
   border-radius: 100rpx;
   position: absolute; 
+ animation: animation_page_3_img 1.5s linear infinite; 
 }
 
-.page_3_img1::before{
-  content: " ";
-  width: 220rpx;
-  height: 220rpx;
-  position: absolute;
-  border-radius: 50%; 
-  top: 50rpx;
-  left: 50rpx; 
-   border:3rpx solid greenyellow; 
-  /*border-width: 10rpx 0rpx 0rpx 0rpx;  
-  transform: rotate(20deg); */
+ @keyframes animation_page_3_img {
+  0% { 
+        box-shadow: 0 0 0 transparent;
+  }
+ 50%{ 
+       box-shadow: 0 0 40px #ffcfa9, 0 0 60px #b9a018; 
+  } 
+    100% { 
+        box-shadow: 0 0 0 transparent;
+  }
 }
 
 
@@ -483,7 +483,7 @@ page {
    transform: rotate(25deg); 
 }
 
-
+/* 
 @keyframes animation_page_3_img {
   0% {
     transform:rotate(0deg);
@@ -492,7 +492,7 @@ page {
   100% {
    transform: rotate(360deg);
   }
-}
+} */
 
 /* 第四屏 */
  

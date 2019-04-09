@@ -41,29 +41,22 @@ page{
 .templetimg{
   width: 600rpx;
   height: 400rpx;
-  border-radius: 20rpx; 
-  z-index: -1;
+  border-radius: 0rpx 0rpx 20rpx 20rpx; 
+  z-index: -2;
 }
 
-.templettext{
+.templettext{ 
   width: 600rpx;
   height: 100rpx; 
   line-height: 100rpx;
-  text-align: center;  
-  border-radius: 20rpx;
-  position: relative;
-  z-index: -1;
-  animation: animation_templettext 3s linear infinite;
+  text-align: center;   
+  position: relative; 
+  z-index: -1; 
+  background-color: #E74C3C;
+  border-radius: 60rpx 60rpx 0rpx 0rpx;  
+  color: #1a2a3a;
 }
+ 
 
-@keyframes animation_templettext {
-  0% {opacity: 1;} 
-  50% {opacity: 0;}
-  100% {opacity: 1;}
-}
-
-
-.templettext::after{
-  content: ">>";
-  position: absolute;  
-}
+ 
+ 

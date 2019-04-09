@@ -1,10 +1,10 @@
 {
   "pages": [ 
-      "pages/csstest4/csstest4",
+    "pages/myfirst/myfirst",
        "pages/wedding/wedding",
     "pages/wedding2/wedding2",
+  "pages/csstest4/csstest4",
 
-"pages/myfirst/myfirst",
     "pages/csstest2/csstest2",
     "pages/weddingconfig/weddingconfig",
     "pages/weddingabout/weddingabout",
@@ -31,11 +31,11 @@
     "backgroundColor": "#F8F8F8",
     "backgroundTextStyle": "light",
     "navigationBarBackgroundColor": "#f39c12",
-    "navigationBarTitleText": "",
+    "navigationBarTitleText": "免费制作邀请函",
     "navigationBarTextStyle": "black"
   },
   "tabBar": {
-    "backgroundColor": "#F8F8F8",
+    "backgroundColor": "#f39c12",
     "selectedColor": "#e14c76",
     "list": [
       {

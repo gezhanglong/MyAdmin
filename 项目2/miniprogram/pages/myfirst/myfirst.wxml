@@ -4,7 +4,7 @@
   <block  wx:for='{{allconfig}}' wx:key='templet' >
    <view class='templet' bindtap='onNavigateToTemplet1' data-templetid='{{item.templetId}}' hover-class='templet_hover'> 
     <view class='templettext'  >{{item.templetText}}</view>
-     <image class='templetimg' src='{{item.templetImg}}'></image>
+     <image class='templetimg' src='{{item.templetImg}}'></image> 
   </view>
   </block>
  

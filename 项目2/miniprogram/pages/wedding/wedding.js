@@ -103,6 +103,18 @@ Page({
     }],
   },
 
+
+  //预览图片
+  onPreviewImage: function (e) {
+    var current = e.target.dataset.src;
+    wx.previewImage({
+      current: current, // 当前显示图片的http链接
+      urls: [current] // 需要预览的图片http链接列表
+    })
+  },
+
+  
+
   //授权
   onGetUserInfo(e) {
     this.setData({
