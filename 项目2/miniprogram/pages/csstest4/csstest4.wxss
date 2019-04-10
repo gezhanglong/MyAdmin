@@ -12,7 +12,7 @@ page{
    height: 200rpx; 
    border: 3rpx solid yellowgreen;
    border-radius: 50%;  
-   background-color: #1a2a3a;
+   background-color: #1a2a3a; 
   
    animation: animation_circle 1.5s linear infinite;
  }
@@ -141,4 +141,43 @@ left: 10rpx;
       left: 400rpx;
       transform: rotate(0deg);
   } 
+}
+
+
+
+/* 星 */
+
+.star{
+  position: relative;
+  width: 10rpx;
+  height: 10rpx;
+  top: 100rpx;
+  left: 50rpx;
+  background-color: #5f91ff;
+  border-radius: 50%;
+  box-shadow: 0rpx 0rpx 3rpx #5f91ff;
+}
+
+.star::after{
+content: '';
+    position: absolute; 
+    top: 5rpx;
+    left: -54rpx;
+    height: 4rpx; 
+    width: 50rpx;
+    transform: translateX(10%)  rotateZ(45deg);
+    background: linear-gradient(-45deg, rgba(0, 0, 255, 0), #5f91ff, rgba(0, 0, 255, 0));
+      /* border-radius: 100%; */
+}
+
+.star::before{
+content: '';
+    position: absolute;  
+    top: 5rpx;
+     left: -54rpx;
+    height: 4rpx; 
+    width: 50rpx;
+    transform: translateX(10%)  rotateZ(-45deg);
+    background: linear-gradient(-45deg, rgba(0, 0, 255, 0), #5f91ff, rgba(0, 0, 255, 0));
+        /* border-radius: 100%; */
 }

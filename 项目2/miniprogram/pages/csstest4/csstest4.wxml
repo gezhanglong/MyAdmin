@@ -2,10 +2,15 @@
       <swiper
         indicator-dots="{{indicatorDots}}" autoplay="{{autoplay}}" circular="{{circular}}" vertical="{{vertical}}"
         interval="{{interval}}" duration="{{duration}}" previous-margin="{{previousMargin}}px" next-margin="{{nextMargin}}px" style='height:{{windowHeight}}px' bindchange='onchange'  > 
+                <swiper-item>
+            <view style=' width:{{windowWidth}}px;  height:{{windowHeight}}px;background-color: black;'>
+            <view class='star'></view>
+            </view>
+          </swiper-item> 
           <swiper-item>
             <view  style=' width:{{windowWidth}}px;  height:{{windowHeight}}px;background-color: rebeccapurple;'>
-            <!-- <view class='cirle'></view> 
-            <view class='price'><view class='tag'> </view></view> -->
+            <view class='cirle'></view> 
+            <view class='price'><view class='tag'> </view></view>
             <view class='img'>
             <view class='img_1'>1</view>
             <view class='img_2'>2</view>
@@ -13,8 +18,6 @@
             </view>
             </view>
           </swiper-item> 
-           <swiper-item>
-            <view style=' width:{{windowWidth}}px;  height:{{windowHeight}}px;background-color: red;'></view>
-          </swiper-item> 
+   
       </swiper>
     </view>
