@@ -15,6 +15,7 @@ Page({
     duration: 600,//滑动动画时长
     previousMargin: '0',//前边距，可用于露出前一项的一小部分
     nextMargin: '0',//后边距，可用于露出后一项的一小部分
+    seat:[],//星星位置
   },
 
   // onanimationfinish:function(e){
@@ -25,10 +26,31 @@ Page({
   //   console.log("ontransition:" + JSON.stringify(e))
   // },
 
+  //swiper滑动事件
   onchange: function (e) {
     console.log("onchange:" + JSON.stringify(e))
     console.log("onchange:" + e.detail.current)
   },
+
+  //产生星星位置
+  onstar: function () { 
+    var that=this;
+    var starclass = ['star', 'star1', 'star2', 'star3'];
+    for(var i=0;i<100;i++){
+      var width = Math.floor(Math.random() * (that.data.windowWidth*2));
+      var height = Math.floor(Math.random() * (that.data.windowHeight*2));
+      var classid=Math.floor(Math.random()*4);
+      var animationdelay = Math.floor(Math.random()*20);
+      var animationtime = Math.floor(Math.random() * 6); 
+      var newarray = { starclass: starclass[classid], top: height, left: width, animation: "animation: animation_star " + animationtime +"s ease-in-out " + animationdelay+"s infinite;"  };
+      that.setData({
+        seat: that.data.seat.concat(newarray),   
+      }); 
+    } 
+    console.log("seat：" + JSON.stringify(that.data.seat));
+  },
+
+
 
   /**
    * 生命周期函数--监听页面加载
@@ -44,6 +66,7 @@ Page({
         console.log("cells:" + JSON.stringify(res));
       }
     })
+    that.onstar();
   },
 
   /**

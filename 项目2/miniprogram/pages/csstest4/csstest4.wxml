@@ -3,8 +3,10 @@
         indicator-dots="{{indicatorDots}}" autoplay="{{autoplay}}" circular="{{circular}}" vertical="{{vertical}}"
         interval="{{interval}}" duration="{{duration}}" previous-margin="{{previousMargin}}px" next-margin="{{nextMargin}}px" style='height:{{windowHeight}}px' bindchange='onchange'  > 
                 <swiper-item>
-            <view style=' width:{{windowWidth}}px;  height:{{windowHeight}}px;background-color: black;'>
-            <view class='star'></view>
+            <view style=' width:{{windowWidth}}px;  height:{{windowHeight}}px;background-color:black;'>
+            <view wx:for='{{seat}}' wx:key='key' style='animation: animation_black_star 100s linear infinite;'>
+              <view class='{{item.starclass}}' style='top: {{item.top}}rpx;left: {{item.left}}rpx;{{item.animation}}' ></view> 
+            </view> 
             </view>
           </swiper-item> 
           <swiper-item>
