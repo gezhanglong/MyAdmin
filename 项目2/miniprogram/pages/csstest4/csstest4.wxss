@@ -146,16 +146,7 @@ left: 10rpx;
 
 
 /* 星 */
-
-@keyframes animation_black_star {
-  0% {
-    transform: rotate(0deg);
-  } 
-  100% {
-    transform: rotate(360deg);
-  }
-}
-
+ 
 
 .star{
   position: relative;   

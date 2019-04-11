@@ -1,11 +1,24 @@
 <view class='page'> 
   <button id='loginbtn' hidden='{{openid.length>0?"hidden":""}}' open-type="getUserInfo" lang="zh_CN" bindgetuserinfo="onGotUserInfo"> </button>
   <!-- <view class='btn_into' bindtap='onNavigateTo' bindtouchmove='onNindtouchmove'>欢迎来到小嘉文相册>>进入</view> -->
-  <block  wx:for='{{allconfig}}' wx:key='templet' >
+
+       <view style=' width:{{windowWidth}}px;  height:{{windowHeight}}px;background-color:black;'>
+            <view wx:for='{{seat}}' wx:key='key'>
+              <view class='{{item.starclass}}' style='top: {{item.top}}rpx;left: {{item.left}}rpx;{{item.animation}}' ></view> 
+            </view>  
+            <view class='templetitem'></view>
+
+  <!-- <block  wx:for='{{allconfig}}' wx:key='templet' >
    <view class='templet' bindtap='onNavigateToTemplet1' data-templetid='{{item.templetId}}' hover-class='templet_hover'> 
     <view class='templettext'  >{{item.templetText}}</view>
+    <view class='tag'> </view>
      <image class='templetimg' src='{{item.templetImg}}'></image> 
   </view>
-  </block>
+  </block> -->
+
+            </view>
+
+
+
  
 </view>

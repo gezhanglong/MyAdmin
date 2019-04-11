@@ -7,6 +7,9 @@ Page({
    * 页面的初始数据
    */
   data: {
+    windowWidth: 0,//当前屏幕宽度
+    windowHeight: 0,//当前屏幕高度 
+    seat: [],//星星位置
     headurl:"",
     nickname:"",
     openid:"",
@@ -18,8 +21,38 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    var that = this;
+    wx.getSystemInfo({//获取系统信息方法
+      success: function (res) {
+        that.setData({
+          windowWidth: res.screenWidth,
+          windowHeight: res.screenHeight,
+        })
+        console.log("cells:" + JSON.stringify(res));
+      }
+    })
+    that.onstar();
     this.onAllConfig();//获取首页显示的配置信息 
   },
+
+  //产生星星位置
+  onstar: function () {
+    var that = this;
+    var starclass = ['star', 'star1', 'star2', 'star3'];
+    for (var i = 0; i < 100; i++) {
+      var width = Math.floor(Math.random() * (that.data.windowWidth * 2));
+      var height = Math.floor(Math.random() * (that.data.windowHeight * 2));
+      var classid = Math.floor(Math.random() * 4);
+      var animationdelay = Math.floor(Math.random() * 20);
+      var animationtime = Math.floor(Math.random() * 6);
+      var newarray = { starclass: starclass[classid], top: height, left: width, animation: "animation: animation_star " + animationtime + "s ease-in-out " + animationdelay + "s infinite;" };
+      that.setData({
+        seat: that.data.seat.concat(newarray),
+      });
+    }
+    console.log("seat：" + JSON.stringify(that.data.seat));
+  },
+
 
   onGetOpenid: function () { 
     // 调用云函数
