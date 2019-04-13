@@ -1,0 +1,27 @@
+
+<!-- 风车 -->
+<!-- <view class='windmill'>
+  <view class='pole'></view>
+  <view class='leaf_content'>
+    <view class='leaf leaf_1'></view>
+    <view class='leaf leaf_2'></view>
+    <view class='leaf leaf_3'></view>
+  </view>
+</view> -->
+
+<!-- 灯 -->
+<!-- <view class='light'>
+  <view class='light_pole'></view>
+  <view class='light_content'> 
+  </view>
+</view> -->
+
+<!-- 月亮 -->
+<!-- <view class='moon'>
+<view class='moon_content moon_1'></view>
+<view class='moon_content moon_2'></view>
+</view> -->
+
+<view class='shootingstar'>
+<view class='shootingstar_content'></view>
+</view>

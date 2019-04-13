@@ -1,5 +1,6 @@
 {
-  "pages": [
+  "pages": [ 
+    "pages/csstest6/csstest6",
     "pages/csstest5/csstest5",
     "pages/csstest4/csstest4",
     "pages/myfirst/myfirst",
@@ -30,7 +31,7 @@
     "backgroundColor": "#F8F8F8",
     "backgroundTextStyle": "light",
     "navigationBarBackgroundColor": "#f39c12",
-    "navigationBarTitleText": "免费制作邀请函",
+    "navigationBarTitleText": "",
     "navigationBarTextStyle": "black"
   },
   "tabBar": {
