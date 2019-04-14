@@ -1,13 +1,12 @@
-
-  <!-- 模态窗 用来禁止scroll滑动 -->
+<!-- 模态窗 用来禁止scroll滑动 -->
 <view class='modelwindow' catchtouchmove='onCatchtouchmove' style='{{loader}}'>
-<!-- <image class='loader_img' src='../../images/nevellson.png'></image> -->
-<view class='loader_text'>LOADING</view>
-<view class='loader'> 
-<view class='circle'>
+  <!-- <image class='loader_img' src='../../images/nevellson.png'></image> -->
+  <view class='loader_text'>LOADING</view>
+  <view class='loader'>
+    <view class='circle'>
+    </view>
+  </view>
 </view>
-</view>
-</view> 
 
 
 <view class='page_content'>
@@ -97,25 +96,25 @@
     <!-- 第三屏 -->
     <swiper-item>
       <view id='page_3' class='page_num' style='width:{{windowWidth}}px;height:{{windowHeight}}px;'>
-        <view class='page_num_content' style='position:relative;'>  
-        <view class='page_3_img1'>
-          <image class='page_3_img'  src='{{page3_img1}}' style='top:5%;left:8%;' bindtap='onPreviewImage' data-src='{{page3_img1}}'></image>
-        </view>
+        <view class='page_num_content' style='position:relative;'>
+          <view class='page_3_img1'>
+            <image class='page_3_img' src='{{page3_img1}}' style='top:5%;left:8%;' bindtap='onPreviewImage' data-src='{{page3_img1}}'></image>
+          </view>
           <view class='page_3_img2'>
-            <image class='page_3_img'  src='{{page3_img2}}'  style='top:15%;left:65%;' bindtap='onPreviewImage' data-src='{{page3_img2}}'></image> 
-             </view>
+            <image class='page_3_img' src='{{page3_img2}}' style='top:15%;left:65%;' bindtap='onPreviewImage' data-src='{{page3_img2}}'></image>
+          </view>
           <view class='page_3_img3'>
-            <image class='page_3_img' src='{{page3_img3}}'  style='top:30%;left:20%;' bindtap='onPreviewImage' data-src='{{page3_img3}}'></image>
-             </view>
+            <image class='page_3_img' src='{{page3_img3}}' style='top:30%;left:20%;' bindtap='onPreviewImage' data-src='{{page3_img3}}'></image>
+          </view>
           <view class='page_3_img4'>
-            <image class='page_3_img'  src='{{page3_img4}}'  style='top:45%;left:60%;' bindtap='onPreviewImage' data-src='{{page3_img4}}'></image> 
-             </view>
+            <image class='page_3_img' src='{{page3_img4}}' style='top:45%;left:60%;' bindtap='onPreviewImage' data-src='{{page3_img4}}'></image>
+          </view>
           <view class='page_3_img5'>
-            <image class='page_3_img'  src='{{page3_img5}}'  style='top:60%;left:5%;' bindtap='onPreviewImage' data-src='{{page3_img5}}'></image>
-             </view>
+            <image class='page_3_img' src='{{page3_img5}}' style='top:60%;left:5%;' bindtap='onPreviewImage' data-src='{{page3_img5}}'></image>
+          </view>
           <view class='page_3_img6'>
-            <image class='page_3_img'  src='{{page3_img6}}'  style='top:75%;left:60%;' bindtap='onPreviewImage' data-src='{{page3_ipage3_img6mg2}}'></image> 
-             </view> 
+            <image class='page_3_img' src='{{page3_img6}}' style='top:75%;left:60%;' bindtap='onPreviewImage' data-src='{{page3_ipage3_img6mg2}}'></image>
+          </view>
         </view>
       </view>
     </swiper-item>
@@ -125,10 +124,10 @@
     <swiper-item>
       <view id='page_4' class='page_num' style='width:{{windowWidth}}px;height:{{windowHeight}}px;'>
         <view class='page_num_content' style=' position: relative;'>
-          <image class='page_4_img' mode='aspectFill' src='{{page4_img1}}' style='transform:rotate(0deg);{{page_4_img4}}'></image>
-          <image class='page_4_img' mode='aspectFill' src='{{page4_img2}}' style='transform:rotate(-5deg);{{page_4_img3}}'></image>
-          <image class='page_4_img' mode='aspectFill' src='{{page4_img3}}' style='transform:rotate(-10deg);{{page_4_img2}}'></image>
-          <image class='page_4_img' mode='aspectFill' src='{{page4_img4}}' style='transform:rotate(-15deg);{{page_4_img1}}'></image>
+           <image class='page_4_img' mode='aspectFill' src='{{page4_img1}}' style='{{page_4_img4}}'></image>
+          <image class='page_4_img' mode='aspectFill' src='{{page4_img2}}' style='{{page_4_img3}}'></image>
+          <image class='page_4_img' mode='aspectFill' src='{{page4_img3}}' style='{{page_4_img2}}'></image>
+          <image class='page_4_img' mode='aspectFill' src='{{page4_img4}}' style='{{page_4_img1}}'></image>
           <view class='page_4_icon page_4_left' data-click='{{page_4_click}}' data-animation='animation_page_4_left' bindtap='onpageleft' catchtouchmove='onCatchtouchmove'></view>
           <view class='page_4_icon page_4_right' data-click='{{page_4_click}}' data-animation='animation_page_4_right' bindtap='onpageleft' catchtouchmove='onCatchtouchmove'></view>
         </view>
@@ -156,23 +155,23 @@
       </view>
     </swiper-item>
 
- 
-   <!-- 第六屏 -->
+
+    <!-- 第六屏 -->
     <swiper-item>
       <view id='page_6' class='page_num' style='width:{{windowWidth}}px;height:{{windowHeight}}px;'>
-        <view class='page_num_content'> 
-        <view class='page_6_content'>
-         <view class='page_6_phone'>
-            <view class='page_6_phonename'>时间：{{datetime}}</view>
+        <view class='page_num_content'>
+          <view class='page_6_content'>
+            <view class='page_6_phone'>
+              <view class='page_6_phonename'>时间：{{datetime}}</view>
+            </view>
+            <view class='page_6_phone'>
+              <view class='page_6_phonename'>地址：{{address}}</view>
+            </view>
+            <view class='page_6_phone'>
+              <view class='page_6_phonenum' bindtap='onPhone' data-phone='{{women_phone}}'>联系新娘</view>
+              <view class='page_6_phonenum' bindtap='onPhone' data-phone='{{man_phone}}'>联系新郎</view>
+            </view>
           </view>
-           <view class='page_6_phone'>
-            <view class='page_6_phonename'>地址：{{address}}</view>
-          </view>
-          <view class='page_6_phone'>  
-            <view class='page_6_phonenum' bindtap='onPhone' data-phone='{{women_phone}}'>联系新娘</view>   
-            <view class='page_6_phonenum' bindtap='onPhone' data-phone='{{man_phone}}'>联系新郎</view> 
-          </view>  
-        </view> 
         </view>
       </view>
     </swiper-item>

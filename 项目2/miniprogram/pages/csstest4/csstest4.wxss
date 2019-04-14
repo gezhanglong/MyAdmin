@@ -260,3 +260,37 @@ content: '';
        transform: translateY(5rpx);
   }
 }
+
+
+/* 往上图 */
+
+.update_icon { 
+  position: fixed;
+  z-index: 51;
+  bottom: 0px;
+  left: 45%;
+  width: 10%;
+  height: 10%;
+  background-repeat: no-repeat;
+  background-position: 50% 95%; 
+  background-image: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAC4AAAAuCAYAAABXuSs3AAAFTklEQVR42u2Y6U9cVRiH55JqP7i1VVtr1SLgwExZ2mIsCYGQQAgfCGloKkmtiUobSNqoxP/CaEICJLLYspihKJHiQNlKW4shRZF938IWMsg2w7B9aNXfj9xDRpjlXhgYSLzJyc2Qszzve8/2oNHsziNNTU1FLC0t1fHN35oD8EgjIyMXLBZL+9ra2j94tw0MDJzd7/ACupPQouD3b4ODg2f2K7xdaFHMZvOv/f39PvsNXhoeHn7fEbQoCwsLtX19fe/uF3iJ0wDQT5xB28DX9Pb2ensaXgKEFtPgsRJoG/jqnp6e056Cl7q6uvwA/VANtKfhJS40QNdtB9pT8BIH41zdCfRewwvoandA28Lv5oJVDb28vLymtC6mXWVnZ+fb7oZXBY16po6Ojh/wfN7d3V0CqBlXbVZXV/9GO2NbW9upPYdGnb9Q905mZuaHAQEBWp1Odzo4ONg/Nzf3KhbzXez1c67g5+bmClpaWl53x5b3DoCqXHzmWQEcEhKiDQwMPIHnBT8/v8N6vf5FlDfCwsJ0eXl5HyOAXxYXFy1O4J8C/nZDQ8PRnUIbmQl7gzCDAP4pJyfnI1tgtD1kM1f5PiQCiIiI0BcWFiY7C2BlZeXp7OxsTmtr6xHV1M3Nza8h8hJ7HWNAM66qRmYwNDQ0wAHwlkSgPOfv7/8SptDJ8PDwM0VFRddwx6lCf4sO4LNVwcvQBfxsm4AtuJdU5Ofnf8rMMYPMpCNg1D3sKoCoqKhALOLrcgBWO/DfKYJvamp6FdC3bKEJPDQ0VMUMMVMckAMTwEGGJZPJdMFqtRr4dlRHBIDyJgMoLi5ORQA1aGdVBc8FAeg8QD9jI3aAjqqZEYXAG/dyBNshB93B30qmEAOIjIwMKi0tvTk6OvoI6rcsFqxDeP6Rc4oLEQ2sGKyupKQkNSYmJkghsDMD6nQBvxEAdqKXGUBCQsK5srKyL8fHxx+DZ5VcW+BFplHBPDk5WY+Ib8TGxoawA4XALg0If/9ToXtKWDfPMwCcAW8lJiaeNxqNX4GrgQkFZ+76Vtne3n4ckXw7MzNTU1tbmxoXFxes1WpPsSE7UHgEO4W2gX8CeJ3CPr04vo+PzysMICkp6Xx9ff1NsNajfK2ZmJi4hOP5SnJyso5TQiWwgP7AFbTNYVWnUt82AuAMSElJ0ZNXk5aWdszb2/sIp4RKYKFt5wD9h8rbYM023HM9AHKSVyPvwSxeak9WfnZA/77Nq+x23dNL5t2Raz46UAYku+aDA2VAnJuAvu9uA9pNeNUGhIN3xdPwqqDn5+dNkIHvcX29ga2rGF9o2hPwagzIBPW6nZ6efglnwnvCgDIyMi5jXRhoSHsFrwiaQMisgcDYa/18fX2PCwPim/d1ikZWVlYS+vvRlcKhv58hzid2DZrAzKRQNgFsz4BEAFS47OzsK9hOSxHAgiN9w7FevB33lPivAszNCgfH9gwH3uyYCgxoXeFEABQS3vMRgNkO/LONC5XSB5k+yc+12TU5AFyxjBlToWwOAxAKJwLY7KCq9E2+Ld6xhaZjAricAzBTrpRNRQD/UTga1uYAFMHL2pYvoGVlu1dQUPAZHZMDuAFYqYNS4RZdGlBjY+MxuqZ8cFjQ8B4zwI5UGJBbAuD1leZlMBhSoHD3hcJtyTyhMadvocL82NhYBaT1+h4COw3g4sWLZ8vLy7+AAT2goW0sWG45NIrp6em7lZWVn0RHR+tVKtuuBSAUjkYWHx8fQkOjqQH+Gw0iuYzD4yrUSMtFtw+A7QqEkGgaEHa9axpuZzswII8EEBQUdHQnBuSxAOQZ8f+zp8+/g/GPXMBbAsEAAAAASUVORK5CYII=");
+  animation: animation_icon 2s linear infinite;
+}
+
+
+.update_icon_1 { 
+  position: fixed;
+  z-index: 51;
+  bottom: 50%;
+  left: 45%;
+  width: 10%;
+  height: 300rpx;
+ background-color: yellow;
+ overflow: auto;
+
+}
+
+.update_icon_2{
+  width: 300rpx;
+  height: 400rpx;
+}

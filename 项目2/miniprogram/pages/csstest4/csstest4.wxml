@@ -1,7 +1,13 @@
+
+ <view  class='update_icon' hover-class='update_hover' ></view>
+ <view class='update_icon_1'>
+ <view class='update_icon_2'></view>
+ </view>
  <view class="page-swiper" >
       <swiper
         indicator-dots="{{indicatorDots}}" autoplay="{{autoplay}}" circular="{{circular}}" vertical="{{vertical}}"
         interval="{{interval}}" duration="{{duration}}" previous-margin="{{previousMargin}}px" next-margin="{{nextMargin}}px" style='height:{{windowHeight}}px' bindchange='onchange'  > 
+        
                 <swiper-item>
             <view style=' width:{{windowWidth}}px;  height:{{windowHeight}}px;background-color:black;'>
             <view wx:for='{{seat}}' wx:key='key'>

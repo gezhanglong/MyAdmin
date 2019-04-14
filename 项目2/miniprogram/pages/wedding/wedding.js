@@ -509,12 +509,12 @@ Page({
     this.setData({
       animation_page_2_img: 'animation: animation_page_2_img 1s linear;',
       animation_page_2_text1: 'animation:animation_page_2 12s,  animation_page_2_text 12s linear ;',
-      animation_page_2_text2: 'animation:animation_page_2 12s,  animation_page_2_text 12s linear  2s;',
-      animation_page_2_text3: 'animation:animation_page_2 12s,  animation_page_2_text 12s linear  4s;',
-      animation_page_2_text4: 'animation:animation_page_2 12s,  animation_page_2_text 12s linear  6s;',
-      animation_page_2_text5: 'animation:animation_page_2 12s,  animation_page_2_text 12s linear  8s;',
-      animation_page_2_text6: 'animation:animation_page_2 12s,  animation_page_2_text 12s linear  10s;',
-      animation_page_2_text7: 'animation:animation_page_2 12s,  animation_page_2_text 12s linear  12s;',
+      animation_page_2_text2: 'animation:animation_page_2 12s,  animation_page_2_text 12s linear  ;',
+      animation_page_2_text3: 'animation:animation_page_2 12s,  animation_page_2_text 12s linear  3s;',
+      animation_page_2_text4: 'animation:animation_page_2 12s,  animation_page_2_text 12s linear  3s;',
+      animation_page_2_text5: 'animation:animation_page_2 12s,  animation_page_2_text 12s linear  3s;',
+      animation_page_2_text6: 'animation:animation_page_2 12s,  animation_page_2_text 12s linear  6s;',
+      animation_page_2_text7: 'animation:animation_page_2 12s,  animation_page_2_text 12s linear  6s;',
     })
   },
 
@@ -533,12 +533,12 @@ Page({
   },
 
   //初始化第四屏动画
-  onSetOnPage_4: function() {
+  onSetOnPage_4: function () {
     this.setData({
-      page_4_img4: 'animation: animation_page_4 1s linear;z-index:10',
-      page_4_img3: 'animation: animation_page_4 1.5s linear;z-index:10',
-      page_4_img2: 'animation: animation_page_4 2s linear;z-index:10',
-      page_4_img1: 'animation: animation_page_4 2.5s linear;z-index:10',
+      page_4_img4: 'animation: animation_page_4 1s forwards  ;animation-fill-mode: both;z-index:7',
+      page_4_img3: 'animation: animation_page_4 1s forwards 1.5s;animation-fill-mode: both;z-index:8',
+      page_4_img2: 'animation: animation_page_4 1s forwards 3s;animation-fill-mode: both;z-index:9',
+      page_4_img1: 'animation: animation_page_4 1s forwards 4.5s;animation-fill-mode: both;z-index:10',
     })
   },
 
@@ -625,7 +625,7 @@ Page({
                 page4_img1: res.fileList[0].tempFileURL,
                 page4_img2: res.fileList[1].tempFileURL,
                 page4_img3: res.fileList[2].tempFileURL,
-                page4_img3: res.fileList[3].tempFileURL,
+                page4_img4: res.fileList[3].tempFileURL,
                 loader:'animation-iteration-count:1;animation: animation_out 2s forwards;'
               });
             },

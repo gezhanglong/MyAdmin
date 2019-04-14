@@ -1,24 +1,66 @@
-<view class='page'> 
-  <button id='loginbtn' hidden='{{openid.length>0?"hidden":""}}' open-type="getUserInfo" lang="zh_CN" bindgetuserinfo="onGotUserInfo"> </button>
-  <!-- <view class='btn_into' bindtap='onNavigateTo' bindtouchmove='onNindtouchmove'>欢迎来到小嘉文相册>>进入</view> -->
+<view hidden='{{openid.length>0?"hidden":""}}'  class='login'  catchtouchmove='onCatchtouchmove'>
+  <button  open-type="getUserInfo" lang="zh_CN" bindgetuserinfo="onGotUserInfo">授权</button>
+</view>
 
-       <view style=' width:{{windowWidth}}px;  height:{{windowHeight}}px;background-color:black;'>
-            <view wx:for='{{seat}}' wx:key='key'>
-              <view class='{{item.starclass}}' style='top: {{item.top}}rpx;left: {{item.left}}rpx;{{item.animation}}' ></view> 
-            </view>  
-            <view class='templetitem'></view>
+<view style=' width:{{windowWidth}}px;  height:{{windowHeight}}px;{{isnight?"background-color:black;":"background: linear-gradient(rgba(0, 0, 255,0.6),transparent);"}}' catchtouchmove='onCatchtouchmove'>
+<!-- 白天 --> 
+<view class='sun'  hidden='{{isnight?"hidden":""}}'  style='top: {{suntop}}rpx;left:{{sunleft}}rpx;'>
+ <view class='sun_content'></view>
+</view>
 
-  <!-- <block  wx:for='{{allconfig}}' wx:key='templet' >
-   <view class='templet' bindtap='onNavigateToTemplet1' data-templetid='{{item.templetId}}' hover-class='templet_hover'> 
-    <view class='templettext'  >{{item.templetText}}</view>
-    <view class='tag'> </view>
-     <image class='templetimg' src='{{item.templetImg}}'></image> 
+  <!-- 晚上 -->
+  <view hidden='{{isnight?"":"hidden"}}'>
+    <!-- 月亮 -->
+    <view class='moon'>
+      <view class='moon_content moon_1'></view>
+      <view class='moon_content moon_2' style='transform: translate({{moon}}px,-25px);'></view>
+    </view>
+    <view wx:for='{{seat}}' wx:key='key'>
+      <view class='{{item.starclass}}' style='top: {{item.top}}rpx;left: {{item.left}}rpx;{{item.animation}}'></view>
+    </view>
   </view>
-  </block> -->
-
+  <view class='pop' style='top:{{poptop}};'>
+    <!-- 风车 -->
+    <view class='windmill'>
+      <view class='pole'></view>
+      <view class='leaf_content'>
+        <view class='leaf leaf_1'></view>
+        <view class='leaf leaf_2'></view>
+        <view class='leaf leaf_3'></view>
+      </view>
+    </view>
+    <view class='windmill' style='left:25%;top:-74rpx'>
+      <view class='pole' style='height:75rpx;background-color: #6666ff; '></view>
+      <view class='leaf_content'>
+        <view class='leaf leaf_1' style='background-color: #6666ff; '></view>
+        <view class='leaf leaf_2' style='background-color: #6666ff; '></view>
+        <view class='leaf leaf_3' style='background-color: #6666ff; '></view>
+      </view>
+    </view>
+    <!-- 灯 -->
+    <view class='light'>
+      <view class='light_pole'></view>
+      <view class='light_content'>
+      </view>
+    </view>
+    <view class='light' style='left:75%;top:-98rpx'>
+      <view class='light_pole' style='background-color:#ffcc66; '></view>
+      <view class='light_content' style='background: radial-gradient(#ffcc66 20%, rgba(255,223,67,0) 70%);'>
+      </view>
+    </view>
+    <view class='pop_top' bindtap='onopen'>{{poptext}}</view>
+    <view class='pop_content'>
+      <swiper indicator-dots="{{indicatorDots}}" autoplay="{{autoplay}}" circular="{{circular}}" vertical="{{vertical}}" interval="{{interval}}" duration="{{duration}}" previous-margin="{{previousMargin}}px" next-margin="{{nextMargin}}px" style='height:100%;width:100%;'
+        bindchange='onchange'> 
+        <block wx:for='{{allconfig}}' wx:key='templet'> 
+          <swiper-item>
+            <view class='templet' bindtap='onNavigateToTemplet1' data-templetid='{{item.templetId}}'>
+              <image class='templetimg' src='{{item.templetImg}}'></image>
+              <view class='templettext'>{{item.templetText}}</view>
             </view>
-
-
-
- 
+          </swiper-item>
+        </block>
+      </swiper>
+    </view>
+  </view>
 </view>

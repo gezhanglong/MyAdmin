@@ -7,3 +7,17 @@
   box-sizing: border-box;
 } 
  
+
+/* 1.动画执行后保留最终状态
+ animation-iteration-count:1;
+ animation: animation_out 2s forwards; 
+ */
+
+ /* 1.1动画执行前隐藏元素
+ animation-fill-mode: both; 
+ */
+
+/* 2、穿透上层元素
+  pointer-events: none; 
+*/
+

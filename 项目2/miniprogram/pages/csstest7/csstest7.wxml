@@ -1,0 +1,28 @@
+<view class="page-swiper">
+  <swiper indicator-dots="{{indicatorDots}}" autoplay="{{autoplay}}" circular="{{circular}}" vertical="{{vertical}}" interval="{{interval}}" duration="{{duration}}" previous-margin="{{previousMargin}}px" next-margin="{{nextMargin}}px" style='height:{{windowHeight}}px'
+    bindchange='onchange'>
+  <!-- 第四屏 -->
+    <swiper-item>
+      <view id='page_4' class='page_num' style='width:{{windowWidth}}px;height:{{windowHeight}}px;'>
+        <view class='page_num_content' style=' position: relative;'>
+          <image class='page_4_img' mode='aspectFill' src='{{page4_img1}}' style='{{page_4_img4}}'></image>
+          <image class='page_4_img' mode='aspectFill' src='{{page4_img2}}' style='{{page_4_img3}}'></image>
+          <image class='page_4_img' mode='aspectFill' src='{{page4_img3}}' style='{{page_4_img2}}'></image>
+          <image class='page_4_img' mode='aspectFill' src='{{page4_img4}}' style='{{page_4_img1}}'></image>
+          <view class='page_4_icon page_4_left' data-click='{{page_4_click}}' data-animation='animation_page_4_left' bindtap='onpageleft' catchtouchmove='onCatchtouchmove'></view>
+          <view class='page_4_icon page_4_right' data-click='{{page_4_click}}' data-animation='animation_page_4_right' bindtap='onpageleft' catchtouchmove='onCatchtouchmove'></view>
+        </view>
+      </view>
+    </swiper-item>
+    <swiper-item>
+      <view style=' width:{{windowWidth}}px;  height:{{windowHeight}}px;background-color:black;'>
+      </view>
+    </swiper-item>
+    <swiper-item>
+      <view class='img_1'>1</view>
+      <view class='img_2'>2</view>
+      <view class='img_3'>3</view>
+    </swiper-item>
+
+  </swiper>
+</view>

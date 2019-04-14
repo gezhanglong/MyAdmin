@@ -1,76 +1,18 @@
-page{ 
-   margin: 0;
-   padding: 0;
-   /* background-color:#f39c12; */
-   color: #1a2a3a;
-}
 
-/* button 去掉边框 */
-
-#loginbtn::after {
-  border: none; 
-}
-
-/* button 去掉背景 */
-
-#loginbtn {
+.login{ 
   position: fixed;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
-  background-color: transparent;
-  z-index: 99; 
+ background-color: rgba(128, 128, 128,0.5);
+  z-index: 99;  
+}
+.login button{ 
+  top:40%;
+  width:40%; 
 }
 
-
-.templet{
-   width: 750rpx;
-   height: 500rpx; 
-   margin-top: 40rpx;
-   padding-top: 10rpx;
-   display: flex;
-   flex-direction: column; 
-   align-items: center;   
-   position: relative;
-}
-
-.templet_hover{
-  box-shadow: 0rpx 0rpx 50rpx gold;
-}
-
-.templetimg{
-  width: 600rpx;
-  height: 400rpx;
-  border-radius: 0rpx 0rpx 20rpx 20rpx; 
-  z-index: -2;
-}
-
-.templettext{ 
-  width: 600rpx;
-  height: 100rpx; 
-  line-height: 100rpx;
-  text-align: center;   
-  position: relative; 
-  z-index: -1; 
-  background-color: #E74C3C;
-  border-radius: 60rpx 60rpx 0rpx 0rpx;  
-  color: #1a2a3a;
-}
- 
-
-.templetitem{
-  position: relative;
-  top: 100rpx;
-  left: -20rpx;
-  width: 200rpx;
-  height: 40rpx;
-  border-radius: 20rpx;
-  background:linear-gradient(rgb(143, 250, 44),rgb(202, 202, 248)); 
-  box-shadow: 0rpx 0rpx 5rpx rgb(143, 250, 44);
-}
-
- 
 /* 星 */
  
 
@@ -162,7 +104,7 @@ content: '';
 }
 
 .star3::before{
-content: '';
+    content: '';
     position: absolute;   
     height: 4rpx; 
     width: 5rpx;
@@ -187,5 +129,207 @@ content: '';
   }
 }
 
+
+/* 月亮 */
+
+.moon{
+  position: relative;
+  top: 30rpx;
+  left: 50rpx; 
+}
+.moon_content
+{
+   position: absolute; 
+  border-radius: 50%; 
+}
+
+.moon_1{ 
+   width: 110rpx;
+  height: 110rpx; 
+  background-color: rgba(255, 255, 255,0.8); 
+   box-shadow: 0 0 10rpx white;
+   z-index:1;
+
+}
+
+.moon_2{ 
+   width: 250rpx;
+  height: 250rpx; 
+  background-color:black;  
+  box-shadow: 0 0 25rpx black;
+ z-index:2; 
+}
+
+
+
+/* pop */
+
+
+.pop{
+  position: relative;
+  
+  width: 100%;
+  height: 55%;
+  background:linear-gradient(rgba(245, 221, 178,0.8),rgba(187, 171, 142,0.5));
+  border-radius: 30rpx 30rpx 0 0rpx;
+  transition: top 2s cubic-bezier(0.075, 0.82, 0.165, 1); 
+} 
+
+.pop_top{
+  position: absolute;
+  left: 35%;
+  top: -78rpx;
+  width: 30%;
+  height: 80rpx; 
+  color: #4a5a6a;
+  border-radius: 0rpx 80rpx 0rpx 80rpx;
+  text-align: center;
+  font-size: 40rpx;
+  font-weight: bolder;
+  line-height: 70rpx;
+  background-color: rgb(245, 221, 178);
+  
+}
+
+
+
+.pop_content{
+  width: 100%;
+  height: 100%;
  
+}
+
+
+/* 风车 */
+.windmill{
+  position: relative;
+  left: 8%;
+  top: -124rpx;
+}  
+
+/* 风车叶子 */
+.leaf_content{
+  position: absolute;
+  width:0rpx;
+  height:0rpx;   
+  animation: animation_leaf 3s linear infinite ; 
+  
+}
+
+ @keyframes animation_leaf {
+  0% {  
+       
+       transform:rotate(0deg);
+  } 
+    100% {   
+       transform:rotate(360deg);
+  }
+}
+
+.leaf{
+  position: absolute;  
+  top: -25rpx;
+  left:-5rpx; 
+  width: 10rpx; 
+  height: 50rpx;
+  background-color: #9966ff;   
+  border-radius: 0 5rpx 5rpx 5rpx;  
+}
  
+
+.leaf_1{
+  transform:rotate(120deg) translate(0rpx,-20rpx); 
+  
+}
+
+.leaf_2{
+  transform:rotate(240deg) translate(0rpx,-20rpx);   
+}
+
+.leaf_3{
+  transform:rotate(360deg) translate(0rpx,-20rpx);    
+}
+
+/* 风车 杆 */
+.pole{
+  position: absolute;  
+  left: -5rpx;
+  height:125rpx; 
+  width: 10rpx;
+  background-color: #9966ff; 
+}
+
+/* 灯*/
+.light{
+ position: relative;
+ left: 90%;
+ top: -98rpx;
+}
+
+/* 灯杆 */
+.light_pole{
+  position: absolute;  
+  left: -5rpx;
+  height:100rpx; 
+  width: 10rpx;
+  background-color: wheat; 
+}
+
+
+.light_content{
+  position: absolute;  
+  top:-50rpx;
+  left: -50rpx;
+  width: 100rpx;
+  height: 100rpx;
+  border-radius: 50%; 
+  background: radial-gradient(wheat 20%, rgba(255,223,67,0) 70%);
+   
+}
+
+/* 模板 */
+.templet{
+ text-align: center;
+ line-height: 100%;
+
+}
+
+.templetimg{
+  width: 600rpx;
+  height: 400rpx;
+  border-radius: 20rpx 20rpx 0rpx 0rpx; 
+  margin-top:90rpx;
+  margin-bottom:-4rpx;
+
+}
+
+.templettext{ 
+  width: 600rpx;
+  height: 100rpx; 
+  line-height: 100rpx;
+  text-align: center;    
+  display:inline-block;  
+  background-color: #E74C3C; 
+  color: #1a2a3a;
+  box-shadow: 0rpx 15rpx 20rpx #1a2a3a;
+}
+
+
+/* 白天 */
+
+
+.sun{
+  position: relative;
+  top: 30rpx;
+  left: 50rpx;
+ 
+}
+
+.sun_content{
+  position: absolute;
+  width: 200rpx;
+  height: 200rpx;
+  border-radius: 100%;
+  background: radial-gradient(white 80%,rgb(233, 202, 27)) ;
+  box-shadow: 0 0 20px white, 0 0 60px rgb(243, 219, 6); 
+}

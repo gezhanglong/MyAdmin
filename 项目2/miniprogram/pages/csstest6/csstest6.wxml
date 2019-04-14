@@ -10,18 +10,23 @@
 </view> -->
 
 <!-- 灯 -->
-<!-- <view class='light'>
+ <!-- <view class='light'>
   <view class='light_pole'></view>
   <view class='light_content'> 
   </view>
-</view> -->
+</view>  -->
 
 <!-- 月亮 -->
 <!-- <view class='moon'>
 <view class='moon_content moon_1'></view>
-<view class='moon_content moon_2'></view>
+<view class='moon_content moon_2'  style='transform: translate({{moon}}px,-25px);'></view>
+</view>  -->
+
+<!-- 流星 -->
+<!-- <view class='shootingstar'>
+<view class='shootingstar_content'></view>
 </view> -->
 
-<view class='shootingstar'>
-<view class='shootingstar_content'></view>
+<view class='sun'  style='  top: {{suntop}}rpx;  left: {{sunleft}}rpx;' >
+ <view class='sun_content'></view>
 </view>

@@ -1,5 +1,7 @@
 page{
-  background-color: black;
+  background: linear-gradient(rgba(0, 0, 255,0.6),transparent);
+  height:100%;
+
 }
 
 /* 风车 */
@@ -70,7 +72,7 @@ page{
 } */
 
 
-
+/* 灯*/
 .light{
  position: relative;
   top: 500rpx;
@@ -86,7 +88,7 @@ page{
   background-color: rgba(255,223,67,1); 
 }
 
-/* 灯*/
+
 .light_content{
   position: absolute;  
   top:-50rpx;
@@ -124,7 +126,7 @@ page{
   height: 250rpx; 
   background-color:black;  
   box-shadow: 0 0 25rpx black;
-  transform: translate(100rpx,-5rpx);
+  /* transform: translate(100rpx,-5rpx); */
 }
 
 
@@ -154,4 +156,24 @@ page{
     100% {   
        transform:translate(300rpx,300rpx) rotate(45deg);
   }
+}
+
+
+
+/* 白天 */
+
+.sun{
+  position: relative;
+  top: 30rpx;
+  left: 50rpx;
+ 
+}
+
+.sun_content{
+  position: absolute;
+  width: 200rpx;
+  height: 200rpx;
+  border-radius: 100%;
+  background: radial-gradient(white 80%,rgb(233, 202, 27)) ;
+  box-shadow: 0 0 20px white, 0 0 60px rgb(243, 219, 6); 
 }
