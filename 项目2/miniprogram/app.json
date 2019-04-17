@@ -1,7 +1,8 @@
 {
   "pages": [ 
-      "pages/myfirst/myfirst",
     "pages/csstest7/csstest7",
+      "pages/myfirst/myfirst",
+    
     "pages/wedding/wedding",
 
     "pages/myfirst1/myfirst1",
