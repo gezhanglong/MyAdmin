@@ -1,4 +1,5 @@
 // miniprogram/pages/csstest4/csstest4.js
+var page3setInter=''//定时器句柄 
 Page({
 
   /**
@@ -26,11 +27,39 @@ Page({
     page_4_img3: '',
     page_4_img2: '',
     page_4_img1: '',
+
+    
+    page_3_img2: '',
+    page_3_img1: '',
   },
 
  
 
- 
+ onpages:function(){
+   var that=this; 
+   var total=0;
+   page3setInter= setInterval(
+     function () {
+       console.log("total:" + total + ";%:" + total% 2)
+       switch (total%2)
+       {
+         case 0:
+           that.setData({
+             page_3_img1: 'animation: animation_page_3 8s linear infinite;',
+             page_3_img2: '',
+           })
+         break;
+         case 1:
+           that.setData({
+             page_3_img1: '',
+             page_3_img2: 'animation: animation_page_3 8s linear infinite;',
+           })
+         break;
+       } 
+        total=total+1;
+     }
+     , 8000);   
+ },
  
 
   //初始化第四屏动画
@@ -118,9 +147,7 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    var that = this;
-    var i=200%100;
-    console.log("i:"+i)
+    var that = this; 
     wx.getSystemInfo({//获取系统信息方法
       success: function (res) {
         that.setData({
@@ -131,30 +158,14 @@ Page({
       }
     }) 
     that.onSetOnPage_4(); 
+    that.onpages();
   },
 
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
   onReady: function () {
-    const context = wx.createCanvasContext('mycanvas')
-
-    context.setStrokeStyle('#00ff00')
-    context.setLineWidth(5)
-    context.rect(0, 0, 200, 200)
-    context.stroke()
-    context.setStrokeStyle('#ff0000')
-    context.setLineWidth(2)
-    context.moveTo(160, 100)
-    context.arc(100, 100, 60, 0, 2 * Math.PI, true)
-    context.moveTo(140, 100)
-    context.arc(100, 100, 40, 0, Math.PI, false)
-    context.moveTo(85, 80)
-    context.arc(80, 80, 5, 0, 2 * Math.PI, true)
-    context.moveTo(125, 80)
-    context.arc(120, 80, 5, 0, 2 * Math.PI, true)
-    context.stroke()
-    context.draw()
+    
   },
 
   /**

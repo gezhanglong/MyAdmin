@@ -3,23 +3,17 @@
     bindchange='onchange'>
 
 
-    <swiper-item>
-      <view style=' width:{{windowWidth}}px;  height:{{windowHeight}}px;background-color:black;'>
-      <canvas canvas-id='mycanvas' class='mycanvas'></canvas>
-      </view>
-    </swiper-item>
 
 
     <swiper-item>
-      <view id='page_4' class='page_num' style='width:{{windowWidth}}px;height:{{windowHeight}}px;'>
-        <view class='page_num_content' style=' position: relative;'>
-          <view class='pop' style=''>
-            <view class='pop_content' bindtap='onopen'>
-               
-                <image class='page_img' mode='aspectFill' src='{{page4_img1}}'></image>
-              
-            </view> 
-          </view>
+      <view id='page_3' class='page_num' style='width:{{windowWidth}}px;height:{{windowHeight}}px;'>
+        <view class='page_num_content' style=' position: relative;'> 
+            <view class='pop_content' style='top: 100%;{{page_3_img1}}'> 
+                <image class='page_img' mode='aspectFill' src='{{page4_img1}}'></image> 
+            </view>  
+              <view class='pop_content' style='top: 100%;{{page_3_img2}}'> 
+                <image class='page_img' mode='aspectFill' src='{{page4_img2}}'></image> 
+            </view>  
         </view>
       </view>
     </swiper-item>
