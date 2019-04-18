@@ -1,10 +1,8 @@
 {
-  "pages": [ 
+  "pages": [
     "pages/csstest7/csstest7",
-      "pages/myfirst/myfirst",
-    
+    "pages/myfirst/myfirst",
     "pages/wedding/wedding",
-
     "pages/myfirst1/myfirst1",
     "pages/csstest6/csstest6",
     "pages/csstest4/csstest4",
@@ -54,5 +52,6 @@
         "selectedIconPath": "/images/icon_3_2.png"
       }
     ]
-  }
+  },
+  "sitemapLocation": "sitemap.json"
 }

@@ -8,8 +8,10 @@
     <swiper-item>
       <view id='page_3' class='page_num' style='width:{{windowWidth}}px;height:{{windowHeight}}px;'>
         <view class='page_num_content' style=' position: relative;'> 
-            <view class='pop_content' style='top: 100%;{{page_3_img1}}'> 
-                <image class='page_img' mode='aspectFill' src='{{page4_img1}}'></image> 
+            <view class='pop_content' style='{{page_3_img1}}'>  
+            <view class='page3_v_1'>
+              <image class='page3_img_1' mode='aspectFit' src='https://7a6c-zltest-d3262f-1258495345.tcb.qcloud.la/2019-4-18/bd3.jpg?sign=ebea379f6dddfcb9aea682da0e8a53cc&t=1555574133'></image> 
+            </view> 
             </view>  
               <view class='pop_content' style='top: 100%;{{page_3_img2}}'> 
                 <image class='page_img' mode='aspectFill' src='{{page4_img2}}'></image> 

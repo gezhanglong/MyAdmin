@@ -158,7 +158,7 @@ Page({
       }
     }) 
     that.onSetOnPage_4(); 
-    that.onpages();
+    // that.onpages();
   },
 
   /**
