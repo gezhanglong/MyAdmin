@@ -1,0 +1,4 @@
+<canvas style='width:400rpx;height:400rpx' canvas-id='test_ctx' animation="{{animation}}">
+
+</canvas>
+ 

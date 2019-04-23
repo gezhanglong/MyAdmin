@@ -1,5 +1,6 @@
 {
   "pages": [
+    "pages/csstest8/csstest8",
     "pages/csstest7/csstest7",
     "pages/myfirst/myfirst",
     "pages/wedding/wedding",
@@ -27,6 +28,7 @@
     "pages/user/user",
     "pages/updateimg/updateimg",
     "pages/userinfo/userinfo"
+   
   ],
   "window": {
     "backgroundColor": "#F8F8F8",
