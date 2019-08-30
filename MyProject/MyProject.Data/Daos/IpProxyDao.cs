@@ -14,7 +14,7 @@ namespace MyProject.Data.Daos
     {
         public PagedList<IpProxy> GetPagedList(int pageIndex, int pageSize)
         {
-            var sql = Sql.Builder.Where("FlushTime<=@0",DateTime.Now.AddMinutes(-5));
+            var sql = Sql.Builder.Where("FlushTime<=@0",DateTime.Now.AddMinutes(-1));
             return PagedList<IpProxy>(pageIndex, pageSize, sql);
         }
 
@@ -40,7 +40,7 @@ namespace MyProject.Data.Daos
 
         public void UpdateIpProxy(IpProxy model)
         {
-            var sqlt = Sql.Builder.Append("update IpProxy set FlushTime=getdate() where Host=@0", model.Host);
+            var sqlt = Sql.Builder.Append("update IpProxy set serve=@1, FlushTime=getdate() where Host=@0", model.Host,model.Serve);
             Execute(sqlt);
         }
     }

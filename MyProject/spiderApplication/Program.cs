@@ -42,7 +42,14 @@ namespace spiderApplication
             //for (int i = 1; i < 5; ++i)
             //{
             // Add start/feed urls. 添加初始采集链接
-            site.AddStartUrl($"http://www.xicidaili.com/nn/1");
+            //site.AddStartUrl($"http://www.xicidaili.com/nn/1");
+
+            string[] urls = { "http://www.xicidaili.com/nn/1"
+                             ,"http://www.xicidaili.com/nn/2"
+                             ,"http://www.xicidaili.com/nn/3"
+                             ,"http://www.xicidaili.com/nn/4"
+                             ,"http://www.xicidaili.com/nn/5"};
+            site.AddStartUrls(urls);
             //}
             Spider spider = Spider.Create(site,
                 // use memoery queue scheduler. 使用内存调度

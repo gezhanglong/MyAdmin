@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
+using System.IO.Compression;
 using System.Linq;
 using System.Net;
 using System.Text;
@@ -507,7 +508,7 @@ namespace MyProject.Services.Utility
             HttpWebRequest req = (HttpWebRequest)WebRequest.Create(url);
             req.Method = "GET";
             req.KeepAlive = true;
-            req.UserAgent = "ADCSDK";
+            req.UserAgent = " Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/76.0.3809.100 Safari/537.36"; //ADCSDK
             req.ContentType = "application/x-www-form-urlencoded;charset=utf-8";
             req.Timeout = 30000;//请求30秒
             WebProxy myProxy = new WebProxy(host, post);
@@ -525,6 +526,55 @@ namespace MyProject.Services.Utility
                 return "Error:"+e.Message;
             }
            
+        }
+
+
+        public static string HttpGet(string url,  string host="", int post=0)
+        {
+            string html;
+            HttpWebRequest Web_Request = (HttpWebRequest)WebRequest.Create(url);
+            Web_Request.Timeout = 30000;
+            Web_Request.Method = "GET";
+            Web_Request.KeepAlive = true;
+            Web_Request.UserAgent = " Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/76.0.3809.100 Safari/537.36"; //ADCSDK
+            Web_Request.ContentType = "application/x-www-form-urlencoded;charset=utf-8";
+            Web_Request.Headers.Add("Accept-Encoding", "gzip, deflate");
+            // Web_Request.Credentials = CredentialCache.DefaultCredentials;
+
+            if(post>0)
+            {
+                WebProxy proxy = new WebProxy(host, post); 
+                Web_Request.Proxy = proxy;
+            }
+           
+
+            HttpWebResponse Web_Response = (HttpWebResponse)Web_Request.GetResponse();
+
+            if (Web_Response.ContentEncoding.ToLower() == "gzip")  // 如果使用了GZip则先解压
+            {
+                using (Stream Stream_Receive = Web_Response.GetResponseStream())
+                {
+                    using (var Zip_Stream = new GZipStream(Stream_Receive, CompressionMode.Decompress))
+                    {
+                        using (StreamReader Stream_Reader = new StreamReader(Zip_Stream, Encoding.UTF8))
+                        {
+                            html = Stream_Reader.ReadToEnd();
+                        }
+                    }
+                }
+            }
+            else
+            {
+                using (Stream Stream_Receive = Web_Response.GetResponseStream())
+                {
+                    using (StreamReader Stream_Reader = new StreamReader(Stream_Receive, Encoding.UTF8))
+                    {
+                        html = Stream_Reader.ReadToEnd();
+                    }
+                }
+            }
+
+            return html;
         }
     }
 }

@@ -42,31 +42,34 @@ namespace MyProject.Web.Controllers.WeiXinShare
         {
             var unionid = "ok0Ues51PAh5nKaz53slvacjdD5E";
             var key = "lkwx7877787952213dddddeddss";
-            var msg = "您好";
+            var money = "0.3";
+            var time = "2019年5月9日";
             var dict = new Dictionary<string, string>  
             {
                 {"unionid",unionid},
-                {"msg",msg},
-                {"sign", CryptHelper.MD5Hash(msg+"_"+unionid+"_" + key).ToLower()},
+                {"money",money},
+                {"time",time},
+                {"sign", CryptHelper.MD5Hash(money+"_"+unionid+"_" + key).ToLower()},
             };
             // var ss = CryptHelper.MD5(unionid + key, 32).ToLower();
             // var result = WebUtils.DoPost("https://apiqa.lkgame.com/superlottery/sendgood?integralaward=1&integraltype=1&cashbalanceaward=1", dict);
-            var result = WebUtils.DoPost("http://m.lkgame.com/api/sendtextcustom", dict);
+            var result = WebUtils.DoPost("http://m.lkgame.com/WechatSmallGameRedPackage/DoRed", dict);
             return View();
         }
 
         public ActionResult Test1()
-        { 
-            //var dict = new Dictionary<string, string>  
-            //{
-            //    {"wx_appid","wxe20f2a757ccbbce3"},
-            //    {"openid", "oxC3qv_DpUKXo_ZvfI9BsFiidxu4"},
-            //};
-            //var result = WebUtils.DoPost("http://112.74.198.84:8110/get_one_pe_order_by_player", dict);
-            var _WeiXinCodetask = new WeiXinCodeTask();
+        {
+            var dict = new Dictionary<string, string>
+            {
+                {"phone","123456"},
+                {"code", "123456"},
+            };
+            var result = WebUtils.DoPost("http://api.yw.com/login/login", dict);
+
+           var _WeiXinCodetask = new WeiXinCodeTask();
             var code = _WeiXinCodetask.GetByUnionid("oxC3qvz5VNrOms3Qbhv7nmKYeMu0");
             
-            return File(code.ImageStream, "image/jpg");
+           return File(code.ImageStream, "image/jpg");
         }
 
         public ActionResult Testsql(string openid)

@@ -112,8 +112,10 @@
   <ItemGroup>
     <Compile Include="Controllers\ApiWeb\ApiWebController.cs" />
     <Compile Include="Controllers\RedisTest\RedisTestController.cs" />
+    <Compile Include="Controllers\Test\ProxyController.cs" />
     <Compile Include="Controllers\Test\QueueController.cs" />
     <Compile Include="Controllers\Test\TestController.cs" />
+    <Compile Include="Controllers\Test\ThreadController.cs" />
     <Compile Include="Controllers\WeiXinShare\WeiXinShareController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
